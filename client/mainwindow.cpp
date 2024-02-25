@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
-#include "logic_simulator.cpp"
+#include "data_reciever.cpp"
 #include <string>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -21,19 +21,21 @@ MainWindow::MainWindow(QWidget *parent)
     ui->tableWidget->setColumnWidth(5, 20);
 
     ui->tableWidget->setItem(0, 0, new QTableWidgetItem(QString("Покупка на P2P")));
-    ui->tableWidget->setSpan(0,0,1,3);
+    ui->tableWidget->setSpan(0, 0, 1, 3);
 
     ui->tableWidget->setItem(0, 3, new QTableWidgetItem(QString("Обмен на споте")));
 
     ui->tableWidget->setItem(0, 4, new QTableWidgetItem(QString("Продажа на P2P")));
-    ui->tableWidget->setSpan(0,4,1,3);
+    ui->tableWidget->setSpan(0, 4, 1, 3);
 
     ui->tableWidget->setItem(0, 7, new QTableWidgetItem(QString("Спред")));
 
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
+    DataReciever dr;
+
     for (int i = 1; i <= n; i++) {
-        Chain new_chain = getFakeChain();
+        Chain new_chain = dr.recieveNewChain();
         ui->tableWidget->setItem(i, 0, new QTableWidgetItem(QString((new_chain.buy.coin1 + "/" + new_chain.buy.coin2).c_str())));
         ui->tableWidget->setItem(i, 1, new QTableWidgetItem(QString((new_chain.buy.bank).c_str())));
         ui->tableWidget->setItem(i, 2, new QTableWidgetItem(QString(tr("%1").arg((double)new_chain.buy.exchange_rate))));

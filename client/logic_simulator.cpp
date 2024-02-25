@@ -1,56 +1,11 @@
+#include "logic_fwd.hpp"
+#include "src/nlohmann/json.hpp"
+
 #include <string>
 #include <vector>
 #include <random>
 #include <iostream>
 
-
-// #include <nlohmann/json.hpp>
-
-// int main() {
-//     nlohmann::json j;
-//     j["name"] = "John";
-//     j["age"] = 30;
-//     j["is_student"] = false;
-//     j["subjects"] = {"Math", "Physics"};
-// }
-
-
-struct Order {
-    // Фактически, без статуса мерчанта на бирже(получить его очень сложно,
-    // а потому в MVP уж точно не стоит рассматривать свзки с учетом того,
-    // что закупаемся/продаемся как мерчант) мы всегда в роли покупателя,
-    // только при закупке "покупаем монету за рубли", а при продаже "покупаем
-    // рубли за монету". Несмотря на это, чтобы не смешивать все ордера, мы будем
-    // условно помечать тип ордера как "BUY" или "SELL".
-    std::string type;
-
-    std::string id; // Строка, храним не фактический id, а фрагмент ссылки(?)
-    long double seller_rating; // Рейтинг продавца
-
-    // Валюта, ЗА которую мы ПОКУПАЕМ. На первом шаге связки - условность, 
-    // так как в MVP(да и вообще имея на руках только карты российских банков)
-    // логично реализовать только свзки с покупкой за рубли.
-    std::string coin1;
-    std::string coin2; // Валюта, ЗА которую мы ПРОДАЁМ. Аналогично, на последнем шаге всегда рубль.
-    std::string bank; // Банк
-    std::pair<int, int> min_max; // Минимальная и максимальная сумма сделки
-    long double exchange_rate; // Курс
-
-    Order(std::string type_, std::string id_, long double seller_rating_, std::string coin1_,
-            std::string coin2_, std::string bank_, std::pair<int, int> min_max_, long double exchange_rate_)
-            : type(type_), id(id_), seller_rating(seller_rating_), coin1(coin1_),
-             coin2(coin2_), bank(bank_), min_max(min_max_), exchange_rate(exchange_rate_) {}
-};
-
-// Связка
-struct Chain{
-    Order buy;
-    std::pair<std::string, std::string> change;
-    Order sell;
-    long double spread;
-
-    Chain(Order buy_, std::pair<std::string, std::string> change_, Order sell_, long double spread_) : buy(buy_), change(change_), sell(sell_), spread(spread_) {};
-};
 
 std::vector<std::string> types {"BUY", "SELL"};
 std::vector<std::string> ids {"https://www.youtube.com/", "https://docs.google.com/spreadsheets/u/0/d/1W2VigJfqsPFK12JuIj62l1kIaeJOE03xK-PTkzmMh2E/htmlview", "https://youtu.be/QMMgjjGugHE?si=PVyBYphuinGCxVun"};
@@ -91,6 +46,41 @@ Chain getFakeChain() {
 
     return fake_chain;
 }
+
+std::string getJsonToString() {
+    Chain new_chain = getFakeChain();
+    nlohmann::json newjson;
+
+    newjson["order1"]["type"] = new_chain.buy.type;
+    newjson["order1"]["id"] = new_chain.buy.id;
+    newjson["order1"]["seller_rating"] = new_chain.buy.seller_rating;
+    newjson["order1"]["coin1"] = new_chain.buy.coin1;
+    newjson["order1"]["coin2"] = new_chain.buy.coin2;
+    newjson["order1"]["bank"] = new_chain.buy.bank;
+    newjson["order1"]["min_max"] = new_chain.buy.min_max;
+    newjson["order1"]["exchange_rate"] = new_chain.buy.exchange_rate;
+
+    newjson["change"] = new_chain.change;
+
+    newjson["order2"]["type"] = new_chain.sell.type;
+    newjson["order2"]["id"] = new_chain.sell.id;
+    newjson["order2"]["seller_rating"] = new_chain.sell.seller_rating;
+    newjson["order2"]["coin1"] = new_chain.sell.coin1;
+    newjson["order2"]["coin2"] = new_chain.sell.coin2;
+    newjson["order2"]["bank"] = new_chain.sell.bank;
+    newjson["order2"]["min_max"] = new_chain.sell.min_max;
+    newjson["order2"]["exchange_rate"] = new_chain.sell.exchange_rate;
+
+    newjson["spread"] = new_chain.spread;
+
+    return newjson.dump();
+}
+
+// int main() {
+//     for (int i = 0; i < 10; i++) {
+//         std::cout << getJsonToString() << std::endl;
+//     }
+// }
 
 
 // int main() {
