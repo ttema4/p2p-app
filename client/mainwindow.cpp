@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 #include "data_reciever.cpp"
+#include <QResizeEvent>
+#include <QDebug>
 #include <string>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -14,11 +16,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->tableWidget->horizontalHeader()->hide();
     ui->tableWidget->setRowCount(n + 1);
     ui->tableWidget->setColumnCount(8);
-    ui->tableWidget->setColumnWidth(1, 20);
-    ui->tableWidget->setColumnWidth(0, 70);
-    ui->tableWidget->setColumnWidth(4, 70);
-    ui->tableWidget->setColumnWidth(3, 120);
-    ui->tableWidget->setColumnWidth(5, 20);
 
     ui->tableWidget->setItem(0, 0, new QTableWidgetItem(QString("Покупка на P2P")));
     ui->tableWidget->setSpan(0, 0, 1, 3);
@@ -30,7 +27,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->tableWidget->setItem(0, 7, new QTableWidgetItem(QString("Спред")));
 
-    ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+    // ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     DataReciever dr;
 
@@ -46,10 +44,26 @@ MainWindow::MainWindow(QWidget *parent)
         ui->tableWidget->setItem(i, 5, new QTableWidgetItem(QString((new_chain.sell.bank).c_str())));
         ui->tableWidget->setItem(i, 6, new QTableWidgetItem(QString(tr("%1").arg((double)new_chain.sell.exchange_rate))));
 
-        ui->tableWidget->setItem(i, 7, new QTableWidgetItem(QString(tr("%1 %").arg((double)new_chain.spread))));
+        ui->tableWidget->setItem(i, 7, new QTableWidgetItem(QString(tr("%1%").arg((double)new_chain.spread))));
     }
-    
 }
+
+void MainWindow::resizeEvent(QResizeEvent *e) {
+    int width = ui->tableWidget->width();
+    if (width == 100) width = 600;
+    ui->tableWidget->setColumnWidth(0, std::round(width * 0.15));
+    ui->tableWidget->setColumnWidth(1, std::round(width * 0.08));
+    ui->tableWidget->setColumnWidth(2, std::round(width * 0.15));
+    ui->tableWidget->setColumnWidth(3, std::round(width * 0.15));
+    ui->tableWidget->setColumnWidth(4, std::round(width * 0.15));
+    ui->tableWidget->setColumnWidth(5, std::round(width * 0.08));
+    ui->tableWidget->setColumnWidth(6, std::round(width * 0.15));
+    ui->tableWidget->setColumnWidth(7, std::round(width * 0.09));
+
+    // qDebug() << width;
+    QMainWindow::resizeEvent(e);
+}
+
 
 MainWindow::~MainWindow()
 {
