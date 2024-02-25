@@ -19,7 +19,7 @@ Chain getFakeChain() {
     std::string fake_type1 = types[gen() % types.size()];
     std::string fake_id1 = ids[gen() % ids.size()];
     long double fake_rating1 = (long double)(gen() % 500) / 100;
-    std::string fake_coin11 = "USDT";
+    std::string fake_coin11 = "RUB";
     std::string fake_coin21 = coins[gen() % coins.size()];
     std::string fake_bank1 = banks[gen() % banks.size()];
     std::pair<int, int> fake_min_max1 = {gen() % 100, gen() % 1000000 + 100};
@@ -31,7 +31,7 @@ Chain getFakeChain() {
     std::string fake_id2 = ids[gen() % ids.size()];
     long double fake_rating2 = (long double)(gen() % 500) / 100;
     std::string fake_coin12 = coins[gen() % coins.size()];
-    std::string fake_coin22 = "USDT";
+    std::string fake_coin22 = "RUB";
     std::string fake_bank2 = banks[gen() % banks.size()];
     std::pair<int, int> fake_min_max2 = {gen() % 100, gen() % 1000000 + 100};
     long double fake_exchange_rate2 = (long double)(gen() % 1000000) / 100;
