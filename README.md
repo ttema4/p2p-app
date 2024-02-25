@@ -1,1 +1,1 @@
-# p2p-app
+clang++ -std=c++17 exchanges.hpp scraper.hpp magic_enum.hpp exchanges.cpp scraper.cpp test.cpp
