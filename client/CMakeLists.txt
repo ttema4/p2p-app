@@ -23,7 +23,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(p2p-app
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        source.qrc
+        resourses.qrc
 
     )
 # Define target properties for Android with Qt 6 as:
@@ -60,7 +60,6 @@ set_target_properties(p2p-app PROPERTIES
     WIN32_EXECUTABLE TRUE
 )
 
-include(GNUInstallDirs)
 install(TARGETS p2p-app
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
