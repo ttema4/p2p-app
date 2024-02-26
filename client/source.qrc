@@ -1,0 +1,31 @@
+<RCC>
+    <qresource prefix="/bank_icons">
+        <file>source/ADVCash_bank.svg</file>
+        <file>source/Agriculture_bank.svg</file>
+        <file>source/Alpha_bank.svg</file>
+        <file>source/BankTrans_bank.svg</file>
+        <file>source/CenterCredit_bank.svg</file>
+        <file>source/HomeCredit_bank.svg</file>
+        <file>source/Gasprom_bank.svg</file>
+        <file>source/CianCommercial_bank.svg</file>
+        <file>source/Kaspi_bank.svg</file>
+        <file>source/Mobile_bank.svg</file>
+        <file>source/MTS_bank.svg</file>
+        <file>source/Otkritie_bank.svg</file>
+        <file>source/OZON_bank.svg</file>
+        <file>source/Payeer_bank.svg</file>
+        <file>source/Post_bank.svg</file>
+        <file>source/QIWI_bank.svg</file>
+        <file>source/Raf_bank.svg</file>
+        <file>source/Renaissance_bank.svg</file>
+        <file>source/Ros_bank.svg</file>
+        <file>source/RusStand_bank.svg</file>
+        <file>source/Sber_bank.svg</file>
+        <file>source/SBP_bank.svg</file>
+        <file>source/Tink_bank.svg</file>
+        <file>source/UMoney_bank.svg</file>
+        <file>source/UniCredit_bank.svg</file>
+        <file>source/Uralsib_bank.svg</file>
+        <file>source/VTB_bank.svg</file>
+    </qresource>
+</RCC>

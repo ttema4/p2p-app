@@ -1,8 +1,11 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 #include "data_reciever.cpp"
+#include "mainwindow_fwd.hpp"
 #include <QResizeEvent>
 #include <QDebug>
+#include <QPixmap>
+#include <QIcon>
 #include <string>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -35,13 +38,25 @@ MainWindow::MainWindow(QWidget *parent)
     for (int i = 1; i <= n; i++) {
         Chain new_chain = dr.recieveNewChain();
         ui->tableWidget->setItem(i, 0, new QTableWidgetItem(QString((new_chain.buy.coin1 + "/" + new_chain.buy.coin2).c_str())));
-        ui->tableWidget->setItem(i, 1, new QTableWidgetItem(QString((new_chain.buy.bank).c_str())));
+
+        QTableWidgetItem* item1 = new QTableWidgetItem;
+        item1->setIcon(QIcon(include_map[new_chain.buy.bank].c_str()));
+        item1->setToolTip(QString((new_chain.buy.bank).c_str()));;
+        ui->tableWidget->setItem( i, 1, item1);
+
+        // ui->tableWidget->setItem(i, 1, new QTableWidgetItem(QString((new_chain.buy.bank).c_str())));
         ui->tableWidget->setItem(i, 2, new QTableWidgetItem(QString(tr("%1").arg((double)new_chain.buy.exchange_rate))));
 
         ui->tableWidget->setItem(i, 3, new QTableWidgetItem(QString((new_chain.change.first + " -> " + new_chain.change.second).c_str())));
 
         ui->tableWidget->setItem(i, 4, new QTableWidgetItem(QString((new_chain.sell.coin1 + "/" + new_chain.sell.coin2).c_str())));
-        ui->tableWidget->setItem(i, 5, new QTableWidgetItem(QString((new_chain.sell.bank).c_str())));
+
+        QTableWidgetItem* item2 = new QTableWidgetItem;
+        item2->setIcon(QIcon(include_map[new_chain.sell.bank].c_str()));
+        item2->setToolTip(QString((new_chain.sell.bank).c_str()));
+        ui->tableWidget->setItem( i, 5, item2);
+
+        // ui->tableWidget->setItem(i, 5, new QTableWidgetItem(QString((new_chain.sell.bank).c_str())));
         ui->tableWidget->setItem(i, 6, new QTableWidgetItem(QString(tr("%1").arg((double)new_chain.sell.exchange_rate))));
 
         ui->tableWidget->setItem(i, 7, new QTableWidgetItem(QString(tr("%1%").arg((double)new_chain.spread))));
@@ -51,12 +66,12 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::resizeEvent(QResizeEvent *e) {
     int width = ui->tableWidget->width();
     if (width == 100) width = 600;
-    ui->tableWidget->setColumnWidth(0, std::round(width * 0.15));
-    ui->tableWidget->setColumnWidth(1, std::round(width * 0.08));
+    ui->tableWidget->setColumnWidth(0, std::round(width * 0.17));
+    ui->tableWidget->setColumnWidth(1, std::round(width * 0.04));
     ui->tableWidget->setColumnWidth(2, std::round(width * 0.15));
-    ui->tableWidget->setColumnWidth(3, std::round(width * 0.15));
-    ui->tableWidget->setColumnWidth(4, std::round(width * 0.15));
-    ui->tableWidget->setColumnWidth(5, std::round(width * 0.08));
+    ui->tableWidget->setColumnWidth(3, std::round(width * 0.19));
+    ui->tableWidget->setColumnWidth(4, std::round(width * 0.17));
+    ui->tableWidget->setColumnWidth(5, std::round(width * 0.04));
     ui->tableWidget->setColumnWidth(6, std::round(width * 0.15));
     ui->tableWidget->setColumnWidth(7, std::round(width * 0.09));
 
