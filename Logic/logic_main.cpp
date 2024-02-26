@@ -34,34 +34,37 @@ struct Orders{
     // ПРОБЛЕМА
     // !!! Нужно более умное хранение / умная соротировка, чтобы быстро находить ордер по банку/монетам,
     // а не проходить каждый раз весь вектор. !!!
-    std::vector<std::unique_ptr<Order>> list;
+    std::vector<std::shared_ptr<Order>> list;
     Orders() = default;
 };
 
 // Обертка
 struct MarketRates{
-    // Проблемка
-    // Pair не может быть ключом, нужен либо кастом хэш, либо другое хранение...
-    std::unordered_map<std::pair<std::string, std::string>, long double> list; // Курсы по маркету
+    std::unordered_map<std::string, std::vector<std::pair<std::string, long double>>> list; // Курсы по маркету
     MarketRates() = default;
 };
 
 // Связка
 struct Chain{
-    Order buy;
+    std::shared_ptr<Order> buy;
     std::pair<std::string, std::string> change;
-    Order sell;
+    std::shared_ptr<Order> sell;
     long double spread;
+    
+    Chain(std::shared_ptr<Order> buy_, const std::pair<std::string, std::string> change_, std::shared_ptr<Order> sell_, long double spread_)
+    : buy(buy_), change(change_), sell(sell_), spread(spread_) {}
+    
 };
 
 // Обертка для хранения уже посчитанных связок
 struct Chains{
-    std::vector<std::unique_ptr<Chain>> list;
+    std::vector<std::shared_ptr<Chain>> list;
+    Chains() = default;
 };
 
-// std::queue<std::unique_ptr<Orders>> queue;
+// std::queue<std::unique_ptr<Orders>> queue; - нужна потокобезопасная
 
-class DataReceiver {
+struct DataReceiver {
     // Получить - разложить в orders и market_rates
     // Вытаскиваем из БД? Получаем .json через TCP? Вытаскиваем из очереди Rabbit'а?
     void receive(){
@@ -69,27 +72,61 @@ class DataReceiver {
     }
 };
 
-class Analysis {
+struct Analysis {
     // Здесь все методы для обработки поллученных данных до состояния Result
     // Вытаскиваем order'a(нужно умное хранение в каком то определенном порядке)
     // Проходимся for'ами
     // Складываем в Chains в каком то виде Order 1 - Market - Order 2 - Spread
+    void analyze(Chains& chains, Orders& orders_for_buy, Orders& orders_for_sell, MarketRates& market_rates){
+        // Первая версия не учитыыает требование потокобезопасности каких либо структур
+        // Поэтому просто пройдемся по всем ордерам и по всем курсам и сделаем связки
+        std::unordered_map<std::string, std::vector<std::shared_ptr<Order>>> sell_by_coin;
+        for(std::shared_ptr<Order> sell : orders_for_sell.list){
+            sell_by_coin[sell->coin1].push_back(sell);
+        }
+        for (std::shared_ptr<Order> buy : orders_for_buy.list){
+            std::string coin_buy = buy->coin2;
+            for (std::pair<std::string, long double> market : market_rates.list[coin_buy]){
+                std::string coin_sell = market.first;
+                long double rate = market.second;
+                for (std::shared_ptr<Order> sell : sell_by_coin[coin_sell]){
+                    long double spread = ((sell->exchange_rate / buy->exchange_rate) - 1) * 100;
+                    chains.list.push_back(std::make_shared<Chain>(buy, std::make_pair(coin_buy, coin_sell), sell, spread));
+                }
+            }
+        }
+    }
 
 };
 
-class DataSender {
+struct DataSender {
     // Вытаскиваем из Chains - отправляем
     // Кладем в БД? Отправляем .json через TCP? Кладем в очередь Rabbit'а?
     // Handle подключения клиентов
     // Вектор клиентов - пройтись - отправить
+    void connection_handler(){
+
+    }
+
+    void send(){
+
+    }
 };
 
-class Main {
+struct Main {
     DataReceiver reciever;
     Analysis analysis;
     DataSender sender;
 
-    void run(){
-        
-    }
+    MarketRates market_rates;
+    Orders orders_for_buy;
+    Orders orders_for_sell;
+    Chains chains;    
+
+    // Вероятно, оно будет не совсем так, но в упрощенном виде можно представлять что-то такое
+    // void run(){
+    //     std::thread t1(&DataReceiver::receive, &reciever);
+    //     std::thread t2(&Analysis::analyze, &analysis);
+    //     std::thread t3(&DataSender::send, &sender);
+    // }
 };
