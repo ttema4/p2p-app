@@ -19,30 +19,12 @@ set(PROJECT_SOURCES
         mainwindow.ui
 )
 
-if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(p2p-app
-        MANUAL_FINALIZATION
-        ${PROJECT_SOURCES}
-        resourses.qrc
-
-    )
-# Define target properties for Android with Qt 6 as:
-#    set_property(TARGET p2p-app APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
-#                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
-# For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
-else()
-    if(ANDROID)
-        add_library(p2p-app SHARED
-            ${PROJECT_SOURCES}
-        )
-# Define properties for Android with Qt 5 after find_package() calls as:
-#    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
-    else()
-        add_executable(p2p-app
-            ${PROJECT_SOURCES}
-        )
-    endif()
-endif()
+qt_add_executable(p2p-app
+    MANUAL_FINALIZATION
+    ${PROJECT_SOURCES}
+    resourses.qrc
+    mypage.h mypage.cpp mypage.ui
+)
 
 target_link_libraries(p2p-app PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 

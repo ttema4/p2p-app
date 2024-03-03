@@ -27,5 +27,6 @@
         <file>resourses/bank_icons/UniCredit_bank.svg</file>
         <file>resourses/bank_icons/Uralsib_bank.svg</file>
         <file>resourses/bank_icons/VTB_bank.svg</file>
+        <file>resourses/css/style.css</file>
     </qresource>
 </RCC>
