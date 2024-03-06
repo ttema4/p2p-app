@@ -1,14 +1,28 @@
 #include "headermenu.h"
 
 HeaderMenu::HeaderMenu(QString center_text_, QWidget *parent) : QWidget{parent} {
+    // this->setStyleSheet("background-color:black;");
+
+    // const QPalette palet(QColor("gray"));
+    // this->setPalette(palet);
+    // this->setAutoFillBackground(true);
+
     QHBoxLayout *layout = new QHBoxLayout(this);
     layout->setContentsMargins(0, 0, 0, 0);
 
-    logo_button = new QPushButton("LOGO");
+    logo_button = new QPushButton();
+    logo_button->setObjectName("logoButton");
+    /*logo_button->setStyleSheet("QPushButton { border-image: url(:/resourses/icons/app-logo-4.png); }"
+                               "QPushButton:!pressed { background-color: transparent; }"
+                               "QPushButton:hover:!pressed { background-color: rgba(255, 255, 255, 80); border-radius: 5px; }"
+                               "QPushButton:pressed { background-color: rgba(0, 0, 0, 10); border-radius: 5px; }"); */
+    logo_button->setMinimumWidth(150);
+    logo_button->setMinimumHeight(40);
     layout->addWidget(logo_button);
     layout->addStretch(1);
 
     center_text = new QLabel(center_text_);
+    center_text->setObjectName("MenuCenterText");
     layout->addWidget(center_text);
     layout->addStretch(1);
 
@@ -17,8 +31,6 @@ HeaderMenu::HeaderMenu(QString center_text_, QWidget *parent) : QWidget{parent} 
     menu_button = new QPushButton("Menu");
     layout->addWidget(menu_button);
 
-
-
     menu_frame = new QFrame(parent);
     menu_frame->setObjectName("MenuQFrame");
     menu_frame->setFrameShape(QFrame::NoFrame);
@@ -26,7 +38,8 @@ HeaderMenu::HeaderMenu(QString center_text_, QWidget *parent) : QWidget{parent} 
     menu_frame->setMinimumWidth(0);
 
     QVBoxLayout *mvbox = new QVBoxLayout;
-    TextPixmapButton *button1 = new TextPixmapButton("Мой профиль", QPixmap(":/resourses/bank_icons/ADVCash_bank.svg"));
+    QPixmap avatar = QPixmap(":/resourses/icons/empty_avatar.jpg");
+    TextPixmapButton *button1 = new TextPixmapButton("Мой профиль", avatar);
     button1->setMinimumHeight(40);
     QPushButton *button2 = new QPushButton("Уведомления");
     button2->setMinimumHeight(30);
@@ -38,8 +51,8 @@ HeaderMenu::HeaderMenu(QString center_text_, QWidget *parent) : QWidget{parent} 
     button5->setMinimumHeight(30);
 
     connect(menu_button, &QPushButton::clicked, this, &HeaderMenu::showMenu);
-
     connect(logo_button, &QPushButton::clicked, this, &HeaderMenu::open_homePage);
+
     connect(button1, &QPushButton::clicked, this, &HeaderMenu::open_myPage);
     connect(button2, &QPushButton::clicked, this, &HeaderMenu::open_notifyPage);
     connect(button3, &QPushButton::clicked, this, &HeaderMenu::open_favotitePage);
@@ -88,33 +101,31 @@ void HeaderMenu::showMenu() {
 }
 
 void HeaderMenu::open_homePage() {
-    if (menuVisible) {
-        showMenu();
-    }
+    if (menuVisible) showMenu();
     emit homePage();
 };
 
 void HeaderMenu::open_myPage() {
-    showMenu();
+    if (menuVisible) showMenu();
     emit myPage();
 };
 
 void HeaderMenu::open_notifyPage() {
-    showMenu();
+    if (menuVisible) showMenu();
     emit notifyPage();
 };
 
 void HeaderMenu::open_favotitePage() {
-    showMenu();
+    if (menuVisible) showMenu();
     emit favotitePage();
 };
 
 void HeaderMenu::open_settingsPage() {
-    showMenu();
+    if (menuVisible) showMenu();
     emit settingsPage();
 };
 
 void HeaderMenu::open_exitPage() {
-    showMenu();
+    if (menuVisible) showMenu();
     emit exitPage();
 };

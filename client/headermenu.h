@@ -28,7 +28,6 @@ public:
     }
 
 signals:
-
     void homePage();
     void myPage();
     void notifyPage();

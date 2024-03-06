@@ -28,5 +28,10 @@
         <file>resourses/bank_icons/Uralsib_bank.svg</file>
         <file>resourses/bank_icons/VTB_bank.svg</file>
         <file>resourses/css/style.css</file>
+        <file>resourses/icons/empty_avatar.jpg</file>
+        <file>resourses/icons/app-logo.png</file>
+        <file>resourses/icons/app-logo-2.png</file>
+        <file>resourses/icons/app-logo-3.png</file>
+        <file>resourses/icons/app-logo-4.png</file>
     </qresource>
 </RCC>

@@ -5,10 +5,12 @@
 #include <QPixmap>
 #include <QLabel>
 #include <QHBoxLayout>
+#include <QPainter>
+#include <QBitmap>
 
 class TextPixmapButton : public QPushButton {
 public:
-    TextPixmapButton(const QString& text, const QPixmap& pixmap, QWidget *parent = nullptr);
+    TextPixmapButton(const QString& text, QPixmap& pixmap, QWidget *parent = nullptr);
 
 private:
     QString m_text;

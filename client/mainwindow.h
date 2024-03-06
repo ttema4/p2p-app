@@ -38,24 +38,18 @@ protected:
 private:
     void resizeTable();
 
-    void windowChanger(QMainWindow *toClose, QMainWindow *toOpen);
+    void windowChanger(QMainWindow *toOpen);
 
     void open_mypage();
-    void mypage_homepage();
-    void mypage_loginpage();
-    void mypage_registerpage();
-    void loginpage_homepage();
-    void registerpage_homepage();
-    void loginpage_registerpage();
-    void loginpage_mypage();
-    void registerpage_loginpage();
-    void registerpage_mypage();
+    void open_homepage();
+    void open_loginpage();
+    void open_registerpage();
 
     HeaderMenu* menu;
     MyPage *mypage;
     LoginPage *loginpage;
     RegisterPage *registerpage;
-
+    QMainWindow *currentpage;
     Ui::MainWindow *ui;
 };
 #endif // MAINWINDOW_H

@@ -20,56 +20,29 @@
 #include <QMouseEvent>
 #include <QVBoxLayout>
 
-void MainWindow::windowChanger(QMainWindow *toClose, QMainWindow *toOpen) {
-    toClose->hide();
+void MainWindow::windowChanger(QMainWindow *toOpen) {
     toOpen->show();
-    toOpen->move(toClose->pos());
-    toOpen->resize(toClose->size());
+    toOpen->setGeometry(currentpage->geometry());
+    currentpage->hide();
     if (toOpen == this) this->resizeTable();
+    currentpage = toOpen;
+}
+
+void MainWindow::open_homepage() {
+    windowChanger(this);
 }
 
 void MainWindow::open_mypage() {
-    windowChanger(this, mypage);
+    windowChanger(mypage);
 }
 
-void MainWindow::mypage_homepage() {
-    windowChanger(mypage, this);
+void MainWindow::open_registerpage() {
+    windowChanger(registerpage);
 }
 
-void MainWindow::mypage_registerpage() {
-    windowChanger(mypage, registerpage);
+void MainWindow::open_loginpage() {
+    windowChanger(loginpage);
 }
-
-void MainWindow::mypage_loginpage() {
-    windowChanger(mypage, loginpage);
-}
-
-void MainWindow::loginpage_homepage() {
-    windowChanger(loginpage, this);
-}
-
-void MainWindow::loginpage_registerpage() {
-    windowChanger(loginpage, registerpage);
-}
-
-void MainWindow::loginpage_mypage() {
-    windowChanger(loginpage, mypage);
-}
-
-
-void MainWindow::registerpage_homepage() {
-    windowChanger(registerpage, this);
-}
-
-void MainWindow::registerpage_loginpage() {
-    windowChanger(registerpage, loginpage);
-}
-
-void MainWindow::registerpage_mypage() {
-    windowChanger(registerpage, mypage);
-}
-
-
 
 void MainWindow::resizeTable() {
     int width = ui->tableWidget->width();
@@ -102,6 +75,7 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event) {
 }
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
+    currentpage = this;
     mypage = new MyPage();
     registerpage = new RegisterPage();
     loginpage = new LoginPage();
@@ -130,17 +104,17 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     // connect(menu, &HeaderMenu::homePage, this, &MainWindow::open_homepage);
     connect(menu, &HeaderMenu::myPage, this, &MainWindow::open_mypage);
 
-    connect(mypage, &MyPage::homePage, this, &MainWindow::mypage_homepage);
-    connect(mypage, &MyPage::loginPage, this, &MainWindow::mypage_loginpage);
-    connect(mypage, &MyPage::registerPage, this, &MainWindow::mypage_registerpage);
+    connect(mypage, &MyPage::homePage, this, &MainWindow::open_homepage);
+    connect(mypage, &MyPage::loginPage, this, &MainWindow::open_loginpage);
+    connect(mypage, &MyPage::registerPage, this, &MainWindow::open_registerpage);
 
+    connect(loginpage, &LoginPage::homePage, this, &MainWindow::open_homepage);
+    connect(loginpage, &LoginPage::myPage, this, &MainWindow::open_mypage);
+    connect(loginpage, &LoginPage::registerPage, this, &MainWindow::open_registerpage);
 
-    connect(loginpage, &LoginPage::homePage, this, &MainWindow::loginpage_homepage);
-    connect(loginpage, &LoginPage::myPage, this, &MainWindow::loginpage_mypage);
-    connect(loginpage, &LoginPage::registerPage, this, &MainWindow::loginpage_registerpage);
-    connect(registerpage, &RegisterPage::homePage, this, &MainWindow::registerpage_homepage);
-    connect(registerpage, &RegisterPage::myPage, this, &MainWindow::registerpage_mypage);
-    connect(registerpage, &RegisterPage::loginPage, this, &MainWindow::registerpage_loginpage);
+    connect(registerpage, &RegisterPage::homePage, this, &MainWindow::open_homepage);
+    connect(registerpage, &RegisterPage::myPage, this, &MainWindow::open_mypage);
+    connect(registerpage, &RegisterPage::loginPage, this, &MainWindow::open_loginpage);
 
 
 
