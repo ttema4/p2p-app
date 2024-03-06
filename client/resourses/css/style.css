@@ -1,7 +1,6 @@
-
 QFrame#MenuQFrame { background-color: rgba(255, 255, 255, 240); border-radius: 4px }
 
-QFrame#MenuQFrame QPushButton { background-color: #f6f6f6; border-style: none; border-width: 0px; border-radius: 3px; font: 13px; padding: 6px; text-align: left }
+QFrame#MenuQFrame QPushButton { background-color: #f6f6f6; border-style: none; border-width: 0px; border-radius: 3px; font: 13px; padding: 7px; text-align: left }
 
 QFrame#MenuQFrame QPushButton:hover:!pressed { background-color: white }
 

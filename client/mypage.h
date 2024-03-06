@@ -2,8 +2,7 @@
 #define MYPAGE_H
 
 #include <QMainWindow>
-#include <QFrame>
-#include <QPropertyAnimation>
+#include "headermenu.h"
 
 namespace Ui {
 class MyPage;
@@ -17,24 +16,16 @@ public:
     explicit MyPage(QWidget *parent = nullptr);
     ~MyPage();
 
-    void resizeMenu();
-
 protected:
     void resizeEvent(QResizeEvent *e);
 
 signals:
-    void firstWindow(); // Сигнал для первого окна на открытие
+    void homePage();
+    void registerPage();
+    void loginPage();
 
 private:
-    void logo_clicked();
-
-    void showMenu();
-    void hideMenu();
-
-    int menuHeight;
-    bool menuVisible;
-    QPropertyAnimation *anim;
-    QFrame *overlay_frame;
+    HeaderMenu* menu;
     Ui::MyPage *ui;
 };
 

@@ -17,23 +17,25 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
-)
-qt_standard_project_setup()
+    )
+
 qt_add_executable(p2p-app
     MANUAL_FINALIZATION
     ${PROJECT_SOURCES}
     resourses.qrc
     mypage.h mypage.cpp mypage.ui
-)
+    headermenu.h headermenu.cpp
+    textpixmapbutton.h textpixmapbutton.cpp
+    loginpage.h loginpage.cpp loginpage.ui
+    registerpage.h registerpage.cpp registerpage.ui)
 
 target_link_libraries(p2p-app PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 
-# Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
-# If you are developing for iOS or macOS you should consider setting an
-# explicit, fixed bundle identifier manually though.
+
 if(${QT_VERSION} VERSION_LESS 6.1.0)
   set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.p2p-app)
 endif()
+
 set_target_properties(p2p-app PROPERTIES
     ${BUNDLE_ID_OPTION}
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}

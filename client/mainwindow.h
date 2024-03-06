@@ -2,10 +2,19 @@
 #define MAINWINDOW_H
 
 #include "mypage.h"
+#include "headermenu.h"
+#include "loginpage.h"
+#include "registerpage.h"
 #include <QMainWindow>
 #include <QFrame>
 #include <QPropertyAnimation>
 #include <QFocusEvent>
+#include <QPushButton>
+#include <QHBoxLayout>
+#include <QLabel>
+#include <QPainter>
+#include <QStyle>
+#include <QStyleOptionButton>
 
 
 QT_BEGIN_NAMESPACE
@@ -24,23 +33,29 @@ public:
 
 protected:
     void resizeEvent(QResizeEvent *e);
+    bool eventFilter(QObject *target, QEvent *event);
 
 private:
-    void showMenu();
-    void hideMenu();
-
     void resizeTable();
-    void resizeMenu();
+
+    void windowChanger(QMainWindow *toClose, QMainWindow *toOpen);
 
     void open_mypage();
-    void open_homepage();
+    void mypage_homepage();
+    void mypage_loginpage();
+    void mypage_registerpage();
+    void loginpage_homepage();
+    void registerpage_homepage();
+    void loginpage_registerpage();
+    void loginpage_mypage();
+    void registerpage_loginpage();
+    void registerpage_mypage();
 
-    int menuHeight;
-    bool menuVisible;
-    QPropertyAnimation *anim;
-    QFrame *overlay_frame;
-    Ui::MainWindow *ui;
-
+    HeaderMenu* menu;
     MyPage *mypage;
+    LoginPage *loginpage;
+    RegisterPage *registerpage;
+
+    Ui::MainWindow *ui;
 };
 #endif // MAINWINDOW_H

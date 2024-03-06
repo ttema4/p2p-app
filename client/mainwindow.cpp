@@ -1,13 +1,14 @@
 #include "mainwindow.h"
+#include "headermenu.h"
 #include "mypage.h"
 #include "ui_mainwindow.h"
 #include "data_reciever.cpp"
 #include "mainwindow_fwd.hpp"
+#include <QWidget>
 #include <QResizeEvent>
 #include <QDebug>
 #include <QPixmap>
 #include <QIcon>
-#include <string>
 #include <QApplication>
 #include <QWidget>
 #include <QPushButton>
@@ -15,26 +16,64 @@
 #include <QHBoxLayout>
 #include <QFrame>
 #include <QPropertyAnimation>
+#include <QPixmap>
+#include <QMouseEvent>
+#include <QVBoxLayout>
+
+void MainWindow::windowChanger(QMainWindow *toClose, QMainWindow *toOpen) {
+    toClose->hide();
+    toOpen->show();
+    toOpen->move(toClose->pos());
+    toOpen->resize(toClose->size());
+    if (toOpen == this) this->resizeTable();
+}
 
 void MainWindow::open_mypage() {
-    mypage->show();
-    mypage->resize(this->size());
-    mypage->move(this->pos());
-    mypage->resizeMenu();
-    this->close();
+    windowChanger(this, mypage);
 }
 
-void MainWindow::open_homepage() {
-    this->resize(mypage->size());
-    this->move(mypage->pos());
-    this->show();
-    resizeMenu();
-    resizeTable();
+void MainWindow::mypage_homepage() {
+    windowChanger(mypage, this);
 }
+
+void MainWindow::mypage_registerpage() {
+    windowChanger(mypage, registerpage);
+}
+
+void MainWindow::mypage_loginpage() {
+    windowChanger(mypage, loginpage);
+}
+
+void MainWindow::loginpage_homepage() {
+    windowChanger(loginpage, this);
+}
+
+void MainWindow::loginpage_registerpage() {
+    windowChanger(loginpage, registerpage);
+}
+
+void MainWindow::loginpage_mypage() {
+    windowChanger(loginpage, mypage);
+}
+
+
+void MainWindow::registerpage_homepage() {
+    windowChanger(registerpage, this);
+}
+
+void MainWindow::registerpage_loginpage() {
+    windowChanger(registerpage, loginpage);
+}
+
+void MainWindow::registerpage_mypage() {
+    windowChanger(registerpage, mypage);
+}
+
+
 
 void MainWindow::resizeTable() {
     int width = ui->tableWidget->width();
-    if (width == 100) width = 600;
+    if (width == 100) width = 635;
     ui->tableWidget->setColumnWidth(0, std::round(width * 0.17));
     ui->tableWidget->setColumnWidth(1, std::round(width * 0.04));
     ui->tableWidget->setColumnWidth(2, std::round(width * 0.15));
@@ -45,44 +84,65 @@ void MainWindow::resizeTable() {
     ui->tableWidget->setColumnWidth(7, std::round(width * 0.09));
 }
 
-void MainWindow::resizeMenu() {
-    int button_pos_x = ui->pushButton_2->x() - 100;
-    int button_pos_y = ui->pushButton_2->y() + ui->pushButton_2->height() + 5;
-    overlay_frame->move(button_pos_x, button_pos_y);
-    overlay_frame->resize(100 + ui->pushButton_2->width(), menuHeight);
-}
+bool MainWindow::eventFilter(QObject *target, QEvent *event) {
+    if (!menu->isMenuVisible()) return false;
 
-void MainWindow::hideMenu() {
-    overlay_frame->hide();
-}
-
-void MainWindow::showMenu() {
-    anim = new QPropertyAnimation(overlay_frame, "size");
-    anim->setDuration(300);
-    if (!menuVisible) {
-        anim->setStartValue(QSize(100 + ui->pushButton_2->width(), 0));
-        anim->setEndValue(QSize(100 + ui->pushButton_2->width(), menuHeight));
-        menuVisible = true;
-        overlay_frame->show();
-        resizeMenu();
+    if (target->objectName() == "tableWidget") {
+        if(event->type() == QTabletEvent::InputMethodQuery) {
+            menu->showMenu();
+            return true;
+        }
     } else {
-        anim->setStartValue(QSize(overlay_frame->width(), menuHeight));
-        anim->setEndValue(QSize(overlay_frame->width(), 0));
-        menuVisible = false;
-        connect(anim, &QPropertyAnimation::finished, this, &MainWindow::hideMenu);
+        if(event->type() == QMouseEvent::MouseButtonPress) {
+            menu->showMenu();
+            return true;
+        }
     }
-    anim->start();
+    return false;
 }
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
+    mypage = new MyPage();
+    registerpage = new RegisterPage();
+    loginpage = new LoginPage();
     int n = 30;
-    menuVisible = false;
 
     ui->setupUi(this);
+    this->setFocus();
 
-    mypage = new MyPage();
-    // подключаем к слоту запуска главного окна по кнопке во втором окне
-    connect(mypage, &MyPage::firstWindow, this, &MainWindow::open_homepage);
+    // menu = new HeaderMenu("BTC/USDT: 43000$; ETH/USDT: 8000$", ui->widget_3->parentWidget());
+    menu = new HeaderMenu("Актуальные P2P-связки", ui->widget_3->parentWidget());
+    ui->widget_3->parentWidget()->layout()->replaceWidget(ui->widget_3, menu);
+
+    menu->installEventFilter(this);
+    ui->pushButton->installEventFilter(this);
+    ui->tableWidget->installEventFilter(this);
+    ui->centralwidget->installEventFilter(this);
+    ui->checkBox->installEventFilter(this);
+    ui->checkBox_2->installEventFilter(this);
+    ui->checkBox_3->installEventFilter(this);
+    ui->checkBox_4->installEventFilter(this);
+    ui->checkBox_5->installEventFilter(this);
+    ui->checkBox_6->installEventFilter(this);
+    ui->lineEdit->installEventFilter(this);
+    ui->lineEdit_2->installEventFilter(this);
+
+    // connect(menu, &HeaderMenu::homePage, this, &MainWindow::open_homepage);
+    connect(menu, &HeaderMenu::myPage, this, &MainWindow::open_mypage);
+
+    connect(mypage, &MyPage::homePage, this, &MainWindow::mypage_homepage);
+    connect(mypage, &MyPage::loginPage, this, &MainWindow::mypage_loginpage);
+    connect(mypage, &MyPage::registerPage, this, &MainWindow::mypage_registerpage);
+
+
+    connect(loginpage, &LoginPage::homePage, this, &MainWindow::loginpage_homepage);
+    connect(loginpage, &LoginPage::myPage, this, &MainWindow::loginpage_mypage);
+    connect(loginpage, &LoginPage::registerPage, this, &MainWindow::loginpage_registerpage);
+    connect(registerpage, &RegisterPage::homePage, this, &MainWindow::registerpage_homepage);
+    connect(registerpage, &RegisterPage::myPage, this, &MainWindow::registerpage_mypage);
+    connect(registerpage, &RegisterPage::loginPage, this, &MainWindow::registerpage_loginpage);
+
+
 
     ui->tableWidget->verticalHeader()->hide();
     ui->tableWidget->horizontalHeader()->hide();
@@ -140,40 +200,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         spread->setTextAlignment(Qt::AlignCenter);
         ui->tableWidget->setItem( i, 7, spread);
     }
-
-
-    connect(ui->pushButton_2, &QPushButton::clicked, this, &MainWindow::showMenu);
-
-    overlay_frame = new QFrame(this);
-    overlay_frame->setObjectName("MenuQFrame");
-    overlay_frame->setFrameShape(QFrame::NoFrame);
-    overlay_frame->setLineWidth(1);
-    overlay_frame->setMinimumWidth(0);
-
-    QVBoxLayout *mvbox = new QVBoxLayout;
-    QPushButton *button1 = new QPushButton("Мой профиль");
-    QPushButton *button2 = new QPushButton("Уведомления");
-    QPushButton *button3 = new QPushButton("Избранное");
-    QPushButton *button4 = new QPushButton("Настройки");
-    QPushButton *button5 = new QPushButton("Выйти");
-
-    connect(button1, &QPushButton::clicked, this, &MainWindow::open_mypage);
-
-    mvbox->addWidget(button1);
-    mvbox->addWidget(button2);
-    mvbox->addWidget(button3);
-    mvbox->addWidget(button4);
-    mvbox->addWidget(button5);
-    mvbox->addStretch(1);
-    overlay_frame->setLayout(mvbox);
-
-    menuHeight = 170;
-    overlay_frame->hide();
 }
 
 void MainWindow::resizeEvent(QResizeEvent *e) {
     resizeTable();
-    resizeMenu();
+    menu->resizeMenu();
 
     QMainWindow::resizeEvent(e);
 }
