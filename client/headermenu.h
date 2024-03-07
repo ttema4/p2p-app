@@ -2,6 +2,7 @@
 #define HEADERMENU_H
 
 #include "textpixmapbutton.h"
+#include "user.h"
 #include <QWidget>
 #include <QLabel>
 #include <QFrame>
@@ -11,6 +12,7 @@
 #include <QLabel>
 #include <QFrame>
 #include <QPushButton>
+#include <QShowEvent>
 
 class HeaderMenu : public QWidget
 {
@@ -27,9 +29,15 @@ public:
         return menuVisible;
     }
 
+    void showEvent(QShowEvent *event) override;
+protected:
+    void resizeEvent(QResizeEvent *event) override;
+
 signals:
     void homePage();
     void myPage();
+    void registerPage();
+    void loginPage();
     void notifyPage();
     void favotitePage();
     void settingsPage();
@@ -52,6 +60,7 @@ private:
     QPushButton *logo_button;
     QPushButton *menu_button;
     QFrame *menu_frame;
+    TextPixmapButton *button1;
 
     QPropertyAnimation *anim;
 };

@@ -103,6 +103,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     // connect(menu, &HeaderMenu::homePage, this, &MainWindow::open_homepage);
     connect(menu, &HeaderMenu::myPage, this, &MainWindow::open_mypage);
+    connect(menu, &HeaderMenu::loginPage, this, &MainWindow::open_loginpage);
 
     connect(mypage, &MyPage::homePage, this, &MainWindow::open_homepage);
     connect(mypage, &MyPage::loginPage, this, &MainWindow::open_loginpage);

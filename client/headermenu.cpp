@@ -26,7 +26,7 @@ HeaderMenu::HeaderMenu(QString center_text_, QWidget *parent) : QWidget{parent} 
     layout->addWidget(center_text);
     layout->addStretch(1);
 
-    status_text = new QLabel("Ваш id: 263");
+    status_text = new QLabel("Ваш id: " + QString::number(CurUser::getInstance().getId()));
     layout->addWidget(status_text);
     menu_button = new QPushButton("Menu");
     layout->addWidget(menu_button);
@@ -38,9 +38,13 @@ HeaderMenu::HeaderMenu(QString center_text_, QWidget *parent) : QWidget{parent} 
     menu_frame->setMinimumWidth(0);
 
     QVBoxLayout *mvbox = new QVBoxLayout;
-    QPixmap avatar = QPixmap(":/resourses/icons/empty_avatar.jpg");
-    TextPixmapButton *button1 = new TextPixmapButton("Мой профиль", avatar);
-    button1->setMinimumHeight(40);
+
+    // if (CurUser::getInstance().getId() != -1) {
+    //     button1 = new TextPixmapButton(CurUser::getInstance().getName(), CurUser::getInstance().getAvatar());
+    // } else {
+        button1 = new TextPixmapButton();
+    // }
+
     QPushButton *button2 = new QPushButton("Уведомления");
     button2->setMinimumHeight(30);
     QPushButton *button3 = new QPushButton("Избранное");
@@ -100,6 +104,17 @@ void HeaderMenu::showMenu() {
     anim->start();
 }
 
+void HeaderMenu::showEvent(QShowEvent *event) {
+    status_text->setText("Ваш id: " + QString::number(CurUser::getInstance().getId()));
+    button1->updateLayout();
+    QWidget::showEvent(event);
+}
+
+void HeaderMenu::resizeEvent(QResizeEvent *event) {
+    resizeMenu();
+    QWidget::resizeEvent(event);
+}
+
 void HeaderMenu::open_homePage() {
     if (menuVisible) showMenu();
     emit homePage();
@@ -107,7 +122,8 @@ void HeaderMenu::open_homePage() {
 
 void HeaderMenu::open_myPage() {
     if (menuVisible) showMenu();
-    emit myPage();
+    if (CurUser::getInstance().getId() == -1) emit loginPage();
+    else emit myPage();
 };
 
 void HeaderMenu::open_notifyPage() {
@@ -127,5 +143,7 @@ void HeaderMenu::open_settingsPage() {
 
 void HeaderMenu::open_exitPage() {
     if (menuVisible) showMenu();
-    emit exitPage();
+    CurUser::getInstance().unsetCurUser();
+    this->showEvent(new QShowEvent());
+    emit homePage();
 };

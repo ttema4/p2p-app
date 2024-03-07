@@ -2,7 +2,10 @@
 #define LOGINPAGE_H
 
 #include <QMainWindow>
+#include <QLineEdit>
+#include <QShowEvent>
 #include "headermenu.h"
+#include "accounthandler.h"
 
 namespace Ui {
 class LoginPage;
@@ -18,6 +21,10 @@ public:
 
 protected:
     // void resizeEvent(QResizeEvent *e);
+    void keyPressEvent(QKeyEvent *event) override;
+    void showEvent(QShowEvent *e) override;
+    // void hideEvent(QHideEvent *event) override;
+    bool eventFilter(QObject *obj, QEvent *event) override;
 
 signals:
     void myPage();
@@ -25,6 +32,8 @@ signals:
     void registerPage();
 
 private:
+    void tryLogin();
+
     HeaderMenu* menu;
 
     Ui::LoginPage *ui;
