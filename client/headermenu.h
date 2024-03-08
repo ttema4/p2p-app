@@ -39,9 +39,8 @@ signals:
     void registerPage();
     void loginPage();
     void notifyPage();
-    void favotitePage();
+    void favouritePage();
     void settingsPage();
-    void exitPage();
 
 private:
     void open_homePage();

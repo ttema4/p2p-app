@@ -2,7 +2,7 @@
 #include <QDebug>
 
 AccountHandler::AccountHandler() {
-    users.append(User("Artem", "ibartion", "1234"));
+    users.append(User("Artem", "ibartiom", "1234"));
     users.last().setAvatar(QPixmap(":/resourses/icons/photo_2024-03-06.jpeg"));
 }
 

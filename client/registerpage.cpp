@@ -7,11 +7,36 @@ RegisterPage::RegisterPage(QWidget *parent) : QMainWindow(parent), ui(new Ui::Re
     ui->widget->parentWidget()->layout()->replaceWidget(ui->widget, menu);
 
     ui->lineEdit_3->setEchoMode(QLineEdit::Password);
+    ui->pushButton_3->setIcon(QIcon("://resourses/icons/eye-icon-open.png"));
+    ui->pushButton_3->setCursor(Qt::PointingHandCursor);
+    ui->pushButton_3->setStyleSheet("border:none;padding:0px;");
+    ui->pushButton_3->setFixedSize(20, 20);
+
+    ui->groupBox->layout()->setContentsMargins(20, 15, 20, 15);
+    ui->groupBox_2->layout()->setContentsMargins(20, 15, 20, 15);
+    ui->groupBox_3->layout()->setContentsMargins(20, 15, 0, 15);
+    ui->groupBox_3->layout()->setSpacing(0);
+
+    connect(ui->pushButton_3, &QPushButton::clicked, this, [this]() {
+        if (ui->lineEdit_3->echoMode() == QLineEdit::Password) {
+            ui->lineEdit_3->setEchoMode(QLineEdit::Normal);
+            ui->pushButton_3->setIcon(QIcon("://resourses/icons/eye-icon-close.png"));
+        } else {
+            ui->lineEdit_3->setEchoMode(QLineEdit::Password);
+            ui->pushButton_3->setIcon(QIcon("://resourses/icons/eye-icon-open.png"));
+        }
+    });
+
     ui->frame->layout()->setSpacing(0);
 
     connect(menu, &HeaderMenu::homePage, this, &RegisterPage::homePage);
     connect(menu, &HeaderMenu::myPage, this, &RegisterPage::myPage);
     connect(menu, &HeaderMenu::loginPage, this, &RegisterPage::loginPage);
+    connect(menu, &HeaderMenu::notifyPage, this, &RegisterPage::notifyPage);
+    connect(menu, &HeaderMenu::favouritePage, this, &RegisterPage::favouritePage);
+    connect(menu, &HeaderMenu::settingsPage, this, &RegisterPage::settingsPage);
+
+
     connect(ui->pushButton_2, &QPushButton::clicked, this, &RegisterPage::loginPage);
     connect(ui->pushButton, &QPushButton::clicked, this, &RegisterPage::tryRegister);
 

@@ -34,5 +34,7 @@
         <file>resourses/icons/app-logo-3.png</file>
         <file>resourses/icons/app-logo-4.png</file>
         <file>resourses/icons/photo_2024-03-06.jpeg</file>
+        <file>resourses/icons/eye-icon-close.png</file>
+        <file>resourses/icons/eye-icon-open.png</file>
     </qresource>
 </RCC>

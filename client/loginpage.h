@@ -30,6 +30,9 @@ signals:
     void myPage();
     void homePage();
     void registerPage();
+    void notifyPage();
+    void favouritePage();
+    void settingsPage();
 
 private:
     void tryLogin();

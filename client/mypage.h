@@ -25,6 +25,9 @@ signals:
     void homePage();
     void registerPage();
     void loginPage();
+    void notifyPage();
+    void favouritePage();
+    void settingsPage();
 
 private:
     void openFileAndSetPixmap();

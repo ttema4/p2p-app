@@ -3,12 +3,12 @@
 HeaderMenu::HeaderMenu(QString center_text_, QWidget *parent) : QWidget{parent} {
     // this->setStyleSheet("background-color:black;");
 
-    // const QPalette palet(QColor("gray"));
-    // this->setPalette(palet);
-    // this->setAutoFillBackground(true);
+    const QPalette palet(QColor(230, 230, 230));
+    this->setPalette(palet);
+    this->setAutoFillBackground(true);
 
     QHBoxLayout *layout = new QHBoxLayout(this);
-    layout->setContentsMargins(0, 0, 0, 0);
+    layout->setContentsMargins(15, 15, 15, 15);
 
     logo_button = new QPushButton();
     logo_button->setObjectName("logoButton");
@@ -75,8 +75,8 @@ HeaderMenu::HeaderMenu(QString center_text_, QWidget *parent) : QWidget{parent} 
 }
 
 void HeaderMenu::resizeMenu() {
-    int button_pos_x = menu_button->x() + menu_button->width() - menuWidth + 11;
-    int button_pos_y = menu_button->y() + menu_button->height() + 10;
+    int button_pos_x = menu_button->x() + menu_button->width() - menuWidth;
+    int button_pos_y = menu_button->y() + menu_button->height();
     menu_frame->move(button_pos_x, button_pos_y);
     menu_frame->resize(menuWidth, menuHeight);
 }
@@ -133,7 +133,7 @@ void HeaderMenu::open_notifyPage() {
 
 void HeaderMenu::open_favotitePage() {
     if (menuVisible) showMenu();
-    emit favotitePage();
+    emit favouritePage();
 };
 
 void HeaderMenu::open_settingsPage() {

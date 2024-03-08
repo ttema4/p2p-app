@@ -5,6 +5,9 @@
 #include "headermenu.h"
 #include "loginpage.h"
 #include "registerpage.h"
+#include "notifypage.h"
+#include "favouritepage.h"
+#include "settingspage.h"
 #include <QMainWindow>
 #include <QFrame>
 #include <QPropertyAnimation>
@@ -44,11 +47,19 @@ private:
     void open_homepage();
     void open_loginpage();
     void open_registerpage();
+    void open_notifypage();
+    void open_favouritepage();
+    void open_settingspage();
 
     HeaderMenu* menu;
+
     MyPage *mypage;
     LoginPage *loginpage;
     RegisterPage *registerpage;
+    NotifyPage *notifypage;
+    FavouritePage *favouritepage;
+    SettingsPage *settingspage;
+
     QMainWindow *currentpage;
     Ui::MainWindow *ui;
 };

@@ -28,6 +28,9 @@ signals:
     void myPage();
     void homePage();
     void loginPage();
+    void notifyPage();
+    void favouritePage();
+    void settingsPage();
 
 private:
     void tryRegister();

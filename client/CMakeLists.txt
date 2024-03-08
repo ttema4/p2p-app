@@ -17,7 +17,7 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
-)
+    )
 
 qt_add_executable(p2p-app
     MANUAL_FINALIZATION
@@ -30,7 +30,11 @@ qt_add_executable(p2p-app
     registerpage.h registerpage.cpp registerpage.ui
     user.h user.cpp
     config.h
-    accounthandler.h accounthandler.cpp)
+    accounthandler.h accounthandler.cpp
+    settingspage.h settingspage.cpp settingspage.ui
+    favouritepage.h favouritepage.cpp favouritepage.ui
+    notifypage.h notifypage.cpp notifypage.ui
+)
 
 target_link_libraries(p2p-app PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 

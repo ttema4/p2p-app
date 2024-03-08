@@ -14,6 +14,9 @@ MyPage::MyPage(QWidget *parent) : QMainWindow(parent), ui(new Ui::MyPage) {
 
     connect(menu, &HeaderMenu::homePage, this, &MyPage::homePage);
     connect(menu, &HeaderMenu::loginPage, this, &MyPage::loginPage);
+    connect(menu, &HeaderMenu::notifyPage, this, &MyPage::notifyPage);
+    connect(menu, &HeaderMenu::favouritePage, this, &MyPage::favouritePage);
+    connect(menu, &HeaderMenu::settingsPage, this, &MyPage::settingsPage);
 
     connect(ui->pushButton, &QPushButton::clicked, this, &MyPage::exitAccount);
     connect(ui->pushButton_3, &QPushButton::clicked, this, &MyPage::loginPage);
