@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "headermenu.h"
+#include "user.h"
 
 namespace Ui {
 class MyPage;
@@ -18,13 +19,20 @@ public:
 
 protected:
     void resizeEvent(QResizeEvent *e);
+    void showEvent(QShowEvent *e);
 
 signals:
     void homePage();
     void registerPage();
     void loginPage();
+    void notifyPage();
+    void favouritePage();
+    void settingsPage();
 
 private:
+    void openFileAndSetPixmap();
+    void exitAccount();
+
     HeaderMenu* menu;
     Ui::MyPage *ui;
 };

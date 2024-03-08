@@ -27,7 +27,14 @@ qt_add_executable(p2p-app
     headermenu.h headermenu.cpp
     textpixmapbutton.h textpixmapbutton.cpp
     loginpage.h loginpage.cpp loginpage.ui
-    registerpage.h registerpage.cpp registerpage.ui)
+    registerpage.h registerpage.cpp registerpage.ui
+    user.h user.cpp
+    config.h
+    accounthandler.h accounthandler.cpp
+    settingspage.h settingspage.cpp settingspage.ui
+    favouritepage.h favouritepage.cpp favouritepage.ui
+    notifypage.h notifypage.cpp notifypage.ui
+)
 
 target_link_libraries(p2p-app PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 

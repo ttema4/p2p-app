@@ -1,6 +1,4 @@
 #include "mainwindow.h"
-#include "headermenu.h"
-#include "mypage.h"
 #include "ui_mainwindow.h"
 #include "data_reciever.cpp"
 #include "mainwindow_fwd.hpp"
@@ -20,56 +18,41 @@
 #include <QMouseEvent>
 #include <QVBoxLayout>
 
-void MainWindow::windowChanger(QMainWindow *toClose, QMainWindow *toOpen) {
-    toClose->hide();
+void MainWindow::windowChanger(QMainWindow *toOpen) {
     toOpen->show();
-    toOpen->move(toClose->pos());
-    toOpen->resize(toClose->size());
+    toOpen->setGeometry(currentpage->geometry());
+    currentpage->hide();
     if (toOpen == this) this->resizeTable();
+    currentpage = toOpen;
+}
+
+void MainWindow::open_homepage() {
+    windowChanger(this);
 }
 
 void MainWindow::open_mypage() {
-    windowChanger(this, mypage);
+    windowChanger(mypage);
 }
 
-void MainWindow::mypage_homepage() {
-    windowChanger(mypage, this);
+void MainWindow::open_registerpage() {
+    windowChanger(registerpage);
 }
 
-void MainWindow::mypage_registerpage() {
-    windowChanger(mypage, registerpage);
+void MainWindow::open_loginpage() {
+    windowChanger(loginpage);
 }
 
-void MainWindow::mypage_loginpage() {
-    windowChanger(mypage, loginpage);
+void MainWindow::open_notifypage() {
+    windowChanger(notifypage);
 }
 
-void MainWindow::loginpage_homepage() {
-    windowChanger(loginpage, this);
+void MainWindow::open_favouritepage() {
+    windowChanger(favouritepage);
 }
 
-void MainWindow::loginpage_registerpage() {
-    windowChanger(loginpage, registerpage);
+void MainWindow::open_settingspage() {
+    windowChanger(settingspage);
 }
-
-void MainWindow::loginpage_mypage() {
-    windowChanger(loginpage, mypage);
-}
-
-
-void MainWindow::registerpage_homepage() {
-    windowChanger(registerpage, this);
-}
-
-void MainWindow::registerpage_loginpage() {
-    windowChanger(registerpage, loginpage);
-}
-
-void MainWindow::registerpage_mypage() {
-    windowChanger(registerpage, mypage);
-}
-
-
 
 void MainWindow::resizeTable() {
     int width = ui->tableWidget->width();
@@ -102,15 +85,18 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event) {
 }
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
+    currentpage = this;
     mypage = new MyPage();
     registerpage = new RegisterPage();
     loginpage = new LoginPage();
+    notifypage = new NotifyPage();
+    favouritepage = new FavouritePage();
+    settingspage = new SettingsPage();
     int n = 30;
 
     ui->setupUi(this);
     this->setFocus();
 
-    // menu = new HeaderMenu("BTC/USDT: 43000$; ETH/USDT: 8000$", ui->widget_3->parentWidget());
     menu = new HeaderMenu("Актуальные P2P-связки", ui->widget_3->parentWidget());
     ui->widget_3->parentWidget()->layout()->replaceWidget(ui->widget_3, menu);
 
@@ -127,20 +113,54 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->lineEdit->installEventFilter(this);
     ui->lineEdit_2->installEventFilter(this);
 
-    // connect(menu, &HeaderMenu::homePage, this, &MainWindow::open_homepage);
     connect(menu, &HeaderMenu::myPage, this, &MainWindow::open_mypage);
+    connect(menu, &HeaderMenu::loginPage, this, &MainWindow::open_loginpage);
+    connect(menu, &HeaderMenu::registerPage, this, &MainWindow::open_registerpage);
+    connect(menu, &HeaderMenu::notifyPage, this, &MainWindow::open_notifypage);
+    connect(menu, &HeaderMenu::favouritePage, this, &MainWindow::open_favouritepage);
+    connect(menu, &HeaderMenu::settingsPage, this, &MainWindow::open_settingspage);
 
-    connect(mypage, &MyPage::homePage, this, &MainWindow::mypage_homepage);
-    connect(mypage, &MyPage::loginPage, this, &MainWindow::mypage_loginpage);
-    connect(mypage, &MyPage::registerPage, this, &MainWindow::mypage_registerpage);
+    connect(mypage, &MyPage::homePage, this, &MainWindow::open_homepage);
+    connect(mypage, &MyPage::loginPage, this, &MainWindow::open_loginpage);
+    connect(mypage, &MyPage::registerPage, this, &MainWindow::open_registerpage);
+    connect(mypage, &MyPage::notifyPage, this, &MainWindow::open_notifypage);
+    connect(mypage, &MyPage::favouritePage, this, &MainWindow::open_favouritepage);
+    connect(mypage, &MyPage::settingsPage, this, &MainWindow::open_settingspage);
 
+    connect(loginpage, &LoginPage::homePage, this, &MainWindow::open_homepage);
+    connect(loginpage, &LoginPage::myPage, this, &MainWindow::open_mypage);
+    connect(loginpage, &LoginPage::registerPage, this, &MainWindow::open_registerpage);
+    connect(loginpage, &LoginPage::notifyPage, this, &MainWindow::open_notifypage);
+    connect(loginpage, &LoginPage::favouritePage, this, &MainWindow::open_favouritepage);
+    connect(loginpage, &LoginPage::settingsPage, this, &MainWindow::open_settingspage);
 
-    connect(loginpage, &LoginPage::homePage, this, &MainWindow::loginpage_homepage);
-    connect(loginpage, &LoginPage::myPage, this, &MainWindow::loginpage_mypage);
-    connect(loginpage, &LoginPage::registerPage, this, &MainWindow::loginpage_registerpage);
-    connect(registerpage, &RegisterPage::homePage, this, &MainWindow::registerpage_homepage);
-    connect(registerpage, &RegisterPage::myPage, this, &MainWindow::registerpage_mypage);
-    connect(registerpage, &RegisterPage::loginPage, this, &MainWindow::registerpage_loginpage);
+    connect(registerpage, &RegisterPage::homePage, this, &MainWindow::open_homepage);
+    connect(registerpage, &RegisterPage::myPage, this, &MainWindow::open_mypage);
+    connect(registerpage, &RegisterPage::loginPage, this, &MainWindow::open_loginpage);
+    connect(registerpage, &RegisterPage::notifyPage, this, &MainWindow::open_notifypage);
+    connect(registerpage, &RegisterPage::favouritePage, this, &MainWindow::open_favouritepage);
+    connect(registerpage, &RegisterPage::settingsPage, this, &MainWindow::open_settingspage);
+
+    connect(notifypage, &NotifyPage::homePage, this, &MainWindow::open_homepage);
+    connect(notifypage, &NotifyPage::myPage, this, &MainWindow::open_mypage);
+    connect(notifypage, &NotifyPage::loginPage, this, &MainWindow::open_loginpage);
+    connect(notifypage, &NotifyPage::registerPage, this, &MainWindow::open_registerpage);
+    connect(notifypage, &NotifyPage::favouritePage, this, &MainWindow::open_favouritepage);
+    connect(notifypage, &NotifyPage::settingsPage, this, &MainWindow::open_settingspage);
+
+    connect(favouritepage, &FavouritePage::homePage, this, &MainWindow::open_homepage);
+    connect(favouritepage, &FavouritePage::myPage, this, &MainWindow::open_mypage);
+    connect(favouritepage, &FavouritePage::loginPage, this, &MainWindow::open_loginpage);
+    connect(favouritepage, &FavouritePage::registerPage, this, &MainWindow::open_registerpage);
+    connect(favouritepage, &FavouritePage::notifyPage, this, &MainWindow::open_notifypage);
+    connect(favouritepage, &FavouritePage::settingsPage, this, &MainWindow::open_settingspage);
+
+    connect(settingspage, &SettingsPage::homePage, this, &MainWindow::open_homepage);
+    connect(settingspage, &SettingsPage::myPage, this, &MainWindow::open_mypage);
+    connect(settingspage, &SettingsPage::loginPage, this, &MainWindow::open_loginpage);
+    connect(settingspage, &SettingsPage::registerPage, this, &MainWindow::open_registerpage);
+    connect(settingspage, &SettingsPage::notifyPage, this, &MainWindow::open_notifypage);
+    connect(settingspage, &SettingsPage::favouritePage, this, &MainWindow::open_favouritepage);
 
 
 

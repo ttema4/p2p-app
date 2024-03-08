@@ -79,3 +79,5 @@ p2p-app_autogen
 CMakeFiles
 .qt
 .out
+.vscode
+client/build/

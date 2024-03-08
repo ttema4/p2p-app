@@ -1,23 +1,35 @@
 #include "headermenu.h"
 
 HeaderMenu::HeaderMenu(QString center_text_, QWidget *parent) : QWidget{parent} {
-    QHBoxLayout *layout = new QHBoxLayout(this);
-    layout->setContentsMargins(0, 0, 0, 0);
+    // this->setStyleSheet("background-color:black;");
 
-    logo_button = new QPushButton("LOGO");
+    const QPalette palet(QColor(230, 230, 230));
+    this->setPalette(palet);
+    this->setAutoFillBackground(true);
+
+    QHBoxLayout *layout = new QHBoxLayout(this);
+    layout->setContentsMargins(15, 15, 15, 15);
+
+    logo_button = new QPushButton();
+    logo_button->setObjectName("logoButton");
+    /*logo_button->setStyleSheet("QPushButton { border-image: url(:/resourses/icons/app-logo-4.png); }"
+                               "QPushButton:!pressed { background-color: transparent; }"
+                               "QPushButton:hover:!pressed { background-color: rgba(255, 255, 255, 80); border-radius: 5px; }"
+                               "QPushButton:pressed { background-color: rgba(0, 0, 0, 10); border-radius: 5px; }"); */
+    logo_button->setMinimumWidth(150);
+    logo_button->setMinimumHeight(40);
     layout->addWidget(logo_button);
     layout->addStretch(1);
 
     center_text = new QLabel(center_text_);
+    center_text->setObjectName("MenuCenterText");
     layout->addWidget(center_text);
     layout->addStretch(1);
 
-    status_text = new QLabel("Ваш id: 263");
+    status_text = new QLabel("Ваш id: " + QString::number(CurUser::getInstance().getId()));
     layout->addWidget(status_text);
     menu_button = new QPushButton("Menu");
     layout->addWidget(menu_button);
-
-
 
     menu_frame = new QFrame(parent);
     menu_frame->setObjectName("MenuQFrame");
@@ -26,8 +38,13 @@ HeaderMenu::HeaderMenu(QString center_text_, QWidget *parent) : QWidget{parent} 
     menu_frame->setMinimumWidth(0);
 
     QVBoxLayout *mvbox = new QVBoxLayout;
-    TextPixmapButton *button1 = new TextPixmapButton("Мой профиль", QPixmap(":/resourses/bank_icons/ADVCash_bank.svg"));
-    button1->setMinimumHeight(40);
+
+    // if (CurUser::getInstance().getId() != -1) {
+    //     button1 = new TextPixmapButton(CurUser::getInstance().getName(), CurUser::getInstance().getAvatar());
+    // } else {
+        button1 = new TextPixmapButton();
+    // }
+
     QPushButton *button2 = new QPushButton("Уведомления");
     button2->setMinimumHeight(30);
     QPushButton *button3 = new QPushButton("Избранное");
@@ -38,8 +55,8 @@ HeaderMenu::HeaderMenu(QString center_text_, QWidget *parent) : QWidget{parent} 
     button5->setMinimumHeight(30);
 
     connect(menu_button, &QPushButton::clicked, this, &HeaderMenu::showMenu);
-
     connect(logo_button, &QPushButton::clicked, this, &HeaderMenu::open_homePage);
+
     connect(button1, &QPushButton::clicked, this, &HeaderMenu::open_myPage);
     connect(button2, &QPushButton::clicked, this, &HeaderMenu::open_notifyPage);
     connect(button3, &QPushButton::clicked, this, &HeaderMenu::open_favotitePage);
@@ -58,8 +75,8 @@ HeaderMenu::HeaderMenu(QString center_text_, QWidget *parent) : QWidget{parent} 
 }
 
 void HeaderMenu::resizeMenu() {
-    int button_pos_x = menu_button->x() + menu_button->width() - menuWidth + 11;
-    int button_pos_y = menu_button->y() + menu_button->height() + 10;
+    int button_pos_x = menu_button->x() + menu_button->width() - menuWidth;
+    int button_pos_y = menu_button->y() + menu_button->height();
     menu_frame->move(button_pos_x, button_pos_y);
     menu_frame->resize(menuWidth, menuHeight);
 }
@@ -87,34 +104,46 @@ void HeaderMenu::showMenu() {
     anim->start();
 }
 
+void HeaderMenu::showEvent(QShowEvent *event) {
+    status_text->setText("Ваш id: " + QString::number(CurUser::getInstance().getId()));
+    button1->updateLayout();
+    QWidget::showEvent(event);
+}
+
+void HeaderMenu::resizeEvent(QResizeEvent *event) {
+    resizeMenu();
+    QWidget::resizeEvent(event);
+}
+
 void HeaderMenu::open_homePage() {
-    if (menuVisible) {
-        showMenu();
-    }
+    if (menuVisible) showMenu();
     emit homePage();
 };
 
 void HeaderMenu::open_myPage() {
-    showMenu();
-    emit myPage();
+    if (menuVisible) showMenu();
+    if (CurUser::getInstance().getId() == -1) emit loginPage();
+    else emit myPage();
 };
 
 void HeaderMenu::open_notifyPage() {
-    showMenu();
+    if (menuVisible) showMenu();
     emit notifyPage();
 };
 
 void HeaderMenu::open_favotitePage() {
-    showMenu();
-    emit favotitePage();
+    if (menuVisible) showMenu();
+    emit favouritePage();
 };
 
 void HeaderMenu::open_settingsPage() {
-    showMenu();
+    if (menuVisible) showMenu();
     emit settingsPage();
 };
 
 void HeaderMenu::open_exitPage() {
-    showMenu();
-    emit exitPage();
+    if (menuVisible) showMenu();
+    CurUser::getInstance().unsetCurUser();
+    this->showEvent(new QShowEvent());
+    emit homePage();
 };
