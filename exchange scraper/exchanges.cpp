@@ -1,17 +1,18 @@
 #include "exchanges.hpp"
 #include <cmath>
-#include <random>
 
-order::order(Currencies currency_, Coins coin_, Directions direction_,
-             double price_, std::vector<std::string> &payment_methods_,
-             double lower_limit_, double upper_limit_, double available_,
-             std::string &link_)
-    : currency(currency_), coin(coin_), direction(direction_), price(price_),
-      payment_methods(payment_methods_), lower_limit(lower_limit_),
-      upper_limit(upper_limit_), available(available_), link(link_) {}
+order::order(Exchanges exchange_, Currencies currency_, Coins coin_,
+             Directions direction_, dec::decimal<2> price_,
+             std::vector<std::string> &payment_methods_,
+             dec::decimal<2> lower_limit_,
+             dec::decimal<2, dec::floor_round_policy> upper_limit_,
+             dec::decimal<8> available_, std::string &link_)
+    : exchange(exchange_), currency(currency_), coin(coin_),
+      direction(direction_), price(price_), payment_methods(payment_methods_),
+      lower_limit(lower_limit_), upper_limit(upper_limit_),
+      available(available_), link(link_) {}
 
 bybit_simulator::bybit_simulator() {
-  name = Exchanges::bybit_simulator_;
   exchange_payment_methods = {"Local Card(Yellow)",
                               "Raiffeisenbank",
                               "A-Bank",
@@ -37,23 +38,48 @@ bybit_simulator::bybit_simulator() {
                               "UniCredit"};
 }
 
-void bybit_simulator::update_orders() {
+std::string decimal2_to_string(dec::decimal<2> n) {
+  std::stringstream ss;
+  ss << n;
+  std::string str_n;
+  ss >> str_n;
+  return str_n;
+}
+
+std::string decimal2frp_to_string(dec::decimal<2, dec::floor_round_policy> n) {
+  std::stringstream ss;
+  ss << n;
+  std::string str_n;
+  ss >> str_n;
+  return str_n;
+}
+
+std::string decimal8_to_string(dec::decimal<8> n) {
+  std::stringstream ss;
+  ss << n;
+  std::string str_n;
+  ss >> str_n;
+  return str_n;
+}
+
+void bybit_simulator::update_exchange_orders() {
+  orders.clear();
   Currencies currencies_[]{Currencies::RUB};
   Coins coins_[]{Coins::BTC, Coins::ETH, Coins::USDC, Coins::USDT};
   Directions directions_[]{Directions::buy, Directions::sell};
-  std::mt19937 gen;
-  double price;
-  double average_price;
+  dec::decimal<2> price;
+  dec::decimal<2> average_price;
   std::vector<std::string> payment_methods;
   int number_of_banks;
-  double lower_limit;
-  double upper_limit;
-  double available;
-  double min_available;
+  dec::decimal<2> lower_limit;
+  dec::decimal<2, dec::floor_round_policy> upper_limit;
+  dec::decimal<8> available;
+  dec::decimal<8> min_available;
   std::string link =
-      "https://music.youtube.com/channel/UCP2Q30XUqNQXstaRolRQ_hw";
+      "https://music.youtube.com/channel/UCP2Q30XUqNQXstaRolRQ_hw"; // писят два
+  int n;
   for (int i = 0; i < 1052; ++i) {
-    int n = gen() % 32767;
+    n = gen() % 32767;
     Currencies currency = currencies_[n % 1];
     Coins coin = coins_[n % 4];
     Directions direction = directions_[n % 2];
@@ -65,9 +91,10 @@ void bybit_simulator::update_orders() {
         switch (direction) {
         case Directions::buy:
           average_price = 4960000;
-          price = average_price +
-                  (-1 * (n % 2 == 0) + 1 * (n % 2 != 0)) * (n % 70001) +
-                  ((double)(n % 101) / 100);
+          price =
+              average_price +
+              dec::decimal_cast<2>(std::to_string(((double)(n % 101) / 100))) +
+              (-1 * (n % 2 == 0) + 1 * (n % 2 != 0)) * (n % 70001);
           number_of_banks = n % 6;
           if (number_of_banks == 0) {
             number_of_banks = 1;
@@ -75,23 +102,29 @@ void bybit_simulator::update_orders() {
           for (int j = 0, k = 13; j < number_of_banks; ++j, ++k) {
             payment_methods.push_back(exchange_payment_methods[n % k]);
           }
-          min_available = 0.00013;
-          available = min_available + ((double)(n % 49988) / 100000) +
-                      ((double)(n % 1000000001) / 1000000000);
-          upper_limit = std::floor(price * available);
-          if (available > 0.00195) {
-            upper_limit *= 0.3 + ((double)(n % 71) / 100);
+          min_available = dec::decimal_cast<8>("0.00013");
+          available = min_available +
+                      dec::decimal_cast<8>(
+                          std::to_string(((double)(n % 49988) / 100000))) +
+                      dec::decimal_cast<8>(std::to_string(
+                          ((double)(n % 1000000001) / 1000000000)));
+          upper_limit = dec::decimal_cast<8>(price) * available;
+          if (available > "0.00195") {
+            upper_limit *=
+                dec::decimal_cast<2>(std::to_string((double)(n % 71) / 100)) +
+                "0.3";
           }
-          upper_limit -= (double)(n % 101) / 100;
-          lower_limit = 500 + (n % (int)(upper_limit - 500));
-          lower_limit += (double)((n + 313) % 101) / 100;
+          lower_limit =
+              500 + (n % std::stoi(decimal2frp_to_string(upper_limit - 500)));
+          lower_limit += std::to_string((double)((n + 313) % 101) / 100);
           break;
 
         case Directions::sell:
           average_price = 4840000;
-          price = average_price +
-                  (-1 * (n % 2 == 0) + 1 * (n % 2 != 0)) * (n % 30001) +
-                  ((double)(n % 101) / 100);
+          price =
+              average_price +
+              dec::decimal_cast<2>(std::to_string(((double)(n % 101) / 100))) +
+              (-1 * (n % 2 == 0) + 1 * (n % 2 != 0)) * (n % 30001);
           number_of_banks = n % 6;
           if (number_of_banks == 0) {
             number_of_banks = 1;
@@ -99,16 +132,21 @@ void bybit_simulator::update_orders() {
           for (int j = 0, k = 13; j < number_of_banks; ++j, ++k) {
             payment_methods.push_back(exchange_payment_methods[n % k]);
           }
-          min_available = 0.00013;
-          available = min_available + ((double)(n % 49988) / 100000) +
-                      ((double)(n % 1000000001) / 1000000000);
-          upper_limit = std::floor(price * available);
-          if (available > 0.00195) {
-            upper_limit *= 0.3 + ((double)(n % 71) / 100);
+          min_available = dec::decimal_cast<8>("0.00013");
+          available = min_available +
+                      dec::decimal_cast<8>(
+                          std::to_string(((double)(n % 49988) / 100000))) +
+                      dec::decimal_cast<8>(std::to_string(
+                          ((double)(n % 1000000001) / 1000000000)));
+          upper_limit = dec::decimal_cast<8>(price) * available;
+          if (available > "0.00195") {
+            upper_limit *=
+                dec::decimal_cast<2>(std::to_string(((double)(n % 71) / 100))) +
+                "0.3";
           }
-          upper_limit -= (double)(n % 101) / 100;
-          lower_limit = 500 + (n % (int)(upper_limit - 500));
-          lower_limit += (double)((n + 313) % 101) / 100;
+          lower_limit =
+              500 + (n % std::stoi(decimal2frp_to_string(upper_limit - 500)));
+          lower_limit += std::to_string((double)((n + 313) % 101) / 100);
           break;
         }
         break;
@@ -117,9 +155,10 @@ void bybit_simulator::update_orders() {
         switch (direction) {
         case Directions::buy:
           average_price = 294000;
-          price = average_price +
-                  (-1 * (n % 2 == 0) + 1 * (n % 2 != 0)) * (n % 6001) +
-                  ((double)(n % 101) / 100);
+          price =
+              average_price +
+              dec::decimal_cast<2>(std::to_string(((double)(n % 101) / 100))) +
+              (-1 * (n % 2 == 0) + 1 * (n % 2 != 0)) * (n % 6001);
           number_of_banks = n % 6;
           if (number_of_banks == 0) {
             number_of_banks = 1;
@@ -127,23 +166,27 @@ void bybit_simulator::update_orders() {
           for (int j = 0, k = 13; j < number_of_banks; ++j, ++k) {
             payment_methods.push_back(exchange_payment_methods[n % k]);
           }
-          min_available = 0.00200000;
-          available =
-              min_available + n % 11 + ((double)(n % 1000000001) / 1000000000);
-          upper_limit = std::floor(price * available);
-          if (available > 0.3) {
-            upper_limit *= 0.3 + ((double)(n % 71) / 100);
+          min_available = dec::decimal_cast<8>("0.00200000");
+          available = min_available + n % 11 +
+                      dec::decimal_cast<8>(std::to_string(
+                          ((double)(n % 1000000001) / 1000000000)));
+          upper_limit = dec::decimal_cast<8>(price) * available;
+          if (available > "0.3") {
+            upper_limit *=
+                dec::decimal_cast<2>(std::to_string(((double)(n % 71) / 100))) +
+                "0.3";
           }
-          upper_limit -= (double)(n % 101) / 100;
-          lower_limit = 500 + (n % (int)(upper_limit - 500));
-          lower_limit += (double)((n + 313) % 101) / 100;
+          lower_limit =
+              500 + (n % std::stoi(decimal2frp_to_string(upper_limit - 500)));
+          lower_limit += std::to_string((double)((n + 313) % 101) / 100);
           break;
 
         case Directions::sell:
           average_price = 283000;
-          price = average_price +
-                  (-1 * (n % 2 == 0) + 1 * (n % 2 != 0)) * (n % 3001) +
-                  ((double)(n % 101) / 100);
+          price =
+              average_price +
+              dec::decimal_cast<2>(std::to_string(((double)(n % 101) / 100))) +
+              (-1 * (n % 2 == 0) + 1 * (n % 2 != 0)) * (n % 3001);
           number_of_banks = n % 6;
           if (number_of_banks == 0) {
             number_of_banks = 1;
@@ -151,16 +194,19 @@ void bybit_simulator::update_orders() {
           for (int j = 0, k = 13; j < number_of_banks; ++j, ++k) {
             payment_methods.push_back(exchange_payment_methods[n % k]);
           }
-          min_available = 0.00200000;
-          available =
-              min_available + n % 11 + ((double)(n % 1000000001) / 1000000000);
-          upper_limit = std::floor(price * available);
-          if (available > 0.3) {
-            upper_limit *= 0.3 + ((double)(n % 71) / 100);
+          min_available = dec::decimal_cast<8>("0.00200000");
+          available = min_available + n % 11 +
+                      dec::decimal_cast<8>(std::to_string(
+                          ((double)(n % 1000000001) / 1000000000)));
+          upper_limit = dec::decimal_cast<8>(price) * available;
+          if (available > "0.3") {
+            upper_limit *=
+                dec::decimal_cast<2>(std::to_string(((double)(n % 71) / 100))) +
+                "0.3";
           }
-          upper_limit -= (double)(n % 101) / 100;
-          lower_limit = 500 + (n % (int)(upper_limit - 500));
-          lower_limit += (double)((n + 313) % 101) / 100;
+          lower_limit =
+              500 + (n % std::stoi(decimal2frp_to_string(upper_limit - 500)));
+          lower_limit += std::to_string((double)((n + 313) % 101) / 100);
           break;
         }
         break;
@@ -169,8 +215,9 @@ void bybit_simulator::update_orders() {
         switch (direction) {
         case Directions::buy:
           average_price = 98.50;
-          price = average_price + (-1 * (n % 2 == 0) + 1 * (n % 2 != 0)) *
-                                      ((double)(n % 301) / 100);
+          price = average_price +
+                  std::to_string((-1 * (n % 2 == 0) + 1 * (n % 2 != 0)) *
+                                 ((double)(n % 301) / 100));
           number_of_banks = n % 6;
           if (number_of_banks == 0) {
             number_of_banks = 1;
@@ -179,22 +226,26 @@ void bybit_simulator::update_orders() {
             payment_methods.push_back(exchange_payment_methods[n % k]);
           }
           min_available = 6;
-          available =
-              min_available + n % 5994 + ((double)(n % 1000001) / 1000000);
+          available = min_available + n % 5994 +
+                      dec::decimal_cast<8>(
+                          std::to_string(((double)(n % 1000001) / 1000000)));
           ;
-          upper_limit = std::floor(price * available);
+          upper_limit = dec::decimal_cast<8>(price) * available;
           if (available > 90) {
-            upper_limit *= 0.3 + ((double)(n % 71) / 100);
+            upper_limit *=
+                dec::decimal_cast<2>(std::to_string(((double)(n % 71) / 100))) +
+                "0.3";
           }
-          upper_limit -= (double)(n % 101) / 100;
-          lower_limit = 500 + (n % (int)(upper_limit - 500));
-          lower_limit += (double)((n + 313) % 101) / 100;
+          lower_limit =
+              500 + (n % std::stoi(decimal2frp_to_string(upper_limit - 500)));
+          lower_limit += std::to_string((double)((n + 313) % 101) / 100);
           break;
 
         case Directions::sell:
           average_price = 93.75;
-          price = average_price + (-1 * (n % 2 == 0) + 1 * (n % 2 != 0)) *
-                                      ((double)(n % 76) / 100);
+          price = average_price +
+                  std::to_string((-1 * (n % 2 == 0) + 1 * (n % 2 != 0)) *
+                                 ((double)(n % 76) / 100));
           number_of_banks = n % 6;
           if (number_of_banks == 0) {
             number_of_banks = 1;
@@ -203,16 +254,19 @@ void bybit_simulator::update_orders() {
             payment_methods.push_back(exchange_payment_methods[n % k]);
           }
           min_available = 6;
-          available =
-              min_available + n % 5994 + ((double)(n % 1000001) / 1000000);
+          available = min_available + n % 5994 +
+                      dec::decimal_cast<8>(
+                          std::to_string(((double)(n % 1000001) / 1000000)));
           ;
-          upper_limit = std::floor(price * available);
+          upper_limit = dec::decimal_cast<8>(price) * available;
           if (available > 90) {
-            upper_limit *= 0.3 + ((double)(n % 71) / 100);
+            upper_limit *=
+                dec::decimal_cast<2>(std::to_string(((double)(n % 71) / 100))) +
+                "0.3";
           }
-          upper_limit -= (double)(n % 101) / 100;
-          lower_limit = 500 + (n % (int)(upper_limit - 500));
-          lower_limit += (double)((n + 313) % 101) / 100;
+          lower_limit =
+              500 + (n % std::stoi(decimal2frp_to_string(upper_limit - 500)));
+          lower_limit += std::to_string((double)((n + 313) % 101) / 100);
           break;
         }
         break;
@@ -221,8 +275,9 @@ void bybit_simulator::update_orders() {
         switch (direction) {
         case Directions::buy:
           average_price = 94.85;
-          price = average_price + (-1 * (n % 2 == 0) + 1 * (n % 2 != 0)) *
-                                      ((double)(n % 26) / 100);
+          price = average_price +
+                  std::to_string((-1 * (n % 2 == 0) + 1 * (n % 2 != 0)) *
+                                 ((double)(n % 26) / 100));
           number_of_banks = n % 6;
           if (number_of_banks == 0) {
             number_of_banks = 1;
@@ -231,20 +286,25 @@ void bybit_simulator::update_orders() {
             payment_methods.push_back(exchange_payment_methods[n % k]);
           }
           min_available = 6;
-          available = min_available + n % 49994 + ((double)(n % 10001) / 10000);
-          upper_limit = std::floor(price * available);
+          available = min_available + n % 49994 +
+                      dec::decimal_cast<8>(
+                          std::to_string(((double)(n % 10001) / 10000)));
+          upper_limit = dec::decimal_cast<8>(price) * available;
           if (available > 90) {
-            upper_limit *= 0.3 + ((double)(n % 71) / 100);
+            upper_limit *=
+                dec::decimal_cast<2>(std::to_string(((double)(n % 71) / 100))) +
+                "0.3";
           }
-          upper_limit -= (double)(n % 101) / 100;
-          lower_limit = 500 + (n % (int)(upper_limit - 500));
-          lower_limit += (double)((n + 313) % 101) / 100;
+          lower_limit =
+              500 + (n % std::stoi(decimal2frp_to_string(upper_limit - 500)));
+          lower_limit += std::to_string((double)((n + 313) % 101) / 100);
           break;
 
         case Directions::sell:
           average_price = 93.50;
-          price = average_price + (-1 * (n % 2 == 0) + 1 * (n % 2 != 0)) *
-                                      ((double)(n % 301) / 100);
+          price = average_price +
+                  std::to_string((-1 * (n % 2 == 0) + 1 * (n % 2 != 0)) *
+                                 ((double)(n % 301) / 100));
           number_of_banks = n % 6;
           if (number_of_banks == 0) {
             number_of_banks = 1;
@@ -253,14 +313,18 @@ void bybit_simulator::update_orders() {
             payment_methods.push_back(exchange_payment_methods[n % k]);
           }
           min_available = 6;
-          available = min_available + n % 49994 + ((double)(n % 10001) / 10000);
-          upper_limit = std::floor(price * available);
+          available = min_available + n % 49994 +
+                      dec::decimal_cast<8>(
+                          std::to_string(((double)(n % 10001) / 10000)));
+          upper_limit = dec::decimal_cast<8>(price) * available;
           if (available > 90) {
-            upper_limit *= 0.3 + ((double)(n % 71) / 100);
+            upper_limit *=
+                dec::decimal_cast<2>(std::to_string(((double)(n % 71) / 100))) +
+                "0.3";
           }
-          upper_limit -= (double)(n % 101) / 100;
-          lower_limit = 500 + (n % (int)(upper_limit - 500));
-          lower_limit += (double)((n + 313) % 101) / 100;
+          lower_limit =
+              500 + (n % std::stoi(decimal2frp_to_string(upper_limit - 500)));
+          lower_limit += std::to_string((double)((n + 313) % 101) / 100);
           break;
         }
         break;
@@ -268,7 +332,7 @@ void bybit_simulator::update_orders() {
       break;
     }
     orders.push_back(std::move(std::make_unique<order>(
-        currency, coin, direction, price, payment_methods, lower_limit,
-        upper_limit, available, link)));
+        Exchanges::bybit_simulator, currency, coin, direction, price,
+        payment_methods, lower_limit, upper_limit, available, link)));
   }
 }
