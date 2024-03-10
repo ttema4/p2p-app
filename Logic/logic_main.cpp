@@ -2,6 +2,7 @@
 #include <unordered_map>
 #include <thread>
 #include <vector>
+#include <boost/asio.hpp>
 
 struct Order {
     std::string type;
@@ -45,8 +46,43 @@ struct Chains{
 };
 
 struct DataReceiver {
+
+    size_t read_complete(char* buf, const boost::system::error_code & err, size_t bytes){
+        if(err){
+            return 0;
+        }
+        bool found = std::find(buf, buf + bytes, '\n') < buf + bytes; // Вместо '\n' здесь любой флаг конца сообщения
+        return found ? 0 : 1;
+    }
+
+    void process_new_data(std::string data){
+        // Здесь разбираем полученную строку в Orders и тд
+    }
+
+    void ask_for_update(){
+        boost::asioio_service service;
+        std::string message = "asking for update\n";
+        ip::tcp::endpoint ep(ip::address::from_string("127.0.0.1"), 8001); // Порт временный
+        ip::tcp::socket sock(service);
+        sock.connect(ep);
+        bool no_updates = true;
+        while(no_updates){
+            sock.write_some(buffer(messasge));
+            char answer_buff[1024]; // Размер буффера временный
+            int bytes = read(sock, buffer(answer_buff), boost::bind(read_complete,answer_buff,_1,_2));
+            std::string copy(answer_buff, bytes - 1);
+            if(copy != "no updates"){
+                no_updates = false;
+            }
+        }
+        sock.close();
+        process_new_data(copy);
+    }
+
     void receive(){
-        
+        while(true){ // Наверно, наивно, но пока как есть ))
+            ask_for_update();
+        }
     }
 };
 
