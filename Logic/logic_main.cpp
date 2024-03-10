@@ -60,6 +60,7 @@ struct DataReceiver {
     }
 
     void ask_for_update(){
+    // В финальной имплементации здесь будет бОльшая часть проверок а-ля "подключение оборвалось" и всё такое прочее
         boost::asioio_service service;
         std::string message = "asking for update\n";
         ip::tcp::endpoint ep(ip::address::from_string("127.0.0.1"), 8001); // Порт временный
