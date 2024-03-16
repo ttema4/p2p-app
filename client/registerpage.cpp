@@ -1,6 +1,8 @@
 #include "registerpage.h"
 #include "ui_registerpage.h"
 
+#include <QMessageBox>
+
 RegisterPage::RegisterPage(QWidget *parent) : QMainWindow(parent), ui(new Ui::RegisterPage) {
     ui->setupUi(this);
     menu = new HeaderMenu("Регистрация", ui->widget->parentWidget());
@@ -77,11 +79,24 @@ bool RegisterPage::eventFilter(QObject *obj, QEvent *event) {
 }
 
 void RegisterPage::tryRegister() {
-    if (AccountHandler::getInstance().tryRegister(ui->lineEdit->text(), ui->lineEdit_2->text(), ui->lineEdit_3->text())) {
+    if (CurUser::getInstance().tryRegister(ui->lineEdit->text(), ui->lineEdit_2->text(), ui->lineEdit_3->text())) {
         ui->lineEdit->setText("");
         ui->lineEdit_2->setText("");
         ui->lineEdit_3->setText("");
         emit RegisterPage::homePage();
+    } else {
+        ui->lineEdit->setFocus();
+        ui->lineEdit->selectAll();
+        ui->lineEdit_2->setText("");
+        ui->lineEdit_3->setText("");
+
+        QMessageBox* m = new QMessageBox(QMessageBox::NoIcon, "", "", QMessageBox::Ok | QMessageBox::Default, this, Qt::Sheet);
+        m->setText("Ошибка");
+        m->setInformativeText("Пользователь с таким логином уже существует");
+        QPixmap exportSuccess("://resourses/icons/pepe.png");
+        exportSuccess = exportSuccess.scaled(QSize(60, 60), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        m->setIconPixmap(exportSuccess);
+        m->exec();
     }
 };
 

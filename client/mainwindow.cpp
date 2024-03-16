@@ -14,9 +14,38 @@
 #include <QHBoxLayout>
 #include <QFrame>
 #include <QPropertyAnimation>
+#include <QParallelAnimationGroup>
 #include <QPixmap>
 #include <QMouseEvent>
 #include <QVBoxLayout>
+
+// void MainWindow::hideFilters() {
+//     ui->widget_2->hide();
+// }
+
+// void MainWindow::showFilters() {
+//     this->setFocus();
+
+//     // Создаем анимацию изменения размера виджета
+//     QPropertyAnimation* sizeAnim = new QPropertyAnimation(ui->widget_2, "geometry");
+//     sizeAnim->setDuration(400);
+
+//     if (!filtersVisible) {
+//         sizeAnim->setStartValue(ui->widget_2->geometry());
+//         sizeAnim->setEndValue(ui->widget_2->geometry().adjusted(0, 0, 200, 0));
+
+//         filtersVisible = true;
+//         ui->widget_2->show();
+//     } else {
+//         sizeAnim->setStartValue(ui->widget_2->geometry());
+//         sizeAnim->setEndValue(ui->widget_2->geometry().adjusted(0, 0, -200, 0));
+
+//         filtersVisible = false;
+//         // После завершения анимации перестраиваем макет
+//         connect(sizeAnim, &QPropertyAnimation::finished, this, &MainWindow::hideFilters);
+//     }
+//     sizeAnim->start();
+// }
 
 void MainWindow::windowChanger(QMainWindow *toOpen) {
     toOpen->show();
@@ -163,6 +192,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(settingspage, &SettingsPage::favouritePage, this, &MainWindow::open_favouritepage);
 
 
+
+    // connect(ui->pushButton_2, &QPushButton::clicked, this, &MainWindow::showFilters);
 
     ui->tableWidget->verticalHeader()->hide();
     ui->tableWidget->horizontalHeader()->hide();

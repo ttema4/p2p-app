@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.4)
 
 project(p2p-app VERSION 0.1 LANGUAGES CXX)
 
@@ -10,7 +10,8 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 REQUIRED COMPONENTS Widgets)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Sql)
+
 
 set(PROJECT_SOURCES
         main.cpp
@@ -30,13 +31,12 @@ qt_add_executable(p2p-app
     registerpage.h registerpage.cpp registerpage.ui
     user.h user.cpp
     config.h
-    accounthandler.h accounthandler.cpp
     settingspage.h settingspage.cpp settingspage.ui
     favouritepage.h favouritepage.cpp favouritepage.ui
     notifypage.h notifypage.cpp notifypage.ui
 )
 
-target_link_libraries(p2p-app PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(p2p-app PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Sql)
 
 
 if(${QT_VERSION} VERSION_LESS 6.1.0)

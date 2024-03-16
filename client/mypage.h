@@ -33,6 +33,9 @@ private:
     void openFileAndSetPixmap();
     void exitAccount();
 
+    void deleteAvatar();
+    void deleteAccount();
+
     HeaderMenu* menu;
     Ui::MyPage *ui;
 };

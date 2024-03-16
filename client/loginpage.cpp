@@ -2,6 +2,12 @@
 #include "ui_loginpage.h"
 #include <QDebug>
 #include <QFile>
+#include <QMessageBox>
+
+#include <QDialog>
+#include <QVBoxLayout>
+#include <QLabel>
+#include <QPushButton>
 
 LoginPage::LoginPage(QWidget *parent) : QMainWindow(parent), ui(new Ui::LoginPage) {
     ui->setupUi(this);
@@ -74,7 +80,7 @@ bool LoginPage::eventFilter(QObject *obj, QEvent *event) {
 }
 
 void LoginPage::tryLogin() {
-    if (AccountHandler::getInstance().tryLogin(ui->lineEdit->text(), ui->lineEdit_2->text())) {
+    if (CurUser::getInstance().tryLogin(ui->lineEdit->text(), ui->lineEdit_2->text())) {
         ui->lineEdit->setText("");
         ui->lineEdit_2->setText("");
         emit LoginPage::homePage();
@@ -82,6 +88,14 @@ void LoginPage::tryLogin() {
         ui->lineEdit->setFocus();
         ui->lineEdit->selectAll();
         ui->lineEdit_2->setText("");
+
+        QMessageBox* m = new QMessageBox(QMessageBox::NoIcon, "", "", QMessageBox::Ok | QMessageBox::Default, this, Qt::Sheet);
+        m->setText("Ошибка");
+        m->setInformativeText("Пользователь не найден");
+        QPixmap exportSuccess("://resourses/icons/pepe.png");
+        exportSuccess = exportSuccess.scaled(QSize(60, 60), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        m->setIconPixmap(exportSuccess);
+        m->exec();
     }
 };
 

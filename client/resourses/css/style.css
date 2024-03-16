@@ -13,4 +13,9 @@ Frame#MenuQFrame QPushButton:hover:pressed { background-color: #f6f6f6 }
 #logoButton:hover:!pressed { background-color: rgba(255, 255, 255, 80); border-radius: 5px; }
 #logoButton:pressed { background-color: rgba(0, 0, 0, 10); border-radius: 5px; }
 
+#menuButton { border-image: url(:/resourses/icons/menu-icon.png); }
+#menuButton:!pressed { background-color: transparent; }
+#menuButton:hover:!pressed { background-color: rgba(255, 255, 255, 80); border-radius: 5px; }
+#menuButton:pressed { background-color: rgba(0, 0, 0, 10); border-radius: 5px; }
+
 

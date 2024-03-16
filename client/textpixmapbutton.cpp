@@ -53,7 +53,7 @@ bool TextPixmapButton::updateLayout() {
         text1_btn->setText(CurUser::getInstance().getName());
         text2_btn->setText("Мой профиль");
         pixmapLabel->show();
-        pixmapLabel->setPixmap(CurUser::getInstance().getAvatar1());
+        pixmapLabel->setPixmap(CurUser::getInstance().getAvatar2());
     }
     return true;
 };
