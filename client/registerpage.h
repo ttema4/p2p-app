@@ -4,7 +4,6 @@
 #include <QMainWindow>
 #include <QShowEvent>
 #include "headermenu.h"
-#include "accounthandler.h"
 
 namespace Ui {
 class RegisterPage;

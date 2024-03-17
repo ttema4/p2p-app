@@ -19,16 +19,19 @@ HeaderMenu::HeaderMenu(QString center_text_, QWidget *parent) : QWidget{parent} 
     logo_button->setMinimumWidth(150);
     logo_button->setMinimumHeight(40);
     layout->addWidget(logo_button);
-    layout->addStretch(1);
+    layout->addStretch(7);
 
     center_text = new QLabel(center_text_);
     center_text->setObjectName("MenuCenterText");
     layout->addWidget(center_text);
-    layout->addStretch(1);
+    layout->addStretch(10);
 
     status_text = new QLabel("Ваш id: " + QString::number(CurUser::getInstance().getId()));
+    status_text->hide();
     layout->addWidget(status_text);
-    menu_button = new QPushButton("Menu");
+    menu_button = new QPushButton();
+    menu_button->setFixedSize(QSize(40, 30));
+    menu_button->setObjectName("menuButton");
     layout->addWidget(menu_button);
 
     menu_frame = new QFrame(parent);
@@ -143,7 +146,7 @@ void HeaderMenu::open_settingsPage() {
 
 void HeaderMenu::open_exitPage() {
     if (menuVisible) showMenu();
-    CurUser::getInstance().unsetCurUser();
+    CurUser::getInstance().tryExit();
     this->showEvent(new QShowEvent());
     emit homePage();
 };
