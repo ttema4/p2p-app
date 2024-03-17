@@ -4,6 +4,8 @@
 #include <vector>
 #include <boost/asio.hpp>
 
+using namespace boost::asio;
+
 struct Order {
     std::string type;
     std::string id;
@@ -45,44 +47,86 @@ struct Chains{
     Chains() = default;
 };
 
-struct DataReceiver {
-
-    size_t read_complete(char* buf, const boost::system::error_code & err, size_t bytes){
-        if(err){
-            return 0;
-        }
-        bool found = std::find(buf, buf + bytes, '\n') < buf + bytes; // Вместо '\n' здесь любой флаг конца сообщения
-        return found ? 0 : 1;
+class ParserConnectionClient {
+public:
+    ParserConnectionClient(boost::asio::io_context& io_context, const ip::tcp::resolver::results_type& endpoints)
+        : io_context_(io_context), socket_(io_context) {
+        do_connect(endpoints);
     }
 
-    void process_new_data(std::string data){
-        // Здесь разбираем полученную строку в Orders и тд
+    void start() {
+        start_receive();
+        start_check_updates();
     }
 
-    void ask_for_update(){
-    // В финальной имплементации здесь будет бОльшая часть проверок а-ля "подключение оборвалось" и всё такое прочее
-        boost::asioio_service service;
-        std::string message = "asking for update\n";
-        ip::tcp::endpoint ep(ip::address::from_string("127.0.0.1"), 8001); // Порт временный
-        ip::tcp::socket sock(service);
-        sock.connect(ep);
-        bool no_updates = true;
-        while(no_updates){
-            sock.write_some(buffer(messasge));
-            char answer_buff[1024]; // Размер буффера временный
-            int bytes = read(sock, buffer(answer_buff), boost::bind(read_complete,answer_buff,_1,_2));
-            std::string copy(answer_buff, bytes - 1);
-            if(copy != "no updates"){
-                no_updates = false;
+private:
+    void start_check_updates() {
+        check_timer.expires_after(std::chrono::seconds(1)); // Проверяем обновления каждую секунду
+        check_timer.async_wait([this](boost::system::error_code ec) {
+            if (!ec) {
+                send_request("Asking for update\n"); // Запрос, по которому парсер присылает обновление, либо говорит о его отсутствии
+                start_check_updates();
             }
-        }
-        sock.close();
-        process_new_data(copy);
+        });
     }
 
+    void send_request(const std::string& request) {
+        std::cout << "Sending request: " << request << std::endl; // Для дебага
+        async_write(socket_, buffer(request + "\n"), [this](boost::system::error_code ec, std::size_t /*length*/) {
+            if (ec) {
+                std::cerr << "Error sending request: " << ec.message() << std::endl; // Возможно, здесь будет более умная обработка ошибок
+            }
+        });
+    }
+
+    void start_receive() {
+        async_read_until(socket_, response_, '\n', [this](boost::system::error_code ec, std::size_t length) {
+            if (!ec) {
+                std::istream response_stream(&response_);
+                std::string response;
+                std::getline(response_stream, response);
+                std::cout << "Received response: " << response << std::endl; // Для дебага
+                // |
+                // |
+                // V
+                // response - наши данные, которые мы получили
+                // Здесь кладем в очередь / передаем во внешний метод - этот этап в работе...
+                start_receive();
+            } else {
+                std::cerr << "Error receiving response: " << ec.message() << std::endl; // Возможно, здесь будет более умная обработка ошибок
+            }
+        });
+    }
+
+    void do_connect(const ip::tcp::resolver::results_type& endpoints) {
+        async_connect(socket_, endpoints, [this](boost::system::error_code ec, ip::tcp::endpoint) {
+            if (!ec) {
+                std::cout << "Connected to server." << std::endl; // Для дебага
+                start();
+            } else {
+                std::cerr << "Error connecting to server: " << ec.message() << std::endl; // Возможно, здесь будет более умная обработка ошибок
+            }
+        });
+    }
+
+private:
+    boost::asio::io_context& io_context_;
+    ip::tcp::socket socket_;
+    boost::asio::streambuf response_;
+    boost::asio::steady_timer check_timer{io_context_};
+};
+
+struct DataReceiver {
     void receive(){
-        while(true){ // Наверно, наивно, но пока как есть ))
-            ask_for_update();
+        // Метод для подключения к парсеру
+        try {
+            boost::asio::io_context io_context;
+            ip::tcp::resolver resolver(io_context);
+            auto endpoints = resolver.resolve("localhost", "12345"); // Временный сокет
+            ParserConnectionClient client(io_context, endpoints);
+            io_context.run();
+        } catch (std::exception& e) {
+            std::cerr << "Exception: " << e.what() << std::endl; // Возможно, здесь будет более умная обработка ошибок
         }
     }
 };
