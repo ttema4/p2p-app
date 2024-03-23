@@ -162,14 +162,14 @@ struct Connection {
 	Connection(boost::asio::io_service & io_service, size_t max_buffer_size): socket( io_service ), read_buffer( max_buffer_size ) { }
 };
 
-class UsersConnectionsClient {
+class UsersConnectionsServer {
 	boost::asio::io_service m_ioservice;
 	boost::asio::ip::tcp::acceptor m_acceptor;
 	std::list<Connection> m_connections;
 	using con_handle_t = std::list<Connection>::iterator;
 
 public:
-	UsersConnectionsClient(): m_ioservice(), m_acceptor(m_ioservice), m_connections() {}
+	UsersConnectionsServer(): m_ioservice(), m_acceptor(m_ioservice), m_connections() {}
 
 	void handle_read(con_handle_t con_handle, boost::system::error_code const & err, size_t bytes_transfered) {
 		if(bytes_transfered > 0) {
@@ -181,13 +181,13 @@ public:
 				// Если получено "Asking for update\n", проверяем наличие и отправляем либо "No updates\n", либо сам апдейт
 
 				// std::shared_ptr<std::string> response = std::make_shared<std::string>("No updates\n");
-				// auto handler = boost::bind(&UsersConnectionsClient::handle_write, this, con_handle, response, boost::asio::placeholders::error);
+				// auto handler = boost::bind(&UsersConnectionsServer::handle_write, this, con_handle, response, boost::asio::placeholders::error);
 				// boost::asio::async_write(con_handle->socket, boost::asio::buffer(*response), handler);
         	} else {
 				// Остальные случаи пока не обрабатываем(есть ли он вообще?)
 
 				std::shared_ptr<std::string> response = std::make_shared<std::string>("ping\n");
-				auto handler = boost::bind(&UsersConnectionsClient::handle_write, this, con_handle, response, boost::asio::placeholders::error);
+				auto handler = boost::bind(&UsersConnectionsServer::handle_write, this, con_handle, response, boost::asio::placeholders::error);
 				boost::asio::async_write(con_handle->socket, boost::asio::buffer(*response), handler);
         	}
 		}
@@ -200,7 +200,7 @@ public:
 	}
 
 	void do_async_read(con_handle_t con_handle) {
-		auto handler = boost::bind(&UsersConnectionsClient::handle_read, this, con_handle, boost::asio::placeholders::error, boost::asio::placeholders::bytes_transferred);
+		auto handler = boost::bind(&UsersConnectionsServer::handle_read, this, con_handle, boost::asio::placeholders::error, boost::asio::placeholders::bytes_transferred);
 		boost::asio::async_read_until(con_handle->socket, con_handle->read_buffer, "\n", handler);
 	}
 
@@ -221,7 +221,7 @@ public:
 			std::cout << "Connection from: " << con_handle->socket.remote_endpoint().address().to_string() << "\n"; // Для дебага
 			std::cout << "Sending message\n"; // Для дебага
 			auto buff = std::make_shared<std::string>("Hello World!\n");
-			auto handler = boost::bind(&UsersConnectionsClient::handle_write, this, con_handle, buff, boost::asio::placeholders::error);
+			auto handler = boost::bind(&UsersConnectionsServer::handle_write, this, con_handle, buff, boost::asio::placeholders::error);
 			boost::asio::async_write(con_handle->socket, boost::asio::buffer(*buff), handler);
 			do_async_read(con_handle);
 		} else {
@@ -233,7 +233,7 @@ public:
 
 	void start_accept() {
 		auto con_handle = m_connections.emplace(m_connections.begin(), m_ioservice);
-		auto handler = boost::bind(&UsersConnectionsClient::handle_accept, this, con_handle, boost::asio::placeholders::error);
+		auto handler = boost::bind(&UsersConnectionsServer::handle_accept, this, con_handle, boost::asio::placeholders::error);
 		m_acceptor.async_accept(con_handle->socket, handler);
 	}
 
@@ -264,7 +264,7 @@ void raise_parser_connection(std::string parser_connection_ip, std::string parse
 // Запускаем в отдельном потоке из Main::run
 void raise_users_server(uint16_t users_server_port){
     // Поднимаем сервер для подключений клиентов:
-    auto users_server = UsersConnectionsClient();
+    auto users_server = UsersConnectionsServer();
 	users_server.listen(users_server_port);
 	users_server.run();
 }
