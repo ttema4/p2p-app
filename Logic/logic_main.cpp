@@ -2,7 +2,13 @@
 #include <unordered_map>
 #include <thread>
 #include <vector>
+#include <cstdint> 
+#include <iostream>
+#include <list>
+#include <memory>
 #include <boost/asio.hpp>
+#include <boost/bind.hpp>
+// #include "src/nlohmann/json.hpp"
 
 using namespace boost::asio;
 
@@ -39,12 +45,44 @@ struct Chain{
     
     Chain(Order buy_, const std::pair<std::string, std::string> change_, Order sell_, long double spread_)
     : buy(buy_), change(change_), sell(sell_), spread(spread_) {}
-    
+
 };
 
 struct Chains{
     std::vector<Chain> list;
     Chains() = default;
+};
+
+struct DataReceiver {
+    void receive(){
+
+    }
+};
+
+struct Analysis {
+    void analyze(Chains& chains, Orders& orders_for_buy, Orders& orders_for_sell, MarketRates& market_rates){
+        std::unordered_map<std::string, std::vector<Order>> sell_by_coin;
+        for(Order sell : orders_for_sell.list){
+            sell_by_coin[sell.coin1].push_back(sell);
+        }
+        for (Order buy : orders_for_buy.list){
+            std::string coin_buy = buy.coin2;
+            for (std::pair<std::string, long double> market : market_rates.list[coin_buy]){
+                std::string coin_sell = market.first;
+                long double rate = market.second;
+                for (Order sell : sell_by_coin[coin_sell]){
+                    long double spread = ((sell.exchange_rate / buy.exchange_rate) - 1) * 100;
+                    chains.list.push_back(Chain(buy, std::make_pair(coin_buy, coin_sell), sell, spread));
+                }
+            }
+        }
+    }
+};
+
+struct DataSender {
+    void send(){
+
+    }
 };
 
 class ParserConnectionClient {
@@ -91,6 +129,7 @@ private:
                 // V
                 // response - наши данные, которые мы получили
                 // Здесь кладем в очередь / передаем во внешний метод - этот этап в работе...
+                // Скорее всего, хотим сначала прямо здесь проверить, получили ли вообще апдейт
                 start_receive();
             } else {
                 std::cerr << "Error receiving response: " << ec.message() << std::endl; // Возможно, здесь будет более умная обработка ошибок
@@ -116,60 +155,124 @@ private:
     boost::asio::steady_timer check_timer{io_context_};
 };
 
-struct DataReceiver {
-    void receive(){
-        // Метод для подключения к парсеру
-        try {
-            boost::asio::io_context io_context;
-            ip::tcp::resolver resolver(io_context);
-            auto endpoints = resolver.resolve("localhost", "12345"); // Временный сокет
-            ParserConnectionClient client(io_context, endpoints);
-            io_context.run();
-        } catch (std::exception& e) {
-            std::cerr << "Exception: " << e.what() << std::endl; // Возможно, здесь будет более умная обработка ошибок
-        }
-    }
+struct Connection {
+	boost::asio::ip::tcp::socket socket;
+	boost::asio::streambuf read_buffer;
+	Connection(boost::asio::io_service & io_service): socket(io_service), read_buffer() {}
+	Connection(boost::asio::io_service & io_service, size_t max_buffer_size): socket( io_service ), read_buffer( max_buffer_size ) { }
 };
 
-struct Analysis {
-    void analyze(Chains& chains, Orders& orders_for_buy, Orders& orders_for_sell, MarketRates& market_rates){
-        std::unordered_map<std::string, std::vector<Order>> sell_by_coin;
-        for(Order sell : orders_for_sell.list){
-            sell_by_coin[sell.coin1].push_back(sell);
-        }
-        for (Order buy : orders_for_buy.list){
-            std::string coin_buy = buy.coin2;
-            for (std::pair<std::string, long double> market : market_rates.list[coin_buy]){
-                std::string coin_sell = market.first;
-                long double rate = market.second;
-                for (Order sell : sell_by_coin[coin_sell]){
-                    long double spread = ((sell.exchange_rate / buy.exchange_rate) - 1) * 100;
-                    chains.list.push_back(Chain(buy, std::make_pair(coin_buy, coin_sell), sell, spread));
-                }
-            }
-        }
-    }
+class UsersConnectionsClient {
+	boost::asio::io_service m_ioservice;
+	boost::asio::ip::tcp::acceptor m_acceptor;
+	std::list<Connection> m_connections;
+	using con_handle_t = std::list<Connection>::iterator;
+
+public:
+	UsersConnectionsClient(): m_ioservice(), m_acceptor(m_ioservice), m_connections() {}
+
+	void handle_read(con_handle_t con_handle, boost::system::error_code const & err, size_t bytes_transfered) {
+		if(bytes_transfered > 0) {
+			std::istream is(&con_handle->read_buffer);
+			std::string line;
+			std::getline(is, line);
+			std::cout << "Message Received: " << line << std::endl; // Для дебага
+            if (line == "Asking for update\n") {
+				// Если получено "Asking for update\n", проверяем наличие и отправляем либо "No updates\n", либо сам апдейт
+
+				// std::shared_ptr<std::string> response = std::make_shared<std::string>("No updates\n");
+				// auto handler = boost::bind(&UsersConnectionsClient::handle_write, this, con_handle, response, boost::asio::placeholders::error);
+				// boost::asio::async_write(con_handle->socket, boost::asio::buffer(*response), handler);
+        	} else {
+				// Остальные случаи пока не обрабатываем(есть ли он вообще?)
+
+				std::shared_ptr<std::string> response = std::make_shared<std::string>("ping\n");
+				auto handler = boost::bind(&UsersConnectionsClient::handle_write, this, con_handle, response, boost::asio::placeholders::error);
+				boost::asio::async_write(con_handle->socket, boost::asio::buffer(*response), handler);
+        	}
+		}
+		if( !err ) {
+			do_async_read(con_handle);
+		} else {
+			std::cerr << "We had an error: " << err.message() << std::endl; // Возможно, здесь будет более умная обработка ошибок
+			m_connections.erase(con_handle);
+		}
+	}
+
+	void do_async_read(con_handle_t con_handle) {
+		auto handler = boost::bind(&UsersConnectionsClient::handle_read, this, con_handle, boost::asio::placeholders::error, boost::asio::placeholders::bytes_transferred);
+		boost::asio::async_read_until(con_handle->socket, con_handle->read_buffer, "\n", handler);
+	}
+
+	void handle_write(con_handle_t con_handle, std::shared_ptr<std::string> msg_buffer, boost::system::error_code const & err) {
+		if(!err) {
+			std::cout << "Finished sending message\n"; // Для дебага
+			if(con_handle->socket.is_open()) {
+				// Всё супер - ответ написан, подключение открыто
+			}
+		} else { 
+			std::cerr << "We had an error: " << err.message() << std::endl;  // Возможно, здесь будет более умная обработка ошибок
+			m_connections.erase(con_handle);
+		}
+	}
+
+	void handle_accept(con_handle_t con_handle, boost::system::error_code const & err) {
+		if(!err) {
+			std::cout << "Connection from: " << con_handle->socket.remote_endpoint().address().to_string() << "\n"; // Для дебага
+			std::cout << "Sending message\n"; // Для дебага
+			auto buff = std::make_shared<std::string>("Hello World!\n");
+			auto handler = boost::bind(&UsersConnectionsClient::handle_write, this, con_handle, buff, boost::asio::placeholders::error);
+			boost::asio::async_write(con_handle->socket, boost::asio::buffer(*buff), handler);
+			do_async_read(con_handle);
+		} else {
+			std::cerr << "We had an error: " << err.message() << std::endl; // Возможно, здесь будет более умная обработка ошибок
+			m_connections.erase(con_handle);
+		}
+		start_accept();
+	}
+
+	void start_accept() {
+		auto con_handle = m_connections.emplace(m_connections.begin(), m_ioservice);
+		auto handler = boost::bind(&UsersConnectionsClient::handle_accept, this, con_handle, boost::asio::placeholders::error);
+		m_acceptor.async_accept(con_handle->socket, handler);
+	}
+
+	void listen(uint16_t port) {
+		auto endpoint = boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), port);
+		m_acceptor.open(endpoint.protocol());
+		m_acceptor.set_option(boost::asio::ip::tcp::acceptor::reuse_address(true));
+		m_acceptor.bind(endpoint);
+		m_acceptor.listen();
+		start_accept();
+	}
+
+	void run() {
+		m_ioservice.run();
+	}
 };
 
-struct DataSender {
-    void connection_handler(){
+// Запускаем в отдельном потоке из Main::run
+void raise_parser_connection(std::string parser_connection_ip, std::string parser_connection_port){
+    // Поднимаем клиента для подключения к парсеру:
+    boost::asio::io_context client_io_context;
+    ip::tcp::resolver resolver(client_io_context);
+    auto endpoints = resolver.resolve(parser_connection_ip, parser_connection_port);
+    ParserConnectionClient client(client_io_context, endpoints);
+    client_io_context.run();
+}
 
-    }
-
-    void send(){
-
-    }
-};
+// Запускаем в отдельном потоке из Main::run
+void raise_users_server(uint16_t users_server_port){
+    // Поднимаем сервер для подключений клиентов:
+    auto users_server = UsersConnectionsClient();
+	users_server.listen(users_server_port);
+	users_server.run();
+}
 
 struct Main {
-    DataReceiver reciever;
-    Analysis analysis;
-    DataSender sender;
-
-    MarketRates market_rates;
-    Orders orders_for_buy;
-    Orders orders_for_sell;
-    Chains chains;    
+    // DataReceiver reciever;
+    // Analysis analysis;
+    // DataSender sender;
 
     // Вероятно, оно будет не совсем так, но в упрощенном виде можно представлять что-то такое
     // void run(){
