@@ -159,7 +159,7 @@ struct Connection {
 	boost::asio::ip::tcp::socket socket;
 	boost::asio::streambuf read_buffer;
 	Connection(boost::asio::io_service & io_service): socket(io_service), read_buffer() {}
-	Connection(boost::asio::io_service & io_service, size_t max_buffer_size): socket( io_service ), read_buffer( max_buffer_size ) { }
+	Connection(boost::asio::io_service & io_service, size_t max_buffer_size): socket(io_service), read_buffer(max_buffer_size) {}
 };
 
 class UsersConnectionsServer {
@@ -282,3 +282,17 @@ struct Main {
     //     std::thread t4(&DataSender::connection_handler, &sender)
     // }
 };
+
+// ДАЛЕЕ КОД ДЛЯ ТЕСТИРОВАНИЯ
+
+// Если на этапе этого коммита хочется увидеть, как функционируют сервер и клиент, то можно запустить следующий main.
+// Примечание 1: отдельно должен быть запущен прототип сервера парсера.
+// Примечание 3: клиентов для сервера(так называемых пользователей) также нужно запустить отдельно(тут в принципе прокатит и netcat).
+// Примечание 3: в данном коде используются временные параметры, которые в дальнейшем будут заменены на конфигурационные.
+
+// int main(){
+//     std::thread t1(&raise_parser_connection, "localhost", "12345"); // Тут указанные временные параметры
+//     std::thread t2(&raise_users_server, 12346); // Тут указаны временные параметры
+//     t1.join();
+//     t2.join();
+// }
