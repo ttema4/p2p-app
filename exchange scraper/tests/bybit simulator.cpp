@@ -1,6 +1,7 @@
 #include "../scraper.hpp"
 #include <iomanip>
 #include <thread>
+#include <chrono>
 
 int main() {
   auto fake_exchange = std::make_unique<bybit_simulator>();

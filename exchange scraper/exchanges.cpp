@@ -78,7 +78,7 @@ void bybit_simulator::update_exchange_orders() {
   std::string link =
       "https://music.youtube.com/channel/UCP2Q30XUqNQXstaRolRQ_hw"; // писят два
   int n;
-  for (int i = 0; i < 1052; ++i) {
+  for (int i = 0; i < 1; ++i) {
     n = gen() % 32767;
     Currencies currency = currencies_[n % 1];
     Coins coin = coins_[n % 4];
