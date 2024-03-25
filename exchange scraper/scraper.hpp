@@ -3,8 +3,6 @@
 
 #include "exchanges.hpp"
 #include "magic_enum/magic_enum.hpp"
-#include "nlohmann/json.hpp"
-#include <fstream>
 
 struct scraper {
   std::vector<std::unique_ptr<exchange>> exchanges;

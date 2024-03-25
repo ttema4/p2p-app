@@ -1,4 +1,5 @@
 #include "scraper.hpp"
+#include "nlohmann/json.hpp"
 
 void scraper::add_exchange(std::unique_ptr<exchange> exchange_) {
   exchanges.push_back(std::move(exchange_));
