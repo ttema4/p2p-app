@@ -6,4 +6,4 @@ FOR TESTS:
 
 FOR PODUCTION:
 
-1. clang++ -std=c++17 exchanges.hpp scraper.hpp nlohmann/json.hpp magic_enum/magic_enum.hpp exchanges.cpp scraper.cpp main.cpp
+clang++ -std=c++17 exchanges.hpp scraper.hpp nlohmann/json.hpp magic_enum/magic_enum.hpp exchanges.cpp scraper.cpp main.cpp
