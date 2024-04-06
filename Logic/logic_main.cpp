@@ -2,7 +2,15 @@
 #include <unordered_map>
 #include <thread>
 #include <vector>
+#include <cstdint> 
+#include <iostream>
+#include <list>
+#include <memory>
 #include <boost/asio.hpp>
+#include <boost/bind.hpp>
+// #include "src/nlohmann/json.hpp"
+
+using namespace boost::asio;
 
 struct Order {
     std::string type;
@@ -37,7 +45,7 @@ struct Chain{
     
     Chain(Order buy_, const std::pair<std::string, std::string> change_, Order sell_, long double spread_)
     : buy(buy_), change(change_), sell(sell_), spread(spread_) {}
-    
+
 };
 
 struct Chains{
@@ -46,44 +54,8 @@ struct Chains{
 };
 
 struct DataReceiver {
-
-    size_t read_complete(char* buf, const boost::system::error_code & err, size_t bytes){
-        if(err){
-            return 0;
-        }
-        bool found = std::find(buf, buf + bytes, '\n') < buf + bytes; // Вместо '\n' здесь любой флаг конца сообщения
-        return found ? 0 : 1;
-    }
-
-    void process_new_data(std::string data){
-        // Здесь разбираем полученную строку в Orders и тд
-    }
-
-    void ask_for_update(){
-    // В финальной имплементации здесь будет бОльшая часть проверок а-ля "подключение оборвалось" и всё такое прочее
-        boost::asioio_service service;
-        std::string message = "asking for update\n";
-        ip::tcp::endpoint ep(ip::address::from_string("127.0.0.1"), 8001); // Порт временный
-        ip::tcp::socket sock(service);
-        sock.connect(ep);
-        bool no_updates = true;
-        while(no_updates){
-            sock.write_some(buffer(messasge));
-            char answer_buff[1024]; // Размер буффера временный
-            int bytes = read(sock, buffer(answer_buff), boost::bind(read_complete,answer_buff,_1,_2));
-            std::string copy(answer_buff, bytes - 1);
-            if(copy != "no updates"){
-                no_updates = false;
-            }
-        }
-        sock.close();
-        process_new_data(copy);
-    }
-
     void receive(){
-        while(true){ // Наверно, наивно, но пока как есть ))
-            ask_for_update();
-        }
+
     }
 };
 
@@ -108,24 +80,199 @@ struct Analysis {
 };
 
 struct DataSender {
-    void connection_handler(){
-
-    }
-
     void send(){
 
     }
 };
 
-struct Main {
-    DataReceiver reciever;
-    Analysis analysis;
-    DataSender sender;
+class ParserConnectionClient {
+public:
+    ParserConnectionClient(boost::asio::io_context& io_context, const ip::tcp::resolver::results_type& endpoints)
+        : io_context_(io_context), socket_(io_context) {
+        do_connect(endpoints);
+    }
 
-    MarketRates market_rates;
-    Orders orders_for_buy;
-    Orders orders_for_sell;
-    Chains chains;    
+    void start() {
+        start_receive();
+        start_check_updates();
+    }
+
+private:
+    void start_check_updates() {
+        check_timer.expires_after(std::chrono::seconds(1)); // Проверяем обновления каждую секунду
+        check_timer.async_wait([this](boost::system::error_code ec) {
+            if (!ec) {
+                send_request("Asking for update\n"); // Запрос, по которому парсер присылает обновление, либо говорит о его отсутствии
+                start_check_updates();
+            }
+        });
+    }
+
+    void send_request(const std::string& request) {
+        std::cout << "Sending request: " << request << std::endl; // Для дебага
+        async_write(socket_, buffer(request + "\n"), [this](boost::system::error_code ec, std::size_t /*length*/) {
+            if (ec) {
+                std::cerr << "Error sending request: " << ec.message() << std::endl; // Возможно, здесь будет более умная обработка ошибок
+            }
+        });
+    }
+
+    void start_receive() {
+        async_read_until(socket_, response_, '\n', [this](boost::system::error_code ec, std::size_t length) {
+            if (!ec) {
+                std::istream response_stream(&response_);
+                std::string response;
+                std::getline(response_stream, response);
+                std::cout << "Received response: " << response << std::endl; // Для дебага
+                // |
+                // |
+                // V
+                // response - наши данные, которые мы получили
+                // Здесь кладем в очередь / передаем во внешний метод - этот этап в работе...
+                // Скорее всего, хотим сначала прямо здесь проверить, получили ли вообще апдейт
+                start_receive();
+            } else {
+                std::cerr << "Error receiving response: " << ec.message() << std::endl; // Возможно, здесь будет более умная обработка ошибок
+            }
+        });
+    }
+
+    void do_connect(const ip::tcp::resolver::results_type& endpoints) {
+        async_connect(socket_, endpoints, [this](boost::system::error_code ec, ip::tcp::endpoint) {
+            if (!ec) {
+                std::cout << "Connected to server." << std::endl; // Для дебага
+                start();
+            } else {
+                std::cerr << "Error connecting to server: " << ec.message() << std::endl; // Возможно, здесь будет более умная обработка ошибок
+            }
+        });
+    }
+
+private:
+    boost::asio::io_context& io_context_;
+    ip::tcp::socket socket_;
+    boost::asio::streambuf response_;
+    boost::asio::steady_timer check_timer{io_context_};
+};
+
+struct Connection {
+	boost::asio::ip::tcp::socket socket;
+	boost::asio::streambuf read_buffer;
+	Connection(boost::asio::io_service & io_service): socket(io_service), read_buffer() {}
+	Connection(boost::asio::io_service & io_service, size_t max_buffer_size): socket(io_service), read_buffer(max_buffer_size) {}
+};
+
+class UsersConnectionsServer {
+	boost::asio::io_service m_ioservice;
+	boost::asio::ip::tcp::acceptor m_acceptor;
+	std::list<Connection> m_connections;
+	using con_handle_t = std::list<Connection>::iterator;
+
+public:
+	UsersConnectionsServer(): m_ioservice(), m_acceptor(m_ioservice), m_connections() {}
+
+	void handle_read(con_handle_t con_handle, boost::system::error_code const & err, size_t bytes_transfered) {
+		if(bytes_transfered > 0) {
+			std::istream is(&con_handle->read_buffer);
+			std::string line;
+			std::getline(is, line);
+			std::cout << "Message Received: " << line << std::endl; // Для дебага
+            if (line == "Asking for update\n") {
+				// Если получено "Asking for update\n", проверяем наличие и отправляем либо "No updates\n", либо сам апдейт
+
+				// std::shared_ptr<std::string> response = std::make_shared<std::string>("No updates\n");
+				// auto handler = boost::bind(&UsersConnectionsServer::handle_write, this, con_handle, response, boost::asio::placeholders::error);
+				// boost::asio::async_write(con_handle->socket, boost::asio::buffer(*response), handler);
+        	} else {
+				// Остальные случаи пока не обрабатываем(есть ли он вообще?)
+
+				std::shared_ptr<std::string> response = std::make_shared<std::string>("ping\n");
+				auto handler = boost::bind(&UsersConnectionsServer::handle_write, this, con_handle, response, boost::asio::placeholders::error);
+				boost::asio::async_write(con_handle->socket, boost::asio::buffer(*response), handler);
+        	}
+		}
+		if( !err ) {
+			do_async_read(con_handle);
+		} else {
+			std::cerr << "We had an error: " << err.message() << std::endl; // Возможно, здесь будет более умная обработка ошибок
+			m_connections.erase(con_handle);
+		}
+	}
+
+	void do_async_read(con_handle_t con_handle) {
+		auto handler = boost::bind(&UsersConnectionsServer::handle_read, this, con_handle, boost::asio::placeholders::error, boost::asio::placeholders::bytes_transferred);
+		boost::asio::async_read_until(con_handle->socket, con_handle->read_buffer, "\n", handler);
+	}
+
+	void handle_write(con_handle_t con_handle, std::shared_ptr<std::string> msg_buffer, boost::system::error_code const & err) {
+		if(!err) {
+			std::cout << "Finished sending message\n"; // Для дебага
+			if(con_handle->socket.is_open()) {
+				// Всё супер - ответ написан, подключение открыто
+			}
+		} else { 
+			std::cerr << "We had an error: " << err.message() << std::endl;  // Возможно, здесь будет более умная обработка ошибок
+			m_connections.erase(con_handle);
+		}
+	}
+
+	void handle_accept(con_handle_t con_handle, boost::system::error_code const & err) {
+		if(!err) {
+			std::cout << "Connection from: " << con_handle->socket.remote_endpoint().address().to_string() << "\n"; // Для дебага
+			std::cout << "Sending message\n"; // Для дебага
+			auto buff = std::make_shared<std::string>("Hello World!\n");
+			auto handler = boost::bind(&UsersConnectionsServer::handle_write, this, con_handle, buff, boost::asio::placeholders::error);
+			boost::asio::async_write(con_handle->socket, boost::asio::buffer(*buff), handler);
+			do_async_read(con_handle);
+		} else {
+			std::cerr << "We had an error: " << err.message() << std::endl; // Возможно, здесь будет более умная обработка ошибок
+			m_connections.erase(con_handle);
+		}
+		start_accept();
+	}
+
+	void start_accept() {
+		auto con_handle = m_connections.emplace(m_connections.begin(), m_ioservice);
+		auto handler = boost::bind(&UsersConnectionsServer::handle_accept, this, con_handle, boost::asio::placeholders::error);
+		m_acceptor.async_accept(con_handle->socket, handler);
+	}
+
+	void listen(uint16_t port) {
+		auto endpoint = boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), port);
+		m_acceptor.open(endpoint.protocol());
+		m_acceptor.set_option(boost::asio::ip::tcp::acceptor::reuse_address(true));
+		m_acceptor.bind(endpoint);
+		m_acceptor.listen();
+		start_accept();
+	}
+
+	void run() {
+		m_ioservice.run();
+	}
+};
+
+// Запускаем в отдельном потоке из Main::run
+void raise_parser_connection(std::string parser_connection_ip, std::string parser_connection_port){
+    // Поднимаем клиента для подключения к парсеру:
+    boost::asio::io_context client_io_context;
+    ip::tcp::resolver resolver(client_io_context);
+    auto endpoints = resolver.resolve(parser_connection_ip, parser_connection_port);
+    ParserConnectionClient client(client_io_context, endpoints);
+    client_io_context.run();
+}
+
+// Запускаем в отдельном потоке из Main::run
+void raise_users_server(uint16_t users_server_port){
+    // Поднимаем сервер для подключений клиентов:
+    auto users_server = UsersConnectionsServer();
+	users_server.listen(users_server_port);
+	users_server.run();
+}
+
+struct Main {
+    // DataReceiver reciever;
+    // Analysis analysis;
+    // DataSender sender;
 
     // Вероятно, оно будет не совсем так, но в упрощенном виде можно представлять что-то такое
     // void run(){
@@ -135,3 +282,17 @@ struct Main {
     //     std::thread t4(&DataSender::connection_handler, &sender)
     // }
 };
+
+// ДАЛЕЕ КОД ДЛЯ ТЕСТИРОВАНИЯ
+
+// Если на этапе этого коммита хочется увидеть, как функционируют сервер и клиент, то можно запустить следующий main.
+// Примечание 1: отдельно должен быть запущен прототип сервера парсера.
+// Примечание 3: клиентов для сервера(так называемых пользователей) также нужно запустить отдельно(тут в принципе прокатит и netcat).
+// Примечание 3: в данном коде используются временные параметры, которые в дальнейшем будут заменены на конфигурационные.
+
+// int main(){
+//     std::thread t1(&raise_parser_connection, "localhost", "12345"); // Тут указанные временные параметры
+//     std::thread t2(&raise_users_server, 12346); // Тут указаны временные параметры
+//     t1.join();
+//     t2.join();
+// }
