@@ -3,8 +3,7 @@
 #include <QApplication>
 #include <QFile>
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     QFile styleF;
     styleF.setFileName(":/resourses/css/style.css");
     styleF.open(QFile::ReadOnly);

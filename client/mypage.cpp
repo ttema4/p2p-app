@@ -22,6 +22,8 @@ MyPage::MyPage(QWidget *parent) : QMainWindow(parent), ui(new Ui::MyPage) {
     connect(ui->pushButton_3, &QPushButton::clicked, this, &MyPage::loginPage);
     connect(ui->pushButton_2, &QPushButton::clicked, this, &MyPage::registerPage);
     connect(ui->pushButton_4, &QPushButton::clicked, this, &MyPage::openFileAndSetPixmap);
+    connect(ui->pushButton_5, &QPushButton::clicked, this, &MyPage::deleteAvatar);
+    connect(ui->pushButton_6, &QPushButton::clicked, this, &MyPage::deleteAccount);
 }
 
 void MyPage::openFileAndSetPixmap() {
@@ -30,10 +32,10 @@ void MyPage::openFileAndSetPixmap() {
     if (!fileName.isEmpty()) {
         QPixmap pixmap(fileName);
         if (!pixmap.isNull()) {
-            CurUser::getInstance().setAvatar(pixmap);
+            CurUser::getInstance().tryEditAvatar(pixmap);
             this->showEvent(new QShowEvent());
         } else {
-            qDebug() << "Не удалось загрузить изображение" << fileName;
+            qDebug() << "Не удалось загрузить изображение:" << fileName;
         }
     }
 }
@@ -45,15 +47,26 @@ void MyPage::resizeEvent(QResizeEvent *e) {
 }
 
 void MyPage::showEvent(QShowEvent *event) {
-    ui->label->setText(CurUser::getInstance().getName() + "\n" + CurUser::getInstance().getLogin() + "\n" + CurUser::getInstance().getPassword());
-    ui->label_2->setPixmap(CurUser::getInstance().getAvatar2());
+    ui->label->setText("Id: " + QString::number(CurUser::getInstance().getId()) + "\nName: " + CurUser::getInstance().getName() + "\nLogin: " + CurUser::getInstance().getLogin() + "\nPassword: " + CurUser::getInstance().getPassword());
+    ui->label_2->setPixmap(CurUser::getInstance().getAvatar());
     menu->showEvent(event);
     QMainWindow::showEvent(event);
 }
 
+void MyPage::deleteAvatar() {
+    CurUser::getInstance().tryDeleteAvatar();
+    this->showEvent(new QShowEvent());
+}
+
+void MyPage::deleteAccount() {
+    CurUser::getInstance().tryDeleteAccount();
+    // menu->show();
+    emit homePage();
+}
+
 void MyPage::exitAccount() {
-    CurUser::getInstance().unsetCurUser();
-    menu->show();
+    CurUser::getInstance().tryExit();
+    // menu->show();
     emit homePage();
 }
 

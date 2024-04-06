@@ -36,5 +36,7 @@
         <file>resourses/icons/photo_2024-03-06.jpeg</file>
         <file>resourses/icons/eye-icon-close.png</file>
         <file>resourses/icons/eye-icon-open.png</file>
+        <file>resourses/icons/menu-icon.png</file>
+        <file>resourses/icons/pepe.png</file>
     </qresource>
 </RCC>

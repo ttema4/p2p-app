@@ -51,6 +51,9 @@ private:
     void open_favouritepage();
     void open_settingspage();
 
+    void hideFilters();
+    void showFilters();
+
     HeaderMenu* menu;
 
     MyPage *mypage;
@@ -60,6 +63,8 @@ private:
     FavouritePage *favouritepage;
     SettingsPage *settingspage;
 
+    // bool filtersVisible = true;
+    // QPropertyAnimation *anim;
     QMainWindow *currentpage;
     Ui::MainWindow *ui;
 };
