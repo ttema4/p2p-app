@@ -85,7 +85,7 @@ void MainWindow::open_settingspage() {
 
 void MainWindow::resizeTable() {
     int width = ui->tableWidget->width();
-    if (width == 100) width = 635;
+    if (width == 100) width = 660;
     ui->tableWidget->setColumnWidth(0, std::round(width * 0.17));
     ui->tableWidget->setColumnWidth(1, std::round(width * 0.04));
     ui->tableWidget->setColumnWidth(2, std::round(width * 0.15));
@@ -261,7 +261,6 @@ void MainWindow::resizeEvent(QResizeEvent *e) {
 }
 
 
-MainWindow::~MainWindow()
-{
+MainWindow::~MainWindow() {
     delete ui;
 }
