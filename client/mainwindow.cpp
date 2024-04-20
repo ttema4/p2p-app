@@ -19,33 +19,13 @@
 #include <QMouseEvent>
 #include <QVBoxLayout>
 
-// void MainWindow::hideFilters() {
-//     ui->widget_2->hide();
-// }
 
-// void MainWindow::showFilters() {
-//     this->setFocus();
-
-//     // Создаем анимацию изменения размера виджета
-//     QPropertyAnimation* sizeAnim = new QPropertyAnimation(ui->widget_2, "geometry");
-//     sizeAnim->setDuration(400);
-
-//     if (!filtersVisible) {
-//         sizeAnim->setStartValue(ui->widget_2->geometry());
-//         sizeAnim->setEndValue(ui->widget_2->geometry().adjusted(0, 0, 200, 0));
-
-//         filtersVisible = true;
-//         ui->widget_2->show();
-//     } else {
-//         sizeAnim->setStartValue(ui->widget_2->geometry());
-//         sizeAnim->setEndValue(ui->widget_2->geometry().adjusted(0, 0, -200, 0));
-
-//         filtersVisible = false;
-//         // После завершения анимации перестраиваем макет
-//         connect(sizeAnim, &QPropertyAnimation::finished, this, &MainWindow::hideFilters);
-//     }
-//     sizeAnim->start();
-// }
+void MainWindow::showFilters() {
+    bool checked = ui->toolButton->isChecked();
+    ui->toolButton->setArrowType(checked ? Qt::LeftArrow : Qt::RightArrow);
+    sizeAnim->setDirection(checked ? QAbstractAnimation::Forward : QAbstractAnimation::Backward);
+    sizeAnim->start();
+}
 
 void MainWindow::windowChanger(QMainWindow *toOpen) {
     toOpen->show();
@@ -85,7 +65,6 @@ void MainWindow::open_settingspage() {
 
 void MainWindow::resizeTable() {
     int width = ui->tableWidget->width();
-    if (width == 100) width = 660;
     ui->tableWidget->setColumnWidth(0, std::round(width * 0.17));
     ui->tableWidget->setColumnWidth(1, std::round(width * 0.04));
     ui->tableWidget->setColumnWidth(2, std::round(width * 0.15));
@@ -97,16 +76,26 @@ void MainWindow::resizeTable() {
 }
 
 bool MainWindow::eventFilter(QObject *target, QEvent *event) {
-    if (!menu->isMenuVisible()) return false;
-
-    if (target->objectName() == "tableWidget") {
-        if(event->type() == QTabletEvent::InputMethodQuery) {
-            menu->showMenu();
-            return true;
+    if (menu->isMenuVisible()) {
+        if (target->objectName() == "tableWidget") {
+            if(event->type() == QTabletEvent::InputMethodQuery) {
+                menu->showMenu();
+                return true;
+            } else if (event->type() == QTabletEvent::Resize) {
+                resizeTable();
+                return true;
+            }
+        } else {
+            if(event->type() == QMouseEvent::MouseButtonPress) {
+                menu->showMenu();
+                return true;
+            }
         }
-    } else {
-        if(event->type() == QMouseEvent::MouseButtonPress) {
-            menu->showMenu();
+        return false;
+    }
+    if (target->objectName() == "tableWidget") {
+        if(event->type() == QTabletEvent::Resize) {
+            resizeTable();
             return true;
         }
     }
@@ -141,6 +130,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->checkBox_6->installEventFilter(this);
     ui->lineEdit->installEventFilter(this);
     ui->lineEdit_2->installEventFilter(this);
+    ui->toolButton->installEventFilter(this);
 
     connect(menu, &HeaderMenu::myPage, this, &MainWindow::open_mypage);
     connect(menu, &HeaderMenu::loginPage, this, &MainWindow::open_loginpage);
@@ -192,9 +182,22 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(settingspage, &SettingsPage::favouritePage, this, &MainWindow::open_favouritepage);
 
 
+    // Настройка бокового меню
+    connect(ui->toolButton, &QToolButton::toggled, this, &MainWindow::showFilters);
 
-    // connect(ui->pushButton_2, &QPushButton::clicked, this, &MainWindow::showFilters);
+    sizeAnim = new QParallelAnimationGroup(ui->widget_2);
+    sizeAnim->addAnimation(new QPropertyAnimation(ui->widget_2, "minimumWidth"));
+    sizeAnim->addAnimation(new QPropertyAnimation(ui->widget_2, "maximumWidth"));
 
+    for (int i = 0; i < sizeAnim->animationCount(); ++i) {
+        QPropertyAnimation *animation = qobject_cast<QPropertyAnimation*>(sizeAnim->animationAt(i));
+        animation->setDuration(500);
+        animation->setStartValue(0);
+        animation->setEndValue(ui->widget_2->maximumWidth());
+    }
+
+
+    // Настройка таблицы
     ui->tableWidget->verticalHeader()->hide();
     ui->tableWidget->horizontalHeader()->hide();
     ui->tableWidget->setRowCount(n + 1);
@@ -230,33 +233,31 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         QTableWidgetItem* bank1 = new QTableWidgetItem;
         bank1->setIcon(QIcon(include_map[new_chain.buy.bank].c_str()));
         bank1->setToolTip(QString((new_chain.buy.bank).c_str()));;
-        ui->tableWidget->setItem( i, 1, bank1);
+        ui->tableWidget->setItem(i, 1, bank1);
 
         ui->tableWidget->setItem(i, 2, new QTableWidgetItem(QString(tr("%1").arg((double)new_chain.buy.exchange_rate))));
 
         QTableWidgetItem* change = new QTableWidgetItem(QString((new_chain.change.first + " -> " + new_chain.change.second).c_str()));
         change->setTextAlignment(Qt::AlignCenter) ;
-        ui->tableWidget->setItem( i, 3, change);
+        ui->tableWidget->setItem(i, 3, change);
 
         ui->tableWidget->setItem(i, 4, new QTableWidgetItem(QString((new_chain.sell.coin1 + "/" + new_chain.sell.coin2).c_str())));
 
         QTableWidgetItem* bank2 = new QTableWidgetItem;
         bank2->setIcon(QIcon(include_map[new_chain.sell.bank].c_str()));
         bank2->setToolTip(QString((new_chain.sell.bank).c_str()));
-        ui->tableWidget->setItem( i, 5, bank2);
+        ui->tableWidget->setItem(i, 5, bank2);
 
         ui->tableWidget->setItem(i, 6, new QTableWidgetItem(QString(tr("%1").arg((double)new_chain.sell.exchange_rate))));
 
         QTableWidgetItem* spread = new QTableWidgetItem(QString(tr("%1%").arg((double)new_chain.spread)));
         spread->setTextAlignment(Qt::AlignCenter);
-        ui->tableWidget->setItem( i, 7, spread);
+        ui->tableWidget->setItem(i, 7, spread);
     }
 }
 
 void MainWindow::resizeEvent(QResizeEvent *e) {
-    resizeTable();
     menu->resizeMenu();
-
     QMainWindow::resizeEvent(e);
 }
 

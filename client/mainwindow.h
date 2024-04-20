@@ -63,8 +63,8 @@ private:
     FavouritePage *favouritepage;
     SettingsPage *settingspage;
 
-    // bool filtersVisible = true;
-    // QPropertyAnimation *anim;
+    bool filtersVisible = true;
+    QParallelAnimationGroup *sizeAnim;
     QMainWindow *currentpage;
     Ui::MainWindow *ui;
 };
