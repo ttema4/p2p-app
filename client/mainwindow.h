@@ -8,9 +8,14 @@
 #include "notifypage.h"
 #include "favouritepage.h"
 #include "settingspage.h"
+#include "datareciever.h"
+#include "logic_fwd.hpp"
+#include "chainmonitor.h"
+
 #include <QMainWindow>
 #include <QFrame>
 #include <QPropertyAnimation>
+#include <QVector>
 #include <QFocusEvent>
 #include <QPushButton>
 #include <QHBoxLayout>
@@ -26,8 +31,7 @@ class MainWindow;
 }
 QT_END_NAMESPACE
 
-class MainWindow : public QMainWindow
-{
+class MainWindow : public QMainWindow {
     Q_OBJECT
 
 public:
@@ -40,6 +44,7 @@ protected:
 
 private:
     void resizeTable();
+    void updateTable();
 
     void windowChanger(QMainWindow *toOpen);
 
@@ -51,8 +56,10 @@ private:
     void open_favouritepage();
     void open_settingspage();
 
-    void hideFilters();
     void showFilters();
+
+    void onCellClicked(int row, int column);
+    void chainMonitorHide();
 
     HeaderMenu* menu;
 
@@ -62,9 +69,13 @@ private:
     NotifyPage *notifypage;
     FavouritePage *favouritepage;
     SettingsPage *settingspage;
+    ChainMonitor *chainmonitor;
 
-    bool filtersVisible = true;
     QParallelAnimationGroup *sizeAnim;
+    DataReciever dr;
+    QVector<Chain> chains;
+
+    bool chainMonitorOpen;
     QMainWindow *currentpage;
     Ui::MainWindow *ui;
 };

@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "data_reciever.cpp"
 #include "mainwindow_fwd.hpp"
 #include <QWidget>
 #include <QResizeEvent>
@@ -18,6 +17,7 @@
 #include <QPixmap>
 #include <QMouseEvent>
 #include <QVBoxLayout>
+#include <QVector>
 
 
 void MainWindow::showFilters() {
@@ -25,6 +25,57 @@ void MainWindow::showFilters() {
     ui->toolButton->setArrowType(checked ? Qt::LeftArrow : Qt::RightArrow);
     sizeAnim->setDirection(checked ? QAbstractAnimation::Forward : QAbstractAnimation::Backward);
     sizeAnim->start();
+}
+
+void MainWindow::chainMonitorHide() {
+    chainMonitorOpen = false;
+}
+
+void MainWindow::onCellClicked(int row, int column) {
+    if (chainMonitorOpen) { chainmonitor->close(); return; }
+    if (row == 0) return;
+    qDebug() << "Cell clicked at row" << row << "and column" << column;
+    chainmonitor = new ChainMonitor(this, chains[row - 1]);
+    chainmonitor->move(QPoint(this->size().width() / 2 - chainmonitor->size().width() / 2, this->size().height() / 2 - chainmonitor->size().height() / 2));
+    chainmonitor->setWindowModality(Qt::ApplicationModal);
+    chainMonitorOpen = true;
+    connect(chainmonitor, &ChainMonitor::monitorSlosed, this, &MainWindow::chainMonitorHide);
+    chainmonitor->show();
+}
+
+void MainWindow::updateTable() {
+    chains = dr.recieveNewChain();
+    ui->tableWidget->setRowCount(chains.size() + 1);
+
+    for (int i = 1; i <= chains.size(); i++) {
+        Chain new_chain = chains[i - 1];
+
+        ui->tableWidget->setItem(i, 0, new QTableWidgetItem(QString((new_chain.buy.coin1 + "/" + new_chain.buy.coin2).c_str())));
+
+        QTableWidgetItem* bank1 = new QTableWidgetItem;
+        bank1->setIcon(QIcon(include_map[new_chain.buy.bank].c_str()));
+        bank1->setToolTip(QString((new_chain.buy.bank).c_str()));;
+        ui->tableWidget->setItem(i, 1, bank1);
+
+        ui->tableWidget->setItem(i, 2, new QTableWidgetItem(QString(tr("%1").arg((double)new_chain.buy.exchange_rate))));
+
+        QTableWidgetItem* change = new QTableWidgetItem(QString((new_chain.change.first + " -> " + new_chain.change.second).c_str()));
+        change->setTextAlignment(Qt::AlignCenter) ;
+        ui->tableWidget->setItem(i, 3, change);
+
+        ui->tableWidget->setItem(i, 4, new QTableWidgetItem(QString((new_chain.sell.coin1 + "/" + new_chain.sell.coin2).c_str())));
+
+        QTableWidgetItem* bank2 = new QTableWidgetItem;
+        bank2->setIcon(QIcon(include_map[new_chain.sell.bank].c_str()));
+        bank2->setToolTip(QString((new_chain.sell.bank).c_str()));
+        ui->tableWidget->setItem(i, 5, bank2);
+
+        ui->tableWidget->setItem(i, 6, new QTableWidgetItem(QString(tr("%1").arg((double)new_chain.sell.exchange_rate))));
+
+        QTableWidgetItem* spread = new QTableWidgetItem(QString(tr("%1%").arg((double)new_chain.spread)));
+        spread->setTextAlignment(Qt::AlignCenter);
+        ui->tableWidget->setItem(i, 7, spread);
+    }
 }
 
 void MainWindow::windowChanger(QMainWindow *toOpen) {
@@ -93,6 +144,17 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event) {
         }
         return false;
     }
+    if (chainMonitorOpen) {
+        if(event->type() == QMouseEvent::MouseButtonPress) {
+            chainmonitor->close();
+            return true;
+        } else if (event->type() == QTabletEvent::Resize) {
+            resizeTable();
+            chainmonitor->remove();
+            return true;
+        }
+        return false;
+    }
     if (target->objectName() == "tableWidget") {
         if(event->type() == QTabletEvent::Resize) {
             resizeTable();
@@ -110,7 +172,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     notifypage = new NotifyPage();
     favouritepage = new FavouritePage();
     settingspage = new SettingsPage();
-    int n = 30;
+    chainMonitorOpen = false;
 
     ui->setupUi(this);
     this->setFocus();
@@ -200,7 +262,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     // Настройка таблицы
     ui->tableWidget->verticalHeader()->hide();
     ui->tableWidget->horizontalHeader()->hide();
-    ui->tableWidget->setRowCount(n + 1);
+    ui->tableWidget->setRowCount(1);
     ui->tableWidget->setColumnCount(8);
 
     QTableWidgetItem* header0 = new QTableWidgetItem(QString("Покупка на P2P"));
@@ -223,37 +285,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     header7->setTextAlignment(Qt::AlignCenter) ;
     ui->tableWidget->setItem(0, 7, header7);
 
-    DataReciever dr;
+    connect(ui->tableWidget, &QTableWidget::cellClicked, this, &MainWindow::onCellClicked);
+    connect(ui->pushButton_2, &QPushButton::clicked, this, &MainWindow::updateTable);
 
-    for (int i = 1; i <= n; i++) {
-        Chain new_chain = dr.recieveNewChain();
-
-        ui->tableWidget->setItem(i, 0, new QTableWidgetItem(QString((new_chain.buy.coin1 + "/" + new_chain.buy.coin2).c_str())));
-
-        QTableWidgetItem* bank1 = new QTableWidgetItem;
-        bank1->setIcon(QIcon(include_map[new_chain.buy.bank].c_str()));
-        bank1->setToolTip(QString((new_chain.buy.bank).c_str()));;
-        ui->tableWidget->setItem(i, 1, bank1);
-
-        ui->tableWidget->setItem(i, 2, new QTableWidgetItem(QString(tr("%1").arg((double)new_chain.buy.exchange_rate))));
-
-        QTableWidgetItem* change = new QTableWidgetItem(QString((new_chain.change.first + " -> " + new_chain.change.second).c_str()));
-        change->setTextAlignment(Qt::AlignCenter) ;
-        ui->tableWidget->setItem(i, 3, change);
-
-        ui->tableWidget->setItem(i, 4, new QTableWidgetItem(QString((new_chain.sell.coin1 + "/" + new_chain.sell.coin2).c_str())));
-
-        QTableWidgetItem* bank2 = new QTableWidgetItem;
-        bank2->setIcon(QIcon(include_map[new_chain.sell.bank].c_str()));
-        bank2->setToolTip(QString((new_chain.sell.bank).c_str()));
-        ui->tableWidget->setItem(i, 5, bank2);
-
-        ui->tableWidget->setItem(i, 6, new QTableWidgetItem(QString(tr("%1").arg((double)new_chain.sell.exchange_rate))));
-
-        QTableWidgetItem* spread = new QTableWidgetItem(QString(tr("%1%").arg((double)new_chain.spread)));
-        spread->setTextAlignment(Qt::AlignCenter);
-        ui->tableWidget->setItem(i, 7, spread);
-    }
+    updateTable();
 }
 
 void MainWindow::resizeEvent(QResizeEvent *e) {
