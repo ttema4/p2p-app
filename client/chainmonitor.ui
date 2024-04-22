@@ -70,7 +70,7 @@
        <number>10</number>
       </property>
       <property name="topMargin">
-       <number>10</number>
+       <number>5</number>
       </property>
       <property name="rightMargin">
        <number>10</number>
@@ -94,7 +94,7 @@
           <number>0</number>
          </property>
          <property name="rightMargin">
-          <number>10</number>
+          <number>5</number>
          </property>
          <property name="bottomMargin">
           <number>0</number>
@@ -131,6 +131,9 @@
       <item>
        <widget class="QWidget" name="widget" native="true">
         <layout class="QHBoxLayout" name="horizontalLayout">
+         <property name="spacing">
+          <number>12</number>
+         </property>
          <property name="leftMargin">
           <number>0</number>
          </property>

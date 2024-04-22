@@ -38,5 +38,8 @@
         <file>resourses/icons/eye-icon-open.png</file>
         <file>resourses/icons/menu-icon.png</file>
         <file>resourses/icons/pepe.png</file>
+        <file>resourses/icons/left-arrow.png</file>
+        <file>resourses/icons/right-arrow.png</file>
+        <file>resourses/icons/no-arrow.png</file>
     </qresource>
 </RCC>

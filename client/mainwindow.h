@@ -57,6 +57,7 @@ private:
     void open_settingspage();
 
     void showFilters();
+    void filterHidden();
 
     void onCellClicked(int row, int column);
     void chainMonitorHide();

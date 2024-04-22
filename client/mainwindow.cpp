@@ -19,11 +19,17 @@
 #include <QVBoxLayout>
 #include <QVector>
 
+void MainWindow::filterHidden() {
+    bool checked = ui->hideButton->isChecked();
+    ui->hideButton->setStyleSheet(checked ? "border-image: url(:/resourses/icons/left-arrow.png);" : "border-image: url(:/resourses/icons/right-arrow.png);");
+}
 
 void MainWindow::showFilters() {
-    bool checked = ui->toolButton->isChecked();
-    ui->toolButton->setArrowType(checked ? Qt::LeftArrow : Qt::RightArrow);
+    bool checked = ui->hideButton->isChecked();
+    ui->hideButton->setStyleSheet("border-image: url(://resourses/icons/no-arrow.png);");
+
     sizeAnim->setDirection(checked ? QAbstractAnimation::Forward : QAbstractAnimation::Backward);
+    connect(sizeAnim, &QParallelAnimationGroup::finished, this, &MainWindow::filterHidden);
     sizeAnim->start();
 }
 
@@ -34,7 +40,7 @@ void MainWindow::chainMonitorHide() {
 void MainWindow::onCellClicked(int row, int column) {
     if (chainMonitorOpen) { chainmonitor->close(); return; }
     if (row == 0) return;
-    qDebug() << "Cell clicked at row" << row << "and column" << column;
+    // qDebug() << "Cell clicked at row" << row << "and column" << column;
     chainmonitor = new ChainMonitor(this, chains[row - 1]);
     chainmonitor->move(QPoint(this->size().width() / 2 - chainmonitor->size().width() / 2, this->size().height() / 2 - chainmonitor->size().height() / 2));
     chainmonitor->setWindowModality(Qt::ApplicationModal);
@@ -192,7 +198,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->checkBox_6->installEventFilter(this);
     ui->lineEdit->installEventFilter(this);
     ui->lineEdit_2->installEventFilter(this);
-    ui->toolButton->installEventFilter(this);
+    ui->hideButton->installEventFilter(this);
 
     connect(menu, &HeaderMenu::myPage, this, &MainWindow::open_mypage);
     connect(menu, &HeaderMenu::loginPage, this, &MainWindow::open_loginpage);
@@ -245,7 +251,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
 
     // Настройка бокового меню
-    connect(ui->toolButton, &QToolButton::toggled, this, &MainWindow::showFilters);
+    connect(ui->hideButton, &QToolButton::toggled, this, &MainWindow::showFilters);
 
     sizeAnim = new QParallelAnimationGroup(ui->widget_2);
     sizeAnim->addAnimation(new QPropertyAnimation(ui->widget_2, "minimumWidth"));

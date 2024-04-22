@@ -17,8 +17,8 @@ ChainMonitor::ChainMonitor(QWidget *parent, Chain c) : QWidget(parent), ui(new U
     ui->label_3->setText(QString("Coin-Pair: %1 -> %2\nSpread: %3").arg(QString::fromStdString(c.change.first), QString::fromStdString(c.change.second), QString::number(c.spread, 'f', 2)));
     connect(ui->pushButton, &QPushButton::clicked, this, &ChainMonitor::close);
     setStyleSheet(
-        "#widget_3 { background-color: #F5F5F5; border-radius: 10px; border: 2px solid #82a1c9; }"
-        "QFrame#frame, QFrame#frame_2, QFrame#frame_3 { background-color: #F5F5F5; border-radius: 10px; border: 1px solid #82a1c9; }"
+        "#widget_3 { background-color: #F5F5F5; border-radius: 10px; border: 2px solid #bebebe; }"
+        "QFrame#frame, QFrame#frame_2, QFrame#frame_3 { background-color: #F5F5F5; border-radius: 5px; border: 1px solid #bebebe; }"
         "QPushButton { background-color: none; border-style: none; font: 25px; }" );
     hide();
 }
