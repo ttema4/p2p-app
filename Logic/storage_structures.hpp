@@ -1,5 +1,6 @@
-#include <boost/asio.hpp>
-#include <boost/bind.hpp>
+#ifndef STORAGE_STRUCTURES_HPP_
+#define STORAGE_STRUCTURES_HPP_
+
 #include <cstdint>
 #include <iostream>
 #include <list>
@@ -8,10 +9,7 @@
 #include <thread>
 #include <unordered_map>
 #include <vector>
-// #include "src/nlohmann/json.hpp"
 // #include "concurrentqueue.h"
-
-using namespace boost::asio;
 
 namespace p2p {
 
@@ -75,3 +73,5 @@ struct Chains {
 
 
 } // namespace p2p
+
+#endif // STORAGE_STRUCTURES_HPP_

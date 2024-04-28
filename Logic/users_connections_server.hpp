@@ -1,3 +1,6 @@
+#ifndef USERS_CONNECTIONS_SERVER_HPP_
+#define USERS_CONNECTIONS_SERVER_HPP_
+
 #include <boost/asio.hpp>
 #include <boost/bind.hpp>
 #include <cstdint>
@@ -143,3 +146,5 @@ public:
 };
 
 } // namespace p2p
+
+#endif // USERS_CONNECTIONS_SERVER_HPP_
