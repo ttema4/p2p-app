@@ -1,3 +1,6 @@
+#ifndef PARSER_CONNECTION_CLIENT_HPP_
+#define PARSER_CONNECTION_CLIENT_HPP_
+
 #include <boost/asio.hpp>
 #include <boost/bind.hpp>
 #include <cstdint>
@@ -106,3 +109,5 @@ private:
 };
 
 } // namespace p2p
+
+#endif // PARSER_CONNECTION_CLIENT_HPP_

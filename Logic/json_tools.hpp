@@ -1,5 +1,6 @@
-#include <boost/asio.hpp>
-#include <boost/bind.hpp>
+#ifndef JSON_TOOLS_HPP_
+#define JSON_TOOLS_HPP_
+
 #include <cstdint>
 #include <iostream>
 #include <list>
@@ -10,8 +11,6 @@
 #include <vector>
 // #include "src/nlohmann/json.hpp"
 // #include "concurrentqueue.h"
-
-using namespace boost::asio;
 
 namespace p2p {
 
@@ -79,5 +78,6 @@ void pack_json() {
   // }
 }
 
-
 } // namespace p2p
+
+#endif // JSON_TOOLS_HPP_
