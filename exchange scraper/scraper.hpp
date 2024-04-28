@@ -2,16 +2,16 @@
 #define SCRAPER_HPP_
 
 #include <fstream>
-#include "exchanges.hpp"
+#include "markets.hpp"
 #include "magic_enum/magic_enum.hpp"
 #include "nlohmann/json.hpp"
 
 struct scraper {
-    std::vector<std::unique_ptr<exchange>> exchanges;
+    std::vector<std::unique_ptr<market>> markets;
 
-    void add_exchange(std::unique_ptr<exchange> exchange_);
+    void add_market(std::unique_ptr<market> market_);
 
-    void update_exchanges_orders();
+    void update_markets_orders();
 
     void handle();
 };
