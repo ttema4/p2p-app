@@ -1,21 +1,21 @@
 #include "scraper.hpp"
 
-void scraper::add_exchange(std::unique_ptr<exchange> exchange_) {
-    exchanges.push_back(std::move(exchange_));
+void scraper::add_market(std::unique_ptr<market> market_) {
+    markets.push_back(std::move(market_));
 }
 
-void scraper::update_exchanges_orders() {
-    for (auto &i : exchanges) {
-        i->update_exchange_orders();
+void scraper::update_markets_orders() {
+    for (auto &i : markets) {
+        i->update_market_orders();
     }
 }
 
 void scraper::handle() {
     std::vector<nlohmann::json> json_orders_;
     nlohmann::json json_order{};
-    for (auto &i : exchanges) {
+    for (auto &i : markets) {
         for (auto &j : i->orders) {
-            json_order["exchange"] = magic_enum::enum_name(j->exchange);
+            json_order["market"] = magic_enum::enum_name(j->market);
             json_order["currency"] = magic_enum::enum_name(j->currency);
             json_order["coin"] = magic_enum::enum_name(j->coin);
             json_order["direction"] = magic_enum::enum_name(j->direction);

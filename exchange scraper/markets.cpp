@@ -1,9 +1,9 @@
-#include "exchanges.hpp"
+#include "markets.hpp"
 #include <cmath>
 #include <sstream>
 
 order::order(
-    Exchanges exchange_,
+    Markets market_,
     Currencies currency_,
     Coins coin_,
     Directions direction_,
@@ -14,7 +14,7 @@ order::order(
     dec::decimal<8> available_,
     std::string &link_
 )
-    : exchange(exchange_),
+    : market(market_),
       currency(currency_),
       coin(coin_),
       direction(direction_),
@@ -27,7 +27,7 @@ order::order(
 }
 
 bybit_simulator::bybit_simulator() {
-    exchange_payment_methods = {
+    market_payment_methods = {
         "Local Card(Yellow)",
         "Raiffeisenbank",
         "A-Bank",
@@ -77,7 +77,7 @@ std::string decimal8_to_string(dec::decimal<8> n) {
     return str_n;
 }
 
-void bybit_simulator::update_exchange_orders() {
+void bybit_simulator::update_market_orders() {
     orders.clear();
     Currencies currencies_[]{Currencies::RUB};
     Coins coins_[]{Coins::BTC, Coins::ETH, Coins::USDC, Coins::USDT};
@@ -118,7 +118,7 @@ void bybit_simulator::update_exchange_orders() {
                                 for (int j = 0, k = 13; j < number_of_banks;
                                      ++j, ++k) {
                                     payment_methods.push_back(
-                                        exchange_payment_methods[n % k]
+                                        market_payment_methods[n % k]
                                     );
                                 }
                                 min_available = dec::decimal_cast<8>("0.00013");
@@ -163,7 +163,7 @@ void bybit_simulator::update_exchange_orders() {
                                 for (int j = 0, k = 13; j < number_of_banks;
                                      ++j, ++k) {
                                     payment_methods.push_back(
-                                        exchange_payment_methods[n % k]
+                                        market_payment_methods[n % k]
                                     );
                                 }
                                 min_available = dec::decimal_cast<8>("0.00013");
@@ -212,7 +212,7 @@ void bybit_simulator::update_exchange_orders() {
                                 for (int j = 0, k = 13; j < number_of_banks;
                                      ++j, ++k) {
                                     payment_methods.push_back(
-                                        exchange_payment_methods[n % k]
+                                        market_payment_methods[n % k]
                                     );
                                 }
                                 min_available =
@@ -255,7 +255,7 @@ void bybit_simulator::update_exchange_orders() {
                                 for (int j = 0, k = 13; j < number_of_banks;
                                      ++j, ++k) {
                                     payment_methods.push_back(
-                                        exchange_payment_methods[n % k]
+                                        market_payment_methods[n % k]
                                     );
                                 }
                                 min_available =
@@ -302,7 +302,7 @@ void bybit_simulator::update_exchange_orders() {
                                 for (int j = 0, k = 13; j < number_of_banks;
                                      ++j, ++k) {
                                     payment_methods.push_back(
-                                        exchange_payment_methods[n % k]
+                                        market_payment_methods[n % k]
                                     );
                                 }
                                 min_available = 6;
@@ -345,7 +345,7 @@ void bybit_simulator::update_exchange_orders() {
                                 for (int j = 0, k = 13; j < number_of_banks;
                                      ++j, ++k) {
                                     payment_methods.push_back(
-                                        exchange_payment_methods[n % k]
+                                        market_payment_methods[n % k]
                                     );
                                 }
                                 min_available = 6;
@@ -392,7 +392,7 @@ void bybit_simulator::update_exchange_orders() {
                                 for (int j = 0, k = 13; j < number_of_banks;
                                      ++j, ++k) {
                                     payment_methods.push_back(
-                                        exchange_payment_methods[n % k]
+                                        market_payment_methods[n % k]
                                     );
                                 }
                                 min_available = 6;
@@ -433,7 +433,7 @@ void bybit_simulator::update_exchange_orders() {
                                 for (int j = 0, k = 13; j < number_of_banks;
                                      ++j, ++k) {
                                     payment_methods.push_back(
-                                        exchange_payment_methods[n % k]
+                                        market_payment_methods[n % k]
                                     );
                                 }
                                 min_available = 6;
@@ -464,7 +464,7 @@ void bybit_simulator::update_exchange_orders() {
                 break;
         }
         orders.push_back(std::move(std::make_unique<order>(
-            Exchanges::bybit_simulator, currency, coin, direction, price,
+            Markets::bybit_simulator, currency, coin, direction, price,
             payment_methods, lower_limit, upper_limit, available, link
         )));
     }

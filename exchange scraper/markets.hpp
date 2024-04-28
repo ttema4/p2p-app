@@ -1,5 +1,5 @@
-#ifndef EXCHANGES_HPP_
-#define EXCHANGES_HPP_
+#ifndef MARKETS_HPP_
+#define MARKETS_HPP_
 
 #include <iostream>
 #include <memory>
@@ -8,7 +8,7 @@
 #include <vector>
 #include "decimal/decimal.h"
 
-enum class Exchanges { bybit_simulator };
+enum class Markets { bybit_simulator };
 
 enum class Currencies { RUB };
 
@@ -17,7 +17,7 @@ enum class Coins { BTC, ETH, USDC, USDT };
 enum class Directions { buy, sell };
 
 struct order {
-    Exchanges exchange;
+    Markets market;
     Currencies currency;
     Coins coin;
     Directions direction;
@@ -29,7 +29,7 @@ struct order {
     std::string link;
 
     order(
-        Exchanges exchange_,
+        Markets market_,
         Currencies currency_,
         Coins coin_,
         Directions direction_,
@@ -42,21 +42,21 @@ struct order {
     );
 };
 
-struct exchange {
-    std::vector<std::string> exchange_payment_methods;
+struct market {
+    std::vector<std::string> market_payment_methods;
     std::vector<std::unique_ptr<order>> orders;
 
-    virtual ~exchange() = default;
+    virtual ~market() = default;
 
-    virtual void update_exchange_orders() = 0;
+    virtual void update_market_orders() = 0;
 };
 
-struct bybit_simulator : exchange {
+struct bybit_simulator : market {
     std::mt19937 gen;
 
     bybit_simulator();
 
-    void update_exchange_orders() override;
+    void update_market_orders() override;
 };
 
 std::string decimal2_to_string(dec::decimal<2> n);

@@ -167,13 +167,13 @@ public:
 };
 
 int main(int, char **) {
-    auto fake_exchange = std::make_unique<bybit_simulator>();
+    auto fake_market = std::make_unique<bybit_simulator>();
     scraper scraper_;
-    scraper_.add_exchange(std::move(fake_exchange));
+    scraper_.add_market(std::move(fake_market));
     std::thread t([&]() {
         while (true) {
             std::unique_lock l(m);
-            scraper_.update_exchanges_orders();
+            scraper_.update_markets_orders();
             scraper_.handle();
             l.unlock();
             std::this_thread::sleep_for(std::chrono::milliseconds(1000));
