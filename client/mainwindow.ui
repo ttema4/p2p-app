@@ -81,11 +81,23 @@
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
          <property name="maximumSize">
           <size>
            <width>200</width>
            <height>16777215</height>
           </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
+           <italic>false</italic>
+          </font>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
           <property name="leftMargin">
@@ -93,6 +105,9 @@
           </property>
           <property name="rightMargin">
            <number>10</number>
+          </property>
+          <property name="bottomMargin">
+           <number>5</number>
           </property>
           <item>
            <widget class="QGroupBox" name="groupBox">
@@ -104,7 +119,7 @@
             </property>
             <property name="minimumSize">
              <size>
-              <width>0</width>
+              <width>180</width>
               <height>0</height>
              </size>
             </property>
@@ -264,9 +279,21 @@
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_2">
+           <widget class="QLabel" name="label">
+            <property name="minimumSize">
+             <size>
+              <width>180</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: grey;</string>
+            </property>
             <property name="text">
-             <string>Update!</string>
+             <string>Last update in 0s</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>

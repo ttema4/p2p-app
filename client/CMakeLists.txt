@@ -32,9 +32,9 @@ qt_add_executable(p2p-app
     settingspage.h settingspage.cpp settingspage.ui
     favouritepage.h favouritepage.cpp favouritepage.ui
     notifypage.h notifypage.cpp notifypage.ui
-    logic_simulator.h logic_fwd.hpp
-    datareciever.h datareciever.cpp
     chainmonitor.h chainmonitor.cpp chainmonitor.ui
+    windowhandler.h windowhandler.cpp windowhandler.ui
+    logic_fwd.hpp datareciever.h datareciever.cpp
 
 )
 

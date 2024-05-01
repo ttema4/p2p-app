@@ -3,7 +3,7 @@
 HeaderMenu::HeaderMenu(QString center_text_, QWidget *parent) : QWidget{parent} {
     // this->setStyleSheet("background-color:black;");
 
-    const QPalette palet(QColor(230, 230, 230));
+    const QPalette palet(QColor("#e6e6e6"));
     this->setPalette(palet);
     this->setAutoFillBackground(true);
 

@@ -23,6 +23,8 @@
 #include <QPainter>
 #include <QStyle>
 #include <QStyleOptionButton>
+#include <QTimer>
+#include <QTime>
 
 
 QT_BEGIN_NAMESPACE
@@ -36,15 +38,22 @@ class MainWindow : public QMainWindow {
 
 public:
     MainWindow(QWidget *parent = nullptr);
+    void resizeTable();
     ~MainWindow();
+signals:
+    void myPage();
+    void registerPage();
+    void loginPage();
+    void notifyPage();
+    void favouritePage();
+    void settingsPage();
 
 protected:
     void resizeEvent(QResizeEvent *e);
     bool eventFilter(QObject *target, QEvent *event);
 
 private:
-    void resizeTable();
-    void updateTable();
+    void updateTable(QVector<Chain> chains);
 
     void windowChanger(QMainWindow *toOpen);
 
@@ -62,6 +71,7 @@ private:
     void onCellClicked(int row, int column);
     void chainMonitorHide();
 
+
     HeaderMenu* menu;
 
     MyPage *mypage;
@@ -71,13 +81,15 @@ private:
     FavouritePage *favouritepage;
     SettingsPage *settingspage;
     ChainMonitor *chainmonitor;
+    QMainWindow *currentpage;
 
     QParallelAnimationGroup *sizeAnim;
-    DataReciever dr;
+
     QVector<Chain> chains;
+    QTimer *timer;
+    QTime *time;
 
     bool chainMonitorOpen;
-    QMainWindow *currentpage;
     Ui::MainWindow *ui;
 };
 #endif // MAINWINDOW_H

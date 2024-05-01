@@ -15,11 +15,16 @@ ChainMonitor::ChainMonitor(QWidget *parent, Chain c) : QWidget(parent), ui(new U
     ui->label_2->setText(QString("Coin1: %1\nCoin2: %2\nExchange rate: %3\nBank: %4\nMin-max: %5-%6\nSeller rating: %7").arg(QString::fromStdString(c.sell.coin1), QString::fromStdString(c.sell.coin2), QString::number(c.sell.exchange_rate, 'f', 2), QString::fromStdString(c.sell.bank), QString::number(c.sell.min_max.first), QString::number(c.sell.min_max.second), QString::number(c.sell.seller_rating, 'f', 2)));
     ui->label_7->setText(QString("id: <a href=\"%8\">Order link</a>").arg(QString::fromStdString(c.sell.id)));
     ui->label_3->setText(QString("Coin-Pair: %1 -> %2\nSpread: %3").arg(QString::fromStdString(c.change.first), QString::fromStdString(c.change.second), QString::number(c.spread, 'f', 2)));
+    if (c.change.first == c.change.second) {
+        ui->label_8->setText(QString("Связка USDT - %1 - USDT со спредом %2\%").arg(QString::fromStdString(c.change.first), QString::number(c.spread)));
+    } else {
+        ui->label_8->setText(QString("Связка USDT - %1 - %2 - USDT со спредом %3\%").arg(QString::fromStdString(c.change.first), QString::fromStdString(c.change.second), QString::number(c.spread)));
+    }
     connect(ui->pushButton, &QPushButton::clicked, this, &ChainMonitor::close);
     setStyleSheet(
         "#widget_3 { background-color: #F5F5F5; border-radius: 10px; border: 2px solid #bebebe; }"
         "QFrame#frame, QFrame#frame_2, QFrame#frame_3 { background-color: #F5F5F5; border-radius: 5px; border: 1px solid #bebebe; }"
-        "QPushButton { background-color: none; border-style: none; font: 25px; }" );
+        "QPushButton { background-color: none; border-style: none; }" );
     hide();
 }
 

@@ -19,6 +19,8 @@
 #include <QDebug>
 #include <optional>
 
+struct AccountHandler;
+
 class User {
 public:
     User();
@@ -71,6 +73,7 @@ protected:
 class CurUser : public User {
 public:
     static CurUser& getInstance();
+    bool init();
 
     bool tryRegister(QString name_, QString login_, QString password_);
     bool tryLogin(QString login_, QString password_);
@@ -89,6 +92,7 @@ public:
 
 private:
     QPixmap default_avatar;
+    AccountHandler *con;
 
     bool setCurUser(User user_);
     bool unsetCurUser();

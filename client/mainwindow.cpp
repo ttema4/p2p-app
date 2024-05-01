@@ -49,8 +49,13 @@ void MainWindow::onCellClicked(int row, int column) {
     chainmonitor->show();
 }
 
-void MainWindow::updateTable() {
-    chains = dr.recieveNewChain();
+void MainWindow::updateTable(QVector<Chain> new_chains) {
+    timer->stop();
+    time->setHMS(0, 0, 0);
+    ui->label->setText(QString("Last update 0s ago"));
+    timer->start(1000);
+
+    chains = std::move(new_chains);
     ui->tableWidget->setRowCount(chains.size() + 1);
 
     for (int i = 1; i <= chains.size(); i++) {
@@ -65,7 +70,7 @@ void MainWindow::updateTable() {
 
         ui->tableWidget->setItem(i, 2, new QTableWidgetItem(QString(tr("%1").arg((double)new_chain.buy.exchange_rate))));
 
-        QTableWidgetItem* change = new QTableWidgetItem(QString((new_chain.change.first + " -> " + new_chain.change.second).c_str()));
+        QTableWidgetItem* change = new QTableWidgetItem(QString(new_chain.change.first != new_chain.change.second ? (new_chain.change.first + " -> " + new_chain.change.second).c_str() : "—"));
         change->setTextAlignment(Qt::AlignCenter) ;
         ui->tableWidget->setItem(i, 3, change);
 
@@ -82,42 +87,6 @@ void MainWindow::updateTable() {
         spread->setTextAlignment(Qt::AlignCenter);
         ui->tableWidget->setItem(i, 7, spread);
     }
-}
-
-void MainWindow::windowChanger(QMainWindow *toOpen) {
-    toOpen->show();
-    toOpen->setGeometry(currentpage->geometry());
-    currentpage->hide();
-    if (toOpen == this) this->resizeTable();
-    currentpage = toOpen;
-}
-
-void MainWindow::open_homepage() {
-    windowChanger(this);
-}
-
-void MainWindow::open_mypage() {
-    windowChanger(mypage);
-}
-
-void MainWindow::open_registerpage() {
-    windowChanger(registerpage);
-}
-
-void MainWindow::open_loginpage() {
-    windowChanger(loginpage);
-}
-
-void MainWindow::open_notifypage() {
-    windowChanger(notifypage);
-}
-
-void MainWindow::open_favouritepage() {
-    windowChanger(favouritepage);
-}
-
-void MainWindow::open_settingspage() {
-    windowChanger(settingspage);
 }
 
 void MainWindow::resizeTable() {
@@ -171,14 +140,13 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event) {
 }
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
-    currentpage = this;
-    mypage = new MyPage();
-    registerpage = new RegisterPage();
-    loginpage = new LoginPage();
-    notifypage = new NotifyPage();
-    favouritepage = new FavouritePage();
-    settingspage = new SettingsPage();
     chainMonitorOpen = false;
+
+
+    // const QPalette palet(QColor("#e7e9e4"));
+    // this->setPalette(palet);
+    // this->setAutoFillBackground(true);
+
 
     ui->setupUi(this);
     this->setFocus();
@@ -200,54 +168,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->lineEdit_2->installEventFilter(this);
     ui->hideButton->installEventFilter(this);
 
-    connect(menu, &HeaderMenu::myPage, this, &MainWindow::open_mypage);
-    connect(menu, &HeaderMenu::loginPage, this, &MainWindow::open_loginpage);
-    connect(menu, &HeaderMenu::registerPage, this, &MainWindow::open_registerpage);
-    connect(menu, &HeaderMenu::notifyPage, this, &MainWindow::open_notifypage);
-    connect(menu, &HeaderMenu::favouritePage, this, &MainWindow::open_favouritepage);
-    connect(menu, &HeaderMenu::settingsPage, this, &MainWindow::open_settingspage);
-
-    connect(mypage, &MyPage::homePage, this, &MainWindow::open_homepage);
-    connect(mypage, &MyPage::loginPage, this, &MainWindow::open_loginpage);
-    connect(mypage, &MyPage::registerPage, this, &MainWindow::open_registerpage);
-    connect(mypage, &MyPage::notifyPage, this, &MainWindow::open_notifypage);
-    connect(mypage, &MyPage::favouritePage, this, &MainWindow::open_favouritepage);
-    connect(mypage, &MyPage::settingsPage, this, &MainWindow::open_settingspage);
-
-    connect(loginpage, &LoginPage::homePage, this, &MainWindow::open_homepage);
-    connect(loginpage, &LoginPage::myPage, this, &MainWindow::open_mypage);
-    connect(loginpage, &LoginPage::registerPage, this, &MainWindow::open_registerpage);
-    connect(loginpage, &LoginPage::notifyPage, this, &MainWindow::open_notifypage);
-    connect(loginpage, &LoginPage::favouritePage, this, &MainWindow::open_favouritepage);
-    connect(loginpage, &LoginPage::settingsPage, this, &MainWindow::open_settingspage);
-
-    connect(registerpage, &RegisterPage::homePage, this, &MainWindow::open_homepage);
-    connect(registerpage, &RegisterPage::myPage, this, &MainWindow::open_mypage);
-    connect(registerpage, &RegisterPage::loginPage, this, &MainWindow::open_loginpage);
-    connect(registerpage, &RegisterPage::notifyPage, this, &MainWindow::open_notifypage);
-    connect(registerpage, &RegisterPage::favouritePage, this, &MainWindow::open_favouritepage);
-    connect(registerpage, &RegisterPage::settingsPage, this, &MainWindow::open_settingspage);
-
-    connect(notifypage, &NotifyPage::homePage, this, &MainWindow::open_homepage);
-    connect(notifypage, &NotifyPage::myPage, this, &MainWindow::open_mypage);
-    connect(notifypage, &NotifyPage::loginPage, this, &MainWindow::open_loginpage);
-    connect(notifypage, &NotifyPage::registerPage, this, &MainWindow::open_registerpage);
-    connect(notifypage, &NotifyPage::favouritePage, this, &MainWindow::open_favouritepage);
-    connect(notifypage, &NotifyPage::settingsPage, this, &MainWindow::open_settingspage);
-
-    connect(favouritepage, &FavouritePage::homePage, this, &MainWindow::open_homepage);
-    connect(favouritepage, &FavouritePage::myPage, this, &MainWindow::open_mypage);
-    connect(favouritepage, &FavouritePage::loginPage, this, &MainWindow::open_loginpage);
-    connect(favouritepage, &FavouritePage::registerPage, this, &MainWindow::open_registerpage);
-    connect(favouritepage, &FavouritePage::notifyPage, this, &MainWindow::open_notifypage);
-    connect(favouritepage, &FavouritePage::settingsPage, this, &MainWindow::open_settingspage);
-
-    connect(settingspage, &SettingsPage::homePage, this, &MainWindow::open_homepage);
-    connect(settingspage, &SettingsPage::myPage, this, &MainWindow::open_mypage);
-    connect(settingspage, &SettingsPage::loginPage, this, &MainWindow::open_loginpage);
-    connect(settingspage, &SettingsPage::registerPage, this, &MainWindow::open_registerpage);
-    connect(settingspage, &SettingsPage::notifyPage, this, &MainWindow::open_notifypage);
-    connect(settingspage, &SettingsPage::favouritePage, this, &MainWindow::open_favouritepage);
+    connect(menu, &HeaderMenu::myPage, this, &MainWindow::myPage);
+    connect(menu, &HeaderMenu::loginPage, this, &MainWindow::loginPage);
+    connect(menu, &HeaderMenu::registerPage, this, &MainWindow::registerPage);
+    connect(menu, &HeaderMenu::notifyPage, this, &MainWindow::notifyPage);
+    connect(menu, &HeaderMenu::favouritePage, this, &MainWindow::favouritePage);
+    connect(menu, &HeaderMenu::settingsPage, this, &MainWindow::settingsPage);
 
 
     // Настройка бокового меню
@@ -292,9 +218,28 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->tableWidget->setItem(0, 7, header7);
 
     connect(ui->tableWidget, &QTableWidget::cellClicked, this, &MainWindow::onCellClicked);
-    connect(ui->pushButton_2, &QPushButton::clicked, this, &MainWindow::updateTable);
+    // connect(ui->pushButton_2, &QPushButton::clicked, this, &MainWindow::updateTable);
 
-    updateTable();
+
+    timer = new QTimer(this);
+    time = new QTime(0, 0, 0);
+    connect(timer, &QTimer::timeout, this, [&]() {
+        time = new QTime(time->addSecs(1));
+        int minutes = time->minute();
+        int seconds = time->second();
+
+        QString timeString;
+        if (minutes > 0) {
+            timeString = QString("Last update %1m %2s ago").arg(minutes).arg(seconds);
+        } else {
+            timeString = QString("Last update %1s ago").arg(seconds);
+        }
+        ui->label->setText(timeString);
+    });
+    timer->start(1000);
+
+    connect(&DataReciever::getInstance(), &DataReciever::dataParsed, this, &MainWindow::updateTable);
+    DataReciever::getInstance().start();
 }
 
 void MainWindow::resizeEvent(QResizeEvent *e) {
