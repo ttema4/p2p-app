@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "windowhandler.h"
 
 #include <QApplication>
 #include <QFile>
@@ -13,7 +14,7 @@ int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
     a.setStyleSheet(qssStr);
     a.setWindowIcon(QIcon(":/resourses/icons/app-logo-3.png"));
-    MainWindow w;
+    WindowHandler w;
     w.show();
     return a.exec();
 }

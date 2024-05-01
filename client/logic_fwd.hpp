@@ -1,10 +1,7 @@
 #ifndef LOGIC_HPP_
 #define LOGIC_HPP_
 
-#include <string>
-#include <vector>
-#include <random>
-#include <iostream>
+#include "src/nlohmann/json.hpp"
 
 struct Order {
     // Фактически, без статуса мерчанта на бирже(получить его очень сложно,
@@ -14,9 +11,9 @@ struct Order {
     // рубли за монету". Несмотря на это, чтобы не смешивать все ордера, мы будем
     // условно помечать тип ордера как "BUY" или "SELL".
     std::string type;
-
+    std::string market;
     std::string id; // Строка, храним не фактический id, а фрагмент ссылки(?)
-    long double seller_rating; // Рейтинг продавца
+    double seller_rating; // Рейтинг продавца
 
     // Валюта, ЗА которую мы ПОКУПАЕМ. На первом шаге связки - условность, 
     // так как в MVP(да и вообще имея на руках только карты российских банков)
@@ -25,12 +22,15 @@ struct Order {
     std::string coin2; // Валюта, ЗА которую мы ПРОДАЁМ. Аналогично, на последнем шаге всегда рубль.
     std::string bank; // Банк
     std::pair<int, int> min_max; // Минимальная и максимальная сумма сделки
-    long double exchange_rate; // Курс
+    double exchange_rate; // Курс
 
+    Order() = default;
     Order(std::string type_, std::string id_, long double seller_rating_, std::string coin1_,
             std::string coin2_, std::string bank_, std::pair<int, int> min_max_, long double exchange_rate_)
             : type(type_), id(id_), seller_rating(seller_rating_), coin1(coin1_),
              coin2(coin2_), bank(bank_), min_max(min_max_), exchange_rate(exchange_rate_) {}
+
+    NLOHMANN_DEFINE_TYPE_INTRUSIVE(Order, type, id, seller_rating, coin1, coin2, bank, min_max, exchange_rate);
 };
 
 // Связка
@@ -38,9 +38,12 @@ struct Chain{
     Order buy;
     std::pair<std::string, std::string> change;
     Order sell;
-    long double spread;
+    double spread;
 
+    Chain() = default;
     Chain(Order buy_, std::pair<std::string, std::string> change_, Order sell_, long double spread_) : buy(buy_), change(change_), sell(sell_), spread(spread_) {};
+
+    NLOHMANN_DEFINE_TYPE_INTRUSIVE(Chain, buy, change, sell, spread);
 };
 
 #endif // LOGIC_HPP_

@@ -8,9 +8,14 @@
 #include "notifypage.h"
 #include "favouritepage.h"
 #include "settingspage.h"
+#include "datareciever.h"
+#include "logic_fwd.hpp"
+#include "chainmonitor.h"
+
 #include <QMainWindow>
 #include <QFrame>
 #include <QPropertyAnimation>
+#include <QVector>
 #include <QFocusEvent>
 #include <QPushButton>
 #include <QHBoxLayout>
@@ -18,6 +23,8 @@
 #include <QPainter>
 #include <QStyle>
 #include <QStyleOptionButton>
+#include <QTimer>
+#include <QTime>
 
 
 QT_BEGIN_NAMESPACE
@@ -26,20 +33,27 @@ class MainWindow;
 }
 QT_END_NAMESPACE
 
-class MainWindow : public QMainWindow
-{
+class MainWindow : public QMainWindow {
     Q_OBJECT
 
 public:
     MainWindow(QWidget *parent = nullptr);
+    void resizeTable();
     ~MainWindow();
+signals:
+    void myPage();
+    void registerPage();
+    void loginPage();
+    void notifyPage();
+    void favouritePage();
+    void settingsPage();
 
 protected:
     void resizeEvent(QResizeEvent *e);
     bool eventFilter(QObject *target, QEvent *event);
 
 private:
-    void resizeTable();
+    void updateTable(QVector<Chain> chains);
 
     void windowChanger(QMainWindow *toOpen);
 
@@ -51,8 +65,12 @@ private:
     void open_favouritepage();
     void open_settingspage();
 
-    void hideFilters();
     void showFilters();
+    void filterHidden();
+
+    void onCellClicked(int row, int column);
+    void chainMonitorHide();
+
 
     HeaderMenu* menu;
 
@@ -62,10 +80,16 @@ private:
     NotifyPage *notifypage;
     FavouritePage *favouritepage;
     SettingsPage *settingspage;
-
-    // bool filtersVisible = true;
-    // QPropertyAnimation *anim;
+    ChainMonitor *chainmonitor;
     QMainWindow *currentpage;
+
+    QParallelAnimationGroup *sizeAnim;
+
+    QVector<Chain> chains;
+    QTimer *timer;
+    QTime *time;
+
+    bool chainMonitorOpen;
     Ui::MainWindow *ui;
 };
 #endif // MAINWINDOW_H

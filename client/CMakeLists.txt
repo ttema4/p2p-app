@@ -9,39 +9,36 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+find_package(Threads REQUIRED)
+find_package(Boost REQUIRED COMPONENTS system)
 find_package(QT NAMES Qt6 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Sql)
 
-
-set(PROJECT_SOURCES
-        main.cpp
-        mainwindow.cpp
-        mainwindow.h
-        mainwindow.ui
-    )
+set(MACOSX_BUNDLE_ICON_FILE icon.icns)
+set(APP_ICON_MACOSX ${CMAKE_CURRENT_SOURCE_DIR}/resourses/icons/icon.icns)
+set_source_files_properties(${APP_ICON_MACOSX} PROPERTIES
+       MACOSX_PACKAGE_LOCATION "Resources")
 
 qt_add_executable(p2p-app
     MANUAL_FINALIZATION
-    ${PROJECT_SOURCES}
-    resourses.qrc
+    main.cpp resourses.qrc
+    mainwindow.h mainwindow.cpp mainwindow.ui
     mypage.h mypage.cpp mypage.ui
     headermenu.h headermenu.cpp
     textpixmapbutton.h textpixmapbutton.cpp
     loginpage.h loginpage.cpp loginpage.ui
     registerpage.h registerpage.cpp registerpage.ui
-    user.h user.cpp
-    config.h
+    user.h user.cpp config.h
     settingspage.h settingspage.cpp settingspage.ui
     favouritepage.h favouritepage.cpp favouritepage.ui
     notifypage.h notifypage.cpp notifypage.ui
+    chainmonitor.h chainmonitor.cpp chainmonitor.ui
+    windowhandler.h windowhandler.cpp windowhandler.ui
+    logic_fwd.hpp datareciever.h datareciever.cpp
+    ${APP_ICON_MACOSX}
 )
 
-target_link_libraries(p2p-app PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Sql)
-
-
-if(${QT_VERSION} VERSION_LESS 6.1.0)
-  set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.p2p-app)
-endif()
+target_link_libraries(p2p-app PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Sql Threads::Threads Boost::system)
 
 set_target_properties(p2p-app PROPERTIES
     ${BUNDLE_ID_OPTION}
@@ -52,10 +49,11 @@ set_target_properties(p2p-app PROPERTIES
 )
 
 install(TARGETS p2p-app
-    BUNDLE DESTINATION .
+    BUNDLE DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
+
 
 if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(p2p-app)

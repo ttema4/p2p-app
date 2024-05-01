@@ -1,4 +1,5 @@
 #include "user.h"
+#include <QException>
 
 User::User() {
     id = -1;
@@ -83,18 +84,23 @@ CurUser& CurUser::getInstance() {
 
 CurUser::CurUser() {
     default_avatar = QPixmap("://resourses/icons/empty_avatar.jpg");
-
     id = -1;
 }
 
-bool CurUser::tryRegister(QString name_, QString login_, QString password_) {
-    AccountHandler* con = nullptr;
-    if (USE_DATABASE) {
-        con = &DBAccountHandler::getInstance();
-    } else {
-        con = &LocalAccountHandler::getInstance();
+bool CurUser::init() {
+    try {
+        if (USE_DATABASE) {
+            con = &DBAccountHandler::getInstance();
+        } else {
+            con = &LocalAccountHandler::getInstance();
+        }
+    } catch (QException e) {
+        return false;
     }
+    return true;
+}
 
+bool CurUser::tryRegister(QString name_, QString login_, QString password_) {
     std::optional<User> registered = con->tryRegister(name_, login_, password_);
     if (registered) {
         qDebug() << "SUCCESS REGISTER";
@@ -105,13 +111,6 @@ bool CurUser::tryRegister(QString name_, QString login_, QString password_) {
 };
 
 bool CurUser::tryLogin(QString login_, QString password_) {
-    AccountHandler* con = nullptr;
-    if (USE_DATABASE) {
-        con = &DBAccountHandler::getInstance();
-    } else {
-        con = &LocalAccountHandler::getInstance();
-    }
-
     std::optional<User> logged = con->tryLogin(login_, password_);
     if (logged) {
         qDebug() << "SUCCESSFULLY LOGGED IN WITH " << login_ << password_;
@@ -122,13 +121,6 @@ bool CurUser::tryLogin(QString login_, QString password_) {
 };
 
 bool CurUser::tryDeleteAccount() {
-    AccountHandler* con = nullptr;
-    if (USE_DATABASE) {
-        con = &DBAccountHandler::getInstance();
-    } else {
-        con = &LocalAccountHandler::getInstance();
-    }
-
     bool deleted = con->tryDeleteAccount(login);
     if (deleted) {
         qDebug() << "SUCCESSFULLY DELETED USER " << login;
@@ -139,13 +131,6 @@ bool CurUser::tryDeleteAccount() {
 }
 
 bool CurUser::tryEditAvatar(QPixmap avatar_) {
-    AccountHandler* con = nullptr;
-    if (USE_DATABASE) {
-        con = &DBAccountHandler::getInstance();
-    } else {
-        con = &LocalAccountHandler::getInstance();
-    }
-
     bool deleted = con->tryEditAvatar(login, avatar_);
     if (deleted) {
         qDebug() << "SUCCESSFULLY EDIT AVATAR " << login;
@@ -156,13 +141,6 @@ bool CurUser::tryEditAvatar(QPixmap avatar_) {
 }
 
 bool CurUser::tryDeleteAvatar() {
-    AccountHandler* con = nullptr;
-    if (USE_DATABASE) {
-        con = &DBAccountHandler::getInstance();
-    } else {
-        con = &LocalAccountHandler::getInstance();
-    }
-
     bool deleted = con->tryDeleteAvatar(login);
     if (deleted) {
         qDebug() << "SUCCESSFULLY DELETED AVATAR " << login;
@@ -281,7 +259,7 @@ DBAccountHandler::DBAccountHandler() {
 
     if (!db.open()) {
         qDebug() << "Ошибка подключения к базе данных:" << db.lastError().text();
-        return;
+        throw QException();
     }
 
     qDebug() << "Успешное подключение к базе данных.";

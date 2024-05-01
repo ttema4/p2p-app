@@ -10,8 +10,7 @@ namespace Ui {
 class LoginPage;
 }
 
-class LoginPage : public QMainWindow
-{
+class LoginPage : public QMainWindow {
     Q_OBJECT
 
 public:
