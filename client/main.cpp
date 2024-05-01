@@ -1,4 +1,3 @@
-#include "mainwindow.h"
 #include "windowhandler.h"
 
 #include <QApplication>

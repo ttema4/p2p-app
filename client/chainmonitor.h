@@ -1,7 +1,7 @@
 #ifndef CHAINMONITOR_H
 #define CHAINMONITOR_H
 
-#include "logic_fwd.hpp"
+#include "logic_fwd.h"
 
 #include <QWidget>
 #include <QDialog>

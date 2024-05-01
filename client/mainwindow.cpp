@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "mainwindow_fwd.hpp"
+#include "mainwindow_fwd.h"
 #include <QWidget>
 #include <QResizeEvent>
 #include <QDebug>

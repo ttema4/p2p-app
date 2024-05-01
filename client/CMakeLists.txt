@@ -34,10 +34,11 @@ qt_add_executable(p2p-app
     notifypage.h notifypage.cpp notifypage.ui
     chainmonitor.h chainmonitor.cpp chainmonitor.ui
     windowhandler.h windowhandler.cpp windowhandler.ui
-    logic_fwd.hpp datareciever.h datareciever.cpp
+    logic_fwd.h datareciever.h datareciever.cpp
     ${APP_ICON_MACOSX}
 )
 
+target_include_directories(p2p-app PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/lib/nlohmann)
 target_link_libraries(p2p-app PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Sql Threads::Threads Boost::system)
 
 set_target_properties(p2p-app PROPERTIES
@@ -47,6 +48,11 @@ set_target_properties(p2p-app PROPERTIES
     MACOSX_BUNDLE TRUE
     WIN32_EXECUTABLE TRUE
 )
+
+get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
+foreach(dir ${dirs})
+  message(STATUS "dir='${dir}'")
+endforeach()
 
 install(TARGETS p2p-app
     BUNDLE DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}

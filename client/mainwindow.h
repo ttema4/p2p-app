@@ -9,7 +9,7 @@
 #include "favouritepage.h"
 #include "settingspage.h"
 #include "datareciever.h"
-#include "logic_fwd.hpp"
+#include "logic_fwd.h"
 #include "chainmonitor.h"
 
 #include <QMainWindow>
