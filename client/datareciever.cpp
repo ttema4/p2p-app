@@ -10,9 +10,11 @@ Chain LocalClient::getFakeChain() {
     static std::vector<std::string> ids {"https://docs.google.com/spreadsheets/u/0/d/1W2VigJfqsPFK12JuIj62l1kIaeJOE03xK-PTkzmMh2E/htmlview", "https://youtu.be/QMMgjjGugHE?si=PVyBYphuinGCxVun", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "https://youtu.be/MGkWSAnoDOI?si=IyLCYPO6QFl2-b-Y&t=330"};
     static std::vector<std::string> coins {"BTC", "ETH", "DOGY", "SOLU", "WLD", "COTI"};
     static std::vector<std::string> banks {"Tinkoff", "Sber", "Alpha", "Qiwi", "SBP"};
+    static std::vector<std::string> markets {"ByBit", "BitPapa", "Binance", "Telegram"};
 
 
     std::string fake_type1 = types[gen() % types.size()];
+    std::string fake_market1 = markets[gen() % markets.size()];
     std::string fake_id1 = ids[gen() % ids.size()];
     double fake_rating1 = (double)(gen() % 500) / 100;
     std::string fake_coin11 = "USDT";
@@ -21,22 +23,23 @@ Chain LocalClient::getFakeChain() {
     std::pair<int, int> fake_min_max1 = {gen() % 100, gen() % 1000000 + 100};
     double fake_exchange_rate1 = (double)(gen() % 1000000) / 100;
 
-    Order order1(fake_type1, fake_id1, fake_rating1, fake_coin11, fake_coin21, fake_bank1, fake_min_max1, fake_exchange_rate1);
+    Order order1(fake_type1, fake_market1, fake_id1, fake_rating1, fake_coin11, fake_coin21, fake_bank1, fake_min_max1, fake_exchange_rate1);
 
     std::string fake_type2 = types[gen() % types.size()];
+    std::string fake_market2 = markets[gen() % markets.size()];
     std::string fake_id2 = ids[gen() % ids.size()];
-    double fake_rating2 = (double)(gen() % 500) / 100;
-    std::string fake_coin12 = coins[gen() % coins.size()];
-    std::string fake_coin22 = "USDT";
+    double fake_rating2 = (double)(gen() % 500) / 100;;
+    std::string fake_coin12 = "USDT";
+    std::string fake_coin22 = coins[gen() % coins.size()];
     std::string fake_bank2 = banks[gen() % banks.size()];
     std::pair<int, int> fake_min_max2 = {gen() % 100, gen() % 1000000 + 100};
     double fake_exchange_rate2 = (double)(gen() % 1000000) / 100;
 
-    Order order2(fake_type2, fake_id2, fake_rating2, fake_coin12, fake_coin22, fake_bank2, fake_min_max2, fake_exchange_rate2);
+    Order order2(fake_type2, fake_market2, fake_id2, fake_rating2, fake_coin12, fake_coin22, fake_bank2, fake_min_max2, fake_exchange_rate2);
 
-    std::pair<std::string, std::string> fake_change {fake_coin21, fake_coin12};
+    std::pair<std::string, std::string> fake_change {fake_coin21, fake_coin22};
 
-    double fake_spread = (double)(gen() % 100) / 10;
+    double fake_spread = (double)(gen() % 2000) / 10 - 100;
 
     Chain fake_chain(order1, fake_change, order2, fake_spread);
 
@@ -158,7 +161,7 @@ void DataReciever::recieveNewChain(QString str) {
         QVector<Chain> chains = nlohmann::json::parse(str.toStdString()).get<QVector<Chain>>();
         emit dataParsed(chains);
     } else {
-        qDebug() << str;
+        // qDebug() << str;
     }
 }
 

@@ -1,8 +1,8 @@
 #ifndef DATARECIEVER_H
 #define DATARECIEVER_H
 
+#include "lib/nlohmann/json.hpp"
 #include <boost/asio.hpp>
-#include "json.hpp"
 #include "logic_fwd.h"
 #include "config.h"
 #include <QObject>

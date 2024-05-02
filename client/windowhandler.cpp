@@ -7,7 +7,7 @@
 WindowHandler::WindowHandler(QWidget *parent) : QMainWindow(parent), ui(new Ui::WindowHandler) {
     ui->setupUi(this);
     ui->label->setStyleSheet("image: url(:/resourses/icons/app-logo-3.png);");
-    QTimer::singleShot(1000, this, &WindowHandler::init);
+    QTimer::singleShot(100, this, &WindowHandler::init);
 }
 
 void WindowHandler::init() {
@@ -17,7 +17,7 @@ void WindowHandler::init() {
         return;
     }
     ui->label_2->setText("Подключение к серверу... ✅\nПодключение к БД...");
-    QTimer::singleShot(1000, this, &WindowHandler::init2);
+    QTimer::singleShot(100, this, &WindowHandler::init2);
 }
 
 void WindowHandler::init2() {
@@ -94,7 +94,7 @@ void WindowHandler::windowChanger(QMainWindow *toOpen) {
     toOpen->show();
     toOpen->setGeometry(currentpage->geometry());
     currentpage->hide();
-    if (toOpen == homepage) homepage->resizeTable();
+    // if (toOpen == homepage) homepage->resizeTable();
     currentpage = toOpen;
 }
 

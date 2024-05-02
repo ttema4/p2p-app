@@ -25,12 +25,12 @@ struct Order {
     double exchange_rate; // Курс
 
     Order() = default;
-    Order(std::string type_, std::string id_, long double seller_rating_, std::string coin1_,
-            std::string coin2_, std::string bank_, std::pair<int, int> min_max_, long double exchange_rate_)
-            : type(type_), id(id_), seller_rating(seller_rating_), coin1(coin1_),
+    Order(std::string type_, std::string market_, std::string id_, double seller_rating_, std::string coin1_,
+            std::string coin2_, std::string bank_, std::pair<int, int> min_max_, double exchange_rate_)
+        : type(type_), market(market_), id(id_), seller_rating(seller_rating_), coin1(coin1_),
              coin2(coin2_), bank(bank_), min_max(min_max_), exchange_rate(exchange_rate_) {}
 
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(Order, type, id, seller_rating, coin1, coin2, bank, min_max, exchange_rate);
+    NLOHMANN_DEFINE_TYPE_INTRUSIVE(Order, type, market, id, seller_rating, coin1, coin2, bank, min_max, exchange_rate);
 };
 
 // Связка
