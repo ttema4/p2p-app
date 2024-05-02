@@ -3,7 +3,6 @@
 #include <sstream>
 
 order::order(
-    Markets market_,
     Currencies currency_,
     Coins coin_,
     Directions direction_,
@@ -14,8 +13,7 @@ order::order(
     dec::decimal<8> available_,
     std::string &link_
 )
-    : market(market_),
-      currency(currency_),
+    : currency(currency_),
       coin(coin_),
       direction(direction_),
       price(price_),
@@ -27,6 +25,7 @@ order::order(
 }
 
 bybit_simulator::bybit_simulator() {
+    market_ = Markets::bybit_simulator;
     market_payment_methods = {
         "Local Card(Yellow)",
         "Raiffeisenbank",
@@ -92,7 +91,7 @@ void bybit_simulator::update_market_orders() {
     dec::decimal<8> min_available;
     std::string link = "";
     int n;
-    for (int i = 0; i < 1; ++i) {
+    for (int i = 0; i < 1052; ++i) {
         n = gen() % 32767;
         Currencies currency = currencies_[n % 1];
         Coins coin = coins_[n % 4];
@@ -464,8 +463,107 @@ void bybit_simulator::update_market_orders() {
                 break;
         }
         orders.push_back(std::move(std::make_unique<order>(
-            Markets::bybit_simulator, currency, coin, direction, price,
-            payment_methods, lower_limit, upper_limit, available, link
+            currency, coin, direction, price, payment_methods, lower_limit,
+            upper_limit, available, link
         )));
     }
+}
+
+void bybit_simulator::update_spot_rates() {
+    int n, isOdd;
+    std::pair<Coins, Coins> spot_pair;
+    for (int i = 0; i < 4; ++i) {
+        for (int j = i + 1; j < 4; ++j) {
+            n = gen() % 32767;
+            isOdd = n & 1;
+            spot_pair.first = coins[i];
+            spot_pair.second = coins[j];
+            switch (spot_pair.first) {
+                case Coins::USDT:
+                    switch (spot_pair.second) {
+                        case Coins::USDC: {
+                            dec::decimal<8> rate("1.0016");
+                            spot_rates[spot_pair.first][spot_pair.second] =
+                                rate +
+                                dec::decimal_cast<8>(isOdd * (-1)) *
+                                    (dec::decimal_cast<8>(n % 16) *
+                                     dec::decimal_cast<8>("0.0001")) +
+                                dec::decimal_cast<8>((int)!isOdd) *
+                                    (dec::decimal_cast<8>(n % 2) *
+                                     dec::decimal_cast<8>("0.0001"));
+                        } break;
+
+                        case Coins::BTC: {
+                            dec::decimal<8> rate("57134.38");
+                            spot_rates[spot_pair.first][spot_pair.second] =
+                                rate +
+                                dec::decimal_cast<8>(isOdd * (-1)) *
+                                    (dec::decimal_cast<8>(n % 59207) *
+                                     dec::decimal_cast<8>("0.01")) +
+                                dec::decimal_cast<8>((int)!isOdd) *
+                                    (dec::decimal_cast<8>(n % 443336) *
+                                     dec::decimal_cast<8>("0.01"));
+                        } break;
+
+                        case Coins::ETH: {
+                            dec::decimal<8> rate("2886.20");
+                            spot_rates[spot_pair.first][spot_pair.second] =
+                                rate +
+                                dec::decimal_cast<8>(isOdd * (-1)) *
+                                    (dec::decimal_cast<8>(n % 6969) *
+                                     dec::decimal_cast<8>("0.01")) +
+                                dec::decimal_cast<8>((int)!isOdd) *
+                                    (dec::decimal_cast<8>(n % 15156) *
+                                     dec::decimal_cast<8>("0.01"));
+                        } break;
+                    }
+                    break;
+
+                case Coins::USDC:
+                    switch (spot_pair.second) {
+                        case Coins::BTC: {
+                            dec::decimal<8> rate("57254.59");
+                            spot_rates[spot_pair.first][spot_pair.second] =
+                                rate +
+                                dec::decimal_cast<8>(isOdd * (-1)) *
+                                    (dec::decimal_cast<8>(n % 77084) *
+                                     dec::decimal_cast<8>("0.01")) +
+                                dec::decimal_cast<8>((int)!isOdd) *
+                                    (dec::decimal_cast<8>(n % 427861) *
+                                     dec::decimal_cast<8>("0.01"));
+                        } break;
+
+                        case Coins::ETH: {
+                            dec::decimal<8> rate("2879.50");
+                            spot_rates[spot_pair.first][spot_pair.second] =
+                                rate +
+                                dec::decimal_cast<8>(isOdd * (-1)) *
+                                    (dec::decimal_cast<8>(n % 6619) *
+                                     dec::decimal_cast<8>("0.01")) +
+                                dec::decimal_cast<8>((int)!isOdd) *
+                                    (dec::decimal_cast<8>(n % 15616) *
+                                     dec::decimal_cast<8>("0.01"));
+                        } break;
+                    }
+                    break;
+
+                case Coins::BTC: {
+                    dec::decimal<8> rate("0.050279");
+                    spot_rates[spot_pair.first][spot_pair.second] =
+                        rate +
+                        dec::decimal_cast<8>(isOdd * (-1)) *
+                            (dec::decimal_cast<8>(n % 1433) *
+                             dec::decimal_cast<8>("0.000001")) +
+                        dec::decimal_cast<8>((int)!isOdd) *
+                            (dec::decimal_cast<8>(n % 57) *
+                             dec::decimal_cast<8>("0.000001"));
+                } break;
+            }
+        }
+    }
+}
+
+void bybit_simulator::update_market() {
+    this->update_market_orders();
+    this->update_spot_rates();
 }
