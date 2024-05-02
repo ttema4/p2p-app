@@ -173,7 +173,7 @@ int main(int, char **) {
     std::thread t([&]() {
         while (true) {
             std::unique_lock l(m);
-            scraper_.update_markets_orders();
+            scraper_.update_markets();
             scraper_.handle();
             l.unlock();
             std::this_thread::sleep_for(std::chrono::milliseconds(1000));
