@@ -9,7 +9,9 @@
 #include <thread>
 #include <unordered_map>
 #include <vector>
-// #include "src/nlohmann/json.hpp"
+
+#include "storage_structures.hpp"
+#include "include/nlohmann/json.hpp"
 // #include "concurrentqueue.h"
 
 namespace p2p {
@@ -18,25 +20,46 @@ namespace p2p {
 // |
 // |
 // V
-void unpack_json(std::string parsers_response) {
-  // nlohmann::json j = nlohmann::json::parse(parsers_response);
-  // Orders orders;
-  // for (auto &order : j["orders"]) {
-  //   orders.list.push_back(Order(order["type"], order["id"],
-  //   order["seller_rating"], order["coin1"], order["coin2"], order["banks"],
-  //   order["min_max"], order["exchange_rate"]));
-  // }
-  // MarketRates market_rates;
-  // for (auto &market : j["market_rates"]) {
-  //   std::vector<std::pair<std::string, long double>> rates;
-  //   for (auto &rate : market["rates"]) {
-  //     rates.push_back(std::make_pair(rate["coin"], rate["rate"]));
-  //   }
-  //   market_rates.list[market["coin"]] = rates;
-  // }
+void unpack_json(std::string parsers_response, Orders& orders, MarketRates& market_rates) {
+  nlohmann::json j;
+  try {
+    // std::cout << "parsers_response: " << parsers_response.substr(0, 25) << std::endl;
+    j = nlohmann::json::parse(parsers_response);
+  } catch (const nlohmann::json::parse_error& e) {
+    std::cout << "JSON parse error(inside unpack()): " << e.what() << '\n';
+    return;
+  }
+  for (const auto& order : j["orders"]) {
+    Order ord;
+    ord.market = order["market"].get<std::string>();
+    ord.type = order["direction"].get<std::string>();
+    ord.id = "-";
+    ord.seller_rating = 0.0;
+    ord.coin1 = order["currency"].get<std::string>();
+    ord.coin2 = order["coin"].get<std::string>();
+    ord.min_max = std::make_pair(std::stold(order["lower_limit"].get<std::string>()), std::stold(order["upper_limit"].get<std::string>()));
+    ord.exchange_rate = std::stold(order["price"].get<std::string>());
+    for (const auto& bank : order["payment_methods"]) {
+        ord.banks.push_back(bank.get<std::string>());
+    }
+    orders.list.push_back(ord);
+  }
 
-  // orders_parser_to_analysis.enqueue(orders);
-  // market_rates_parser_to_analysis.enqueue(market_rates);
+  for (const auto& rate_obj : j["spot_rates"]) {
+      for (auto it = rate_obj.begin(); it != rate_obj.end(); ++it) {
+          if (it.key() == "market") continue; // пропустить поле market
+
+          std::string coins_pair = it.key();
+          size_t delimiter_pos = coins_pair.find('/');
+          std::string coin1 = coins_pair.substr(0, delimiter_pos);
+          std::string coin2 = coins_pair.substr(delimiter_pos + 1);
+          long double rate12 = std::stold(it.value().get<std::string>());
+          long double rate21 = 1 / rate12;
+          market_rates.list[coin1].push_back(std::make_pair(coin2, rate12));
+          market_rates.list[coin2].push_back(std::make_pair(coin1, rate21));
+      }
+  }
+  
 }
 
 // На данный момент метод pack_json находится в разработке...

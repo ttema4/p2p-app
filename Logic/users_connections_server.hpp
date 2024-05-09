@@ -21,21 +21,21 @@ namespace p2p {
 struct Connection {
   boost::asio::ip::tcp::socket socket;
   boost::asio::streambuf read_buffer;
-  Connection(boost::asio::io_service &io_service)
-      : socket(io_service), read_buffer() {}
-  Connection(boost::asio::io_service &io_service, size_t max_buffer_size)
-      : socket(io_service), read_buffer(max_buffer_size) {}
+  Connection(boost::asio::io_context &io_context)
+      : socket(io_context), read_buffer() {}
+  Connection(boost::asio::io_context &io_context, size_t max_buffer_size)
+      : socket(io_context), read_buffer(max_buffer_size) {}
 };
 
 class UsersConnectionsServer {
-  boost::asio::io_service m_ioservice;
+  boost::asio::io_context& m_ioservice;
   boost::asio::ip::tcp::acceptor m_acceptor;
   std::list<Connection> m_connections;
   using con_handle_t = std::list<Connection>::iterator;
 
 public:
-  UsersConnectionsServer()
-      : m_ioservice(), m_acceptor(m_ioservice), m_connections() {}
+  UsersConnectionsServer(boost::asio::io_context &io_context)
+      : m_ioservice(io_context), m_acceptor(m_ioservice), m_connections() {}
 
   void handle_read(con_handle_t con_handle,
                    boost::system::error_code const &err,

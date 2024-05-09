@@ -4,6 +4,7 @@
 #include <boost/asio.hpp>
 #include <boost/bind.hpp>
 #include <cstdint>
+#include <fstream>
 #include <iostream>
 #include <list>
 #include <memory>
@@ -64,17 +65,17 @@ private:
                          std::istream response_stream(&response_);
                          std::string response;
                          std::getline(response_stream, response);
-                         std::cout << "Received response: " << response
-                                   << std::endl; // Для дебага
-                         // |
-                         // |
-                         // V
-                         // response - наши данные, которые мы получили
-                         // Здесь кладем в очередь / передаем во внешний метод -
-                         // этот этап в работе... Скорее всего, хотим сначала
-                         // прямо здесь проверить, получили ли вообще апдейт
-                         // Callback на обработку данных??? или прямой вызов
-                         // unpack_json прямо в этом потоке?
+                         // std::cout << "Received response: " << response.substr(0, 25) << std::endl; // Для дебага
+                         if(response != "Hello World!"){
+                          // std::ofstream file("output.json");
+                          // if (file.is_open()) {
+                          //     file << response;
+                          //     file.close();
+                          // } else {
+                          //     std::cerr << "Unable to open file";
+                          // }
+                          parsers_responses.enqueue(response);
+                         }
                          start_receive();
                        } else {
                          std::cerr

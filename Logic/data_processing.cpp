@@ -17,8 +17,16 @@ namespace p2p {
 //   void receive() {}
 // };
 
-void Analysis::analyze(Chains &chains, Orders &orders_for_buy, Orders &orders_for_sell,
-              MarketRates &market_rates) {
+void Analysis::analyze(Chains &chains, Orders &orders, MarketRates &market_rates) {
+  Orders orders_for_sell;
+  Orders orders_for_buy;
+  for (Order order : orders.list) {
+    if (order.type == "sell") {
+      orders_for_sell.list.push_back(order);
+    } else if (order.type == "buy") {
+      orders_for_buy.list.push_back(order);
+    }
+  }
   std::unordered_map<std::string, std::vector<Order>> sell_by_coin;
   for (Order sell : orders_for_sell.list) {
     sell_by_coin[sell.coin1].push_back(sell);

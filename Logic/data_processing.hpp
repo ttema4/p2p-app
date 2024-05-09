@@ -10,7 +10,7 @@ namespace p2p {
 // };
 
 struct Analysis {
-  void analyze(Chains &chains, Orders &orders_for_buy, Orders &orders_for_sell,MarketRates &market_rates);
+  void analyze(Chains &chains, Orders &orders, MarketRates &market_rates);
 };
 
 // struct DataSender {
