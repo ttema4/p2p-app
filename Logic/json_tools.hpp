@@ -16,10 +16,6 @@
 
 namespace p2p {
 
-// На данный момент метод unpack_json находится в разработке...
-// |
-// |
-// V
 void unpack_json(std::string parsers_response, Orders& orders, MarketRates& market_rates) {
   nlohmann::json j;
   try {
@@ -63,42 +59,38 @@ void unpack_json(std::string parsers_response, Orders& orders, MarketRates& mark
 }
 
 // На данный момент метод pack_json находится в разработке...
-void pack_json() {
-  // Chains chains;
-  // while(chains_analysis_to_sender.try_dequeue(chains)){
-  //   nlohmann::json j;
-  //   for(auto &chain : chains.list){
-  //     j.push_back({
-  //       {"buy", {
-  //         {"type", chain.buy.type},
-  //         {"id", chain.buy.id},
-  //         {"seller_rating", chain.buy.seller_rating},
-  //         {"coin1", chain.buy.coin1},
-  //         {"coin2", chain.buy.coin2},
-  //         {"bank", chain.buy.bank},
-  //         {"min_max", chain.buy.min_max},
-  //         {"exchange_rate", chain.buy.exchange_rate}
-  //       }},
-  //       {"change", {
-  //         {"coin1", chain.change.first},
-  //         {"coin2", chain.change.second}
-  //       }},
-  //       {"sell", {
-  //         {"type", chain.sell.type},
-  //         {"id", chain.sell.id},
-  //         {"seller_rating", chain.sell.seller_rating},
-  //         {"coin1", chain.sell.coin1},
-  //         {"coin2", chain.sell.coin2},
-  //         {"bank", chain.sell.bank},
-  //         {"min_max", chain.sell.min_max},
-  //         {"exchange_rate", chain.sell.exchange_rate}
-  //       }},
-  //       {"spread", chain.spread}
-  //     });
-  //   }
-  //   // j.dump() - наш апдейт, который теперь при очередном запросе клиента
-  //   можем отправить
-  // }
+std::string pack_json(Chains& chains) {
+  nlohmann::json j;
+  for (Chain chain : chains.list) {
+    nlohmann::json chain_json;
+    chain_json["buy"]["market"] = chain.buy.market;
+    chain_json["buy"]["type"] = chain.buy.type;
+    chain_json["buy"]["id"] = chain.buy.id;
+    chain_json["buy"]["seller_rating"] = chain.buy.seller_rating;
+    chain_json["buy"]["coin1"] = chain.buy.coin1;
+    chain_json["buy"]["coin2"] = chain.buy.coin2;
+    chain_json["buy"]["banks"] = chain.buy.banks;
+    chain_json["buy"]["min_max"] = chain.buy.min_max;
+    chain_json["buy"]["exchange_rate"] = chain.buy.exchange_rate;
+
+    chain_json["change"] = chain.change;
+
+    chain_json["sell"]["market"] = chain.sell.market;
+    chain_json["sell"]["type"] = chain.sell.type;
+    chain_json["sell"]["id"] = chain.sell.id;
+    chain_json["sell"]["seller_rating"] = chain.sell.seller_rating;
+    chain_json["sell"]["coin1"] = chain.sell.coin1;
+    chain_json["sell"]["coin2"] = chain.sell.coin2;
+    chain_json["sell"]["banks"] = chain.sell.banks;
+    chain_json["sell"]["min_max"] = chain.sell.min_max;
+    chain_json["sell"]["exchange_rate"] = chain.sell.exchange_rate;
+
+    chain_json["spread"] = chain.spread;
+
+    j.push_back(chain_json);
+  }
+  
+  return j.dump();
 }
 
 } // namespace p2p

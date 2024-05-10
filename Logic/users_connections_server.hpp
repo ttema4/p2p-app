@@ -11,8 +11,10 @@
 #include <thread>
 #include <unordered_map>
 #include <vector>
+
 // #include "src/nlohmann/json.hpp"
 // #include "concurrentqueue.h"
+#include "storage_structures.hpp"
 
 using namespace boost::asio;
 
@@ -46,11 +48,7 @@ public:
       std::getline(is, line);
       std::cout << "Message Received: " << line << std::endl; // Для дебага
       if (line == "need update") {
-        // Если получено "need update, проверяем наличие и отправляем либо "No
-        // updates\n", либо сам апдейт
-
-        std::shared_ptr<std::string> response =
-            std::make_shared<std::string>("No updates");
+        std::shared_ptr<std::string> response = std::make_shared<std::string>(up_to_date_version.get());
         auto handler =
             boost::bind(&UsersConnectionsServer::handle_write, this, con_handle,
                         response, boost::asio::placeholders::error);

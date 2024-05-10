@@ -22,6 +22,7 @@
 
 using namespace boost::asio;
 moodycamel::ConcurrentQueue<std::string> p2p::parsers_responses;
+p2p::SharedString p2p::up_to_date_version;
 
 namespace p2p {
 
@@ -64,6 +65,7 @@ void to_analysis(){
           std::cout << "Received empty response.\n";
           continue;
       }
+
       Analysis analysis;
       Chains chains;
       analysis.analyze(chains, orders, market_rates);
@@ -73,6 +75,8 @@ void to_analysis(){
       // for(auto &chain : chains.list){
       //   std::cout << "Buy: " << chain.buy.coin2 << ", " << chain.change.first << " -> " << chain.change.second<< ", Sell: " << chain.sell.coin2 << ", Spread: " << chain.spread << "%" << std::endl;
       // }
+
+      up_to_date_version.set(pack_json(chains));
 
     } else {
       std::this_thread::sleep_for(std::chrono::milliseconds(100)); // Пауза на 100 миллисекунд

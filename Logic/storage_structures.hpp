@@ -92,6 +92,8 @@ public:
     }
 };
 
+extern SharedString up_to_date_version;
+
 } // namespace p2p 
 
 #endif // STORAGE_STRUCTURES_HPP_
