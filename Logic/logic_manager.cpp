@@ -75,7 +75,12 @@ void to_analysis(){
       }
       Analysis analysis;
       Chains chains;
-      // analysis.analyze(chains, orders, market_rates);
+      analysis.analyze(chains, orders, market_rates);
+      // std::cout << "Chains size: " << chains.list.size() << std::endl;
+      // std::cout << "Chains:" << std::endl;
+      // for(auto &chain : chains.list){
+      //   std::cout << "Buy: " << chain.buy.coin2 << ", " << chain.change.first << " -> " << chain.change.second<< ", Sell: " << chain.sell.coin2 << ", Spread: " << chain.spread << "%" << std::endl;
+      // }
     } else {
       std::this_thread::sleep_for(std::chrono::milliseconds(100)); // Пауза на 100 миллисекунд
     }
