@@ -9,6 +9,7 @@
 #include <thread>
 #include <unordered_map>
 #include <vector>
+#include <shared_mutex>
 
 #include "include/concurrentqueue.h"
 
@@ -55,6 +56,7 @@ struct Chain {
   Order sell;
   long double spread;
 
+  Chain() = default;
   Chain(Order buy_, const std::pair<std::string, std::string> change_,
         Order sell_, long double spread_)
       : buy(buy_), change(change_), sell(sell_), spread(spread_) {}
@@ -70,10 +72,25 @@ struct Chains {
 
 extern moodycamel::ConcurrentQueue<std::string> parsers_responses;
 
-// В разработке...
-// moodycamel::ConcurrentQueue<Orders> orders_parser_to_analysis;
-// moodycamel::ConcurrentQueue<MarketRates> market_rates_parser_to_analysis;
-// moodycamel::ConcurrentQueue<Chains> chains_analysis_to_sender;
+class SharedString {
+private:
+    std::string str;
+    mutable std::shared_mutex mtx;
+
+public:
+    SharedString() = default;
+    SharedString(const std::string& initial_str) : str(initial_str) {}
+
+    std::string get() const {
+        std::shared_lock lock(mtx);
+        return str;
+    }
+
+    void set(const std::string& new_str) {
+        std::unique_lock lock(mtx);
+        str = new_str;
+    }
+};
 
 } // namespace p2p 
 

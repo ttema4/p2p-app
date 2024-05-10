@@ -25,10 +25,8 @@ moodycamel::ConcurrentQueue<std::string> p2p::parsers_responses;
 
 namespace p2p {
 
-// Запускаем в отдельном потоке из Main::run
 void raise_parser_connection_and_users_server(std::string parser_connection_ip,
                               uint16_t parser_connection_port, uint16_t users_server_port) {
-  // Поднимаем клиента для подключения к парсеру:
   boost::asio::io_context global_io_context;
   ip::tcp::resolver resolver(global_io_context);
   auto endpoints = resolver.resolve(parser_connection_ip, std::to_string(parser_connection_port));
@@ -37,14 +35,6 @@ void raise_parser_connection_and_users_server(std::string parser_connection_ip,
   users_server.listen(users_server_port);
   global_io_context.run();
 }
-
-// Запускаем в отдельном потоке из Main::run
-// void raise_users_server(uint16_t users_server_port) {
-//   // Поднимаем сервер для подключений клиентов:
-//   auto users_server = UsersConnectionsServer();
-//   users_server.listen(users_server_port);
-//   users_server.run();
-// }
 
 struct Main {
 
@@ -65,6 +55,7 @@ void to_analysis(){
     }
     if(has_new_responses){
       // std::cout << "Last response: " << last_response.substr(0, 25) << std::endl;
+
       Orders orders;
       MarketRates market_rates;
       if (!last_response.empty() && last_response[0] == '{') {
@@ -76,11 +67,13 @@ void to_analysis(){
       Analysis analysis;
       Chains chains;
       analysis.analyze(chains, orders, market_rates);
+
       // std::cout << "Chains size: " << chains.list.size() << std::endl;
       // std::cout << "Chains:" << std::endl;
       // for(auto &chain : chains.list){
       //   std::cout << "Buy: " << chain.buy.coin2 << ", " << chain.change.first << " -> " << chain.change.second<< ", Sell: " << chain.sell.coin2 << ", Spread: " << chain.spread << "%" << std::endl;
       // }
+
     } else {
       std::this_thread::sleep_for(std::chrono::milliseconds(100)); // Пауза на 100 миллисекунд
     }
