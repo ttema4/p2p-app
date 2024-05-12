@@ -9,7 +9,7 @@ Chain LocalClient::getFakeChain() {
     static std::vector<std::string> types {"BUY", "SELL"};
     static std::vector<std::string> ids {"https://docs.google.com/spreadsheets/u/0/d/1W2VigJfqsPFK12JuIj62l1kIaeJOE03xK-PTkzmMh2E/htmlview", "https://youtu.be/QMMgjjGugHE?si=PVyBYphuinGCxVun", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "https://youtu.be/MGkWSAnoDOI?si=IyLCYPO6QFl2-b-Y&t=330"};
     static std::vector<std::string> coins {"BTC", "ETH", "DOGY", "SOLU", "WLD", "COTI"};
-    static std::vector<std::string> banks {"Tinkoff", "Sber", "Alpha", "Qiwi", "SBP"};
+    static std::vector<std::string> banks {"Tinkoff", "Sber", "Alpha", "VTB", "SBP", "Raif", "Gasprom"};
     static std::vector<std::string> markets {"ByBit", "BitPapa", "Binance", "Telegram"};
 
 
@@ -19,7 +19,7 @@ Chain LocalClient::getFakeChain() {
     double fake_rating1 = (double)(gen() % 500) / 100;
     std::string fake_coin11 = "USDT";
     std::string fake_coin21 = coins[gen() % coins.size()];
-    std::string fake_bank1 = banks[gen() % banks.size()];
+    std::vector<std::string> fake_bank1 = std::vector<std::string>{(banks[gen() % banks.size()])};
     std::pair<int, int> fake_min_max1 = {gen() % 100, gen() % 1000000 + 100};
     double fake_exchange_rate1 = (double)(gen() % 1000000) / 100;
 
@@ -31,7 +31,7 @@ Chain LocalClient::getFakeChain() {
     double fake_rating2 = (double)(gen() % 500) / 100;;
     std::string fake_coin12 = "USDT";
     std::string fake_coin22 = coins[gen() % coins.size()];
-    std::string fake_bank2 = banks[gen() % banks.size()];
+    std::vector<std::string> fake_bank2 = std::vector<std::string>{(banks[gen() % banks.size()])};
     std::pair<int, int> fake_min_max2 = {gen() % 100, gen() % 1000000 + 100};
     double fake_exchange_rate2 = (double)(gen() % 1000000) / 100;
 
@@ -121,6 +121,7 @@ void ServerClient::do_connect(const boost::asio::ip::tcp::resolver::results_type
     boost::system::error_code ec;
     boost::asio::connect(socket, endpoints, ec);
     if (ec) {
+        qDebug() << ec.what();
         throw QException();
     }
 }
@@ -142,6 +143,7 @@ bool DataReciever::init() {
         try {
             boost::asio::ip::tcp::resolver resolver(io_context);
             auto endpoints = resolver.resolve(SERVER_IP, std::to_string(SERVER_PORT));
+            qDebug() << "SUCCESS";
             client = new ServerClient(io_context, endpoints);
             qDebug() << "Успешное подключение";
         } catch (QException e) {
@@ -157,7 +159,8 @@ bool DataReciever::init() {
 }
 
 void DataReciever::recieveNewChain(QString str) {
-    if (str != "No updates\r") {
+    if (str != "No updates\r" && str != "Hello World!") {
+        qDebug() << str;
         QVector<Chain> chains = nlohmann::json::parse(str.toStdString()).get<QVector<Chain>>();
         emit dataParsed(chains);
     } else {

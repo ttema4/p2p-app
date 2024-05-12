@@ -28,7 +28,7 @@ TableSpreadWidget::TableSpreadWidget(double spread, QWidget *parent) : QWidget(p
     layout->setSpacing(0);
 
     QLabel *label = new QLabel();
-    label->setText(QString::number(spread) + "%");
+    label->setText(QString::number(spread, 'f', 2) + "%");
     label->setFixedSize(50, 27);
     label->setAlignment(Qt::AlignCenter);
     layout->addWidget(label);
@@ -60,78 +60,108 @@ TableOrderWidget::TableOrderWidget(Order& ord, QWidget *parent) : QWidget(parent
         {"Tinkoff", "://resourses/bank_icons/Tink_bank.svg"},
         {"Sber", "://resourses/bank_icons/Sber_bank.svg"},
         {"Alpha", "://resourses/bank_icons/Alpha_bank.svg"},
-        {"Qiwi", "://resourses/bank_icons/QIWI_bank.svg"},
-        {"SBP", "://resourses/bank_icons/SBP_bank.svg"}
+        {"Gasprom", "://resourses/bank_icons/Gasprom_bank.svg"},
+        {"SBP", "://resourses/bank_icons/SBP_bank.svg"},
+        {"Raif", "://resourses/bank_icons/Raf_bank.svg"},
+        {"VTB", "://resourses/bank_icons/VTB_bank.svg"}
     };
 
     QGridLayout *layout = new QGridLayout(this);
     layout->setContentsMargins(0, 2, 0, 2);
-    layout->setVerticalSpacing(2);
-
-
-    QFrame *verticalLine = new QFrame();
-    verticalLine->setFrameStyle(QFrame::VLine);
-    verticalLine->setStyleSheet("QFrame { color: darkgrey; }");
-    layout->addWidget(verticalLine, 0, 0, 2, 1);
+    layout->setVerticalSpacing(1);
 
     QLabel *label_1 = new QLabel();
-    label_1->setFixedSize(25, 25);
+    label_1->setFixedSize(27, 27);
     label_1->setAlignment(Qt::AlignCenter);
 
-    QIcon icon(includeMap[ord.bank]);
-    QPixmap pixmap = icon.pixmap(QSize(17, 17));
+    QIcon icon(includeMap[ord.banks[0]]);
+    QPixmap pixmap = icon.pixmap(QSize(18, 18));
     label_1->setPixmap(pixmap);
 
-    label_1->setStyleSheet(
-        "background-color: rgba(128, 128, 128, 30); "
-        "border-radius: 4px; "
-        );
-    layout->addWidget(label_1, 0, 1, 2, 1);
+    label_1->setStyleSheet("background-color: rgba(128, 128, 128, 30); border-radius: 4px; ");
+    layout->addWidget(label_1, 0, 0, 2, 1);
 
     QLabel *label_2 = new QLabel(QString::fromStdString(ord.coin2));
-    label_2->setMinimumSize(0, 25);
-    label_2->setStyleSheet("font-size: 18px;");
+    label_2->setMinimumSize(0, 23);
+    label_2->setStyleSheet("font-size: 17px;");
     label_2->setAlignment(Qt::AlignLeft|Qt::AlignBottom);
-    layout->addWidget(label_2, 0, 2);
+    layout->addWidget(label_2, 0, 1);
 
-    QLabel *label_3 = new QLabel(QString::fromStdString(ord.market) + ", " + QString::fromStdString(ord.bank));
-    label_3->setMinimumSize(0, 25);
-    label_3->setStyleSheet("font-size: 10px; font-weight: light;");
+    QLabel *label_3 = new QLabel(QString::fromStdString(ord.market) + " • " + QString::fromStdString(ord.banks[0]) + (ord.banks.size() > 1 ? QString("(+%1)").arg(ord.banks.size() - 1) : ""));
+    label_3->setMinimumSize(0, 15);
+    label_3->setStyleSheet("font-size: 10px; font-weight: light; color: grey; ");
     label_3->setAlignment(Qt::AlignLeft|Qt::AlignTop);
-    layout->addWidget(label_3, 1, 2);
+    layout->addWidget(label_3, 1, 1);
 
     QSpacerItem *horizontalSpacer = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Preferred);
-    layout->addItem(horizontalSpacer, 0, 3, 2, 1);
+    layout->addItem(horizontalSpacer, 0, 2, 2, 1);
 
     QLabel *label_4 = new QLabel(QString::number(ord.exchange_rate, 'f', 2));
     label_4->setMinimumSize(0, 25);
-    label_4->setStyleSheet("font-size: 18px;");
+    label_4->setStyleSheet("font-size: 17px;");
     label_4->setAlignment(Qt::AlignRight|Qt::AlignBottom);
-    layout->addWidget(label_4, 0, 4);
+    layout->addWidget(label_4, 0, 3);
 
     QLabel *label_5 = new QLabel(QString::fromStdString(ord.coin1) + "/1 " + QString::fromStdString(ord.coin2));
-    label_5->setMinimumSize(0, 25);
-    label_5->setStyleSheet("font-size: 10px; font-weight: light;");
+    label_5->setMinimumSize(0, 15);
+    label_5->setStyleSheet("font-size: 8px; font-weight: 500; color: grey; ");
     label_5->setAlignment(Qt::AlignRight|Qt::AlignTop);
-    layout->addWidget(label_5, 1, 4);
+    layout->addWidget(label_5, 1, 3);
+
+};
+
+TableCellWidget::TableCellWidget(Chain ch, int ind, QWidget *parent) {
+    QHBoxLayout *layout = new QHBoxLayout(this);
+    layout->setContentsMargins(0, 4, 0, 4);
+    layout->setSpacing(8);
+
+    QFrame *verticalLine1 = new QFrame();
+    verticalLine1->setFrameStyle(QFrame::VLine);
+    verticalLine1->setStyleSheet("QFrame { color: lightgrey; }");
 
     QFrame *verticalLine2 = new QFrame();
     verticalLine2->setFrameStyle(QFrame::VLine);
-    verticalLine2->setStyleSheet("QFrame { color: darkgrey; }");
-    layout->addWidget(verticalLine2, 0, 5, 2, 1);
+    verticalLine2->setStyleSheet("QFrame { color: lightgrey; }");
 
+    QFrame *verticalLine3 = new QFrame();
+    verticalLine3->setFrameStyle(QFrame::VLine);
+    verticalLine3->setStyleSheet("QFrame { color: lightgrey; }");
+
+    QFrame *verticalLine4 = new QFrame();
+    verticalLine4->setFrameStyle(QFrame::VLine);
+    verticalLine4->setStyleSheet("QFrame { color: lightgrey; }");
+
+    layout->addWidget(new TableIndexWidget(ind + 1));
+    layout->addWidget(verticalLine1);
+    layout->addWidget(new TableOrderWidget(ch.buy));
+    layout->addWidget(verticalLine2);
+    layout->addWidget(new TableChangeWidget(ch.change));
+    layout->addWidget(verticalLine3);
+    layout->addWidget(new TableOrderWidget(ch.sell));
+    layout->addWidget(verticalLine4);
+    layout->addWidget(new TableSpreadWidget(ch.spread));
 };
+
+void TableCellWidget::resizeEvent(QResizeEvent *event) {
+    double width = this->width();
+    this->layout()->itemAt(0)->widget()->setFixedWidth(std::round(width * 0.04));
+    this->layout()->itemAt(2)->widget()->setFixedWidth(std::round(width * 0.29));
+    this->layout()->itemAt(4)->widget()->setFixedWidth(std::round(width * 0.16));
+    this->layout()->itemAt(6)->widget()->setFixedWidth(std::round(width * 0.29));
+    this->layout()->itemAt(8)->widget()->setFixedWidth(std::round(width * 0.1));
+    QWidget::resizeEvent(event);
+}
 
 ChainTableView::ChainTableView(QWidget *parent) : QWidget{parent} {
     sortType = SortType::none;
 
     QFont font;
     font.setPointSize(12);
-    font.setBold(true);
+    font.setWeight(QFont::DemiBold);
 
     QVBoxLayout *layout = new QVBoxLayout(this);
     layout->setContentsMargins(10, 0, 5, 5);
-    layout->setSpacing(0);
+    layout->setSpacing(5);
 
     header = new QTableWidget();
     header->verticalHeader()->hide();
@@ -179,7 +209,7 @@ ChainTableView::ChainTableView(QWidget *parent) : QWidget{parent} {
     table->verticalHeader()->hide();
     table->horizontalHeader()->hide();
     table->setRowCount(30);
-    table->setColumnCount(5);
+    table->setColumnCount(1);
 
     table->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     table->horizontalScrollBar()->setDisabled(true);
@@ -190,14 +220,13 @@ ChainTableView::ChainTableView(QWidget *parent) : QWidget{parent} {
     layout->addWidget(table);
 
     header->setShowGrid(false);
-    header->setStyleSheet("QTableWidget{background-color: #ececec; border: none;} QTableWidget::item { background-color: #ececec; }");
+    header->setStyleSheet("QTableWidget{background-color: #e4e4e4; border: none; border-radius: 10px; } QTableWidget::item { background-color: #e4e4e4; border-radius: 10px; }");
     table->setShowGrid(false);
-    table->setStyleSheet("QTableWidget{background-color: #ececec; border: none;} QTableWidget::item { background-color: #fefefe; margin-top: 5px;}");
+    table->setStyleSheet("QTableWidget{background-color: #ececec; border: none; } QTableWidget::item { background-color: #fbfbfb; margin-top: 5px; border-radius: 10px; }");
+
 
     connect(header, &QTableWidget::cellClicked, this, &ChainTableView::onHeaderCellClicked);
     connect(table, &QTableWidget::cellClicked, this, &ChainTableView::onTableCellClicked);
-
-
 }
 
 void ChainTableView::onTableCellClicked(int row, int col) {
@@ -205,23 +234,21 @@ void ChainTableView::onTableCellClicked(int row, int col) {
 }
 
 void ChainTableView::onHeaderCellClicked(int row, int col) {
-    if (row == 0 && col == 0) {
-        switch(sortType) {
-        case SortType::none:
-            header->itemAt(0, 0)->setIcon(QIcon("://resourses/icons/sort-up.png"));
-            sortType = SortType::up;
-            break;
-        case SortType::up:
-            header->itemAt(0, 0)->setIcon(QIcon("://resourses/icons/sort-down.png"));
-            sortType = SortType::down;
-            break;
-        case SortType::down:
-            header->itemAt(0, 0)->setIcon(QIcon("://resourses/icons/sort.png"));
-            sortType = SortType::none;
-            break;
-        }
-        setData(chains);
+    switch(sortType) {
+    case SortType::none:
+        header->itemAt(0, 0)->setIcon(QIcon("://resourses/icons/sort-up.png"));
+        sortType = SortType::up;
+        break;
+    case SortType::up:
+        header->itemAt(0, 0)->setIcon(QIcon("://resourses/icons/sort-down.png"));
+        sortType = SortType::down;
+        break;
+    case SortType::down:
+        header->itemAt(0, 0)->setIcon(QIcon("://resourses/icons/sort.png"));
+        sortType = SortType::none;
+        break;
     }
+    setData(chains);
 }
 
 void ChainTableView::setData(QVector<Chain> &data) {
@@ -244,27 +271,19 @@ void ChainTableView::setData(QVector<Chain> &data) {
 
     table->setRowCount(chains.count());
     for (int i = 0; i < int(chains.size()); i++) {
-        table->setCellWidget(i, 0, new TableIndexWidget(i + 1));
-        table->setCellWidget(i, 1, new TableOrderWidget(chains[i].buy));
-        table->setCellWidget(i, 2, new TableChangeWidget(chains[i].change));
-        table->setCellWidget(i, 3, new TableOrderWidget(chains[i].sell));
-        table->setCellWidget(i, 4, new TableSpreadWidget(chains[i].spread));
-        table->setRowHeight(i, 65);
+        table->setCellWidget(i, 0, new TableCellWidget(chains[i], i));
+        table->setRowHeight(i, 60);
     }
 };
 
-void ChainTableView::resizeTable(QTableWidget *table) {
-    double width = table->width();
-    table->setColumnWidth(0, std::round(width * 0.04));
-    table->setColumnWidth(1, std::round(width * 0.34));
-    table->setColumnWidth(2, std::round(width * 0.18));
-    table->setColumnWidth(3, std::round(width * 0.34));
-    table->setColumnWidth(4, std::round(width * 0.10));
-}
-
 void ChainTableView::resizeTable() {
-    resizeTable(header);
-    resizeTable(table);
+    double width = header->width();
+    header->setColumnWidth(0, std::round(width * 0.04));
+    header->setColumnWidth(1, std::round(width * 0.34));
+    header->setColumnWidth(2, std::round(width * 0.18));
+    header->setColumnWidth(3, std::round(width * 0.34));
+    header->setColumnWidth(4, std::round(width * 0.075));
+    table->setColumnWidth(0, table->width());
 }
 
 void ChainTableView::resizeEvent(QResizeEvent *event) {

@@ -65,10 +65,10 @@
         <number>5</number>
        </property>
        <property name="topMargin">
-        <number>5</number>
+        <number>10</number>
        </property>
        <property name="rightMargin">
-        <number>5</number>
+        <number>22</number>
        </property>
        <property name="bottomMargin">
         <number>5</number>

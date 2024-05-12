@@ -10,7 +10,7 @@ HeaderMenu::HeaderMenu(QString center_text_, QWidget *parent) : QWidget{parent} 
     QHBoxLayout *layout = new QHBoxLayout(this);
     layout->setContentsMargins(15, 15, 15, 15);
 
-    logo_button = new QPushButton();
+    logo_button = new QPushButton(this);
     logo_button->setObjectName("logoButton");
     /*logo_button->setStyleSheet("QPushButton { border-image: url(:/resourses/icons/app-logo-4.png); }"
                                "QPushButton:!pressed { background-color: transparent; }"
@@ -29,7 +29,7 @@ HeaderMenu::HeaderMenu(QString center_text_, QWidget *parent) : QWidget{parent} 
     status_text = new QLabel("Ваш id: " + QString::number(CurUser::getInstance().getId()));
     status_text->hide();
     layout->addWidget(status_text);
-    menu_button = new QPushButton();
+    menu_button = new QPushButton(this);
     menu_button->setFixedSize(QSize(40, 30));
     menu_button->setObjectName("menuButton");
     layout->addWidget(menu_button);
@@ -108,9 +108,17 @@ void HeaderMenu::showMenu() {
 }
 
 void HeaderMenu::showEvent(QShowEvent *event) {
+    logo_button->style()->unpolish(logo_button);
+    logo_button->style()->polish(logo_button);
+
     status_text->setText("Ваш id: " + QString::number(CurUser::getInstance().getId()));
     button1->updateLayout();
     QWidget::showEvent(event);
+}
+
+void HeaderMenu::hideEvent(QHideEvent *event) {
+    // this->setStyleSheet("");
+    QWidget::hideEvent(event);
 }
 
 void HeaderMenu::resizeEvent(QResizeEvent *event) {

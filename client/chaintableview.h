@@ -43,6 +43,15 @@ public:
     TableSpreadWidget(double spread, QWidget *parent = nullptr);
 };
 
+class TableCellWidget : public QWidget {
+    Q_OBJECT
+public:
+    TableCellWidget(Chain ch, int ind, QWidget *parent = nullptr);
+
+protected:
+    void resizeEvent(QResizeEvent *event) override;
+};
+
 class ChainTableView : public QWidget {
     Q_OBJECT
 public:
@@ -59,7 +68,6 @@ protected:
 private:
     void onTableCellClicked(int row, int col);
     void onHeaderCellClicked(int row, int col);
-    void resizeTable(QTableWidget *table);
 
     QTableWidget *header;
     QTableWidget *table;

@@ -5,7 +5,7 @@
 #define USE_SERVER false
 
 #define SERVER_IP "localhost"
-#define SERVER_PORT 12345
+#define SERVER_PORT 12346
 
 #define CHECK_UPDATE_INTERVAL 5
 

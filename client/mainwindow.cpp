@@ -34,11 +34,17 @@ void MainWindow::showFilters() {
 }
 
 void MainWindow::chainMonitorHide() {
+    foreach (QWidget *widget, this->findChildren<QWidget*>()) {
+        widget->setEnabled(true);
+    }
     chainMonitorOpen = false;
 }
 
 void MainWindow::onCellClicked(Chain &chain) {
     if (chainMonitorOpen) { chainmonitor->close(); return; }
+    foreach (QWidget *widget, this->findChildren<QWidget*>()) {
+        widget->setEnabled(false);
+    }
     chainmonitor = new ChainMonitor(this, chain);
     chainmonitor->move(QPoint(this->size().width() / 2 - chainmonitor->size().width() / 2, this->size().height() / 2 - chainmonitor->size().height() / 2));
     chainmonitor->setWindowModality(Qt::ApplicationModal);
@@ -71,17 +77,11 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event) {
                 return true;
             }
         }
-        return false;
     }
-    if (chainMonitorOpen) {
-        if(event->type() == QMouseEvent::MouseButtonPress) {
-            chainmonitor->close();
-            return true;
-        } else if (event->type() == QTabletEvent::Resize) {
-            chainmonitor->remove();
-            return true;
-        }
-        return false;
+
+    if (chainMonitorOpen && event->type() == QInputEvent::Resize) {
+        chainmonitor->remove();
+        return true;
     }
     return false;
 }
@@ -91,6 +91,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     ui->setupUi(this);
     this->setFocus();
+
+    // const QPalette palet(QColor("#f8fafc"));
+    // this->setPalette(palet);
+    // this->setAutoFillBackground(true);
 
     menu = new HeaderMenu("Актуальные P2P-связки", ui->widget_3->parentWidget());
     ui->widget_3->parentWidget()->layout()->replaceWidget(ui->widget_3, menu);
@@ -159,6 +163,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
 void MainWindow::resizeEvent(QResizeEvent *e) {
     menu->resizeMenu();
+
     QMainWindow::resizeEvent(e);
 }
 

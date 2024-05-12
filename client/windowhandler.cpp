@@ -45,8 +45,6 @@ void WindowHandler::init2() {
     connect(homepage, &MainWindow::settingsPage, this, &WindowHandler::open_settingspage);
 
     connect(mypage, &MyPage::homePage, this, &WindowHandler::open_homepage);
-    connect(mypage, &MyPage::loginPage, this, &WindowHandler::open_loginpage);
-    connect(mypage, &MyPage::registerPage, this, &WindowHandler::open_registerpage);
     connect(mypage, &MyPage::notifyPage, this, &WindowHandler::open_notifypage);
     connect(mypage, &MyPage::favouritePage, this, &WindowHandler::open_favouritepage);
     connect(mypage, &MyPage::settingsPage, this, &WindowHandler::open_settingspage);
