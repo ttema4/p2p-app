@@ -30,6 +30,7 @@ public:
     }
 
     void showEvent(QShowEvent *event) override;
+    void hideEvent(QHideEvent *event) override;
 protected:
     void resizeEvent(QResizeEvent *event) override;
 

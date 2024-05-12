@@ -7,7 +7,7 @@
 WindowHandler::WindowHandler(QWidget *parent) : QMainWindow(parent), ui(new Ui::WindowHandler) {
     ui->setupUi(this);
     ui->label->setStyleSheet("image: url(:/resourses/icons/app-logo-3.png);");
-    QTimer::singleShot(1000, this, &WindowHandler::init);
+    QTimer::singleShot(100, this, &WindowHandler::init);
 }
 
 void WindowHandler::init() {
@@ -17,7 +17,7 @@ void WindowHandler::init() {
         return;
     }
     ui->label_2->setText("Подключение к серверу... ✅\nПодключение к БД...");
-    QTimer::singleShot(1000, this, &WindowHandler::init2);
+    QTimer::singleShot(100, this, &WindowHandler::init2);
 }
 
 void WindowHandler::init2() {
@@ -45,8 +45,6 @@ void WindowHandler::init2() {
     connect(homepage, &MainWindow::settingsPage, this, &WindowHandler::open_settingspage);
 
     connect(mypage, &MyPage::homePage, this, &WindowHandler::open_homepage);
-    connect(mypage, &MyPage::loginPage, this, &WindowHandler::open_loginpage);
-    connect(mypage, &MyPage::registerPage, this, &WindowHandler::open_registerpage);
     connect(mypage, &MyPage::notifyPage, this, &WindowHandler::open_notifypage);
     connect(mypage, &MyPage::favouritePage, this, &WindowHandler::open_favouritepage);
     connect(mypage, &MyPage::settingsPage, this, &WindowHandler::open_settingspage);
@@ -94,7 +92,7 @@ void WindowHandler::windowChanger(QMainWindow *toOpen) {
     toOpen->show();
     toOpen->setGeometry(currentpage->geometry());
     currentpage->hide();
-    if (toOpen == homepage) homepage->resizeTable();
+    // if (toOpen == homepage) homepage->resizeTable();
     currentpage = toOpen;
 }
 

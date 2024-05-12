@@ -9,7 +9,8 @@
 #include "favouritepage.h"
 #include "settingspage.h"
 #include "datareciever.h"
-#include "logic_fwd.hpp"
+#include "chaintableview.h"
+#include "logic_fwd.h"
 #include "chainmonitor.h"
 
 #include <QMainWindow>
@@ -68,7 +69,7 @@ private:
     void showFilters();
     void filterHidden();
 
-    void onCellClicked(int row, int column);
+    void onCellClicked(Chain &chain);
     void chainMonitorHide();
 
 
@@ -89,6 +90,7 @@ private:
     QTimer *timer;
     QTime *time;
 
+    ChainTableView *chainTable;
     bool chainMonitorOpen;
     Ui::MainWindow *ui;
 };

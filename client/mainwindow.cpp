@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "mainwindow_fwd.hpp"
+#include "chaintableview.h"
 #include <QWidget>
 #include <QResizeEvent>
 #include <QDebug>
@@ -34,14 +34,18 @@ void MainWindow::showFilters() {
 }
 
 void MainWindow::chainMonitorHide() {
+    foreach (QWidget *widget, this->findChildren<QWidget*>()) {
+        widget->setEnabled(true);
+    }
     chainMonitorOpen = false;
 }
 
-void MainWindow::onCellClicked(int row, int column) {
+void MainWindow::onCellClicked(Chain &chain) {
     if (chainMonitorOpen) { chainmonitor->close(); return; }
-    if (row == 0) return;
-    // qDebug() << "Cell clicked at row" << row << "and column" << column;
-    chainmonitor = new ChainMonitor(this, chains[row - 1]);
+    foreach (QWidget *widget, this->findChildren<QWidget*>()) {
+        widget->setEnabled(false);
+    }
+    chainmonitor = new ChainMonitor(this, chain);
     chainmonitor->move(QPoint(this->size().width() / 2 - chainmonitor->size().width() / 2, this->size().height() / 2 - chainmonitor->size().height() / 2));
     chainmonitor->setWindowModality(Qt::ApplicationModal);
     chainMonitorOpen = true;
@@ -56,49 +60,8 @@ void MainWindow::updateTable(QVector<Chain> new_chains) {
     timer->start(1000);
 
     chains = std::move(new_chains);
-    ui->tableWidget->setRowCount(chains.size() + 1);
+    chainTable->setData(chains);
 
-    for (int i = 1; i <= chains.size(); i++) {
-        Chain new_chain = chains[i - 1];
-
-        ui->tableWidget->setItem(i, 0, new QTableWidgetItem(QString((new_chain.buy.coin1 + "/" + new_chain.buy.coin2).c_str())));
-
-        QTableWidgetItem* bank1 = new QTableWidgetItem;
-        bank1->setIcon(QIcon(include_map[new_chain.buy.bank].c_str()));
-        bank1->setToolTip(QString((new_chain.buy.bank).c_str()));;
-        ui->tableWidget->setItem(i, 1, bank1);
-
-        ui->tableWidget->setItem(i, 2, new QTableWidgetItem(QString(tr("%1").arg((double)new_chain.buy.exchange_rate))));
-
-        QTableWidgetItem* change = new QTableWidgetItem(QString(new_chain.change.first != new_chain.change.second ? (new_chain.change.first + " -> " + new_chain.change.second).c_str() : "—"));
-        change->setTextAlignment(Qt::AlignCenter) ;
-        ui->tableWidget->setItem(i, 3, change);
-
-        ui->tableWidget->setItem(i, 4, new QTableWidgetItem(QString((new_chain.sell.coin1 + "/" + new_chain.sell.coin2).c_str())));
-
-        QTableWidgetItem* bank2 = new QTableWidgetItem;
-        bank2->setIcon(QIcon(include_map[new_chain.sell.bank].c_str()));
-        bank2->setToolTip(QString((new_chain.sell.bank).c_str()));
-        ui->tableWidget->setItem(i, 5, bank2);
-
-        ui->tableWidget->setItem(i, 6, new QTableWidgetItem(QString(tr("%1").arg((double)new_chain.sell.exchange_rate))));
-
-        QTableWidgetItem* spread = new QTableWidgetItem(QString(tr("%1%").arg((double)new_chain.spread)));
-        spread->setTextAlignment(Qt::AlignCenter);
-        ui->tableWidget->setItem(i, 7, spread);
-    }
-}
-
-void MainWindow::resizeTable() {
-    int width = ui->tableWidget->width();
-    ui->tableWidget->setColumnWidth(0, std::round(width * 0.17));
-    ui->tableWidget->setColumnWidth(1, std::round(width * 0.04));
-    ui->tableWidget->setColumnWidth(2, std::round(width * 0.15));
-    ui->tableWidget->setColumnWidth(3, std::round(width * 0.19));
-    ui->tableWidget->setColumnWidth(4, std::round(width * 0.17));
-    ui->tableWidget->setColumnWidth(5, std::round(width * 0.04));
-    ui->tableWidget->setColumnWidth(6, std::round(width * 0.15));
-    ui->tableWidget->setColumnWidth(7, std::round(width * 0.09));
 }
 
 bool MainWindow::eventFilter(QObject *target, QEvent *event) {
@@ -107,9 +70,6 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event) {
             if(event->type() == QTabletEvent::InputMethodQuery) {
                 menu->showMenu();
                 return true;
-            } else if (event->type() == QTabletEvent::Resize) {
-                resizeTable();
-                return true;
             }
         } else {
             if(event->type() == QMouseEvent::MouseButtonPress) {
@@ -117,24 +77,11 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event) {
                 return true;
             }
         }
-        return false;
     }
-    if (chainMonitorOpen) {
-        if(event->type() == QMouseEvent::MouseButtonPress) {
-            chainmonitor->close();
-            return true;
-        } else if (event->type() == QTabletEvent::Resize) {
-            resizeTable();
-            chainmonitor->remove();
-            return true;
-        }
-        return false;
-    }
-    if (target->objectName() == "tableWidget") {
-        if(event->type() == QTabletEvent::Resize) {
-            resizeTable();
-            return true;
-        }
+
+    if (chainMonitorOpen && event->type() == QInputEvent::Resize) {
+        chainmonitor->remove();
+        return true;
     }
     return false;
 }
@@ -142,21 +89,22 @@ bool MainWindow::eventFilter(QObject *target, QEvent *event) {
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     chainMonitorOpen = false;
 
-
-    // const QPalette palet(QColor("#e7e9e4"));
-    // this->setPalette(palet);
-    // this->setAutoFillBackground(true);
-
-
     ui->setupUi(this);
     this->setFocus();
+
+    // const QPalette palet(QColor("#f8fafc"));
+    // this->setPalette(palet);
+    // this->setAutoFillBackground(true);
 
     menu = new HeaderMenu("Актуальные P2P-связки", ui->widget_3->parentWidget());
     ui->widget_3->parentWidget()->layout()->replaceWidget(ui->widget_3, menu);
 
+    chainTable = new ChainTableView(ui->widget_4->parentWidget());
+    ui->widget_4->parentWidget()->layout()->replaceWidget(ui->widget_4, chainTable);
+
     menu->installEventFilter(this);
     ui->pushButton->installEventFilter(this);
-    ui->tableWidget->installEventFilter(this);
+    // ui->tableWidget->installEventFilter(this);
     ui->centralwidget->installEventFilter(this);
     ui->checkBox->installEventFilter(this);
     ui->checkBox_2->installEventFilter(this);
@@ -190,36 +138,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         animation->setEndValue(ui->widget_2->maximumWidth());
     }
 
-
-    // Настройка таблицы
-    ui->tableWidget->verticalHeader()->hide();
-    ui->tableWidget->horizontalHeader()->hide();
-    ui->tableWidget->setRowCount(1);
-    ui->tableWidget->setColumnCount(8);
-
-    QTableWidgetItem* header0 = new QTableWidgetItem(QString("Покупка на P2P"));
-    header0->setTextAlignment(Qt::AlignCenter) ;
-    ui->tableWidget->setItem(0, 0, header0);
-
-    ui->tableWidget->setSpan(0, 0, 1, 3);
-
-    QTableWidgetItem* header3 = new QTableWidgetItem(QString("Обмен на споте"));
-    header3->setTextAlignment(Qt::AlignCenter) ;
-    ui->tableWidget->setItem(0, 3, header3);
-
-    QTableWidgetItem* header4 = new QTableWidgetItem(QString("Продажа на P2P"));
-    header4->setTextAlignment(Qt::AlignCenter) ;
-    ui->tableWidget->setItem(0, 4, header4);
-
-    ui->tableWidget->setSpan(0, 4, 1, 3);
-
-    QTableWidgetItem* header7 = new QTableWidgetItem(QString("Спред"));
-    header7->setTextAlignment(Qt::AlignCenter) ;
-    ui->tableWidget->setItem(0, 7, header7);
-
-    connect(ui->tableWidget, &QTableWidget::cellClicked, this, &MainWindow::onCellClicked);
-    // connect(ui->pushButton_2, &QPushButton::clicked, this, &MainWindow::updateTable);
-
+    connect(chainTable, &ChainTableView::cellClicked, this, &MainWindow::onCellClicked);
 
     timer = new QTimer(this);
     time = new QTime(0, 0, 0);
@@ -244,6 +163,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
 void MainWindow::resizeEvent(QResizeEvent *e) {
     menu->resizeMenu();
+
     QMainWindow::resizeEvent(e);
 }
 

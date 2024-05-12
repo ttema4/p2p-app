@@ -13,14 +13,11 @@ MyPage::MyPage(QWidget *parent) : QMainWindow(parent), ui(new Ui::MyPage) {
     ui->widget_2->parentWidget()->layout()->replaceWidget(ui->widget_2, menu);
 
     connect(menu, &HeaderMenu::homePage, this, &MyPage::homePage);
-    connect(menu, &HeaderMenu::loginPage, this, &MyPage::loginPage);
     connect(menu, &HeaderMenu::notifyPage, this, &MyPage::notifyPage);
     connect(menu, &HeaderMenu::favouritePage, this, &MyPage::favouritePage);
     connect(menu, &HeaderMenu::settingsPage, this, &MyPage::settingsPage);
 
     connect(ui->pushButton, &QPushButton::clicked, this, &MyPage::exitAccount);
-    connect(ui->pushButton_3, &QPushButton::clicked, this, &MyPage::loginPage);
-    connect(ui->pushButton_2, &QPushButton::clicked, this, &MyPage::registerPage);
     connect(ui->pushButton_4, &QPushButton::clicked, this, &MyPage::openFileAndSetPixmap);
     connect(ui->pushButton_5, &QPushButton::clicked, this, &MyPage::deleteAvatar);
     connect(ui->pushButton_6, &QPushButton::clicked, this, &MyPage::deleteAccount);
