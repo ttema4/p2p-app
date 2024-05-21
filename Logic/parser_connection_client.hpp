@@ -34,26 +34,24 @@ public:
 
 private:
   void start_check_updates() {
-    check_timer.expires_after(
-        std::chrono::seconds(1)); // Проверяем обновления каждую секунду
+    check_timer.expires_after(std::chrono::seconds(1));
     check_timer.async_wait([this](boost::system::error_code ec) {
       if (!ec) {
-        send_request(
-            "need update"); // Запрос, по которому парсер присылает обновление,
-                            // либо говорит о его отсутствии
+        send_request("need update");
         start_check_updates();
       }
     });
   }
 
   void send_request(const std::string &request) {
-    std::cout << "Sending request: " << request << std::endl; // Для дебага
+    if(PARSER_LOGS_ON){
+      std::cout << "PARSER'S CLIENT: Sending request: " << request << std::endl;
+    }
     async_write(socket_, buffer(request + '\n'),
                 [this](boost::system::error_code ec, std::size_t /*length*/) {
                   if (ec) {
-                    std::cerr << "Error sending request: " << ec.message()
-                              << std::endl; // Возможно, здесь будет более умная
-                                            // обработка ошибок
+                    std::cerr << "PARSER'S CLIENT: Error sending request: " << ec.message()
+                              << std::endl;
                   }
                 });
   }
@@ -65,23 +63,14 @@ private:
                          std::istream response_stream(&response_);
                          std::string response;
                          std::getline(response_stream, response);
-                         // std::cout << "Received response: " << response.substr(0, 25) << std::endl; // Для дебага
                          if(response != "Hello World!"){
-                          // std::ofstream file("output.json");
-                          // if (file.is_open()) {
-                          //     file << response;
-                          //     file.close();
-                          // } else {
-                          //     std::cerr << "Unable to open file";
-                          // }
                           parsers_responses.enqueue(response);
                          }
                          start_receive();
                        } else {
                          std::cerr
-                             << "Error receiving response: " << ec.message()
-                             << std::endl; // Возможно, здесь будет более умная
-                                           // обработка ошибок
+                             << "PARSER'S CLIENT: Error receiving response: " << ec.message()
+                             << std::endl;
                        }
                      });
   }
@@ -90,14 +79,14 @@ private:
     async_connect(socket_, endpoints,
                   [this](boost::system::error_code ec, ip::tcp::endpoint) {
                     if (!ec) {
-                      std::cout << "Connected to server."
-                                << std::endl; // Для дебага
+                      if(PARSER_LOGS_ON){
+                        std::cout << "PARSER'S CLIENT: Connected to parser's server."<< std::endl;
+                      }
                       start();
                     } else {
                       std::cerr
-                          << "Error connecting to server: " << ec.message()
-                          << std::endl; // Возможно, здесь будет более умная
-                                        // обработка ошибок
+                          << "PARSER'S CLIENT: Error connecting to server: " << ec.message()
+                          << std::endl;
                     }
                   });
   }

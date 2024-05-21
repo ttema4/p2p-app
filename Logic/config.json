@@ -1,0 +1,17 @@
+{
+    "endpoints": {
+        "parser's ip": "127.0.0.1",
+        "parser's port": 12345,
+        "users server's port": 50000 
+    },
+    "logs to output": {
+        "parser's client": true,
+        "parser's server last response": false,
+        "users server": true,
+        "orders for buy": true,
+        "orders for sell": true,
+        "sell by coin": true,
+        "market rates": true,
+        "chains": true
+    }
+}

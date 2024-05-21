@@ -33,9 +33,6 @@ struct Order {
         coin2(coin2_), banks(banks_), min_max(min_max_),
         exchange_rate(exchange_rate_) {}
 
-  // В разработке
-  // NLOHMANN_DEFINE_TYPE_INTRUSIVE(Order, market, type, id, seller_rating, coin1,
-  // coin2, banks, min_max, exchange_rate);
 };
 
 struct Orders {
@@ -61,8 +58,6 @@ struct Chain {
         Order sell_, long double spread_)
       : buy(buy_), change(change_), sell(sell_), spread(spread_) {}
 
-  // В разработке
-  // NLOHMANN_DEFINE_TYPE_INTRUSIVE(Chain, buy, change, sell, spread);
 };
 
 struct Chains {
@@ -93,6 +88,18 @@ public:
 };
 
 extern SharedString up_to_date_version;
+extern std::string PARSER_IP;
+extern uint16_t PARSER_PORT;
+extern uint16_t USERS_SERVER_PORT;
+extern bool PARSER_LOGS_ON;
+extern bool PARSER_RESPONSE_LOGS_ON;
+extern bool USERS_SERVER_LOGS_ON;
+extern bool ORDERS_FOR_BUY_LOGS_ON;
+extern bool ORDERS_FOR_SELL_LOGS_ON;
+extern bool SELL_BY_COIN_LOGS_ON;
+extern bool MARKET_RATES_LOGS_ON;
+extern bool CHAINS_LOGS_ON;
+
 
 } // namespace p2p 
 

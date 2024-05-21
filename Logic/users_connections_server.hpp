@@ -46,9 +46,11 @@ public:
       std::istream is(&con_handle->read_buffer);
       std::string line;
       std::getline(is, line);
-      std::cout << "Message Received: " << line << std::endl; // Для дебага
+      if(USERS_SERVER_LOGS_ON){
+        std::cout << "SERVER: Message Received: " << line << std::endl;
+      }
       if (line == "need update") {
-        std::shared_ptr<std::string> response = std::make_shared<std::string>(up_to_date_version.get());
+        std::shared_ptr<std::string> response = std::make_shared<std::string>(up_to_date_version.get() + "\n");
         auto handler =
             boost::bind(&UsersConnectionsServer::handle_write, this, con_handle,
                         response, boost::asio::placeholders::error);
@@ -70,7 +72,7 @@ public:
       do_async_read(con_handle);
     } else {
       std::cerr
-          << "We had an error: " << err.message()
+          << "SERVER: We had an error: " << err.message()
           << std::endl; // Возможно, здесь будет более умная обработка ошибок
       m_connections.erase(con_handle);
     }
@@ -88,13 +90,15 @@ public:
                     std::shared_ptr<std::string> msg_buffer,
                     boost::system::error_code const &err) {
     if (!err) {
-      std::cout << "Finished sending message\n"; // Для дебага
+      if(USERS_SERVER_LOGS_ON){
+        std::cout << "SERVER: Finished sending message to client\n";
+      }
       if (con_handle->socket.is_open()) {
         // Всё супер - ответ написан, подключение открыто
       }
     } else {
       std::cerr
-          << "We had an error: " << err.message()
+          << "SERVER: We had an error: " << err.message()
           << std::endl; // Возможно, здесь будет более умная обработка ошибок
       m_connections.erase(con_handle);
     }
@@ -103,10 +107,12 @@ public:
   void handle_accept(con_handle_t con_handle,
                      boost::system::error_code const &err) {
     if (!err) {
-      std::cout << "Connection from: "
-                << con_handle->socket.remote_endpoint().address().to_string()
-                << "\n";                // Для дебага
-      std::cout << "Sending message\n"; // Для дебага
+      if(USERS_SERVER_LOGS_ON){
+        std::cout << "SERVER: Connection from: "
+                  << con_handle->socket.remote_endpoint().address().to_string()
+                  << "\n";                // Для дебага
+        std::cout << "SERVER: Sending message\n"; // Для дебага
+      }
       auto buff = std::make_shared<std::string>("Hello World!\n");
       auto handler =
           boost::bind(&UsersConnectionsServer::handle_write, this, con_handle,
@@ -116,7 +122,7 @@ public:
       do_async_read(con_handle);
     } else {
       std::cerr
-          << "We had an error: " << err.message()
+          << "SERVER: We had an error: " << err.message()
           << std::endl; // Возможно, здесь будет более умная обработка ошибок
       m_connections.erase(con_handle);
     }

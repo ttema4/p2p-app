@@ -19,7 +19,6 @@ namespace p2p {
 void unpack_json(std::string parsers_response, Orders& orders, MarketRates& market_rates) {
   nlohmann::json j;
   try {
-    // std::cout << "parsers_response: " << parsers_response.substr(0, 25) << std::endl;
     j = nlohmann::json::parse(parsers_response);
   } catch (const nlohmann::json::parse_error& e) {
     std::cout << "JSON parse error(inside unpack()): " << e.what() << '\n';
