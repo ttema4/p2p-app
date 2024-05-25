@@ -10,8 +10,6 @@
 #include <thread>
 #include <unordered_map>
 #include <vector>
-// #include "src/nlohmann/json.hpp"
-// #include "concurrentqueue.h"
 
 #include "storage_structures.hpp"
 #include "parser_connection_client.hpp"
@@ -21,8 +19,10 @@
 
 
 using namespace boost::asio;
+
 moodycamel::ConcurrentQueue<std::string> p2p::parsers_responses;
 p2p::SharedString p2p::up_to_date_version;
+
 std::string p2p::PARSER_IP;
 uint16_t p2p::PARSER_PORT;
 uint16_t p2p::USERS_SERVER_PORT;
@@ -69,6 +69,8 @@ void to_analysis(){
           std::cout << "Received empty response.\n";
           continue;
       }
+
+      
 
       Analysis analysis;
       Chains chains;

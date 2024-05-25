@@ -16,6 +16,32 @@
 
 namespace p2p {
 
+void fix_banks_naming_and_filter(Orders& orders) {
+  Orders new_orders;
+  for(const auto& ord : orders.list) {
+    std::vector<std::string> new_banks;
+    for(std::string bank : ord.banks) {
+      if (bank == "A-Bank") {
+        new_banks.push_back("Alpha");
+      } else if (bank == "Sberbank" || bank == "Local Card(Green)") {
+        new_banks.push_back("Sber");
+      } else if (bank == "Raiffeisenbank") {
+        new_banks.push_back("Raif");
+      } else if (bank == "Tinkoff" || bank == "Local Card(Yellow)") {
+        new_banks.push_back("Tinkoff");
+      } else if (bank == "FPS" || bank == "SBP") {
+        new_banks.push_back("SBP");
+      }
+    }
+    if(new_banks.size() > 0){
+      Order new_order = ord;
+      new_order.banks = new_banks;
+      new_orders.list.push_back(new_order);
+    }
+  }
+  orders = new_orders;
+}
+
 void unpack_json(std::string parsers_response, Orders& orders, MarketRates& market_rates) {
   nlohmann::json j;
   try {
@@ -40,9 +66,11 @@ void unpack_json(std::string parsers_response, Orders& orders, MarketRates& mark
     orders.list.push_back(ord);
   }
 
+  fix_banks_naming_and_filter(orders);
+
   for (const auto& rate_obj : j["spot_rates"]) {
       for (auto it = rate_obj.begin(); it != rate_obj.end(); ++it) {
-          if (it.key() == "market") continue; // пропустить поле market
+          if (it.key() == "market") continue;
 
           std::string coins_pair = it.key();
           size_t delimiter_pos = coins_pair.find('/');
@@ -57,7 +85,6 @@ void unpack_json(std::string parsers_response, Orders& orders, MarketRates& mark
   
 }
 
-// На данный момент метод pack_json находится в разработке...
 std::string pack_json(Chains& chains) {
   nlohmann::json j;
   for (Chain chain : chains.list) {

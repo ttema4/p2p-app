@@ -5,13 +5,13 @@
         "users server's port": 50000 
     },
     "logs to output": {
-        "parser's client": true,
+        "parser's client": false,
         "parser's server last response": false,
-        "users server": true,
-        "orders for buy": true,
-        "orders for sell": true,
-        "sell by coin": true,
-        "market rates": true,
-        "chains": true
+        "users server": false,
+        "orders for buy": false,
+        "orders for sell": false,
+        "sell by coin": false,
+        "market rates": false,
+        "chains": false
     }
 }
