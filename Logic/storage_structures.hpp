@@ -88,6 +88,8 @@ public:
 };
 
 extern SharedString up_to_date_version;
+extern std::unordered_map<std::string, std::string> last_version_by_user;
+
 extern std::string PARSER_IP;
 extern uint16_t PARSER_PORT;
 extern uint16_t USERS_SERVER_PORT;

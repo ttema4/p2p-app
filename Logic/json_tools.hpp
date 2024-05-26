@@ -23,11 +23,11 @@ void fix_banks_naming_and_filter(Orders& orders) {
     for(std::string bank : ord.banks) {
       if (bank == "A-Bank") {
         new_banks.push_back("Alpha");
-      } else if (bank == "Sberbank" || bank == "Local Card(Green)") {
+      } else if (bank == "Sberbank") {
         new_banks.push_back("Sber");
       } else if (bank == "Raiffeisenbank") {
         new_banks.push_back("Raif");
-      } else if (bank == "Tinkoff" || bank == "Local Card(Yellow)") {
+      } else if (bank == "Tinkoff") {
         new_banks.push_back("Tinkoff");
       } else if (bank == "FPS" || bank == "SBP") {
         new_banks.push_back("SBP");

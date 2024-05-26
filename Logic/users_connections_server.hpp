@@ -18,6 +18,8 @@
 
 using namespace boost::asio;
 
+std::unordered_map<std::string, std::string> p2p::last_version_by_user;
+
 namespace p2p {
 
 struct Connection {
@@ -50,15 +52,21 @@ public:
         std::cout << "SERVER: Message Received: " << line << std::endl;
       }
       if (line == "need update") {
-        std::shared_ptr<std::string> response = std::make_shared<std::string>(up_to_date_version.get() + "\n");
+        std::string address = con_handle->socket.remote_endpoint().address().to_string();
+        std::shared_ptr<std::string> response;
+        std::string current_up_to_date = up_to_date_version.get(); 
+        if (last_version_by_user.find(address) == last_version_by_user.end() || last_version_by_user[address] != current_up_to_date){
+          response = std::make_shared<std::string>(current_up_to_date + "\n");
+          last_version_by_user[address] = current_up_to_date;
+        } else {
+          response = std::make_shared<std::string>("no updates\n");
+        }
         auto handler =
             boost::bind(&UsersConnectionsServer::handle_write, this, con_handle,
                         response, boost::asio::placeholders::error);
         boost::asio::async_write(con_handle->socket,
                                  boost::asio::buffer(*response), handler);
       } else {
-        // Остальные случаи пока не обрабатываем(есть ли они вообще?)
-
         std::shared_ptr<std::string> response =
             std::make_shared<std::string>("ping");
         auto handler =
@@ -113,7 +121,8 @@ public:
                   << "\n";                // Для дебага
         std::cout << "SERVER: Sending message\n"; // Для дебага
       }
-      auto buff = std::make_shared<std::string>("Hello World!\n");
+      std::string current_up_to_date = up_to_date_version.get(); 
+      auto buff = std::make_shared<std::string>(current_up_to_date + "\n");
       auto handler =
           boost::bind(&UsersConnectionsServer::handle_write, this, con_handle,
                       buff, boost::asio::placeholders::error);
