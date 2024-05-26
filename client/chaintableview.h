@@ -12,6 +12,8 @@
 #include <QScrollArea>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
+#include <QSet>
+#include <QPair>
 
 enum class SortType {
     none,
@@ -56,7 +58,10 @@ class ChainTableView : public QWidget {
     Q_OBJECT
 public:
     ChainTableView(QWidget *parent = nullptr);
-    void setData(QVector<Chain> &data);
+    void setData(QVector<Chain> data);
+    void setFilters(QSet<QString> &selectedBanks, QSet<QString> &selectedMarkets, QPair<double, double> &selectedMinMax);
+    void updateTable();
+
     void resizeTable();
 
 signals:
@@ -71,10 +76,14 @@ private:
 
     QTableWidget *header;
     QTableWidget *table;
+
     QVector<Chain> chains;
     QVector<Chain> showedChains;
 
     SortType sortType;
+    QSet<QString> filterBanks;
+    QSet<QString> filterMarkets;
+    QPair<double, double> filterMinMax;
 };
 
 #endif // CHAINTABLEVIEW_H

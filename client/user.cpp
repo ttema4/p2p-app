@@ -41,12 +41,12 @@ bool User::setAvatar(QPixmap avatar_) {
     return true;
 }
 
-bool User::setFavourites(QVector<QString> favourites_) {
+bool User::setFavourites(QSet<QString> favourites_) {
     favourites = favourites_;
     return true;
 }
 
-bool User::setNotifications(QVector<QString> notifications_) {
+bool User::setNotifications(QSet<QString> notifications_) {
     notifications = notifications_;
     return true;
 }
@@ -73,7 +73,6 @@ QPixmap User::avatarCorrection(QPixmap avatar_, int size) {
     squarePixmap.setMask(roundedPixmap.mask());
     return squarePixmap.scaled(QSize(size, size), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 };
-
 
 
 // class CurUser
@@ -140,7 +139,7 @@ bool CurUser::tryEditAvatar(QPixmap avatar_) {
     return false;
 }
 
-bool CurUser::tryDeleteAvatar() {
+bool CurUser::tryDelAvatar() {
     bool deleted = con->tryDeleteAvatar(login);
     if (deleted) {
         qDebug() << "SUCCESSFULLY DELETED AVATAR " << login;
@@ -151,9 +150,58 @@ bool CurUser::tryDeleteAvatar() {
 
 };
 
+bool CurUser::tryAddFavorites(QString chainHash) {
+    if (id == -1) return false;
+
+    favourites.insert(chainHash);
+    bool added = con->tryEditFavourites(login, favourites);
+    if (!added) {
+        favourites.remove(chainHash);
+        return false;
+    }
+    return true;
+};
+
+bool CurUser::tryDelFavorites(QString chainHash) {
+    if (id == -1) return false;
+    if (!favourites.contains(chainHash)) return false;
+
+    favourites.remove(chainHash);
+    bool deleted = con->tryEditFavourites(login, favourites);
+    if (!deleted) {
+        favourites.insert(chainHash);
+        return false;
+    }
+    return true;
+};
+
+bool CurUser::tryClearFavourites() {
+    if (id == -1) return false;
+
+    QSet<QString> favCopy{};
+    bool deleted = con->tryEditFavourites(login, favCopy);
+    if (!deleted) {
+        return false;
+    }
+    favourites.clear();
+    return true;
+}
+
+bool CurUser::isFavorites(QString chainHash) {
+    return favourites.contains(chainHash);
+}
+
 bool CurUser::tryExit() {
     return unsetCurUser();
 };
+
+void CurUser::setCurrentChains(QVector<Chain> newChains) {
+    currentChains = newChains;
+}
+QVector<Chain> CurUser::getCurrentChains() {
+    return currentChains;
+}
+
 
 bool CurUser::setCurUser(User user_) {
     getInstance().setAvatar(user_.getAvatar());
@@ -216,6 +264,17 @@ bool LocalAccountHandler::tryEditAvatar(QString login_, QPixmap avatar_) {
     for (User u : users) {
         if (login_ == u.getLogin()) {
             u.setAvatar(avatar_);
+            return true;
+        }
+    }
+    return false;
+};
+
+
+bool LocalAccountHandler::tryEditFavourites(QString login_, QSet<QString> favourites_) {
+    for (User u : users) {
+        if (login_ == u.getLogin()) {
+            u.setFavourites(favourites_);
             return true;
         }
     }
@@ -307,7 +366,7 @@ std::optional<User> DBAccountHandler::tryRegister(QString name_, QString login_,
 
 std::optional<User> DBAccountHandler::tryLogin(QString login_, QString password_) {
     QSqlQuery query(db);
-    query.prepare("SELECT id, name, password, avatar FROM users WHERE login = :login;");
+    query.prepare("SELECT id, name, password, avatar, favourites FROM users WHERE login = :login;");
     query.bindValue(":login", login_);
     query.bindValue(":password", password_);
 
@@ -333,6 +392,15 @@ std::optional<User> DBAccountHandler::tryLogin(QString login_, QString password_
     } else {
         tmp.setAvatar(default_avatar);
     }
+
+    QSet<QString> favourites;
+    QByteArray favouritesData = query.value("favourites").toByteArray();
+    if (!favouritesData.isEmpty()) {
+        QDataStream in(favouritesData);
+        in >> favourites;
+        tmp.setFavourites(favourites);
+    }
+
     return tmp;
 };
 
@@ -347,6 +415,24 @@ bool DBAccountHandler::tryEditAvatar(QString login_, QPixmap avatar_) {
     QSqlQuery query;
     query.prepare("UPDATE users SET avatar = :avatar WHERE login = :login;");
     query.bindValue(":avatar", byteArray);
+    query.bindValue(":login", CurUser::getInstance().getLogin());
+
+    if (!query.exec()) {
+        qDebug() << "Ошибка выполнения запроса:" << query.lastError().text();
+        return false;
+    }
+    qDebug() << "Изображение успешно добавлено в базу данных.";
+    return true;
+};
+
+bool DBAccountHandler::tryEditFavourites(QString login_, QSet<QString> favourites_) {
+    QByteArray byteArray;
+    QDataStream out(&byteArray, QIODevice::WriteOnly);
+    out << favourites_;
+
+    QSqlQuery query;
+    query.prepare("UPDATE users SET favourites = :favourites WHERE login = :login;");
+    query.bindValue(":favourites", byteArray);
     query.bindValue(":login", CurUser::getInstance().getLogin());
 
     if (!query.exec()) {

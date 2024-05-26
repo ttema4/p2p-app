@@ -10,7 +10,7 @@ Chain LocalClient::getFakeChain() {
     static std::vector<std::string> ids {"https://docs.google.com/spreadsheets/u/0/d/1W2VigJfqsPFK12JuIj62l1kIaeJOE03xK-PTkzmMh2E/htmlview", "https://youtu.be/QMMgjjGugHE?si=PVyBYphuinGCxVun", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "https://youtu.be/MGkWSAnoDOI?si=IyLCYPO6QFl2-b-Y&t=330"};
     static std::vector<std::string> coins {"BTC", "ETH", "DOGY", "SOLU", "WLD", "COTI"};
     static std::vector<std::string> banks {"Tinkoff", "Sber", "Alpha", "VTB", "SBP", "Raif", "Gasprom"};
-    static std::vector<std::string> markets {"ByBit", "BitPapa", "Binance", "Telegram"};
+    static std::vector<std::string> markets {"ByBit", "Bitget"};
 
 
     std::string fake_type1 = types[gen() % types.size()];
@@ -160,7 +160,6 @@ bool DataReciever::init() {
 
 void DataReciever::recieveNewChain(QString str) {
     if (str != "No updates\r" && str != "Hello World!") {
-        qDebug() << str;
         QVector<Chain> chains = nlohmann::json::parse(str.toStdString()).get<QVector<Chain>>();
         emit dataParsed(chains);
     } else {

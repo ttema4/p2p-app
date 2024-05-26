@@ -2,6 +2,7 @@
 #define USER_H
 
 #include "config.h"
+#include "logic_fwd.h"
 
 #include <QString>
 #include <QPixmap>
@@ -12,6 +13,7 @@
 
 #include <QVector>
 #include <QMap>
+#include <QSet>
 #include <QtSql>
 #include <QtPlugin>
 #include <QSqlDriverPlugin>
@@ -34,8 +36,8 @@ public:
     QPixmap getAvatar() { return avatar; };
     QPixmap getAvatar2() { return avatar2; };
 
-    QVector<QString> getFavourites() { return favourites; };
-    QVector<QString> getNotifications() { return notifications; };
+    QSet<QString> getFavourites() { return favourites; };
+    QSet<QString> getNotifications() { return notifications; };
 
     QMap<QString, bool> getRights() { return rights; };
 
@@ -51,8 +53,8 @@ protected:
     bool setPassword(QString password_ = QString());
     bool setAvatar(QPixmap avatar_ = QPixmap());
 
-    bool setFavourites(QVector<QString> favourites_ = QVector<QString>());
-    bool setNotifications(QVector<QString> notifications_ = QVector<QString>());
+    bool setFavourites(QSet<QString> favourites_ = QSet<QString>());
+    bool setNotifications(QSet<QString> notifications_ = QSet<QString>());
 
     bool setRights(QMap<QString, bool> rights_ = QMap<QString, bool>());
 
@@ -63,8 +65,8 @@ protected:
     QPixmap avatar; // bigger (250x250)
     QPixmap avatar2; // small (30x30)
 
-    QVector<QString> favourites;
-    QVector<QString> notifications;
+    QSet<QString> favourites;
+    QSet<QString> notifications;
 
     QMap<QString, bool> rights;
 };
@@ -84,18 +86,29 @@ public:
     bool tryEditLogin(QString login_);
     bool tryEditPassword(QString password_);
     bool tryEditAvatar(QPixmap avatar_ = QPixmap());
+    bool tryDelAvatar();
 
-    bool tryDeleteAvatar();
+    bool tryAddFavorites(QString chainHash);
+    bool tryDelFavorites(QString chainHash);
+    bool tryClearFavourites();
+    bool isFavorites(QString chainHash);
+
+    void setCurrentChains(QVector<Chain> newChains);
+    QVector<Chain> getCurrentChains();
+
 
     friend class LocalAccountHandler;
     friend class DBAccountHandler;
 
 private:
+    QVector<Chain> currentChains;
+
     QPixmap default_avatar;
     AccountHandler *con;
 
     bool setCurUser(User user_);
     bool unsetCurUser();
+
 
     CurUser();
     CurUser(const CurUser&) = delete;
@@ -109,6 +122,7 @@ public:
     virtual std::optional<User> tryLogin(QString login_, QString password_) = 0;
 
     virtual bool tryEditAvatar(QString login_, QPixmap avatar_ = QPixmap()) = 0;
+    virtual bool tryEditFavourites(QString login_, QSet<QString> favourites_) = 0;
     virtual bool tryDeleteAvatar(QString login_) = 0;
     virtual bool tryDeleteAccount(QString login_) = 0;
 };
@@ -121,6 +135,7 @@ public:
     std::optional<User> tryLogin(QString login_, QString password_) override;
 
     bool tryEditAvatar(QString login_, QPixmap avatar_ = QPixmap()) override;
+    bool tryEditFavourites(QString login_, QSet<QString> favourites_) override;
     bool tryDeleteAvatar(QString login_) override;
     bool tryDeleteAccount(QString login_) override;
 
@@ -142,6 +157,7 @@ public:
     std::optional<User> tryLogin(QString login_, QString password_) override;
 
     bool tryEditAvatar(QString login_, QPixmap avatar_ = QPixmap()) override;
+    bool tryEditFavourites(QString login_, QSet<QString> favourites_) override;
     bool tryDeleteAvatar(QString login_) override;
     bool tryDeleteAccount(QString login_) override;
 

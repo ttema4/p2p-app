@@ -11,6 +11,10 @@ ChainMonitor::ChainMonitor(QWidget *parent) : QWidget(parent), ui(new Ui::ChainM
 
 ChainMonitor::ChainMonitor(QWidget *parent, Chain c) : QWidget(parent), ui(new Ui::ChainMonitor) {
     ui->setupUi(this);
+    chainHash = QString::fromStdString(c.buy.coin1 + c.buy.coin2 + c.buy.market +  c.sell.coin1 + c.sell.coin2 + c.sell.market);
+    isFavorite = CurUser::getInstance().isFavorites(chainHash);
+    if (isFavorite) ui->pushButton_2->setText("★");
+
     if (c.change.first == c.change.second) {
         ui->label_8->setText(QString("Связка USDT - %1 - USDT со спредом %2\%").arg(QString::fromStdString(c.change.first), QString::number(c.spread, 'f', 2)));
     } else {
@@ -37,6 +41,7 @@ ChainMonitor::ChainMonitor(QWidget *parent, Chain c) : QWidget(parent), ui(new U
     ui->label_2->setText(lbl2);
     ui->label_7->setText(QString("<a href=\"%8\">Order link</a>").arg(QString::fromStdString(c.sell.id)));
     connect(ui->pushButton, &QPushButton::clicked, this, &ChainMonitor::close);
+    connect(ui->pushButton_2, &QPushButton::clicked, this, &ChainMonitor::favouriteSwap);
 
     setStyleSheet(
         "#widget_3 { background-color: #F5F5F5; border-radius: 10px; }"
@@ -45,15 +50,26 @@ ChainMonitor::ChainMonitor(QWidget *parent, Chain c) : QWidget(parent), ui(new U
         "QLabel#label_3, QLabel#label_4, QLabel#label_5 { font-size: 14px; }" );
     hide();
 
-    // Создаем эффект тени
     QGraphicsDropShadowEffect* effect = new QGraphicsDropShadowEffect();
-    effect->setBlurRadius(50); // Радиус размытия
-    effect->setXOffset(0); // Смещение тени по горизонтали
-    effect->setYOffset(0); // Смещение тени по вертикали
-    effect->setColor(QColor(0, 0, 0, 80)); // Цвет тени
-
-    // Применяем эффект тени к виджету
+    effect->setBlurRadius(50);
+    effect->setXOffset(0);
+    effect->setYOffset(0);
+    effect->setColor(QColor(0, 0, 0, 80));
     ui->widget_3->setGraphicsEffect(effect);
+}
+
+void ChainMonitor::favouriteSwap() {
+    if (isFavorite) {
+        if (CurUser::getInstance().tryDelFavorites(chainHash)) {
+            ui->pushButton_2->setText("☆");
+            isFavorite = false;
+        }
+    } else {
+        if (CurUser::getInstance().tryAddFavorites(chainHash)) {
+            ui->pushButton_2->setText("★");
+            isFavorite = true;
+        }
+    }
 }
 
 void ChainMonitor::remove() {
@@ -61,21 +77,13 @@ void ChainMonitor::remove() {
 
 }
 
-
 void ChainMonitor::resizeEvent(QResizeEvent *e) {
     move(QPoint(parentWidget()->size().width() / 2 - size().width() / 2, parentWidget()->size().height() / 2 - size().height() / 2));
     QWidget::resizeEvent(e);
 }
 
-
-void ChainMonitor::mousePressEvent(QMouseEvent* event) {
-    if (!rect().contains(event->pos())) {
-        this->close(); // Закрыть при клике за пределами
-    }
-}
-
 void ChainMonitor::closeEvent(QCloseEvent *event)  {
-    emit monitorSlosed();
+    emit monitorClosed();
     QWidget::closeEvent(event);
 }
 

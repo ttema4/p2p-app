@@ -2,10 +2,12 @@
 #define CHAINMONITOR_H
 
 #include "logic_fwd.h"
+#include "user.h"
 
 #include <QWidget>
 #include <QDialog>
 #include <QMouseEvent>
+#include <QString>
 
 namespace Ui {
 class ChainMonitor;
@@ -20,14 +22,18 @@ public:
     void remove();
     ~ChainMonitor();
 signals:
-    void monitorSlosed();
+    void monitorClosed();
 
 protected:
     void closeEvent(QCloseEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
 
 private:
-    void mousePressEvent(QMouseEvent* event) override;
+    void favouriteSwap();
+
+    bool isFavorite;
+    QString chainHash;
+
     Ui::ChainMonitor *ui;
 };
 

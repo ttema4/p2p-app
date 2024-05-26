@@ -1,5 +1,7 @@
 #include "headermenu.h"
 
+#include <QGraphicsDropShadowEffect>
+
 HeaderMenu::HeaderMenu(QString center_text_, QWidget *parent) : QWidget{parent} {
     // this->setStyleSheet("background-color:black;");
 
@@ -39,6 +41,15 @@ HeaderMenu::HeaderMenu(QString center_text_, QWidget *parent) : QWidget{parent} 
     menu_frame->setFrameShape(QFrame::NoFrame);
     menu_frame->setLineWidth(1);
     menu_frame->setMinimumWidth(0);
+
+    QGraphicsDropShadowEffect* effect = new QGraphicsDropShadowEffect();
+    effect->setBlurRadius(80); // Радиус размытия
+    effect->setXOffset(-5); // Смещение тени по горизонтали
+    effect->setYOffset(5); // Смещение тени по вертикали
+    effect->setColor(QColor(0, 0, 0, 50)); // Цвет тени
+
+    // Применяем эффект тени к виджету
+    menu_frame->setGraphicsEffect(effect);
 
     QVBoxLayout *mvbox = new QVBoxLayout;
 

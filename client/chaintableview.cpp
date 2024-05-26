@@ -8,6 +8,7 @@
 #include <QIcon>
 #include <QMap>
 #include <QFont>
+#include <limits>
 
 #include <algorithm>
 
@@ -28,7 +29,7 @@ TableSpreadWidget::TableSpreadWidget(double spread, QWidget *parent) : QWidget(p
     layout->setSpacing(0);
 
     QLabel *label = new QLabel();
-    label->setText(QString::number(spread, 'f', 2) + "%");
+    label->setText(QString::number(spread, 'f', 1) + "%");
     label->setFixedSize(50, 27);
     label->setAlignment(Qt::AlignCenter);
     layout->addWidget(label);
@@ -153,6 +154,7 @@ void TableCellWidget::resizeEvent(QResizeEvent *event) {
 }
 
 ChainTableView::ChainTableView(QWidget *parent) : QWidget{parent} {
+    filterMinMax = {0, std::numeric_limits<double>::max()};
     sortType = SortType::none;
 
     QFont font;
@@ -230,7 +232,11 @@ ChainTableView::ChainTableView(QWidget *parent) : QWidget{parent} {
 }
 
 void ChainTableView::onTableCellClicked(int row, int col) {
-    emit cellClicked(chains[row]);
+    emit cellClicked(showedChains[row]);
+}
+
+void ChainTableView::updateTable() {
+    setData(chains);
 }
 
 void ChainTableView::onHeaderCellClicked(int row, int col) {
@@ -248,20 +254,63 @@ void ChainTableView::onHeaderCellClicked(int row, int col) {
         sortType = SortType::none;
         break;
     }
-    setData(chains);
+    updateTable();
 }
 
-void ChainTableView::setData(QVector<Chain> &data) {
+void ChainTableView::setFilters(QSet<QString> &selectedBanks, QSet<QString> &selectedMarkets, QPair<double, double> &selectedMinMax) {
+    if (filterBanks == selectedBanks && filterMarkets == selectedMarkets && filterMinMax == selectedMinMax) {
+        qDebug() << "reset filters";
+        return;
+    }
+
+    filterBanks = std::move(selectedBanks);
+    filterMarkets = std::move(selectedMarkets);
+    filterMinMax = std::move(selectedMinMax);
+
+    // qDebug() << filterBanks.size() << filterMarkets.size() << filterMinMax.first << filterMinMax.second;
+
+    updateTable();
+}
+
+void ChainTableView::setData(QVector<Chain> data) {
     if (&chains != &data) chains = std::move(data);
+
+    // qDebug() << filterBanks.size() << filterMarkets.size() << filterMinMax.first << filterMinMax.second;
+    if (filterBanks.size() || filterMarkets.size() || filterMinMax.first || filterMinMax.second < std::numeric_limits<double>::max()) {
+        showedChains.clear();
+        showedChains.reserve(chains.size());
+        foreach (Chain chain, chains) {
+            bool bankContains1 = filterBanks.empty() || std::find_if(chain.buy.banks.begin(), chain.buy.banks.end(), [&](const std::string& str) {
+                                     return filterBanks.contains(QString::fromStdString(str));
+                                 }) != chain.buy.banks.end();
+            bool bankContains2 = filterBanks.empty() || std::find_if(chain.sell.banks.begin(), chain.sell.banks.end(), [&](const std::string& str) {
+                                     return filterBanks.contains(QString::fromStdString(str));
+                                 }) != chain.sell.banks.end();
+            bool marketContains = filterMarkets.empty() || filterMarkets.contains(QString::fromStdString(chain.buy.market)) && filterMarkets.contains(QString::fromStdString(chain.sell.market));
+            bool minMaxMatches = (filterMinMax.first == 0 && filterMinMax.second == std::numeric_limits<double>::max()) ||
+                                 (filterMinMax.first >= chain.buy.min_max.first && filterMinMax.second <= chain.buy.min_max.second) &&
+                                 (filterMinMax.first >= chain.sell.min_max.first && filterMinMax.second <= chain.sell.min_max.second);
+            // qDebug() << (filterMinMax.first >= chain.buy.min_max.first) << (filterMinMax.second <= chain.buy.min_max.second) << (filterMinMax.first >= chain.sell.min_max.first) << (filterMinMax.second <= chain.sell.min_max.second);
+            // qDebug() << filterMinMax.first << chain.buy.min_max.first << filterMinMax.second << chain.buy.min_max.second << filterMinMax.first << chain.sell.min_max.first << filterMinMax.second << chain.sell.min_max.second;
+            // qDebug() << bankContains1 << bankContains2 << marketContains << minMaxMatches;
+            // qDebug() << "";
+            if (bankContains1 && bankContains2 && marketContains && minMaxMatches) {
+                // qDebug() << filterMinMax.first << chain.buy.min_max.first << filterMinMax.second << chain.buy.min_max.second << " || " << filterMinMax.first << chain.buy.min_max.first << filterMinMax.second << chain.buy.min_max.second;
+                showedChains.push_back(chain);
+            }
+        }
+    } else {
+        showedChains = chains;
+    }
 
     switch(sortType) {
     case SortType::up:
-        std::sort(chains.begin(), chains.end(), [](Chain a, Chain b) {
+        std::sort(showedChains.begin(), showedChains.end(), [](Chain &a, Chain &b) {
             return a.spread > b.spread;
         });
         break;
     case SortType::down:
-        std::sort(chains.begin(), chains.end(), [](Chain a, Chain b) {
+        std::sort(showedChains.begin(), showedChains.end(), [](Chain &a, Chain &b) {
             return a.spread < b.spread;
         });
         break;
@@ -269,9 +318,9 @@ void ChainTableView::setData(QVector<Chain> &data) {
         break;
     }
 
-    table->setRowCount(chains.count());
-    for (int i = 0; i < int(chains.size()); i++) {
-        table->setCellWidget(i, 0, new TableCellWidget(chains[i], i));
+    table->setRowCount(showedChains.count());
+    for (int i = 0; i < int(showedChains.size()); i++) {
+        table->setCellWidget(i, 0, new TableCellWidget(showedChains[i], i));
         table->setRowHeight(i, 60);
     }
 };

@@ -68,6 +68,8 @@ private:
 
     void showFilters();
     void filterHidden();
+    void applyFilters();
+    void resetFilters();
 
     void onCellClicked(Chain &chain);
     void chainMonitorHide();
@@ -86,7 +88,6 @@ private:
 
     QParallelAnimationGroup *sizeAnim;
 
-    QVector<Chain> chains;
     QTimer *timer;
     QTime *time;
 

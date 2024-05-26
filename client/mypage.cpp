@@ -51,7 +51,7 @@ void MyPage::showEvent(QShowEvent *event) {
 }
 
 void MyPage::deleteAvatar() {
-    CurUser::getInstance().tryDeleteAvatar();
+    CurUser::getInstance().tryDelAvatar();
     this->showEvent(new QShowEvent());
 }
 

@@ -34,6 +34,7 @@ cd client/ && cmake -B build && cmake --build build && cmake --install build
     name VARCHAR(255) NOT NULL,
     login VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
+    favourites MEDIUMBLOB NULL,
     avatar MEDIUMBLOB NULL 
   ); 
   ```

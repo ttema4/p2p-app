@@ -1,4 +1,4 @@
-QFrame#MenuQFrame { background-color: rgba(255, 255, 255, 240); border-radius: 4px; }
+QFrame#MenuQFrame { background-color: rgba(255, 255, 255, 255); border-radius: 5px; }
 
 QFrame#MenuQFrame QPushButton { background-color: #f6f6f6; border-style: none; border-width: 0px; border-radius: 3px; font: 13px; padding: 7px; text-align: left }
 

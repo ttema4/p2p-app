@@ -12,21 +12,21 @@ WindowHandler::WindowHandler(QWidget *parent) : QMainWindow(parent), ui(new Ui::
 
 void WindowHandler::init() {
     if (!DataReciever::getInstance().init()) {
-        ui->label_2->setText("Подключение к серверу... ❌");
+        ui->label_2->setText("Подключение к серверу... Ошибка!");
         qDebug() << "Ошибка подключения";
         return;
     }
-    ui->label_2->setText("Подключение к серверу... ✅\nПодключение к БД...");
+    ui->label_2->setText("Подключение к серверу... Успех!\nПодключение к БД...");
     QTimer::singleShot(100, this, &WindowHandler::init2);
 }
 
 void WindowHandler::init2() {
     if (!CurUser::getInstance().init()) {
-        ui->label_2->setText("Подключение к серверу... ✅\nПодключение к БД... ❌");
+        ui->label_2->setText("Подключение к серверу... Успех!\nПодключение к БД... Ошибка!");
         qDebug() << "Ошибка подключения";
         return;
     }
-    ui->label_2->setText("Подключение к серверу... ✅\nПодключение к БД... ✅");
+    ui->label_2->setText("Подключение к серверу... Успех!\nПодключение к БД... Успех!");
 
     currentpage = this;
     homepage = new MainWindow();
@@ -92,7 +92,6 @@ void WindowHandler::windowChanger(QMainWindow *toOpen) {
     toOpen->show();
     toOpen->setGeometry(currentpage->geometry());
     currentpage->hide();
-    // if (toOpen == homepage) homepage->resizeTable();
     currentpage = toOpen;
 }
 
