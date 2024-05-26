@@ -118,6 +118,7 @@ public:
         std::cout << "SERVER: Sending message\n";
       }
       std::string current_up_to_date = up_to_date_version.get();
+      last_version_by_user[con_handle->socket.remote_endpoint().address().to_string()] = current_up_to_date;
       auto buff = std::make_shared<std::string>(current_up_to_date + "\n");
       auto handler =
           boost::bind(&UsersConnectionsServer::handle_write, this, con_handle,

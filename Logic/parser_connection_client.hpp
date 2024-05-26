@@ -21,7 +21,7 @@ class ParserConnectionClient {
 public:
   ParserConnectionClient(boost::asio::io_context &io_context,
                          const ip::tcp::resolver::results_type &endpoints)
-      : io_context_(io_context), socket_(io_context) {
+      : io_context_(io_context), socket_(io_context), endpoints_(endpoints) {
     do_connect(endpoints);
   }
 
@@ -66,9 +66,9 @@ private:
                          }
                          start_receive();
                        } else {
-                         std::cerr
-                             << "PARSER'S CLIENT: Error receiving response: "
-                             << ec.message() << std::endl;
+                          std::cerr
+                            << "PARSER'S CLIENT: Error receiving response: "
+                            << ec.message() << std::endl;
                        }
                      });
   }
@@ -84,11 +84,23 @@ private:
                       }
                       start();
                     } else {
-                      std::cerr
+                      if(ec.message() == "Connection refused"){
+                        std::cerr << "PARSER'S CLIENT: Error connecting to server: Connection refused" << std::endl;
+                        std::cerr << "PARSER'S CLIENT: Trying to reconnect..." << std::endl;
+                        do_reconnect();
+                      } else {
+                        std::cerr
                           << "PARSER'S CLIENT: Error connecting to server: "
                           << ec.message() << std::endl;
+                      }
                     }
                   });
+  }
+
+  void do_reconnect() {
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+    socket_.close();
+    io_context_.post([this]() { do_connect(endpoints_); });
   }
 
 private:
@@ -96,6 +108,7 @@ private:
   ip::tcp::socket socket_;
   boost::asio::streambuf response_;
   boost::asio::steady_timer check_timer{io_context_};
+  ip::tcp::resolver::results_type endpoints_;
 };
 
 } // namespace p2p

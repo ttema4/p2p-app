@@ -65,7 +65,9 @@ void to_analysis() {
       if (!last_response.empty() && last_response[0] == '{') {
         unpack_json(last_response, orders, market_rates);
       } else {
-        std::cout << "Received empty response.\n";
+        if (PARSER_RESPONSE_LOGS_ON) {
+          std::cout << "Received empty response.\n";
+        }
         continue;
       }
 

@@ -13,5 +13,6 @@
         "sell by coin": false,
         "market rates": false,
         "chains": false
-    }
+    },
+    "testing mode" : false
 }
