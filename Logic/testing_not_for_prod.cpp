@@ -14,14 +14,14 @@
 // #include "concurrentqueue.h"
 
 #include "include/concurrentqueue.h"
-#include "storage_structures.hpp"
 #include "parser_connection_client.hpp"
+#include "storage_structures.hpp"
 #include "users_connections_server.hpp"
 
 using namespace boost::asio;
 
 namespace p2p {
-    
+
 // ДАЛЕЕ КОД ДЛЯ ТЕСТИРОВАНИЯ
 
 // Если на этапе этого коммита хочется увидеть, как функционируют сервер и
@@ -32,7 +32,7 @@ namespace p2p {
 // параметры, которые в дальнейшем будут заменены на конфигурационные.
 
 void raise_parser_connection(std::string parser_connection_ip,
-                              std::string parser_connection_port) {
+                             std::string parser_connection_port) {
   // Поднимаем клиента для подключения к парсеру:
   boost::asio::io_context client_io_context;
   ip::tcp::resolver resolver(client_io_context);
@@ -54,7 +54,8 @@ void raise_users_server(uint16_t users_server_port) {
 int main() {
   std::thread t1(&p2p::raise_parser_connection, "localhost",
                  "12345"); // Тут указанные временные параметры
-  std::thread t2(&p2p::raise_users_server, 12346); // Тут указаны временные параметры
+  std::thread t2(&p2p::raise_users_server,
+                 12346); // Тут указаны временные параметры
   t1.join();
   t2.join();
 }

@@ -5,11 +5,11 @@
 #include <iostream>
 #include <list>
 #include <memory>
+#include <shared_mutex>
 #include <string>
 #include <thread>
 #include <unordered_map>
 #include <vector>
-#include <shared_mutex>
 
 #include "include/concurrentqueue.h"
 
@@ -26,13 +26,14 @@ struct Order {
   std::pair<long double, long double> min_max;
   long double exchange_rate;
   Order() = default;
-  Order(std::string market_, std::string type_, std::string id_, long double seller_rating_,
-        std::string coin1_, std::string coin2_, std::vector<std::string> banks_,
-        std::pair<long double, long double> min_max_, long double exchange_rate_)
-      : market(market_), type(type_), id(id_), seller_rating(seller_rating_), coin1(coin1_),
-        coin2(coin2_), banks(banks_), min_max(min_max_),
+  Order(std::string market_, std::string type_, std::string id_,
+        long double seller_rating_, std::string coin1_, std::string coin2_,
+        std::vector<std::string> banks_,
+        std::pair<long double, long double> min_max_,
+        long double exchange_rate_)
+      : market(market_), type(type_), id(id_), seller_rating(seller_rating_),
+        coin1(coin1_), coin2(coin2_), banks(banks_), min_max(min_max_),
         exchange_rate(exchange_rate_) {}
-
 };
 
 struct Orders {
@@ -57,7 +58,6 @@ struct Chain {
   Chain(Order buy_, const std::pair<std::string, std::string> change_,
         Order sell_, long double spread_)
       : buy(buy_), change(change_), sell(sell_), spread(spread_) {}
-
 };
 
 struct Chains {
@@ -69,22 +69,22 @@ extern moodycamel::ConcurrentQueue<std::string> parsers_responses;
 
 class SharedString {
 private:
-    std::string str;
-    mutable std::shared_mutex mtx;
+  std::string str;
+  mutable std::shared_mutex mtx;
 
 public:
-    SharedString() = default;
-    SharedString(const std::string& initial_str) : str(initial_str) {}
+  SharedString() = default;
+  SharedString(const std::string &initial_str) : str(initial_str) {}
 
-    std::string get() const {
-        std::shared_lock lock(mtx);
-        return str;
-    }
+  std::string get() const {
+    std::shared_lock lock(mtx);
+    return str;
+  }
 
-    void set(const std::string& new_str) {
-        std::unique_lock lock(mtx);
-        str = new_str;
-    }
+  void set(const std::string &new_str) {
+    std::unique_lock lock(mtx);
+    str = new_str;
+  }
 };
 
 extern SharedString up_to_date_version;
@@ -102,7 +102,6 @@ extern bool SELL_BY_COIN_LOGS_ON;
 extern bool MARKET_RATES_LOGS_ON;
 extern bool CHAINS_LOGS_ON;
 
-
-} // namespace p2p 
+} // namespace p2p
 
 #endif // STORAGE_STRUCTURES_HPP_

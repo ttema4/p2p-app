@@ -12,8 +12,6 @@
 #include <thread>
 #include <unordered_map>
 #include <vector>
-// #include "src/nlohmann/json.hpp"
-// #include "concurrentqueue.h"
 
 using namespace boost::asio;
 
@@ -44,14 +42,14 @@ private:
   }
 
   void send_request(const std::string &request) {
-    if(PARSER_LOGS_ON){
+    if (PARSER_LOGS_ON) {
       std::cout << "PARSER'S CLIENT: Sending request: " << request << std::endl;
     }
     async_write(socket_, buffer(request + '\n'),
                 [this](boost::system::error_code ec, std::size_t /*length*/) {
                   if (ec) {
-                    std::cerr << "PARSER'S CLIENT: Error sending request: " << ec.message()
-                              << std::endl;
+                    std::cerr << "PARSER'S CLIENT: Error sending request: "
+                              << ec.message() << std::endl;
                   }
                 });
   }
@@ -63,14 +61,14 @@ private:
                          std::istream response_stream(&response_);
                          std::string response;
                          std::getline(response_stream, response);
-                         if(response != "Hello World!"){
-                          parsers_responses.enqueue(response);
+                         if (response != "Hello World!") {
+                           parsers_responses.enqueue(response);
                          }
                          start_receive();
                        } else {
                          std::cerr
-                             << "PARSER'S CLIENT: Error receiving response: " << ec.message()
-                             << std::endl;
+                             << "PARSER'S CLIENT: Error receiving response: "
+                             << ec.message() << std::endl;
                        }
                      });
   }
@@ -79,14 +77,16 @@ private:
     async_connect(socket_, endpoints,
                   [this](boost::system::error_code ec, ip::tcp::endpoint) {
                     if (!ec) {
-                      if(PARSER_LOGS_ON){
-                        std::cout << "PARSER'S CLIENT: Connected to parser's server."<< std::endl;
+                      if (PARSER_LOGS_ON) {
+                        std::cout
+                            << "PARSER'S CLIENT: Connected to parser's server."
+                            << std::endl;
                       }
                       start();
                     } else {
                       std::cerr
-                          << "PARSER'S CLIENT: Error connecting to server: " << ec.message()
-                          << std::endl;
+                          << "PARSER'S CLIENT: Error connecting to server: "
+                          << ec.message() << std::endl;
                     }
                   });
   }

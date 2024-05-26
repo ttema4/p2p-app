@@ -5,17 +5,9 @@
 
 namespace p2p {
 
-// struct DataReceiver {
-//   void receive() {}
-// };
-
 struct Analysis {
   void analyze(Chains &chains, Orders &orders, MarketRates &market_rates);
 };
-
-// struct DataSender {
-//   void send() {}
-// };
 
 } // namespace p2p
 
