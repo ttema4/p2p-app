@@ -165,7 +165,7 @@ void HeaderMenu::open_settingsPage() {
 
 void HeaderMenu::open_exitPage() {
     if (menuVisible) showMenu();
-    CurUser::getInstance().tryExit();
+    CurUser::getInstance().userExit();
     this->showEvent(new QShowEvent());
     emit homePage();
 };

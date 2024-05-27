@@ -41,6 +41,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     void resizeTable();
     ~MainWindow();
+
 signals:
     void myPage();
     void registerPage();
@@ -73,7 +74,6 @@ private:
 
     void onCellClicked(Chain &chain);
     void chainMonitorHide();
-
 
     HeaderMenu* menu;
 

@@ -24,6 +24,11 @@ FavouritePage::FavouritePage(QWidget *parent) : QMainWindow(parent), ui(new Ui::
     connect(ui->pushButton, &QPushButton::clicked, this, &FavouritePage::clearFavourites);
     connect(ui->pushButton_2, &QPushButton::clicked, this, &FavouritePage::updateTable);
 
+    menu->installEventFilter(this);
+    ui->pushButton->installEventFilter(this);
+    ui->pushButton_2->installEventFilter(this);
+    ui->centralwidget->installEventFilter(this);
+
     updateTable();
 }
 
@@ -55,13 +60,19 @@ void FavouritePage::onCellClicked(Chain &chain) {
 
 void FavouritePage::updateTable() {
     QVector<Chain> favouriteChains;
-    qDebug() << CurUser::getInstance().getCurrentChains().size() << CurUser::getInstance().getFavourites().size();
+    // qDebug() << CurUser::getInstance().getCurrentChains().size() << CurUser::getInstance().getFavourites().size();
     foreach (Chain c, CurUser::getInstance().getCurrentChains()) {
         QString chainHash = QString::fromStdString(c.buy.coin1 + c.buy.coin2 + c.buy.market +  c.sell.coin1 + c.sell.coin2 + c.sell.market);
         if (CurUser::getInstance().getFavourites().contains(chainHash)) favouriteChains.push_back(c);
     }
 
     chainTable->setData(favouriteChains);
+
+    if (CurUser::getInstance().getId() != -1) {
+        ui->label->setText("Актуальны " + QString::number(favouriteChains.size()) + " из " + QString::number(CurUser::getInstance().getFavourites().size()) + " связок!");
+    } else {
+        ui->label->setText("Для просмотра избранного войдите/зарегистрируйтесь!");
+    }
 }
 
 void FavouritePage::showEvent(QShowEvent *event) {
@@ -69,10 +80,16 @@ void FavouritePage::showEvent(QShowEvent *event) {
 }
 
 bool FavouritePage::eventFilter(QObject *target, QEvent *event) {
+    if (menu->isMenuVisible() && event->type() == QMouseEvent::MouseButtonPress) {
+        menu->showMenu();
+        return true;
+    }
+
     if (chainMonitorOpen && event->type() == QInputEvent::Resize) {
         chainmonitor->remove();
         return true;
     }
+
     return false;
 }
 

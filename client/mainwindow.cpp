@@ -112,18 +112,9 @@ void MainWindow::updateTable(QVector<Chain> new_chains) {
 }
 
 bool MainWindow::eventFilter(QObject *target, QEvent *event) {
-    if (menu->isMenuVisible()) {
-        if (target->objectName() == "tableWidget") {
-            if(event->type() == QTabletEvent::InputMethodQuery) {
-                menu->showMenu();
-                return true;
-            }
-        } else {
-            if(event->type() == QMouseEvent::MouseButtonPress) {
-                menu->showMenu();
-                return true;
-            }
-        }
+    if (menu->isMenuVisible() && event->type() == QMouseEvent::MouseButtonPress) {
+        menu->showMenu();
+        return true;
     }
 
     if (chainMonitorOpen && event->type() == QInputEvent::Resize) {
@@ -146,6 +137,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->widget_4->parentWidget()->layout()->replaceWidget(ui->widget_4, chainTable);
 
     menu->installEventFilter(this);
+    chainTable->installEventFilter(this);
     ui->pushButton->installEventFilter(this);
     ui->pushButton_2->installEventFilter(this);
     ui->centralwidget->installEventFilter(this);
@@ -161,6 +153,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->lineEdit->installEventFilter(this);
     ui->lineEdit_2->installEventFilter(this);
     ui->hideButton->installEventFilter(this);
+
 
     connect(menu, &HeaderMenu::myPage, this, &MainWindow::myPage);
     connect(menu, &HeaderMenu::loginPage, this, &MainWindow::loginPage);
@@ -189,18 +182,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->pushButton->setStyleSheet("background-color: #FCFCFC; border-radius: 6px; border: 1px solid #bebebe; font: 12px; padding: 4px;");
     ui->lineEdit->setStyleSheet("background-color: #FCFCFC; border-radius: 4px; border: 1px solid #bebebe");
     ui->lineEdit_2->setStyleSheet("background-color: #FCFCFC; border-radius: 4px; border: 1px solid #bebebe");
-
-    // ui->groupBox_2->setStyleSheet("background-color: transparent; ");
-    // ui->groupBox_3->setStyleSheet("background-color: transparent; border-radius: 8px; border: 1px solid #bebebe");
-    // ui->groupBox_4->setStyleSheet("background-color: transparent; border-radius: 8px; border: 1px solid #bebebe");
-
-    // foreach (QCheckBox *checkBox, ui->groupBox_2->findChildren<QCheckBox*>()) {
-    //     checkBox->setStyleSheet("color: white; ");
-    // }
-
-    // foreach (QCheckBox *checkBox, ui->groupBox_3->findChildren<QCheckBox*>()) {
-    //     checkBox->setStyleSheet("");
-    // }
 
     connect(chainTable, &ChainTableView::cellClicked, this, &MainWindow::onCellClicked);
 

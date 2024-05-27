@@ -57,13 +57,11 @@ void MyPage::deleteAvatar() {
 
 void MyPage::deleteAccount() {
     CurUser::getInstance().tryDeleteAccount();
-    // menu->show();
     emit homePage();
 }
 
 void MyPage::exitAccount() {
-    CurUser::getInstance().tryExit();
-    // menu->show();
+    CurUser::getInstance().userExit();
     emit homePage();
 }
 

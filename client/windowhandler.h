@@ -3,16 +3,14 @@
 
 #include <QMainWindow>
 #include "datareciever.h"
-#include "user.h"
-
+#include "favouritepage.h"
+#include "loginpage.h"
 #include "mainwindow.h"
 #include "mypage.h"
-#include "loginpage.h"
-#include "registerpage.h"
 #include "notifypage.h"
-#include "favouritepage.h"
+#include "registerpage.h"
 #include "settingspage.h"
-#include "datareciever.h"
+#include "user.h"
 
 namespace Ui {
 class WindowHandler;
@@ -52,4 +50,4 @@ private:
     Ui::WindowHandler *ui;
 };
 
-#endif // WINDOWHANDLER_H
+#endif  // WINDOWHANDLER_H

@@ -48,6 +48,9 @@
        <property name="rightMargin">
         <number>22</number>
        </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
        <item>
         <widget class="QWidget" name="widget_2" native="true"/>
        </item>
@@ -66,16 +69,25 @@
        <property name="leftMargin">
         <number>22</number>
        </property>
+       <property name="topMargin">
+        <number>5</number>
+       </property>
        <property name="rightMargin">
         <number>22</number>
        </property>
        <item>
         <widget class="QLabel" name="label">
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+           <bold>false</bold>
+          </font>
+         </property>
          <property name="text">
           <string>У вас в избранном 11 связок!</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
          </property>
         </widget>
        </item>

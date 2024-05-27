@@ -1,64 +1,35 @@
 #include "user.h"
-#include <QException>
 
+// checked
+
+// class User
 User::User() {
     id = -1;
 }
 
-User::User(QString name_, QString login_, QString password_) : name(name_), login(login_), password(password_) {
-    avatar = avatarCorrection(QPixmap("://resourses/icons/empty_avatar.jpg"), 250);
+User::User(const QString &name_, const QString &login_, const QString &password_)
+    : name(name_), login(login_), password(password_) {
+    avatar = avatarCorrection(default_avatar, 250);
     avatar2 = avatarCorrection(avatar, 30);
-    static int id_counter = 1;
-    id = id_counter++;
+    static int id_counter = 0;
+    id = ++id_counter;
 }
 
+User::User(const int id_, const QString &name_, const QString &login_, const QString &password_)
+    : id(id_), name(name_), login(login_), password(password_){};
 
-User::User(int id_, QString name_, QString login_, QString password_) : id(id_), name(name_), login(login_), password(password_) {};
-
-bool User::setId(int id_) {
-    id = id_;
-    return true;
-}
-
-bool User::setName(QString name_) {
-    name = name_;
-    return true;
-}
-
-bool User::setLogin(QString login_) {
-    login = login_;
-    return true;
-}
-
-bool User::setPassword(QString password_) {
-    password = password_;
-    return true;
-}
-
-bool User::setAvatar(QPixmap avatar_) {
+void User::setAvatar(const QPixmap &avatar_) {
     avatar = avatarCorrection(avatar_, 250);
     avatar2 = avatarCorrection(avatar, 30);
-    return true;
 }
 
-bool User::setFavourites(QSet<QString> favourites_) {
-    favourites = favourites_;
-    return true;
-}
-
-bool User::setNotifications(QSet<QString> notifications_) {
-    notifications = notifications_;
-    return true;
-}
-
-bool User::setRights(QMap<QString, bool> rights_) {
-    rights = rights_;
-    return true;
-}
-
-QPixmap User::avatarCorrection(QPixmap avatar_, int size) {
-    if (avatar_.isNull()) return avatar_;
-    if (avatar_.size() == QSize(size, size)) return avatar_;
+QPixmap User::avatarCorrection(const QPixmap &avatar_, int size) const {
+    if (avatar_.isNull()) {
+        return avatar_;
+    }
+    if (avatar_.size() == QSize(size, size)) {
+        return avatar_;
+    }
 
     int squareSize = std::min(avatar_.height(), avatar_.width());
     int x = (avatar_.width() - squareSize) / 2;
@@ -74,15 +45,13 @@ QPixmap User::avatarCorrection(QPixmap avatar_, int size) {
     return squarePixmap.scaled(QSize(size, size), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 };
 
-
 // class CurUser
-CurUser& CurUser::getInstance() {
+CurUser &CurUser::getInstance() {
     static CurUser instance;
     return instance;
 }
 
 CurUser::CurUser() {
-    default_avatar = QPixmap("://resourses/icons/empty_avatar.jpg");
     id = -1;
 }
 
@@ -93,117 +62,135 @@ bool CurUser::init() {
         } else {
             con = &LocalAccountHandler::getInstance();
         }
-    } catch (QException e) {
+    } catch (...) {
+        qDebug() << "Error while connecting to UserHandler";
         return false;
     }
     return true;
 }
 
-bool CurUser::tryRegister(QString name_, QString login_, QString password_) {
+bool CurUser::tryRegister(const QString &name_, const QString &login_, const QString &password_) {
     std::optional<User> registered = con->tryRegister(name_, login_, password_);
     if (registered) {
-        qDebug() << "SUCCESS REGISTER";
+        qDebug() << "Successfully registered via:" << name_ << login_ << password_;
         setCurUser(*registered);
         return true;
     }
+    qDebug() << "Error while registering via:" << name_ << login_ << password_;
     return false;
 };
 
-bool CurUser::tryLogin(QString login_, QString password_) {
+bool CurUser::tryLogin(const QString &login_, const QString &password_) {
     std::optional<User> logged = con->tryLogin(login_, password_);
     if (logged) {
-        qDebug() << "SUCCESSFULLY LOGGED IN WITH " << login_ << password_;
+        qDebug() << "Successfully logged via:" << login_ << password_;
         setCurUser(*logged);
         return true;
     }
+    qDebug() << "Error while logging via:" << login_ << password_;
     return false;
 };
 
 bool CurUser::tryDeleteAccount() {
-    bool deleted = con->tryDeleteAccount(login);
+    bool deleted = con->tryDeleteAccount();
     if (deleted) {
-        qDebug() << "SUCCESSFULLY DELETED USER " << login;
+        qDebug() << "Successfully deleted user:" << login;
         unsetCurUser();
         return true;
     }
+    qDebug() << "Error while deleting user:" << login;
     return false;
 }
 
-bool CurUser::tryEditAvatar(QPixmap avatar_) {
-    bool deleted = con->tryEditAvatar(login, avatar_);
+bool CurUser::tryEditAvatar(const QPixmap &avatar_) {
+    bool deleted = con->tryEditAvatar(avatar_);
     if (deleted) {
-        qDebug() << "SUCCESSFULLY EDIT AVATAR " << login;
+        qDebug() << "Successfully edited user avatar:" << login;
         setAvatar(avatar_);
         return true;
     }
+    qDebug() << "Error while editing user avatar:" << login;
     return false;
 }
 
 bool CurUser::tryDelAvatar() {
-    bool deleted = con->tryDeleteAvatar(login);
+    bool deleted = con->tryDeleteAvatar();
     if (deleted) {
-        qDebug() << "SUCCESSFULLY DELETED AVATAR " << login;
+        qDebug() << "Successfully deleted user avatar:" << login;
         setAvatar(default_avatar);
         return true;
     }
+    qDebug() << "Error while deleting user avatar:" << login;
     return false;
-
 };
 
-bool CurUser::tryAddFavorites(QString chainHash) {
-    if (id == -1) return false;
+bool CurUser::tryAddFavorites(const QString &chainHash) {
+    if (id == -1) {
+        return false;
+    }
 
     favourites.insert(chainHash);
-    bool added = con->tryEditFavourites(login, favourites);
-    if (!added) {
-        favourites.remove(chainHash);
-        return false;
+    bool added = con->tryEditFavourites(favourites);
+    if (added) {
+        qDebug() << "Successfully edited favourites user:" << login << chainHash;
+        return true;
     }
-    return true;
+    qDebug() << "Error while editing favourites user:" << login << chainHash;
+    favourites.remove(chainHash);
+    return false;
 };
 
-bool CurUser::tryDelFavorites(QString chainHash) {
-    if (id == -1) return false;
-    if (!favourites.contains(chainHash)) return false;
-
-    favourites.remove(chainHash);
-    bool deleted = con->tryEditFavourites(login, favourites);
-    if (!deleted) {
-        favourites.insert(chainHash);
+bool CurUser::tryDelFavorites(const QString &chainHash) {
+    if (id == -1) {
         return false;
     }
-    return true;
+    if (!favourites.contains(chainHash)) {
+        return false;
+    }
+
+    favourites.remove(chainHash);
+    bool deleted = con->tryEditFavourites(favourites);
+    if (deleted) {
+        qDebug() << "Successfully delete favourites user:" << login << chainHash;
+        return true;
+    }
+    qDebug() << "Error while deleting favourites user:" << login << chainHash;
+    favourites.insert(chainHash);
+    return false;
 };
 
 bool CurUser::tryClearFavourites() {
-    if (id == -1) return false;
-
-    QSet<QString> favCopy{};
-    bool deleted = con->tryEditFavourites(login, favCopy);
-    if (!deleted) {
+    if (id == -1) {
         return false;
     }
-    favourites.clear();
-    return true;
+
+    bool deleted = con->tryEditFavourites({});
+    if (deleted) {
+        qDebug() << "Successfully cleaned favourites user:" << login;
+        favourites.clear();
+        return true;
+    }
+    qDebug() << "Error while cleaning favourites user:" << login;
+    return false;
 }
 
-bool CurUser::isFavorites(QString chainHash) {
+bool CurUser::isFavorites(const QString &chainHash) const {
     return favourites.contains(chainHash);
 }
 
-bool CurUser::tryExit() {
-    return unsetCurUser();
+void CurUser::userExit() {
+    unsetCurUser();
 };
 
-void CurUser::setCurrentChains(QVector<Chain> newChains) {
+void CurUser::setCurrentChains(const QVector<Chain> &newChains) {
     currentChains = newChains;
 }
-QVector<Chain> CurUser::getCurrentChains() {
+
+QVector<Chain> CurUser::getCurrentChains() const {
     return currentChains;
 }
 
-
-bool CurUser::setCurUser(User user_) {
+void CurUser::setCurUser(const User &user_) {
     getInstance().setAvatar(user_.getAvatar());
     getInstance().setFavourites(user_.getFavourites());
     getInstance().setNotifications(user_.getNotifications());
@@ -212,10 +199,10 @@ bool CurUser::setCurUser(User user_) {
     getInstance().setLogin(user_.getLogin());
     getInstance().setPassword(user_.getPassword());
     getInstance().setRights(user_.getRights());
-    return true;
+    qDebug() << "Successfully set current user:" << user_.getLogin();
 }
 
-bool CurUser::unsetCurUser() {
+void CurUser::unsetCurUser() {
     getInstance().setId();
     getInstance().setAvatar();
     getInstance().setFavourites();
@@ -224,25 +211,24 @@ bool CurUser::unsetCurUser() {
     getInstance().setLogin();
     getInstance().setPassword();
     getInstance().setRights();
-    return true;
+    qDebug() << "Successfully log out user";
 }
-
 
 // class LocalAccountHandler
 LocalAccountHandler::LocalAccountHandler() {
-    default_avatar = QPixmap("://resourses/icons/empty_avatar.jpg");
-
+    // for fast-tests
     users.append(User("Artem", "ibartiom", "1234"));
     users.last().setAvatar(QPixmap(":/resourses/icons/photo_2024-03-06.jpeg"));
 }
 
-LocalAccountHandler& LocalAccountHandler::getInstance() {
+LocalAccountHandler &LocalAccountHandler::getInstance() {
     static LocalAccountHandler instance;
     return instance;
 }
 
-std::optional<User> LocalAccountHandler::tryRegister(QString name_, QString login_, QString password_) {
-    for (User u : users) {
+std::optional<User>
+LocalAccountHandler::tryRegister(const QString &name_, const QString &login_, const QString &password_) {
+    for (const User &u : users) {
         if (login_ == u.getLogin()) {
             return std::nullopt;
         }
@@ -251,8 +237,8 @@ std::optional<User> LocalAccountHandler::tryRegister(QString name_, QString logi
     return users.last();
 }
 
-std::optional<User> LocalAccountHandler::tryLogin(QString login_, QString password_) {
-    for (User u : users) {
+std::optional<User> LocalAccountHandler::tryLogin(const QString &login_, const QString &password_) {
+    for (const User &u : users) {
         if (login_ == u.getLogin() && password_ == u.getPassword()) {
             return u;
         }
@@ -260,9 +246,9 @@ std::optional<User> LocalAccountHandler::tryLogin(QString login_, QString passwo
     return std::nullopt;
 };
 
-bool LocalAccountHandler::tryEditAvatar(QString login_, QPixmap avatar_) {
-    for (User u : users) {
-        if (login_ == u.getLogin()) {
+bool LocalAccountHandler::tryEditAvatar(const QPixmap &avatar_) {
+    for (User &u : users) {
+        if (CurUser::getInstance().getLogin() == u.getLogin()) {
             u.setAvatar(avatar_);
             return true;
         }
@@ -270,10 +256,9 @@ bool LocalAccountHandler::tryEditAvatar(QString login_, QPixmap avatar_) {
     return false;
 };
 
-
-bool LocalAccountHandler::tryEditFavourites(QString login_, QSet<QString> favourites_) {
-    for (User u : users) {
-        if (login_ == u.getLogin()) {
+bool LocalAccountHandler::tryEditFavourites(const QSet<QString> &favourites_) {
+    for (User &u : users) {
+        if (CurUser::getInstance().getLogin() == u.getLogin()) {
             u.setFavourites(favourites_);
             return true;
         }
@@ -281,9 +266,9 @@ bool LocalAccountHandler::tryEditFavourites(QString login_, QSet<QString> favour
     return false;
 };
 
-bool LocalAccountHandler::tryDeleteAvatar(QString login_) {
-    for (User u : users) {
-        if (login_ == u.getLogin()) {
+bool LocalAccountHandler::tryDeleteAvatar() {
+    for (User &u : users) {
+        if (CurUser::getInstance().getLogin() == u.getLogin()) {
             u.setAvatar(default_avatar);
             return true;
         }
@@ -291,9 +276,9 @@ bool LocalAccountHandler::tryDeleteAvatar(QString login_) {
     return false;
 };
 
-bool LocalAccountHandler::tryDeleteAccount(QString login_) {
+bool LocalAccountHandler::tryDeleteAccount() {
     for (int i = 0; i < users.size(); i++) {
-        if (login_ == users[i].getLogin()) {
+        if (CurUser::getInstance().getLogin() == users[i].getLogin()) {
             users.removeAt(i);
             return true;
         }
@@ -301,13 +286,8 @@ bool LocalAccountHandler::tryDeleteAccount(QString login_) {
     return false;
 };
 
-
-
-
 // class DBAccountHandler
 DBAccountHandler::DBAccountHandler() {
-    default_avatar = QPixmap("://resourses/icons/empty_avatar.jpg");
-
     db = QSqlDatabase::addDatabase("QMYSQL");
     db.setHostName(DATABASE_IP);
     db.setPort(DATABASE_PORT);
@@ -317,19 +297,20 @@ DBAccountHandler::DBAccountHandler() {
     db.setPassword(DATABASE_USERPASS);
 
     if (!db.open()) {
-        qDebug() << "Ошибка подключения к базе данных:" << db.lastError().text();
+        qDebug() << "Error while connecting to DataBase:" << db.lastError().text();
         throw QException();
     }
 
-    qDebug() << "Успешное подключение к базе данных.";
+    qDebug() << "Successfully connected to DataBase";
 }
 
-DBAccountHandler& DBAccountHandler::getInstance() {
+DBAccountHandler &DBAccountHandler::getInstance() {
     static DBAccountHandler instance;
     return instance;
 }
 
-std::optional<User> DBAccountHandler::tryRegister(QString name_, QString login_, QString password_) {
+std::optional<User>
+DBAccountHandler::tryRegister(const QString &name_, const QString &login_, const QString &password_) {
     QSqlQuery query(db);
     query.prepare("SELECT id FROM users WHERE login = :login;");
     query.bindValue(":login", login_);
@@ -363,8 +344,7 @@ std::optional<User> DBAccountHandler::tryRegister(QString name_, QString login_,
     return tmp;
 }
 
-
-std::optional<User> DBAccountHandler::tryLogin(QString login_, QString password_) {
+std::optional<User> DBAccountHandler::tryLogin(const QString &login_, const QString &password_) {
     QSqlQuery query(db);
     query.prepare("SELECT id, name, password, avatar, favourites FROM users WHERE login = :login;");
     query.bindValue(":login", login_);
@@ -395,6 +375,7 @@ std::optional<User> DBAccountHandler::tryLogin(QString login_, QString password_
 
     QSet<QString> favourites;
     QByteArray favouritesData = query.value("favourites").toByteArray();
+
     if (!favouritesData.isEmpty()) {
         QDataStream in(favouritesData);
         in >> favourites;
@@ -404,8 +385,7 @@ std::optional<User> DBAccountHandler::tryLogin(QString login_, QString password_
     return tmp;
 };
 
-
-bool DBAccountHandler::tryEditAvatar(QString login_, QPixmap avatar_) {
+bool DBAccountHandler::tryEditAvatar(const QPixmap &avatar_) {
     QByteArray byteArray;
     QBuffer buffer(&byteArray);
     buffer.open(QIODevice::WriteOnly);
@@ -418,14 +398,14 @@ bool DBAccountHandler::tryEditAvatar(QString login_, QPixmap avatar_) {
     query.bindValue(":login", CurUser::getInstance().getLogin());
 
     if (!query.exec()) {
-        qDebug() << "Ошибка выполнения запроса:" << query.lastError().text();
+        qDebug() << "Error while editing avatar:" << query.lastError().text();
         return false;
     }
-    qDebug() << "Изображение успешно добавлено в базу данных.";
+    qDebug() << "Avatar succesfully added to DataBase";
     return true;
 };
 
-bool DBAccountHandler::tryEditFavourites(QString login_, QSet<QString> favourites_) {
+bool DBAccountHandler::tryEditFavourites(const QSet<QString> &favourites_) {
     QByteArray byteArray;
     QDataStream out(&byteArray, QIODevice::WriteOnly);
     out << favourites_;
@@ -436,14 +416,14 @@ bool DBAccountHandler::tryEditFavourites(QString login_, QSet<QString> favourite
     query.bindValue(":login", CurUser::getInstance().getLogin());
 
     if (!query.exec()) {
-        qDebug() << "Ошибка выполнения запроса:" << query.lastError().text();
+        qDebug() << "Error while editing favourites:" << query.lastError().text();
         return false;
     }
-    qDebug() << "Изображение успешно добавлено в базу данных.";
+    qDebug() << "Favourites successfully edited";
     return true;
 };
 
-bool DBAccountHandler::tryDeleteAvatar(QString login_) {
+bool DBAccountHandler::tryDeleteAvatar() {
     QByteArray byteArray;
     QSqlQuery query;
     query.prepare("UPDATE users SET avatar = :avatar WHERE login = :login;");
@@ -451,22 +431,22 @@ bool DBAccountHandler::tryDeleteAvatar(QString login_) {
     query.bindValue(":login", CurUser::getInstance().getLogin());
 
     if (!query.exec()) {
-        qDebug() << "Ошибка выполнения запроса:" << query.lastError().text();
+        qDebug() << "Error while deleting avatar:" << query.lastError().text();
         return false;
     }
-    qDebug() << "Изображение успешно добавлено в базу данных.";
+    qDebug() << "Avatar successfully deleted";
     return true;
 };
 
-
-bool DBAccountHandler::tryDeleteAccount(QString login_) {
+bool DBAccountHandler::tryDeleteAccount() {
     QSqlQuery query(db);
     query.prepare("DELETE FROM users WHERE login = :login");
-    query.bindValue(":login", login_);
+    query.bindValue(":login", CurUser::getInstance().getLogin());
     if (!query.exec()) {
-        qDebug() << "Failed to delete user";
-        return false; // обработайте ошибку
+        qDebug() << "Error while deleting user:" << query.lastError().text();
+        return false;
     }
+    qDebug() << "User succesfully deleted";
     db.commit();
     return true;
 };
