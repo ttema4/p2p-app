@@ -8,8 +8,10 @@
 #include <unordered_map>
 #include <vector>
 #include "decimal/decimal.h"
+#include "nlohmann/json.hpp"
+#include <fstream>
 
-enum class Markets { bybit_simulator };
+enum class Markets { bybit_simulator, bybit };
 
 enum class Currencies { RUB };
 
@@ -45,28 +47,37 @@ struct order {
 
 struct market {
     Markets market_;
-    std::vector<std::string> market_payment_methods;
-    std::vector<std::unique_ptr<order>> orders;
-    std::unordered_map<Coins, std::unordered_map<Coins, dec::decimal<8>>>
-        spot_rates;
+    std::vector<nlohmann::json> json_orders;
+    nlohmann::json json_spot_rates;
 
     virtual ~market() = default;
-
-    virtual void update_market_orders() = 0;
-
-    virtual void update_spot_rates() = 0;
 
     virtual void update_market() = 0;
 };
 
 struct bybit_simulator : market {
+    std::vector<std::string> market_payment_methods;
+    std::vector<std::unique_ptr<order>> orders;
+    std::unordered_map<Coins, std::unordered_map<Coins, dec::decimal<8>>>
+        spot_rates;
     std::mt19937 gen;
 
     bybit_simulator();
 
-    void update_market_orders() override;
+    void update_market_orders();
 
-    void update_spot_rates() override;
+    void update_spot_rates();
+
+    void update_market() override;
+
+    void pack_in_json();
+};
+
+std::vector<std::string> local_bank_is(std::vector<std::string> &payment_methods
+);
+
+struct bybit : market {
+    bybit();
 
     void update_market() override;
 };

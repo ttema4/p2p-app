@@ -50,7 +50,7 @@ public:
                 // апдейта нет
                 std::string back;
                 std::ifstream file_of_orders;
-                file_of_orders.open("orders.json");
+                file_of_orders.open("/Users/data_market.json");
                 nlohmann::json json_orders{};
                 file_of_orders >> json_orders;
                 file_of_orders.close();
@@ -167,9 +167,11 @@ public:
 };
 
 int main(int, char **) {
-    auto fake_market = std::make_unique<bybit_simulator>();
+    // auto fake_market = std::make_unique<bybit_simulator>();
+    auto bybit_market = std::make_unique<bybit>();
     scraper scraper_;
-    scraper_.add_market(std::move(fake_market));
+    // scraper_.add_market(std::move(fake_market));
+    scraper_.add_market(std::move(bybit_market));
     std::thread t([&]() {
         while (true) {
             std::unique_lock l(m);
