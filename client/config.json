@@ -1,0 +1,12 @@
+{
+  "use_database": true,
+  "use_server": false,
+  "server_ip": "localhost",
+  "server_port": 12345,
+  "server_update_interval": 5,
+  "database_ip": "localhost",
+  "database_port": 3306,
+  "database_dataname": "p2p",
+  "database_username": "root",
+  "database_userpass": ""
+}

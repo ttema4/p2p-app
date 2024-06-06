@@ -1,8 +1,5 @@
 #include "windowhandler.h"
 #include "ui_windowhandler.h"
-#include "user.h"
-#include <QDebug>
-#include <QTimer>
 
 WindowHandler::WindowHandler(QWidget *parent) : QMainWindow(parent), ui(new Ui::WindowHandler) {
     ui->setupUi(this);
@@ -11,23 +8,56 @@ WindowHandler::WindowHandler(QWidget *parent) : QMainWindow(parent), ui(new Ui::
 }
 
 void WindowHandler::init() {
-    if (!DataReciever::getInstance().init()) {
-        ui->label_2->setText("Подключение к серверу... ❌");
-        qDebug() << "Ошибка подключения";
+    QFile configFile;
+    configFile.setFileName(":/config.json");
+
+    if (!configFile.open(QIODevice::ReadOnly)) {
+        ui->label_2->setText("Парсинг config.json...\tОшибка!");
+        qWarning() << "Failed to open config file";
         return;
     }
-    ui->label_2->setText("Подключение к серверу... ✅\nПодключение к БД...");
+
+    QTextStream in(&configFile);
+    QString configData = in.readAll();
+    configFile.close();
+
+    try {
+        nlohmann::json config = nlohmann::json::parse(configData.toStdString());
+        GlobalCondition::getInstance().setFromJson(config);
+    } catch (...) {
+        ui->label_2->setText("Парсинг config.json...\tОшибка!");
+        qWarning() << "Failed to parsing config file";
+        return;
+    }
+    ui->label_2->setText("Парсинг config.json...\tУспех!\nПодключение к серверу...");
+    qInfo() << "Successfully parsed config.json";
     QTimer::singleShot(100, this, &WindowHandler::init2);
 }
 
 void WindowHandler::init2() {
-    if (!CurUser::getInstance().init()) {
-        ui->label_2->setText("Подключение к серверу... ✅\nПодключение к БД... ❌");
-        qDebug() << "Ошибка подключения";
+    if (!DataReciever::getInstance().init()) {
+        ui->label_2->setText("Парсинг config.json...\tУспех!\nПодключение к серверу...\tОшибка!");
+        qWarning() << "Error while connecting to server";
         return;
     }
-    ui->label_2->setText("Подключение к серверу... ✅\nПодключение к БД... ✅");
+    ui->label_2->setText("Парсинг config.json...\tУспех!\nПодключение к серверу...\tУспех!\nПодключение к БД...");
+    QTimer::singleShot(100, this, &WindowHandler::init3);
+}
 
+void WindowHandler::init3() {
+    if (!CurUser::getInstance().init()) {
+        ui->label_2->setText(
+            "Парсинг config.json...\tУспех!\nПодключение к серверу...\tУспех!\nПодключение к БД...\tОшибка!"
+        );
+        qWarning() << "Error while connecting to dataBase";
+        return;
+    }
+    ui->label_2->setText("Парсинг config.json...\tУспех!\nПодключение к серверу...\tУспех!\nПодключение к БД...\tУспех!"
+    );
+    QTimer::singleShot(100, this, &WindowHandler::init4);
+}
+
+void WindowHandler::init4() {
     currentpage = this;
     homepage = new MainWindow();
     mypage = new MyPage();
@@ -87,12 +117,10 @@ void WindowHandler::init2() {
     QTimer::singleShot(1000, this, &WindowHandler::open_homepage);
 }
 
-
 void WindowHandler::windowChanger(QMainWindow *toOpen) {
     toOpen->show();
     toOpen->setGeometry(currentpage->geometry());
     currentpage->hide();
-    // if (toOpen == homepage) homepage->resizeTable();
     currentpage = toOpen;
 }
 

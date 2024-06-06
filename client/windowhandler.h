@@ -1,18 +1,21 @@
 #ifndef WINDOWHANDLER_H
 #define WINDOWHANDLER_H
 
+#include <QDebug>
+#include <QException>
+#include <QFile>
 #include <QMainWindow>
+#include <QTimer>
 #include "datareciever.h"
-#include "user.h"
-
+#include "favouritepage.h"
+#include "globalcondition.h"
+#include "loginpage.h"
 #include "mainwindow.h"
 #include "mypage.h"
-#include "loginpage.h"
-#include "registerpage.h"
 #include "notifypage.h"
-#include "favouritepage.h"
+#include "registerpage.h"
 #include "settingspage.h"
-#include "datareciever.h"
+#include "user.h"
 
 namespace Ui {
 class WindowHandler;
@@ -29,6 +32,8 @@ public:
 private:
     void init();
     void init2();
+    void init3();
+    void init4();
     void windowChanger(QMainWindow *toOpen);
 
     void open_mainwindow();
@@ -52,4 +57,4 @@ private:
     Ui::WindowHandler *ui;
 };
 
-#endif // WINDOWHANDLER_H
+#endif  // WINDOWHANDLER_H

@@ -27,7 +27,7 @@ void TextPixmapButton::initialize() {
     this->setLayout(layout);
 }
 
-TextPixmapButton::TextPixmapButton(const QString& text, QPixmap pixmap, QWidget *parent) : QPushButton(parent) {
+TextPixmapButton::TextPixmapButton(const QString &text, QPixmap pixmap, QWidget *parent) : QPushButton(parent) {
     initialize();
 
     text1_btn->setText(text);
@@ -35,14 +35,13 @@ TextPixmapButton::TextPixmapButton(const QString& text, QPixmap pixmap, QWidget 
     pixmapLabel->setPixmap(pixmap);
 }
 
-TextPixmapButton::TextPixmapButton(QWidget *parent) : QPushButton(parent){
+TextPixmapButton::TextPixmapButton(QWidget *parent) : QPushButton(parent) {
     initialize();
 
     text1_btn->setText("Войти");
     text2_btn->setText("Зарегистрироваться");
     pixmapLabel->hide();
 };
-
 
 bool TextPixmapButton::updateLayout() {
     if (CurUser::getInstance().getId() == -1) {

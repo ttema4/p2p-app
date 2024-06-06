@@ -8,8 +8,7 @@ namespace Ui {
 class NotifyPage;
 }
 
-class NotifyPage : public QMainWindow
-{
+class NotifyPage : public QMainWindow {
     Q_OBJECT
 
 public:
@@ -28,4 +27,4 @@ private:
     Ui::NotifyPage *ui;
 };
 
-#endif // NOTIFYPAGE_H
+#endif  // NOTIFYPAGE_H

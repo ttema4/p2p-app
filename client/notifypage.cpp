@@ -13,7 +13,6 @@ NotifyPage::NotifyPage(QWidget *parent) : QMainWindow(parent), ui(new Ui::Notify
     connect(menu, &HeaderMenu::settingsPage, this, &NotifyPage::settingsPage);
 }
 
-NotifyPage::~NotifyPage()
-{
+NotifyPage::~NotifyPage() {
     delete ui;
 }

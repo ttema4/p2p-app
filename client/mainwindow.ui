@@ -127,7 +127,7 @@
              <enum>Qt::LeftToRight</enum>
             </property>
             <property name="title">
-             <string>Фильтры</string>
+             <string/>
             </property>
             <property name="alignment">
              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -139,11 +139,17 @@
              <bool>false</bool>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_5">
+             <property name="spacing">
+              <number>20</number>
+             </property>
              <property name="leftMargin">
               <number>12</number>
              </property>
              <property name="rightMargin">
               <number>12</number>
+             </property>
+             <property name="bottomMargin">
+              <number>15</number>
              </property>
              <item>
               <widget class="QGroupBox" name="groupBox_2">
@@ -153,31 +159,68 @@
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="font">
+                <font>
+                 <pointsize>12</pointsize>
+                 <italic>false</italic>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true"/>
+               </property>
                <property name="title">
                 <string>Банк</string>
                </property>
                <property name="alignment">
-                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                <set>Qt::AlignCenter</set>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_6">
                 <item>
                  <widget class="QCheckBox" name="checkBox">
                   <property name="text">
-                   <string>Тиньк</string>
+                   <string>Сбербанк</string>
                   </property>
                  </widget>
                 </item>
                 <item>
                  <widget class="QCheckBox" name="checkBox_2">
                   <property name="text">
-                   <string>Сбер</string>
+                   <string>Тинькофф</string>
                   </property>
                  </widget>
                 </item>
                 <item>
                  <widget class="QCheckBox" name="checkBox_3">
                   <property name="text">
-                   <string>Альфа</string>
+                   <string>Альфа-Банк</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="checkBox_7">
+                  <property name="text">
+                   <string>Райффайзен</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="checkBox_8">
+                  <property name="text">
+                   <string>Газпром</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="checkBox_9">
+                  <property name="text">
+                   <string>ВТБ</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="checkBox_10">
+                  <property name="text">
+                   <string>СБП</string>
                   </property>
                  </widget>
                 </item>
@@ -186,8 +229,17 @@
              </item>
              <item>
               <widget class="QGroupBox" name="groupBox_3">
+               <property name="font">
+                <font>
+                 <pointsize>12</pointsize>
+                 <italic>false</italic>
+                </font>
+               </property>
                <property name="title">
                 <string>Биржи</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_9">
                 <item>
@@ -200,14 +252,7 @@
                 <item>
                  <widget class="QCheckBox" name="checkBox_5">
                   <property name="text">
-                   <string>BeriBit</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QCheckBox" name="checkBox_6">
-                  <property name="text">
-                   <string>Binance</string>
+                   <string>Bitget</string>
                   </property>
                  </widget>
                 </item>
@@ -216,8 +261,19 @@
              </item>
              <item>
               <widget class="QGroupBox" name="groupBox_4">
+               <property name="font">
+                <font>
+                 <pointsize>12</pointsize>
+                 <italic>false</italic>
+                 <underline>false</underline>
+                 <strikeout>false</strikeout>
+                </font>
+               </property>
                <property name="title">
                 <string>Объем сделки</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_10">
                 <item>
@@ -247,6 +303,12 @@
                     <verstretch>0</verstretch>
                    </sizepolicy>
                   </property>
+                  <property name="inputMethodHints">
+                   <set>Qt::ImhNone</set>
+                  </property>
+                  <property name="inputMask">
+                   <string/>
+                  </property>
                   <property name="placeholderText">
                    <string>До:</string>
                   </property>
@@ -259,6 +321,24 @@
               <widget class="QPushButton" name="pushButton">
                <property name="text">
                 <string>Применить</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButton_2">
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                 <italic>false</italic>
+                 <underline>true</underline>
+                 <strikeout>false</strikeout>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">background-color: transparent; border-style: none; color: rgb(77, 121, 233)</string>
+               </property>
+               <property name="text">
+                <string>Очистить</string>
                </property>
               </widget>
              </item>

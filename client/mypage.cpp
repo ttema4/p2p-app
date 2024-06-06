@@ -1,11 +1,5 @@
 #include "mypage.h"
 #include "ui_mypage.h"
-#include <QLabel>
-#include <QFrame>
-#include <QPushButton>
-#include <QPixmap>
-#include <QFileDialog>
-
 
 MyPage::MyPage(QWidget *parent) : QMainWindow(parent), ui(new Ui::MyPage) {
     ui->setupUi(this);
@@ -24,7 +18,9 @@ MyPage::MyPage(QWidget *parent) : QMainWindow(parent), ui(new Ui::MyPage) {
 }
 
 void MyPage::openFileAndSetPixmap() {
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Выберите фотографию"), QDir::homePath(), tr("Изображения (*.png *.jpg *.jpeg)"));
+    QString fileName = QFileDialog::getOpenFileName(
+        this, tr("Выберите фотографию"), QDir::homePath(), tr("Изображения (*.png *.jpg *.jpeg)")
+    );
 
     if (!fileName.isEmpty()) {
         QPixmap pixmap(fileName);
@@ -37,37 +33,37 @@ void MyPage::openFileAndSetPixmap() {
     }
 }
 
-
 void MyPage::resizeEvent(QResizeEvent *e) {
     menu->resizeMenu();
     QMainWindow::resizeEvent(e);
 }
 
 void MyPage::showEvent(QShowEvent *event) {
-    ui->label->setText("Id: " + QString::number(CurUser::getInstance().getId()) + "\nName: " + CurUser::getInstance().getName() + "\nLogin: " + CurUser::getInstance().getLogin() + "\nPassword: " + CurUser::getInstance().getPassword());
+    ui->label->setText(
+        "Id: " + QString::number(CurUser::getInstance().getId()) + "\nName: " + CurUser::getInstance().getName() +
+        "\nLogin: " + CurUser::getInstance().getLogin() +
+        "\nIn Favourite: " + QString::number(CurUser::getInstance().getFavourites().size())
+    );
     ui->label_2->setPixmap(CurUser::getInstance().getAvatar());
     menu->showEvent(event);
     QMainWindow::showEvent(event);
 }
 
 void MyPage::deleteAvatar() {
-    CurUser::getInstance().tryDeleteAvatar();
+    CurUser::getInstance().tryDelAvatar();
     this->showEvent(new QShowEvent());
 }
 
 void MyPage::deleteAccount() {
     CurUser::getInstance().tryDeleteAccount();
-    // menu->show();
     emit homePage();
 }
 
 void MyPage::exitAccount() {
-    CurUser::getInstance().tryExit();
-    // menu->show();
+    CurUser::getInstance().userExit();
     emit homePage();
 }
 
-MyPage::~MyPage()
-{
+MyPage::~MyPage() {
     delete ui;
 }
