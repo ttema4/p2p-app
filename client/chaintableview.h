@@ -1,36 +1,40 @@
 #ifndef CHAINTABLEVIEW_H
 #define CHAINTABLEVIEW_H
 
-
-#include "logic_fwd.h"
-#include <QObject>
-#include <QWidget>
-#include <QVector>
+#include <QFont>
+#include <QHBoxLayout>
+#include <QIcon>
 #include <QLabel>
+#include <QMap>
+#include <QObject>
+#include <QPair>
+#include <QPixmap>
+#include <QScrollArea>
+#include <QScrollBar>
+#include <QSet>
+#include <QSizePolicy>
+#include <QSpacerItem>
 #include <QTableWidget>
 #include <QTableWidgetItem>
-#include <QScrollArea>
 #include <QVBoxLayout>
-#include <QHBoxLayout>
-#include <QSet>
-#include <QPair>
+#include <QVector>
+#include <QWidget>
+#include <algorithm>
+#include <limits>
+#include "logic_fwd.h"
 
-enum class SortType {
-    none,
-    up,
-    down
-};
+enum class SortType { none, up, down };
 
 class TableOrderWidget : public QWidget {
     Q_OBJECT
 public:
-    TableOrderWidget(Order& ord, QWidget *parent = nullptr);
+    TableOrderWidget(Order &ord, QWidget *parent = nullptr);
 };
 
 class TableChangeWidget : public QLabel {
     Q_OBJECT
 public:
-    TableChangeWidget(std::pair<std::string, std::string>& change, QWidget *parent = nullptr);
+    TableChangeWidget(std::pair<std::string, std::string> &change, QWidget *parent = nullptr);
 };
 
 class TableIndexWidget : public QLabel {
@@ -59,7 +63,8 @@ class ChainTableView : public QWidget {
 public:
     ChainTableView(QWidget *parent = nullptr);
     void setData(QVector<Chain> data);
-    void setFilters(QSet<QString> &selectedBanks, QSet<QString> &selectedMarkets, QPair<double, double> &selectedMinMax);
+    void
+    setFilters(QSet<QString> &selectedBanks, QSet<QString> &selectedMarkets, QPair<double, double> &selectedMinMax);
     void updateTable();
 
     void resizeTable();
@@ -86,4 +91,4 @@ private:
     QPair<double, double> filterMinMax;
 };
 
-#endif // CHAINTABLEVIEW_H
+#endif  // CHAINTABLEVIEW_H

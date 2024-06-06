@@ -6,6 +6,7 @@
 #include <QBitmap>
 #include <QBuffer>
 #include <QByteArray>
+#include <QCryptographicHash>
 #include <QDebug>
 #include <QException>
 #include <QMap>
@@ -13,7 +14,9 @@
 #include <QPixmap>
 #include <QSet>
 #include <QSqlDriverPlugin>
+#include <QSqlError>
 #include <QString>
+#include <QUuid>
 #include <QVector>
 #include <QtPlugin>
 #include <QtSql>
@@ -26,8 +29,13 @@ struct AccountHandler;
 class User {
 public:
     User();
-    User(const QString &name_, const QString &login_, const QString &password_);  // for LocalAccountHendler
-    User(const int id, const QString &name_, const QString &login_, const QString &password_);  // for DBAccountHandler
+    explicit User(const QString &name_, const QString &login_, const QString &password_);  // for LocalAccountHendler
+    explicit User(
+        const int id,
+        const QString &name_,
+        const QString &login_,
+        const QString &password_
+    );  // for DBAccountHandler
 
     [[nodiscard]] int getId() const {
         return id;
@@ -160,8 +168,11 @@ public:
     virtual std::optional<User> tryRegister(const QString &name_, const QString &login_, const QString &password_) = 0;
     virtual std::optional<User> tryLogin(const QString &login_, const QString &password_) = 0;
 
+    virtual bool tryEditName(const QString &newName) = 0;
+    virtual bool tryEditPassword(const QString &newPassword) = 0;
     virtual bool tryEditAvatar(const QPixmap &avatar_ = QPixmap()) = 0;
     virtual bool tryEditFavourites(const QSet<QString> &favourites_) = 0;
+
     virtual bool tryDeleteAvatar() = 0;
     virtual bool tryDeleteAccount() = 0;
 
@@ -176,8 +187,11 @@ public:
     std::optional<User> tryRegister(const QString &name_, const QString &login_, const QString &password_) final;
     std::optional<User> tryLogin(const QString &login_, const QString &password_) final;
 
+    bool tryEditName(const QString &newName) final;
+    bool tryEditPassword(const QString &newPassword) final;
     bool tryEditAvatar(const QPixmap &avatar_ = QPixmap()) final;
     bool tryEditFavourites(const QSet<QString> &favourites_) final;
+
     bool tryDeleteAvatar() final;
     bool tryDeleteAccount() final;
 
@@ -196,8 +210,11 @@ public:
     std::optional<User> tryRegister(const QString &name_, const QString &login_, const QString &password_) final;
     std::optional<User> tryLogin(const QString &login_, const QString &password_) final;
 
+    bool tryEditName(const QString &newName) final;
+    bool tryEditPassword(const QString &newPassword) final;
     bool tryEditAvatar(const QPixmap &avatar_ = QPixmap()) final;
     bool tryEditFavourites(const QSet<QString> &favourites_) final;
+
     bool tryDeleteAvatar() final;
     bool tryDeleteAccount() final;
 

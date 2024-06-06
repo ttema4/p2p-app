@@ -1,11 +1,5 @@
 #include "windowhandler.h"
 #include "ui_windowhandler.h"
-#include "user.h"
-#include <QDebug>
-#include <QTimer>
-#include <QFile>
-#include <QException>
-
 
 WindowHandler::WindowHandler(QWidget *parent) : QMainWindow(parent), ui(new Ui::WindowHandler) {
     ui->setupUi(this);
@@ -52,11 +46,14 @@ void WindowHandler::init2() {
 
 void WindowHandler::init3() {
     if (!CurUser::getInstance().init()) {
-        ui->label_2->setText("Парсинг config.json...\tУспех!\nПодключение к серверу...\tУспех!\nПодключение к БД...\tОшибка!");
+        ui->label_2->setText(
+            "Парсинг config.json...\tУспех!\nПодключение к серверу...\tУспех!\nПодключение к БД...\tОшибка!"
+        );
         qWarning() << "Error while connecting to dataBase";
         return;
     }
-    ui->label_2->setText("Парсинг config.json...\tУспех!\nПодключение к серверу...\tУспех!\nПодключение к БД...\tУспех!");
+    ui->label_2->setText("Парсинг config.json...\tУспех!\nПодключение к серверу...\tУспех!\nПодключение к БД...\tУспех!"
+    );
     QTimer::singleShot(100, this, &WindowHandler::init4);
 }
 
@@ -119,7 +116,6 @@ void WindowHandler::init4() {
 
     QTimer::singleShot(1000, this, &WindowHandler::open_homepage);
 }
-
 
 void WindowHandler::windowChanger(QMainWindow *toOpen) {
     toOpen->show();

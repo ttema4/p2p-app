@@ -1,21 +1,18 @@
 #ifndef HEADERMENU_H
 #define HEADERMENU_H
 
-#include "textpixmapbutton.h"
-#include "user.h"
-#include <QWidget>
-#include <QLabel>
 #include <QFrame>
-#include <QPushButton>
-#include <QPropertyAnimation>
+#include <QGraphicsDropShadowEffect>
 #include <QHBoxLayout>
 #include <QLabel>
-#include <QFrame>
+#include <QPropertyAnimation>
 #include <QPushButton>
 #include <QShowEvent>
+#include <QWidget>
+#include "textpixmapbutton.h"
+#include "user.h"
 
-class HeaderMenu : public QWidget
-{
+class HeaderMenu : public QWidget {
     Q_OBJECT
 public:
     explicit HeaderMenu(QString center_text_, QWidget *parent = nullptr);
@@ -31,6 +28,7 @@ public:
 
     void showEvent(QShowEvent *event) override;
     void hideEvent(QHideEvent *event) override;
+
 protected:
     void resizeEvent(QResizeEvent *event) override;
 
@@ -65,4 +63,4 @@ private:
     QPropertyAnimation *anim;
 };
 
-#endif // HEADERMENU_H
+#endif  // HEADERMENU_H

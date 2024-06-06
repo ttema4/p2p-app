@@ -1,9 +1,14 @@
 #ifndef WINDOWHANDLER_H
 #define WINDOWHANDLER_H
 
+#include <QDebug>
+#include <QException>
+#include <QFile>
 #include <QMainWindow>
+#include <QTimer>
 #include "datareciever.h"
 #include "favouritepage.h"
+#include "globalcondition.h"
 #include "loginpage.h"
 #include "mainwindow.h"
 #include "mypage.h"
@@ -11,7 +16,6 @@
 #include "registerpage.h"
 #include "settingspage.h"
 #include "user.h"
-#include "globalcondition.h"
 
 namespace Ui {
 class WindowHandler;

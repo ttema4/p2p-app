@@ -1,37 +1,51 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "mypage.h"
-#include "headermenu.h"
-#include "loginpage.h"
-#include "registerpage.h"
-#include "notifypage.h"
-#include "favouritepage.h"
-#include "settingspage.h"
-#include "datareciever.h"
-#include "chaintableview.h"
-#include "logic_fwd.h"
-#include "chainmonitor.h"
-
-#include <QMainWindow>
-#include <QFrame>
-#include <QPropertyAnimation>
-#include <QVector>
+#include <QApplication>
+#include <QDebug>
 #include <QFocusEvent>
-#include <QPushButton>
+#include <QFrame>
 #include <QHBoxLayout>
+#include <QIcon>
 #include <QLabel>
+#include <QMainWindow>
+#include <QMouseEvent>
 #include <QPainter>
+#include <QPair>
+#include <QParallelAnimationGroup>
+#include <QPixmap>
+#include <QPropertyAnimation>
+#include <QPushButton>
+#include <QResizeEvent>
+#include <QSet>
 #include <QStyle>
 #include <QStyleOptionButton>
-#include <QTimer>
 #include <QTime>
-
+#include <QTimer>
+#include <QVBoxLayout>
+#include <QValidator>
+#include <QVector>
+#include <QWidget>
+#include <limits>
+#include "chainmonitor.h"
+#include "chaintableview.h"
+#include "datareciever.h"
+#include "favouritepage.h"
+#include "headermenu.h"
+#include "logic_fwd.h"
+#include "loginpage.h"
+#include "mypage.h"
+#include "notifypage.h"
+#include "registerpage.h"
+#include "settingspage.h"
+#include "user.h"
 
 QT_BEGIN_NAMESPACE
+
 namespace Ui {
 class MainWindow;
 }
+
 QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow {
@@ -75,7 +89,7 @@ private:
     void onCellClicked(Chain &chain);
     void chainMonitorHide();
 
-    HeaderMenu* menu;
+    HeaderMenu *menu;
 
     MyPage *mypage;
     LoginPage *loginpage;
@@ -95,4 +109,4 @@ private:
     bool chainMonitorOpen;
     Ui::MainWindow *ui;
 };
-#endif // MAINWINDOW_H
+#endif  // MAINWINDOW_H

@@ -1,13 +1,13 @@
 #ifndef GLOBALCONDITION_H
 #define GLOBALCONDITION_H
 
-#include <string>
-#include <nlohmann/json.hpp>
 #include <QException>
+#include <nlohmann/json.hpp>
+#include <string>
 
 struct GlobalCondition {
     static GlobalCondition &getInstance();
-    void setFromJson(const nlohmann::json& json);
+    void setFromJson(const nlohmann::json &json);
 
     bool use_database;
     bool use_server;

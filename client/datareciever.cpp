@@ -1,7 +1,5 @@
 #include "datareciever.h"
 
-// checked
-
 // LocalClient
 void LocalClient::start() {
     check_updates();
@@ -95,10 +93,10 @@ void ServerClient::do_connect(const boost::asio::ip::tcp::resolver::results_type
     boost::system::error_code ec;
     boost::asio::connect(socket, endpoints, ec);
     if (ec) {
-        qDebug() << "Error while connecting to server:" << ec.what();
+        qCritical() << "Error while connecting to server:" << ec.what();
         throw QException();
     }
-    qDebug() << "Successfully connected to server";
+    qInfo() << "Successfully connected to server";
 }
 
 void ServerClient::start() {
@@ -119,15 +117,12 @@ void ServerClient::start_check_updates() {
 
 void ServerClient::send_request(const std::string &request) {
     qDebug() << "Sending request: " << request;
-    async_write(
-        socket, boost::asio::buffer(request + "\n"),
-        [this](boost::system::error_code ec, std::size_t /*length*/) {
-            if (ec) {
-                qDebug() << "Error while sending request:" << QString::fromStdString(ec.message());
-                emit error(QString("Error sending request: ") + QString::fromStdString(ec.message()));
-            }
+    async_write(socket, boost::asio::buffer(request + "\n"), [this](boost::system::error_code ec, std::size_t) {
+        if (ec) {
+            qWarning() << "Error while sending request:" << QString::fromStdString(ec.message());
+            emit error(QString("Error sending request: ") + QString::fromStdString(ec.message()));
         }
-    );
+    });
 }
 
 void ServerClient::start_receive() {
@@ -136,12 +131,10 @@ void ServerClient::start_receive() {
             std::istream response_stream(&response);
             std::string response;
             std::getline(response_stream, response);
-            qDebug() << "Recieved response with len" << QString::number(response.size())
-                     << "First 10:" << QString::fromStdString(response).left(10);
             emit dataRecieved(QString::fromStdString(response));
             start_receive();
         } else {
-            qDebug() << "Error while recieving response:" << QString::fromStdString(ec.message());
+            qWarning() << "Error while recieving response:" << QString::fromStdString(ec.message());
             emit error(QString("Error while receiving response: ") + QString::fromStdString(ec.message()));
         }
     });
@@ -164,7 +157,9 @@ bool DataReciever::init() {
     if (GlobalCondition::getInstance().use_server) {
         try {
             ip::tcp::resolver resolver(cli_io_context);
-            auto endpoints = resolver.resolve(GlobalCondition::getInstance().server_ip, std::to_string(GlobalCondition::getInstance().server_port));
+            auto endpoints = resolver.resolve(
+                GlobalCondition::getInstance().server_ip, std::to_string(GlobalCondition::getInstance().server_port)
+            );
             client = new ServerClient(cli_io_context, endpoints);
         } catch (QException e) {
             return false;
@@ -172,16 +167,21 @@ bool DataReciever::init() {
     } else {
         client = new LocalClient(cli_io_context);
     }
-    qDebug() << "Successfully init DataReciever";
+    qInfo() << "Successfully init DataReciever";
     connect(client, &Client::error, this, &DataReciever::error);
     connect(client, &Client::dataRecieved, this, &DataReciever::recieveNewChain);
     return true;
 }
 
 void DataReciever::recieveNewChain(const QString &response) {
-    if (response != "No updates\r" && response != "Hello World!") {
+    if (response != "No updates\r") {
+        qInfo() << "Recieved response";
+        qDebug() << "Recieved response with len" << QString::number(response.size())
+                 << "First 10:" << response.left(10);
         QVector<Chain> chains = nlohmann::json::parse(response.toStdString()).get<QVector<Chain>>();
         emit dataParsed(chains);
+    } else {
+        qDebug() << "Recieved null response [no update]";
     }
 }
 

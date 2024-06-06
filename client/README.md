@@ -1,7 +1,7 @@
 # Дисклеймер
 * Приложение пишется, собирается и тестируется под MacOS 14.
 * Стек технологий: Qt6, NLohmann, MySQL, Boost::asio.
-* Настройки - config.h.
+* Настройки - config.json.
 
 # Состояние на сегодняшний день:
 * Работает полноценно верхнее меню, таблица связок и система авторизации.
@@ -21,11 +21,10 @@
 
 # Как собирать?
 ``` shell
-cd client/ && cmake -B build && cmake --build build && cmake --install build
+cd client/ && cmake -B build && cmake --build build && cmake --install build --target run 
 ```
-и запускаем p2p-app!
 
-# Если выбрали в config.hpp использование БД:
+# Если выбрали в config.json использование БД:
 * Установите `mysql`
 * Запустите SQL-скрипт:
   ``` sql
@@ -35,7 +34,8 @@ cd client/ && cmake -B build && cmake --build build && cmake --install build
     login VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     favourites MEDIUMBLOB NULL,
-    avatar MEDIUMBLOB NULL 
+    avatar MEDIUMBLOB NULL,
+    salt VARCHAR(64) NOT NULL;
   ); 
   ```
-* Настройте файл `config.h`
+* Настройте файл `config.json`

@@ -1,32 +1,12 @@
 #include "mainwindow.h"
-#include "user.h"
 #include "ui_mainwindow.h"
-#include "chaintableview.h"
-#include <QWidget>
-#include <QResizeEvent>
-#include <QDebug>
-#include <QPixmap>
-#include <QIcon>
-#include <QApplication>
-#include <QWidget>
-#include <QPushButton>
-#include <QVBoxLayout>
-#include <QHBoxLayout>
-#include <QFrame>
-#include <QPropertyAnimation>
-#include <QParallelAnimationGroup>
-#include <QPixmap>
-#include <QMouseEvent>
-#include <QVBoxLayout>
-#include <QVector>
-#include <QValidator>
-#include <QSet>
-#include <QPair>
-#include <limits>
 
 void MainWindow::filterHidden() {
     bool checked = ui->hideButton->isChecked();
-    ui->hideButton->setStyleSheet(checked ? "border-image: url(:/resourses/icons/left-arrow.png);" : "border-image: url(:/resourses/icons/right-arrow.png);");
+    ui->hideButton->setStyleSheet(
+        checked ? "border-image: url(:/resourses/icons/left-arrow.png);"
+                : "border-image: url(:/resourses/icons/right-arrow.png);"
+    );
 }
 
 void MainWindow::showFilters() {
@@ -39,37 +19,38 @@ void MainWindow::showFilters() {
 }
 
 void MainWindow::applyFilters() {
-    QMap<QString, QString> banks{{"Сбербанк", "Sber"},
-                                 {"Тинькофф", "Tinkoff"},
-                                 {"Альфа-Банк", "Alpha"},
-                                 {"Райффайзен", "Raif"},
-                                 {"Газпром", "Gasprom"},
-                                 {"ВТБ", "VTB"},
+    QMap<QString, QString> banks{{"Сбербанк", "Sber"},   {"Тинькофф", "Tinkoff"}, {"Альфа-Банк", "Alpha"},
+                                 {"Райффайзен", "Raif"}, {"Газпром", "Gasprom"},  {"ВТБ", "VTB"},
                                  {"СБП", "SBP"}};
 
     QSet<QString> selectedBanks, selectedMarkets;
     QPair<double, double> selectedMinMax;
 
-    foreach (QCheckBox *checkBox, ui->groupBox_2->findChildren<QCheckBox*>()) {
-        if (checkBox->isChecked()) selectedBanks.insert(banks[checkBox->text()]);
+    foreach (QCheckBox *checkBox, ui->groupBox_2->findChildren<QCheckBox *>()) {
+        if (checkBox->isChecked()) {
+            selectedBanks.insert(banks[checkBox->text()]);
+        }
     }
 
-    foreach (QCheckBox *checkBox, ui->groupBox_3->findChildren<QCheckBox*>()) {
-        if (checkBox->isChecked()) selectedMarkets.insert(checkBox->text());
+    foreach (QCheckBox *checkBox, ui->groupBox_3->findChildren<QCheckBox *>()) {
+        if (checkBox->isChecked()) {
+            selectedMarkets.insert(checkBox->text());
+        }
     }
 
     selectedMinMax.first = (ui->lineEdit->text() != "") ? ui->lineEdit->text().toDouble() : 0;
-    selectedMinMax.second = (ui->lineEdit_2->text() != "") ? ui->lineEdit_2->text().toDouble() : std::numeric_limits<double>::max();
+    selectedMinMax.second =
+        (ui->lineEdit_2->text() != "") ? ui->lineEdit_2->text().toDouble() : std::numeric_limits<double>::max();
 
     chainTable->setFilters(selectedBanks, selectedMarkets, selectedMinMax);
 }
 
 void MainWindow::resetFilters() {
-    foreach (QCheckBox *checkBox, ui->groupBox_2->findChildren<QCheckBox*>()) {
+    foreach (QCheckBox *checkBox, ui->groupBox_2->findChildren<QCheckBox *>()) {
         checkBox->setChecked(false);
     }
 
-    foreach (QCheckBox *checkBox, ui->groupBox_3->findChildren<QCheckBox*>()) {
+    foreach (QCheckBox *checkBox, ui->groupBox_3->findChildren<QCheckBox *>()) {
         checkBox->setChecked(false);
     }
 
@@ -80,20 +61,29 @@ void MainWindow::resetFilters() {
 }
 
 void MainWindow::chainMonitorHide() {
-    foreach (QWidget *widget, this->findChildren<QWidget*>()) {
+    foreach (QWidget *widget, this->findChildren<QWidget *>()) {
         widget->setEnabled(true);
     }
     chainMonitorOpen = false;
 }
 
 void MainWindow::onCellClicked(Chain &chain) {
-    if (menu->isMenuVisible()) { menu->showMenu(); return; }
-    if (chainMonitorOpen) { chainmonitor->close(); return; }
-    foreach (QWidget *widget, this->findChildren<QWidget*>()) {
+    if (menu->isMenuVisible()) {
+        menu->showMenu();
+        return;
+    }
+    if (chainMonitorOpen) {
+        chainmonitor->close();
+        return;
+    }
+    foreach (QWidget *widget, this->findChildren<QWidget *>()) {
         widget->setEnabled(false);
     }
     chainmonitor = new ChainMonitor(this, chain);
-    chainmonitor->move(QPoint(this->size().width() / 2 - chainmonitor->size().width() / 2, this->size().height() / 2 - chainmonitor->size().height() / 2));
+    chainmonitor->move(QPoint(
+        this->size().width() / 2 - chainmonitor->size().width() / 2,
+        this->size().height() / 2 - chainmonitor->size().height() / 2
+    ));
     chainmonitor->setWindowModality(Qt::ApplicationModal);
     chainMonitorOpen = true;
     connect(chainmonitor, &ChainMonitor::monitorClosed, this, &MainWindow::chainMonitorHide);
@@ -108,7 +98,6 @@ void MainWindow::updateTable(QVector<Chain> new_chains) {
 
     CurUser::getInstance().setCurrentChains(new_chains);
     chainTable->setData(std::move(new_chains));
-
 }
 
 bool MainWindow::eventFilter(QObject *target, QEvent *event) {
@@ -154,14 +143,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->lineEdit_2->installEventFilter(this);
     ui->hideButton->installEventFilter(this);
 
-
     connect(menu, &HeaderMenu::myPage, this, &MainWindow::myPage);
     connect(menu, &HeaderMenu::loginPage, this, &MainWindow::loginPage);
     connect(menu, &HeaderMenu::registerPage, this, &MainWindow::registerPage);
     connect(menu, &HeaderMenu::notifyPage, this, &MainWindow::notifyPage);
     connect(menu, &HeaderMenu::favouritePage, this, &MainWindow::favouritePage);
     connect(menu, &HeaderMenu::settingsPage, this, &MainWindow::settingsPage);
-
 
     // Настройка бокового меню
     connect(ui->hideButton, &QToolButton::toggled, this, &MainWindow::showFilters);
@@ -173,13 +160,15 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     sizeAnim->addAnimation(new QPropertyAnimation(ui->widget_2, "maximumWidth"));
 
     for (int i = 0; i < sizeAnim->animationCount(); ++i) {
-        QPropertyAnimation *animation = qobject_cast<QPropertyAnimation*>(sizeAnim->animationAt(i));
+        QPropertyAnimation *animation = qobject_cast<QPropertyAnimation *>(sizeAnim->animationAt(i));
         animation->setDuration(500);
         animation->setStartValue(0);
         animation->setEndValue(ui->widget_2->maximumWidth());
     }
 
-    ui->pushButton->setStyleSheet("background-color: #FCFCFC; border-radius: 6px; border: 1px solid #bebebe; font: 12px; padding: 4px;");
+    ui->pushButton->setStyleSheet(
+        "background-color: #FCFCFC; border-radius: 6px; border: 1px solid #bebebe; font: 12px; padding: 4px;"
+    );
     ui->lineEdit->setStyleSheet("background-color: #FCFCFC; border-radius: 4px; border: 1px solid #bebebe");
     ui->lineEdit_2->setStyleSheet("background-color: #FCFCFC; border-radius: 4px; border: 1px solid #bebebe");
 
@@ -194,7 +183,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
         QString timeString;
         if (minutes > 0) {
-            timeString = QString("Last update %1m %2s ago").arg(minutes).arg(seconds);
+            timeString = QString("Last update %1m %2s ago").arg(minutes, seconds);
         } else {
             timeString = QString("Last update %1s ago").arg(seconds);
         }
@@ -211,7 +200,6 @@ void MainWindow::resizeEvent(QResizeEvent *e) {
 
     QMainWindow::resizeEvent(e);
 }
-
 
 MainWindow::~MainWindow() {
     delete ui;

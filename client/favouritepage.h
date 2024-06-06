@@ -1,18 +1,17 @@
 #ifndef FAVOURITEPAGE_H
 #define FAVOURITEPAGE_H
 
-#include <QMainWindow>
-#include "headermenu.h"
-#include "chaintableview.h"
-#include "chainmonitor.h"
 #include <QEvent>
+#include <QMainWindow>
+#include "chainmonitor.h"
+#include "chaintableview.h"
+#include "headermenu.h"
 
 namespace Ui {
 class FavouritePage;
 }
 
-class FavouritePage : public QMainWindow
-{
+class FavouritePage : public QMainWindow {
     Q_OBJECT
 
 public:
@@ -46,4 +45,4 @@ private:
     Ui::FavouritePage *ui;
 };
 
-#endif // FAVOURITEPAGE_H
+#endif  // FAVOURITEPAGE_H

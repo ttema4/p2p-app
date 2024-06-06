@@ -1,9 +1,6 @@
 #include "favouritepage.h"
 #include "ui_favouritepage.h"
 
-#include "chainmonitor.h"
-#include "chaintableview.h"
-
 FavouritePage::FavouritePage(QWidget *parent) : QMainWindow(parent), ui(new Ui::FavouritePage) {
     ui->setupUi(this);
     chainMonitorOpen = false;
@@ -38,20 +35,29 @@ void FavouritePage::clearFavourites() {
 }
 
 void FavouritePage::chainMonitorHide() {
-    foreach (QWidget *widget, this->findChildren<QWidget*>()) {
+    foreach (QWidget *widget, this->findChildren<QWidget *>()) {
         widget->setEnabled(true);
     }
     chainMonitorOpen = false;
 }
 
 void FavouritePage::onCellClicked(Chain &chain) {
-    if (menu->isMenuVisible()) { menu->showMenu(); return; }
-    if (chainMonitorOpen) { chainmonitor->close(); return; }
-    foreach (QWidget *widget, this->findChildren<QWidget*>()) {
+    if (menu->isMenuVisible()) {
+        menu->showMenu();
+        return;
+    }
+    if (chainMonitorOpen) {
+        chainmonitor->close();
+        return;
+    }
+    foreach (QWidget *widget, this->findChildren<QWidget *>()) {
         widget->setEnabled(false);
     }
     chainmonitor = new ChainMonitor(this, chain);
-    chainmonitor->move(QPoint(this->size().width() / 2 - chainmonitor->size().width() / 2, this->size().height() / 2 - chainmonitor->size().height() / 2));
+    chainmonitor->move(QPoint(
+        this->size().width() / 2 - chainmonitor->size().width() / 2,
+        this->size().height() / 2 - chainmonitor->size().height() / 2
+    ));
     chainmonitor->setWindowModality(Qt::ApplicationModal);
     chainMonitorOpen = true;
     connect(chainmonitor, &ChainMonitor::monitorClosed, this, &FavouritePage::chainMonitorHide);
@@ -60,16 +66,22 @@ void FavouritePage::onCellClicked(Chain &chain) {
 
 void FavouritePage::updateTable() {
     QVector<Chain> favouriteChains;
-    // qDebug() << CurUser::getInstance().getCurrentChains().size() << CurUser::getInstance().getFavourites().size();
     foreach (Chain c, CurUser::getInstance().getCurrentChains()) {
-        QString chainHash = QString::fromStdString(c.buy.coin1 + c.buy.coin2 + c.buy.market +  c.sell.coin1 + c.sell.coin2 + c.sell.market);
-        if (CurUser::getInstance().getFavourites().contains(chainHash)) favouriteChains.push_back(c);
+        QString chainHash = QString::fromStdString(
+            c.buy.coin1 + c.buy.coin2 + c.buy.market + c.sell.coin1 + c.sell.coin2 + c.sell.market
+        );
+        if (CurUser::getInstance().getFavourites().contains(chainHash)) {
+            favouriteChains.push_back(c);
+        }
     }
 
     chainTable->setData(favouriteChains);
 
     if (CurUser::getInstance().getId() != -1) {
-        ui->label->setText("Актуальны " + QString::number(favouriteChains.size()) + " из " + QString::number(CurUser::getInstance().getFavourites().size()) + " связок!");
+        ui->label->setText(
+            "Актуальны " + QString::number(favouriteChains.size()) + " из " +
+            QString::number(CurUser::getInstance().getFavourites().size()) + " связок!"
+        );
     } else {
         ui->label->setText("Для просмотра избранного войдите/зарегистрируйтесь!");
     }
@@ -93,7 +105,6 @@ bool FavouritePage::eventFilter(QObject *target, QEvent *event) {
     return false;
 }
 
-FavouritePage::~FavouritePage()
-{
+FavouritePage::~FavouritePage() {
     delete ui;
 }

@@ -1,13 +1,14 @@
 #ifndef CHAINMONITOR_H
 #define CHAINMONITOR_H
 
+#include <QDialog>
+#include <QGraphicsDropShadowEffect>
+#include <QMouseEvent>
+#include <QPushButton>
+#include <QString>
+#include <QWidget>
 #include "logic_fwd.h"
 #include "user.h"
-
-#include <QWidget>
-#include <QDialog>
-#include <QMouseEvent>
-#include <QString>
 
 namespace Ui {
 class ChainMonitor;
@@ -37,4 +38,4 @@ private:
     Ui::ChainMonitor *ui;
 };
 
-#endif // CHAINMONITOR_H
+#endif  // CHAINMONITOR_H
