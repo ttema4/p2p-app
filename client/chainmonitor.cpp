@@ -35,7 +35,7 @@ ChainMonitor::ChainMonitor(QWidget *parent, Chain c) : QWidget(parent), ui(new U
 
     QString lbl1 = QString(
                        "<p style='line-height: 150%;'><b>Coin 1:</b> %1<br><b>Coin 2:</b> %2<br><b>Market:</b> "
-                       "%3<br><b>Exchange rate:</b> %4<br><b>Banks:</b> %5"
+                       "%3<br><b>Exchange rate:</b> %4 RUB<br><b>Banks:</b> %5"
     )
                        .arg(
                            QString::fromStdString(c.buy.coin1), QString::fromStdString(c.buy.coin2),
@@ -45,7 +45,7 @@ ChainMonitor::ChainMonitor(QWidget *parent, Chain c) : QWidget(parent), ui(new U
     for (int i = 1; i < c.buy.banks.size(); i++) {
         lbl1 += (", " + c.buy.banks[i]);
     }
-    lbl1 += QString("<br><b>Min-max:</b> %1-%2<br><b>Seller rating:</b> %3</p>")
+    lbl1 += QString("<br><b>Min Volume:</b> %1 RUB<br><b>Max Volume:</b> %2 RUB<br><b>Seller rating:</b> %3</p>")
                 .arg(
                     QString::number(c.buy.min_max.first), QString::number(c.buy.min_max.second),
                     QString::number(c.buy.seller_rating, 'f', 2)
@@ -55,7 +55,7 @@ ChainMonitor::ChainMonitor(QWidget *parent, Chain c) : QWidget(parent), ui(new U
 
     QString lbl2 = QString(
                        "<p style='line-height: 150%;'><b>Coin 1:</b> %1<br><b>Coin 2:</b> %2<br><b>Market:</b> "
-                       "%3<br><b>Exchange rate:</b> %4<br><b>Banks:</b> %5"
+                       "%3<br><b>Exchange rate:</b> %4 RUB<br><b>Banks:</b> %5"
     )
                        .arg(
                            QString::fromStdString(c.sell.coin2), QString::fromStdString(c.sell.coin1),
@@ -65,7 +65,7 @@ ChainMonitor::ChainMonitor(QWidget *parent, Chain c) : QWidget(parent), ui(new U
     for (int i = 1; i < c.sell.banks.size(); i++) {
         lbl2 += (", " + c.sell.banks[i]);
     }
-    lbl2 += QString("<br><b>Min-max:</b> %1-%2<br><b>Seller rating:</b> %3</p>")
+    lbl2 += QString("<br><b>Min Volume:</b> %1 RUB<br><b>Max Volume:</b> %2 RUB<br><b>Seller rating:</b> %3</p>")
                 .arg(
                     QString::number(c.sell.min_max.first), QString::number(c.sell.min_max.second),
                     QString::number(c.sell.seller_rating, 'f', 2)

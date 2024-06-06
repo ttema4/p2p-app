@@ -21,7 +21,7 @@ Chain LocalClient::getFakeChain() {
     std::string fake_market1 = markets[gen() % markets.size()];
     std::string fake_id1 = ids[gen() % ids.size()];
     double fake_rating1 = static_cast<double>(gen() % 500) / 100;
-    std::string fake_coin11 = "USDT";
+    std::string fake_coin11 = "RUB";
     std::string fake_coin21 = coins[gen() % coins.size()];
     std::vector<std::string> fake_bank1 = std::vector<std::string>{(banks[gen() % banks.size()])};
     std::pair<int, int> fake_min_max1 = {gen() % 100, gen() % 1000000 + 100};
@@ -36,8 +36,7 @@ Chain LocalClient::getFakeChain() {
     std::string fake_market2 = markets[gen() % markets.size()];
     std::string fake_id2 = ids[gen() % ids.size()];
     double fake_rating2 = static_cast<double>(gen() % 500) / 100;
-    ;
-    std::string fake_coin12 = "USDT";
+    std::string fake_coin12 = "RUB";
     std::string fake_coin22 = coins[gen() % coins.size()];
     std::vector<std::string> fake_bank2 = std::vector<std::string>{(banks[gen() % banks.size()])};
     std::pair<int, int> fake_min_max2 = {gen() % 100, gen() % 1000000 + 100};
