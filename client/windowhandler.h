@@ -11,6 +11,7 @@
 #include "registerpage.h"
 #include "settingspage.h"
 #include "user.h"
+#include "globalcondition.h"
 
 namespace Ui {
 class WindowHandler;
@@ -27,6 +28,8 @@ public:
 private:
     void init();
     void init2();
+    void init3();
+    void init4();
     void windowChanger(QMainWindow *toOpen);
 
     void open_mainwindow();

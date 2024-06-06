@@ -28,7 +28,6 @@ qt_add_executable(p2p-app
     textpixmapbutton.h textpixmapbutton.cpp
     loginpage.h loginpage.cpp loginpage.ui
     registerpage.h registerpage.cpp registerpage.ui
-    user.h user.cpp config.h
     settingspage.h settingspage.cpp settingspage.ui
     favouritepage.h favouritepage.cpp favouritepage.ui
     notifypage.h notifypage.cpp notifypage.ui
@@ -36,6 +35,8 @@ qt_add_executable(p2p-app
     windowhandler.h windowhandler.cpp windowhandler.ui
     logic_fwd.h datareciever.h datareciever.cpp
     chaintableview.h chaintableview.cpp
+    globalcondition.h globalcondition.cpp
+    user.h user.cpp
     ${APP_ICON_MACOSX}
 )
 

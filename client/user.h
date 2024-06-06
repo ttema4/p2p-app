@@ -18,7 +18,7 @@
 #include <QtPlugin>
 #include <QtSql>
 #include <optional>
-#include "config.h"
+#include "globalcondition.h"
 #include "logic_fwd.h"
 
 struct AccountHandler;

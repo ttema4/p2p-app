@@ -57,7 +57,7 @@ CurUser::CurUser() {
 
 bool CurUser::init() {
     try {
-        if (USE_DATABASE) {
+        if (GlobalCondition::getInstance().use_database) {
             con = &DBAccountHandler::getInstance();
         } else {
             con = &LocalAccountHandler::getInstance();
@@ -289,12 +289,12 @@ bool LocalAccountHandler::tryDeleteAccount() {
 // class DBAccountHandler
 DBAccountHandler::DBAccountHandler() {
     db = QSqlDatabase::addDatabase("QMYSQL");
-    db.setHostName(DATABASE_IP);
-    db.setPort(DATABASE_PORT);
+    db.setHostName(QString::fromStdString(GlobalCondition::getInstance().database_ip));
+    db.setPort(GlobalCondition::getInstance().database_port);
 
-    db.setDatabaseName(DATABASE_DATANAME);
-    db.setUserName(DATABASE_USERNAME);
-    db.setPassword(DATABASE_USERPASS);
+    db.setDatabaseName(QString::fromStdString(GlobalCondition::getInstance().database_dataname));
+    db.setUserName(QString::fromStdString(GlobalCondition::getInstance().database_username));
+    db.setPassword(QString::fromStdString(GlobalCondition::getInstance().database_userpass));
 
     if (!db.open()) {
         qDebug() << "Error while connecting to DataBase:" << db.lastError().text();

@@ -14,7 +14,7 @@
 #include <random>
 #include <string>
 #include <thread>
-#include "config.h"
+#include "globalcondition.h"
 #include "logic_fwd.h"
 
 using namespace boost::asio;

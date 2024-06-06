@@ -73,7 +73,7 @@ std::string LocalClient::getJsonToString() {
 
 void LocalClient::check_updates() {
     emit dataRecieved(QString::fromStdString(getJsonToString()));
-    check_timer.expires_after(std::chrono::seconds(CHECK_UPDATE_INTERVAL));
+    check_timer.expires_after(std::chrono::seconds(GlobalCondition::getInstance().server_update_interval));
     check_timer.async_wait([this](boost::system::error_code ec) {
         if (!ec) {
             check_updates();
@@ -108,7 +108,7 @@ void ServerClient::start() {
 }
 
 void ServerClient::start_check_updates() {
-    check_timer.expires_after(std::chrono::seconds(CHECK_UPDATE_INTERVAL));
+    check_timer.expires_after(std::chrono::seconds(GlobalCondition::getInstance().server_update_interval));
     check_timer.async_wait([this](boost::system::error_code ec) {
         if (!ec) {
             send_request("need update");
@@ -161,10 +161,10 @@ DataReciever &DataReciever::getInstance() {
 }
 
 bool DataReciever::init() {
-    if (USE_SERVER) {
+    if (GlobalCondition::getInstance().use_server) {
         try {
             ip::tcp::resolver resolver(cli_io_context);
-            auto endpoints = resolver.resolve(SERVER_IP, std::to_string(SERVER_PORT));
+            auto endpoints = resolver.resolve(GlobalCondition::getInstance().server_ip, std::to_string(GlobalCondition::getInstance().server_port));
             client = new ServerClient(cli_io_context, endpoints);
         } catch (QException e) {
             return false;
