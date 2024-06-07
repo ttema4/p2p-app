@@ -6,3 +6,4 @@ project(p2p
 )
 
 add_subdirectory(client)
+add_subdirectory(Logic)
