@@ -6,9 +6,9 @@
 namespace p2p {
 
 struct Analysis {
-  void analyze(Chains &chains, Orders &orders, MarketRates &market_rates);
+    void analyze(Chains &chains, Orders &orders, MarketRates &market_rates);
 };
 
-} // namespace p2p
+}  // namespace p2p
 
-#endif // DATA_PROCESSING_HPP_
+#endif  // DATA_PROCESSING_HPP_
