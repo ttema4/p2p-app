@@ -1,18 +1,23 @@
 #ifndef LOGINPAGE_H
 #define LOGINPAGE_H
 
-#include <QMainWindow>
+#include <QDebug>
+#include <QDialog>
+#include <QFile>
+#include <QLabel>
 #include <QLineEdit>
+#include <QMainWindow>
+#include <QMessageBox>
+#include <QPushButton>
 #include <QShowEvent>
+#include <QVBoxLayout>
 #include "headermenu.h"
-#include "accounthandler.h"
 
 namespace Ui {
 class LoginPage;
 }
 
-class LoginPage : public QMainWindow
-{
+class LoginPage : public QMainWindow {
     Q_OBJECT
 
 public:
@@ -20,10 +25,8 @@ public:
     ~LoginPage();
 
 protected:
-    // void resizeEvent(QResizeEvent *e);
     void keyPressEvent(QKeyEvent *event) override;
     void showEvent(QShowEvent *e) override;
-    // void hideEvent(QHideEvent *event) override;
     bool eventFilter(QObject *obj, QEvent *event) override;
 
 signals:
@@ -37,9 +40,9 @@ signals:
 private:
     void tryLogin();
 
-    HeaderMenu* menu;
+    HeaderMenu *menu;
 
     Ui::LoginPage *ui;
 };
 
-#endif // LOGINPAGE_H
+#endif  // LOGINPAGE_H

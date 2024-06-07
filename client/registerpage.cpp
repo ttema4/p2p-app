@@ -36,7 +36,6 @@ RegisterPage::RegisterPage(QWidget *parent) : QMainWindow(parent), ui(new Ui::Re
     connect(menu, &HeaderMenu::favouritePage, this, &RegisterPage::favouritePage);
     connect(menu, &HeaderMenu::settingsPage, this, &RegisterPage::settingsPage);
 
-
     connect(ui->pushButton_2, &QPushButton::clicked, this, &RegisterPage::loginPage);
     connect(ui->pushButton, &QPushButton::clicked, this, &RegisterPage::tryRegister);
 
@@ -48,7 +47,6 @@ RegisterPage::RegisterPage(QWidget *parent) : QMainWindow(parent), ui(new Ui::Re
     ui->lineEdit_2->installEventFilter(this);
     ui->lineEdit_3->installEventFilter(this);
 }
-
 
 void RegisterPage::keyPressEvent(QKeyEvent *event) {
     if (event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter) {
@@ -67,7 +65,9 @@ void RegisterPage::keyPressEvent(QKeyEvent *event) {
 }
 
 bool RegisterPage::eventFilter(QObject *obj, QEvent *event) {
-    if (!menu->isMenuVisible()) return false;
+    if (!menu->isMenuVisible()) {
+        return false;
+    }
 
     if (event->type() == QEvent::MouseButtonPress) {
         menu->showMenu();
@@ -77,11 +77,25 @@ bool RegisterPage::eventFilter(QObject *obj, QEvent *event) {
 }
 
 void RegisterPage::tryRegister() {
-    if (AccountHandler::getInstance().tryRegister(ui->lineEdit->text(), ui->lineEdit_2->text(), ui->lineEdit_3->text())) {
+    if (CurUser::getInstance().tryRegister(ui->lineEdit->text(), ui->lineEdit_2->text(), ui->lineEdit_3->text())) {
         ui->lineEdit->setText("");
         ui->lineEdit_2->setText("");
         ui->lineEdit_3->setText("");
         emit RegisterPage::homePage();
+    } else {
+        ui->lineEdit->setFocus();
+        ui->lineEdit->selectAll();
+        ui->lineEdit_2->setText("");
+        ui->lineEdit_3->setText("");
+
+        QMessageBox *m =
+            new QMessageBox(QMessageBox::NoIcon, "", "", QMessageBox::Ok | QMessageBox::Default, this, Qt::Sheet);
+        m->setText("Ошибка");
+        m->setInformativeText("Пользователь с таким логином уже существует");
+        QPixmap exportSuccess("://resourses/icons/pepe.png");
+        exportSuccess = exportSuccess.scaled(QSize(60, 60), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        m->setIconPixmap(exportSuccess);
+        m->exec();
     }
 };
 

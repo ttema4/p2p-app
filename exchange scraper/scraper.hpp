@@ -1,19 +1,22 @@
 #ifndef SCRAPER_HPP_
 #define SCRAPER_HPP_
 
-#include "exchanges.hpp"
-#include "magic_enum/magic_enum.hpp"
-#include "nlohmann/json.hpp"
 #include <fstream>
+#include "magic_enum/magic_enum.hpp"
+#include "markets.hpp"
+#include "nlohmann/json.hpp"
+
+std::vector<std::string> local_bank_is(std::vector<std::string> &payment_methods
+);
 
 struct scraper {
-  std::vector<std::unique_ptr<exchange>> exchanges;
+    std::vector<std::unique_ptr<market>> markets;
 
-  void add_exchange(std::unique_ptr<exchange> exchange_);
+    void add_market(std::unique_ptr<market> market_);
 
-  void update_exchanges_orders();
+    void update_markets();
 
-  void handle();
+    void handle();
 };
 
 #endif

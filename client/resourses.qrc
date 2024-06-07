@@ -36,5 +36,14 @@
         <file>resourses/icons/photo_2024-03-06.jpeg</file>
         <file>resourses/icons/eye-icon-close.png</file>
         <file>resourses/icons/eye-icon-open.png</file>
+        <file>resourses/icons/menu-icon.png</file>
+        <file>resourses/icons/pepe.png</file>
+        <file>resourses/icons/left-arrow.png</file>
+        <file>resourses/icons/right-arrow.png</file>
+        <file>resourses/icons/no-arrow.png</file>
+        <file>resourses/icons/sort-down.png</file>
+        <file>resourses/icons/sort-up.png</file>
+        <file>resourses/icons/sort.png</file>
+        <file>config.json</file>
     </qresource>
 </RCC>

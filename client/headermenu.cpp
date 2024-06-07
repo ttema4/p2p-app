@@ -1,34 +1,32 @@
 #include "headermenu.h"
 
 HeaderMenu::HeaderMenu(QString center_text_, QWidget *parent) : QWidget{parent} {
-    // this->setStyleSheet("background-color:black;");
-
-    const QPalette palet(QColor(230, 230, 230));
+    const QPalette palet(QColor("#e6e6e6"));
     this->setPalette(palet);
     this->setAutoFillBackground(true);
 
     QHBoxLayout *layout = new QHBoxLayout(this);
     layout->setContentsMargins(15, 15, 15, 15);
 
-    logo_button = new QPushButton();
+    logo_button = new QPushButton(this);
     logo_button->setObjectName("logoButton");
-    /*logo_button->setStyleSheet("QPushButton { border-image: url(:/resourses/icons/app-logo-4.png); }"
-                               "QPushButton:!pressed { background-color: transparent; }"
-                               "QPushButton:hover:!pressed { background-color: rgba(255, 255, 255, 80); border-radius: 5px; }"
-                               "QPushButton:pressed { background-color: rgba(0, 0, 0, 10); border-radius: 5px; }"); */
+
     logo_button->setMinimumWidth(150);
     logo_button->setMinimumHeight(40);
     layout->addWidget(logo_button);
-    layout->addStretch(1);
+    layout->addStretch(7);
 
     center_text = new QLabel(center_text_);
     center_text->setObjectName("MenuCenterText");
     layout->addWidget(center_text);
-    layout->addStretch(1);
+    layout->addStretch(10);
 
     status_text = new QLabel("Ваш id: " + QString::number(CurUser::getInstance().getId()));
+    status_text->hide();
     layout->addWidget(status_text);
-    menu_button = new QPushButton("Menu");
+    menu_button = new QPushButton(this);
+    menu_button->setFixedSize(QSize(40, 30));
+    menu_button->setObjectName("menuButton");
     layout->addWidget(menu_button);
 
     menu_frame = new QFrame(parent);
@@ -37,13 +35,16 @@ HeaderMenu::HeaderMenu(QString center_text_, QWidget *parent) : QWidget{parent} 
     menu_frame->setLineWidth(1);
     menu_frame->setMinimumWidth(0);
 
-    QVBoxLayout *mvbox = new QVBoxLayout;
+    QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect();
+    effect->setBlurRadius(80);              // Радиус размытия
+    effect->setXOffset(-5);                 // Смещение тени по горизонтали
+    effect->setYOffset(5);                  // Смещение тени по вертикали
+    effect->setColor(QColor(0, 0, 0, 50));  // Цвет тени
 
-    // if (CurUser::getInstance().getId() != -1) {
-    //     button1 = new TextPixmapButton(CurUser::getInstance().getName(), CurUser::getInstance().getAvatar());
-    // } else {
-        button1 = new TextPixmapButton();
-    // }
+    menu_frame->setGraphicsEffect(effect);
+
+    QVBoxLayout *mvbox = new QVBoxLayout;
+    button1 = new TextPixmapButton();
 
     QPushButton *button2 = new QPushButton("Уведомления");
     button2->setMinimumHeight(30);
@@ -105,9 +106,16 @@ void HeaderMenu::showMenu() {
 }
 
 void HeaderMenu::showEvent(QShowEvent *event) {
+    logo_button->style()->unpolish(logo_button);
+    logo_button->style()->polish(logo_button);
+
     status_text->setText("Ваш id: " + QString::number(CurUser::getInstance().getId()));
     button1->updateLayout();
     QWidget::showEvent(event);
+}
+
+void HeaderMenu::hideEvent(QHideEvent *event) {
+    QWidget::hideEvent(event);
 }
 
 void HeaderMenu::resizeEvent(QResizeEvent *event) {
@@ -116,34 +124,49 @@ void HeaderMenu::resizeEvent(QResizeEvent *event) {
 }
 
 void HeaderMenu::open_homePage() {
-    if (menuVisible) showMenu();
+    if (menuVisible) {
+        showMenu();
+    }
     emit homePage();
 };
 
 void HeaderMenu::open_myPage() {
-    if (menuVisible) showMenu();
-    if (CurUser::getInstance().getId() == -1) emit loginPage();
-    else emit myPage();
+    if (menuVisible) {
+        showMenu();
+    }
+    if (CurUser::getInstance().getId() == -1) {
+        emit loginPage();
+    } else {
+        emit myPage();
+    }
 };
 
 void HeaderMenu::open_notifyPage() {
-    if (menuVisible) showMenu();
+    if (menuVisible) {
+        showMenu();
+    }
     emit notifyPage();
 };
 
 void HeaderMenu::open_favotitePage() {
-    if (menuVisible) showMenu();
+    if (menuVisible) {
+        showMenu();
+    }
     emit favouritePage();
 };
 
 void HeaderMenu::open_settingsPage() {
-    if (menuVisible) showMenu();
+    if (menuVisible) {
+        showMenu();
+    }
     emit settingsPage();
 };
 
 void HeaderMenu::open_exitPage() {
-    if (menuVisible) showMenu();
-    CurUser::getInstance().unsetCurUser();
+    if (menuVisible) {
+        showMenu();
+    }
+    CurUser::getInstance().userExit();
     this->showEvent(new QShowEvent());
     emit homePage();
 };

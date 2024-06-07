@@ -1,7 +1,12 @@
 #ifndef MYPAGE_H
 #define MYPAGE_H
 
+#include <QFileDialog>
+#include <QFrame>
+#include <QLabel>
 #include <QMainWindow>
+#include <QPixmap>
+#include <QPushButton>
 #include "headermenu.h"
 #include "user.h"
 
@@ -9,8 +14,7 @@ namespace Ui {
 class MyPage;
 }
 
-class MyPage : public QMainWindow
-{
+class MyPage : public QMainWindow {
     Q_OBJECT
 
 public:
@@ -23,8 +27,6 @@ protected:
 
 signals:
     void homePage();
-    void registerPage();
-    void loginPage();
     void notifyPage();
     void favouritePage();
     void settingsPage();
@@ -33,8 +35,11 @@ private:
     void openFileAndSetPixmap();
     void exitAccount();
 
-    HeaderMenu* menu;
+    void deleteAvatar();
+    void deleteAccount();
+
+    HeaderMenu *menu;
     Ui::MyPage *ui;
 };
 
-#endif // MYPAGE_H
+#endif  // MYPAGE_H

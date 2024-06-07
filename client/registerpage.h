@@ -2,16 +2,15 @@
 #define REGISTERPAGE_H
 
 #include <QMainWindow>
+#include <QMessageBox>
 #include <QShowEvent>
 #include "headermenu.h"
-#include "accounthandler.h"
 
 namespace Ui {
 class RegisterPage;
 }
 
-class RegisterPage : public QMainWindow
-{
+class RegisterPage : public QMainWindow {
     Q_OBJECT
 
 public:
@@ -19,7 +18,6 @@ public:
     ~RegisterPage();
 
 protected:
-    // void resizeEvent(QResizeEvent *e);
     void showEvent(QShowEvent *event) override;
     void keyPressEvent(QKeyEvent *event) override;
     bool eventFilter(QObject *obj, QEvent *event) override;
@@ -36,9 +34,9 @@ private:
     void tryRegister();
     void changeFocus();
 
-    HeaderMenu* menu;
+    HeaderMenu *menu;
 
     Ui::RegisterPage *ui;
 };
 
-#endif // REGISTERPAGE_H
+#endif  // REGISTERPAGE_H

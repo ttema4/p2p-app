@@ -1,7 +1,5 @@
 #include "loginpage.h"
 #include "ui_loginpage.h"
-#include <QDebug>
-#include <QFile>
 
 LoginPage::LoginPage(QWidget *parent) : QMainWindow(parent), ui(new Ui::LoginPage) {
     ui->setupUi(this);
@@ -28,7 +26,6 @@ LoginPage::LoginPage(QWidget *parent) : QMainWindow(parent), ui(new Ui::LoginPag
         }
     });
 
-
     ui->frame->layout()->setSpacing(0);
 
     connect(menu, &HeaderMenu::homePage, this, &LoginPage::homePage);
@@ -36,7 +33,6 @@ LoginPage::LoginPage(QWidget *parent) : QMainWindow(parent), ui(new Ui::LoginPag
     connect(menu, &HeaderMenu::notifyPage, this, &LoginPage::notifyPage);
     connect(menu, &HeaderMenu::favouritePage, this, &LoginPage::favouritePage);
     connect(menu, &HeaderMenu::settingsPage, this, &LoginPage::settingsPage);
-
 
     connect(ui->pushButton_2, &QPushButton::clicked, this, &LoginPage::registerPage);
     connect(ui->pushButton, &QPushButton::clicked, this, &LoginPage::tryLogin);
@@ -64,7 +60,9 @@ void LoginPage::keyPressEvent(QKeyEvent *event) {
 }
 
 bool LoginPage::eventFilter(QObject *obj, QEvent *event) {
-    if (!menu->isMenuVisible()) return false;
+    if (!menu->isMenuVisible()) {
+        return false;
+    }
 
     if (event->type() == QEvent::MouseButtonPress) {
         menu->showMenu();
@@ -74,7 +72,7 @@ bool LoginPage::eventFilter(QObject *obj, QEvent *event) {
 }
 
 void LoginPage::tryLogin() {
-    if (AccountHandler::getInstance().tryLogin(ui->lineEdit->text(), ui->lineEdit_2->text())) {
+    if (CurUser::getInstance().tryLogin(ui->lineEdit->text(), ui->lineEdit_2->text())) {
         ui->lineEdit->setText("");
         ui->lineEdit_2->setText("");
         emit LoginPage::homePage();
@@ -82,6 +80,15 @@ void LoginPage::tryLogin() {
         ui->lineEdit->setFocus();
         ui->lineEdit->selectAll();
         ui->lineEdit_2->setText("");
+
+        QMessageBox *m =
+            new QMessageBox(QMessageBox::NoIcon, "", "", QMessageBox::Ok | QMessageBox::Default, this, Qt::Sheet);
+        m->setText("Ошибка");
+        m->setInformativeText("Пользователь не найден");
+        QPixmap exportSuccess("://resourses/icons/pepe.png");
+        exportSuccess = exportSuccess.scaled(QSize(60, 60), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        m->setIconPixmap(exportSuccess);
+        m->exec();
     }
 };
 
