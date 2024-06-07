@@ -58,8 +58,7 @@ void to_analysis() {
             }
 
             Analysis analysis;
-            Chains chains;
-            analysis.analyze(chains, orders, market_rates);
+            Chains chains = analysis.analyze(orders, market_rates);
 
             if (CHAINS_LOGS_ON) {
                 std::cout << "Chains size: " << chains.list.size() << std::endl;

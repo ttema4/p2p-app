@@ -1,4 +1,5 @@
 #include "json_tools.hpp"
+#include "storage_structures.hpp"
 
 namespace p2p {
 
@@ -54,22 +55,23 @@ void unpack_json(std::string parsers_response, Orders &orders,
             ord.banks.push_back(bank.get<std::string>());
         }
         orders.list.push_back(ord);
+        markets.insert(ord.market);
     }
 
     fix_banks_naming_and_filter(orders);
 
     for (const auto &rate_obj : j["spot_rates"]) {
+        std::string current_market = rate_obj["market"].get<std::string>();
         for (auto it = rate_obj.begin(); it != rate_obj.end(); ++it) {
             if (it.key() == "market") continue;
-
             std::string coins_pair = it.key();
             size_t delimiter_pos = coins_pair.find('/');
             std::string coin1 = coins_pair.substr(0, delimiter_pos);
             std::string coin2 = coins_pair.substr(delimiter_pos + 1);
             long double rate12 = std::stold(it.value().get<std::string>());
             long double rate21 = 1 / rate12;
-            market_rates.list[coin1].push_back(std::make_pair(coin2, rate12));
-            market_rates.list[coin2].push_back(std::make_pair(coin1, rate21));
+            market_rates.list[current_market][coin1].push_back(std::make_pair(coin2, rate12));
+            market_rates.list[current_market][coin2].push_back(std::make_pair(coin1, rate21));
         }
     }
 }
