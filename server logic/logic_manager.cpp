@@ -35,6 +35,7 @@ void raise_parser_connection_and_users_server() {
 void to_analysis() {
     std::string response;
     std::string last_response;
+    Analysis analysis;
     while (true) {
         bool has_new_responses = false;
         while (parsers_responses.try_dequeue(response)) {
@@ -57,7 +58,6 @@ void to_analysis() {
                 continue;
             }
 
-            Analysis analysis;
             Chains chains = analysis.analyze(orders, market_rates);
 
             if (CHAINS_LOGS_ON) {
@@ -102,11 +102,3 @@ void apply_config() {
 }
 
 }  // namespace p2p
-
-int main() {
-    p2p::apply_config();
-    std::thread t1(&p2p::raise_parser_connection_and_users_server);
-    std::thread t2(&p2p::to_analysis);
-    t1.join();
-    t2.join();
-}

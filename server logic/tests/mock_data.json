@@ -1,0 +1,5980 @@
+{        "orders": [
+        {
+            "available": "17.46315225",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/128719274/ETH/RUB/item",
+            "lower_limit": "100000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "343734.65",
+            "upper_limit": "1533779.32"
+        },
+        {
+            "available": "2.82511931",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/169530122/ETH/RUB/item",
+            "lower_limit": "100000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "343734.65",
+            "upper_limit": "971091.39"
+        },
+        {
+            "available": "4.42843254",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/101693921/ETH/RUB/item",
+            "lower_limit": "100000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "343767.51",
+            "upper_limit": "500000"
+        },
+        {
+            "available": "1.5",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/65392619/ETH/RUB/item",
+            "lower_limit": "100000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "343800.37",
+            "upper_limit": "500000"
+        },
+        {
+            "available": "4.29122269",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/103702371/ETH/RUB/item",
+            "lower_limit": "100000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "343800.37",
+            "upper_limit": "936874.28"
+        },
+        {
+            "available": "0.49998929",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/140797393/ETH/RUB/item",
+            "lower_limit": "100000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "344161.78",
+            "upper_limit": "172077.2"
+        },
+        {
+            "available": "2.73871739",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/106721101/ETH/RUB/item",
+            "lower_limit": "30000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank"
+            ],
+            "price": "344194.63",
+            "upper_limit": "420933.06"
+        },
+        {
+            "available": "2.92979877",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/136222105/ETH/RUB/item",
+            "lower_limit": "100000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "344457.48",
+            "upper_limit": "500000"
+        },
+        {
+            "available": "0.06630477",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/25456598/ETH/RUB/item",
+            "lower_limit": "5000",
+            "market": "bybit",
+            "payment_methods": [
+                "VTB"
+            ],
+            "price": "344490",
+            "upper_limit": "22841.33"
+        },
+        {
+            "available": "0.054",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/24497164/ETH/RUB/item",
+            "lower_limit": "10000",
+            "market": "bybit",
+            "payment_methods": [
+                "VTB"
+            ],
+            "price": "344500",
+            "upper_limit": "18603"
+        },
+        {
+            "available": "18.08681948",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/108800238/ETH/RUB/item",
+            "lower_limit": "10000",
+            "market": "bybit",
+            "payment_methods": [
+                "VTB"
+            ],
+            "price": "344917.45",
+            "upper_limit": "70000"
+        },
+        {
+            "available": "1.52098159",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/6551014/ETH/RUB/item",
+            "lower_limit": "150000",
+            "market": "bybit",
+            "payment_methods": [
+                "VTB"
+            ],
+            "price": "347874.45",
+            "upper_limit": "490000"
+        },
+        {
+            "available": "1.81379539",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/51675357/ETH/RUB/item",
+            "lower_limit": "20000",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "348268.72",
+            "upper_limit": "533704.46"
+        },
+        {
+            "available": "0.51097642",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/43677888/ETH/RUB/item",
+            "lower_limit": "3000",
+            "market": "bybit",
+            "payment_methods": [
+                "VTB"
+            ],
+            "price": "349750",
+            "upper_limit": "49462.49"
+        },
+        {
+            "available": "6.29448041",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/111957351/ETH/RUB/item",
+            "lower_limit": "15000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank"
+            ],
+            "price": "349911.5",
+            "upper_limit": "500000"
+        },
+        {
+            "available": "0.46141381",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/48641459/ETH/RUB/item",
+            "lower_limit": "5000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "VTB"
+            ],
+            "price": "350000",
+            "upper_limit": "27471.65"
+        },
+        {
+            "available": "0.03701993",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/111254055/ETH/RUB/item",
+            "lower_limit": "12956",
+            "market": "bybit",
+            "payment_methods": [
+                "A-Bank",
+                "OZON",
+                "VTB"
+            ],
+            "price": "350000",
+            "upper_limit": "12956.97"
+        },
+        {
+            "available": "0.05841154",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/152918663/ETH/RUB/item",
+            "lower_limit": "20000",
+            "market": "bybit",
+            "payment_methods": [
+                "VTB"
+            ],
+            "price": "350000",
+            "upper_limit": "20444.03"
+        },
+        {
+            "available": "0.56448369",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/160433110/ETH/RUB/item",
+            "lower_limit": "25000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "351455.71",
+            "upper_limit": "99062.01"
+        },
+        {
+            "available": "0.70412592",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/160433110/ETH/RUB/item",
+            "lower_limit": "25000",
+            "market": "bybit",
+            "payment_methods": [
+                "A-Bank",
+                "VTB"
+            ],
+            "price": "351455.71",
+            "upper_limit": "48535.72"
+        },
+        {
+            "available": "14.95390947",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/31010707/ETH/RUB/item",
+            "lower_limit": "30000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "A-Bank",
+                "VTB"
+            ],
+            "price": "351521.42",
+            "upper_limit": "388613.77"
+        },
+        {
+            "available": "0.06640386",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/28004155/ETH/RUB/item",
+            "lower_limit": "2000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff",
+                "Sberbank",
+                "VTB"
+            ],
+            "price": "351554.27",
+            "upper_limit": "7869.22"
+        },
+        {
+            "available": "1.53245018",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/51675357/ETH/RUB/item",
+            "lower_limit": "10000",
+            "market": "bybit",
+            "payment_methods": [
+                "VTB"
+            ],
+            "price": "351554.27",
+            "upper_limit": "538739.4"
+        },
+        {
+            "available": "0.41975574",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/79418348/ETH/RUB/item",
+            "lower_limit": "25000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "352244.24",
+            "upper_limit": "93229.81"
+        },
+        {
+            "available": "0.78255152",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/79418348/ETH/RUB/item",
+            "lower_limit": "25000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "A-Bank"
+            ],
+            "price": "352244.24",
+            "upper_limit": "93229.81"
+        },
+        {
+            "available": "0.4360319",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/79418348/ETH/RUB/item",
+            "lower_limit": "25000",
+            "market": "bybit",
+            "payment_methods": [
+                "VTB"
+            ],
+            "price": "352244.24",
+            "upper_limit": "93229.81"
+        },
+        {
+            "available": "4.28160984",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/100701211/ETH/RUB/item",
+            "lower_limit": "10000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "352507.08",
+            "upper_limit": "1147477.9"
+        },
+        {
+            "available": "5.34379568",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/31010707/ETH/RUB/item",
+            "lower_limit": "20000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "354806.97",
+            "upper_limit": "324312.29"
+        },
+        {
+            "available": "0.6106993",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/111011201/ETH/RUB/item",
+            "lower_limit": "4000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank"
+            ],
+            "price": "354999",
+            "upper_limit": "78797.99"
+        },
+        {
+            "available": "401",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/130143625/USDC/RUB/item",
+            "lower_limit": "10000",
+            "market": "bybit",
+            "payment_methods": [
+                "VTB"
+            ],
+            "price": "92.39",
+            "upper_limit": "37048.39"
+        },
+        {
+            "available": "945.001336",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/116152695/USDC/RUB/item",
+            "lower_limit": "5000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "VTB"
+            ],
+            "price": "92.4",
+            "upper_limit": "32237"
+        },
+        {
+            "available": "179.808831",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/19267138/USDC/RUB/item",
+            "lower_limit": "5000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "OTP Bank",
+                "VTB"
+            ],
+            "price": "92.4",
+            "upper_limit": "7010.39"
+        },
+        {
+            "available": "590.585473",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/26685384/USDC/RUB/item",
+            "lower_limit": "10000",
+            "market": "bybit",
+            "payment_methods": [
+                "VTB"
+            ],
+            "price": "92.68",
+            "upper_limit": "54735.46"
+        },
+        {
+            "available": "1749.001262",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/174462541/USDC/RUB/item",
+            "lower_limit": "8000",
+            "market": "bybit",
+            "payment_methods": [
+                "VTB"
+            ],
+            "price": "92.96",
+            "upper_limit": "88367.55"
+        },
+        {
+            "available": "23901.42921",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/70393754/USDC/RUB/item",
+            "lower_limit": "20000",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "93.35",
+            "upper_limit": "166684.6"
+        },
+        {
+            "available": "3000",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/101693921/USDC/RUB/item",
+            "lower_limit": "90000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "93.39",
+            "upper_limit": "280170"
+        },
+        {
+            "available": "149.942698",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/100594981/USDC/RUB/item",
+            "lower_limit": "5000",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "93.5",
+            "upper_limit": "14019.64"
+        },
+        {
+            "available": "1027.483885",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/134055383/USDC/RUB/item",
+            "lower_limit": "750",
+            "market": "bybit",
+            "payment_methods": [
+                "VTB"
+            ],
+            "price": "93.95",
+            "upper_limit": "4561.23"
+        },
+        {
+            "available": "145.976083",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/122786691/USDC/RUB/item",
+            "lower_limit": "1000",
+            "market": "bybit",
+            "payment_methods": [
+                "OZON"
+            ],
+            "price": "94",
+            "upper_limit": "4721.75"
+        },
+        {
+            "available": "613.300146",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/9039550/USDC/RUB/item",
+            "lower_limit": "900",
+            "market": "bybit",
+            "payment_methods": [
+                "A-Bank",
+                "Payeer",
+                "Sberbank"
+            ],
+            "price": "94",
+            "upper_limit": "29324.29"
+        },
+        {
+            "available": "3216.167724",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/144541956/USDC/RUB/item",
+            "lower_limit": "10000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "94.2",
+            "upper_limit": "28711.11"
+        },
+        {
+            "available": "2723.177537",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/19473496/USDC/RUB/item",
+            "lower_limit": "1000",
+            "market": "bybit",
+            "payment_methods": [
+                "VTB"
+            ],
+            "price": "94.5",
+            "upper_limit": "26049.37"
+        },
+        {
+            "available": "26753.602962",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/31010707/USDC/RUB/item",
+            "lower_limit": "30000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "A-Bank",
+                "VTB"
+            ],
+            "price": "94.82",
+            "upper_limit": "72029.9"
+        },
+        {
+            "available": "2226.076538",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/44446877/USDC/RUB/item",
+            "lower_limit": "10000",
+            "market": "bybit",
+            "payment_methods": [
+                "VTB"
+            ],
+            "price": "96",
+            "upper_limit": "79783.34"
+        },
+        {
+            "available": "21.564791",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/167715902/USDC/RUB/item",
+            "lower_limit": "500",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "VTB"
+            ],
+            "price": "96.96",
+            "upper_limit": "890.92"
+        },
+        {
+            "available": "103.684799",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/41066864/USDC/RUB/item",
+            "lower_limit": "10000",
+            "market": "bybit",
+            "payment_methods": [
+                "A-Bank",
+                "OZON",
+                "Sberbank"
+            ],
+            "price": "97",
+            "upper_limit": "10057.42"
+        },
+        {
+            "available": "10567.71309",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/100631397/USDC/RUB/item",
+            "lower_limit": "5000",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "97.2",
+            "upper_limit": "735379.46"
+        },
+        {
+            "available": "38397.460363",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/58291100/USDC/RUB/item",
+            "lower_limit": "50000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "Tinkoff",
+                "VTB"
+            ],
+            "price": "97.28",
+            "upper_limit": "1709090.34"
+        },
+        {
+            "available": "35577.087292",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/58291100/USDC/RUB/item",
+            "lower_limit": "50000",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "97.28",
+            "upper_limit": "1709090.34"
+        },
+        {
+            "available": "17214.040121",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/100631397/USDC/RUB/item",
+            "lower_limit": "70000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "97.3",
+            "upper_limit": "736136.02"
+        },
+        {
+            "available": "2690.087365",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/42243041/USDC/RUB/item",
+            "lower_limit": "10000",
+            "market": "bybit",
+            "payment_methods": [
+                "OZON",
+                "VTB"
+            ],
+            "price": "97.82",
+            "upper_limit": "150000"
+        },
+        {
+            "available": "641.768278",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/15380697/USDC/RUB/item",
+            "lower_limit": "3000",
+            "market": "bybit",
+            "payment_methods": [
+                "VTB"
+            ],
+            "price": "97.95",
+            "upper_limit": "32149.52"
+        },
+        {
+            "available": "634.657125",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/15380697/USDC/RUB/item",
+            "lower_limit": "3000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank"
+            ],
+            "price": "97.95",
+            "upper_limit": "33116.09"
+        },
+        {
+            "available": "338.091801",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/15380697/USDC/RUB/item",
+            "lower_limit": "3000",
+            "market": "bybit",
+            "payment_methods": [
+                "Payeer"
+            ],
+            "price": "97.95",
+            "upper_limit": "33116.09"
+        },
+        {
+            "available": "135.410286",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/28938691/USDC/RUB/item",
+            "lower_limit": "500",
+            "market": "bybit",
+            "payment_methods": [
+                "Payeer"
+            ],
+            "price": "97.95",
+            "upper_limit": "10629.29"
+        },
+        {
+            "available": "257.982846",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/71515269/USDC/RUB/item",
+            "lower_limit": "1000",
+            "market": "bybit",
+            "payment_methods": [
+                "VTB"
+            ],
+            "price": "97.99",
+            "upper_limit": "6260.42"
+        },
+        {
+            "available": "669.162534",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/75742069/USDC/RUB/item",
+            "lower_limit": "500",
+            "market": "bybit",
+            "payment_methods": [
+                "VTB"
+            ],
+            "price": "98",
+            "upper_limit": "15916.4"
+        },
+        {
+            "available": "162.344392",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/24393696/USDC/RUB/item",
+            "lower_limit": "555",
+            "market": "bybit",
+            "payment_methods": [
+                "OZON"
+            ],
+            "price": "98.28",
+            "upper_limit": "3200.2"
+        },
+        {
+            "available": "7618.3984",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/118476732/USDT/RUB/item",
+            "lower_limit": "112000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank"
+            ],
+            "price": "91.3",
+            "upper_limit": "112000"
+        },
+        {
+            "available": "2392.1883",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/22306145/USDT/RUB/item",
+            "lower_limit": "30000",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "91.25",
+            "upper_limit": "30000"
+        },
+        {
+            "available": "87406.0766",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/28050724/USDT/RUB/item",
+            "lower_limit": "250000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "91.24",
+            "upper_limit": "250000.01"
+        },
+        {
+            "available": "3810.0439",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/151438776/USDT/RUB/item",
+            "lower_limit": "264058",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "91.2",
+            "upper_limit": "264059"
+        },
+        {
+            "available": "2315.4198",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/76762807/USDT/RUB/item",
+            "lower_limit": "106699",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank"
+            ],
+            "price": "91.1",
+            "upper_limit": "106699.96"
+        },
+        {
+            "available": "1775.7826",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/104442245/USDT/RUB/item",
+            "lower_limit": "10000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank"
+            ],
+            "price": "91.1",
+            "upper_limit": "35000"
+        },
+        {
+            "available": "2172.7214",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/20292137/USDT/RUB/item",
+            "lower_limit": "67000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "91.06",
+            "upper_limit": "67000.01"
+        },
+        {
+            "available": "63025.6503",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/9888076/USDT/RUB/item",
+            "lower_limit": "59999",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "91.05",
+            "upper_limit": "60000"
+        },
+        {
+            "available": "3333",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/143427514/USDT/RUB/item",
+            "lower_limit": "300000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "91.03",
+            "upper_limit": "300000.01"
+        },
+        {
+            "available": "40050.1938",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/117451958/USDT/RUB/item",
+            "lower_limit": "300000",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "91.01",
+            "upper_limit": "300000.01"
+        },
+        {
+            "available": "4564.3954",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/19829755/USDT/RUB/item",
+            "lower_limit": "395000",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "91.01",
+            "upper_limit": "395000.01"
+        },
+        {
+            "available": "250",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/115951228/USDT/RUB/item",
+            "lower_limit": "19999",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "91.01",
+            "upper_limit": "20000"
+        },
+        {
+            "available": "34471.0337",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/134342193/USDT/RUB/item",
+            "lower_limit": "50000",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "91",
+            "upper_limit": "50000.01"
+        },
+        {
+            "available": "6872.7898",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/45645396/USDT/RUB/item",
+            "lower_limit": "200000",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "91",
+            "upper_limit": "200000.2"
+        },
+        {
+            "available": "237451.7165",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/45645396/USDT/RUB/item",
+            "lower_limit": "100000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank"
+            ],
+            "price": "91",
+            "upper_limit": "100000.2"
+        },
+        {
+            "available": "1239.1411",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/135034696/USDT/RUB/item",
+            "lower_limit": "10000",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "91",
+            "upper_limit": "11020.98"
+        },
+        {
+            "available": "34895.9255",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/33572608/USDT/RUB/item",
+            "lower_limit": "18500",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank"
+            ],
+            "price": "91",
+            "upper_limit": "29500"
+        },
+        {
+            "available": "1800",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/25151997/USDT/RUB/item",
+            "lower_limit": "100000",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "90.96",
+            "upper_limit": "145000"
+        },
+        {
+            "available": "5700",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/140583064/USDT/RUB/item",
+            "lower_limit": "200000",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "90.96",
+            "upper_limit": "500000"
+        },
+        {
+            "available": "194926.1881",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/116150056/USDT/RUB/item",
+            "lower_limit": "30000",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "90.96",
+            "upper_limit": "74000"
+        },
+        {
+            "available": "12000",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/33985073/USDT/RUB/item",
+            "lower_limit": "200000",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "90.96",
+            "upper_limit": "1000000"
+        },
+        {
+            "available": "24458.9777",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/71463355/USDT/RUB/item",
+            "lower_limit": "25000",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "90.96",
+            "upper_limit": "25000"
+        },
+        {
+            "available": "12000",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/27149151/USDT/RUB/item",
+            "lower_limit": "150000",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "90.95",
+            "upper_limit": "1091400"
+        },
+        {
+            "available": "12000",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/43630025/USDT/RUB/item",
+            "lower_limit": "200000",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "90.92",
+            "upper_limit": "1091040"
+        },
+        {
+            "available": "0.16291054",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/102367295/BTC/RUB/item",
+            "lower_limit": "30000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank"
+            ],
+            "price": "6311949.55",
+            "upper_limit": "100000"
+        },
+        {
+            "available": "0.12303676",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/138492080/BTC/RUB/item",
+            "lower_limit": "50000",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "6284810",
+            "upper_limit": "150000"
+        },
+        {
+            "available": "2.94532758",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/52322301/BTC/RUB/item",
+            "lower_limit": "50000",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "6284157.21",
+            "upper_limit": "450000"
+        },
+        {
+            "available": "0.03800561",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/45039089/BTC/RUB/item",
+            "lower_limit": "25000",
+            "market": "bybit",
+            "payment_methods": [
+                "VTB"
+            ],
+            "price": "6270000",
+            "upper_limit": "77299"
+        },
+        {
+            "available": "0.08287549",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/108085411/BTC/RUB/item",
+            "lower_limit": "50000",
+            "market": "bybit",
+            "payment_methods": [
+                "A-Bank",
+                "VTB"
+            ],
+            "price": "6270000",
+            "upper_limit": "80000"
+        },
+        {
+            "available": "1.032",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/42079898/BTC/RUB/item",
+            "lower_limit": "30000",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "6259452.91",
+            "upper_limit": "300000"
+        },
+        {
+            "available": "1",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/121266299/BTC/RUB/item",
+            "lower_limit": "45000",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "6258835.3",
+            "upper_limit": "200000"
+        },
+        {
+            "available": "0.97858745",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/1839059/BTC/RUB/item",
+            "lower_limit": "15000",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "6258696",
+            "upper_limit": "400000"
+        },
+        {
+            "available": "1",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/26233654/BTC/RUB/item",
+            "lower_limit": "100000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "6252041.62",
+            "upper_limit": "700000"
+        },
+        {
+            "available": "1",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/26244572/BTC/RUB/item",
+            "lower_limit": "100000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "6251424.01",
+            "upper_limit": "700000"
+        },
+        {
+            "available": "1",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/140797393/BTC/RUB/item",
+            "lower_limit": "100000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "6250806.4",
+            "upper_limit": "500000"
+        },
+        {
+            "available": "3.97891085",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/101342343/BTC/RUB/item",
+            "lower_limit": "50000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "Sberbank"
+            ],
+            "price": "6247100.76",
+            "upper_limit": "400000"
+        },
+        {
+            "available": "0.81502684",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/22989540/BTC/RUB/item",
+            "lower_limit": "30000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "6246483.15",
+            "upper_limit": "500000"
+        },
+        {
+            "available": "1",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/104754903/BTC/RUB/item",
+            "lower_limit": "50000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "6246483.15",
+            "upper_limit": "300000"
+        },
+        {
+            "available": "1.029",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/121266299/BTC/RUB/item",
+            "lower_limit": "45000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "6246483.15",
+            "upper_limit": "200000"
+        },
+        {
+            "available": "0.8206322",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/69624517/BTC/RUB/item",
+            "lower_limit": "30000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "6246483.15",
+            "upper_limit": "700000"
+        },
+        {
+            "available": "1.03151469",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/52322301/BTC/RUB/item",
+            "lower_limit": "50000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "6244630.33",
+            "upper_limit": "500000"
+        },
+        {
+            "available": "1.195302",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/21726399/BTC/RUB/item",
+            "lower_limit": "30000",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "6237836.64",
+            "upper_limit": "150000"
+        },
+        {
+            "available": "1.07821945",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/120879960/BTC/RUB/item",
+            "lower_limit": "20000",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "6235000",
+            "upper_limit": "2000000"
+        },
+        {
+            "available": "1",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/115951228/BTC/RUB/item",
+            "lower_limit": "10000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "6231660.57",
+            "upper_limit": "35000"
+        },
+        {
+            "available": "0.29522895",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/28072760/BTC/RUB/item",
+            "lower_limit": "40000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "6219308.42",
+            "upper_limit": "570000"
+        },
+        {
+            "available": "1.60547572",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/169530122/BTC/RUB/item",
+            "lower_limit": "100000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "6215602.77",
+            "upper_limit": "2000000"
+        },
+        {
+            "available": "0.50951738",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/40756288/BTC/RUB/item",
+            "lower_limit": "30000",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "6214985.16",
+            "upper_limit": "2000000"
+        },
+        {
+            "available": "1",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/142306990/BTC/RUB/item",
+            "lower_limit": "30000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "Tinkoff"
+            ],
+            "price": "6214000",
+            "upper_limit": "2000000"
+        },
+        {
+            "available": "2.68340013",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/103702371/BTC/RUB/item",
+            "lower_limit": "100000",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "6209426.69",
+            "upper_limit": "2000000"
+        },
+        {
+            "available": "5.02802809",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/128719274/BTC/RUB/item",
+            "lower_limit": "100000",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "6209426.69",
+            "upper_limit": "2000000"
+        },
+        {
+            "available": "1",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/20292137/BTC/RUB/item",
+            "lower_limit": "80000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "6208809.09",
+            "upper_limit": "300000"
+        },
+        {
+            "available": "1",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/142055894/BTC/RUB/item",
+            "lower_limit": "25000",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "6208809.09",
+            "upper_limit": "150000"
+        },
+        {
+            "available": "0.96822099",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/61056140/BTC/RUB/item",
+            "lower_limit": "50000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "Tinkoff",
+                "VTB"
+            ],
+            "price": "6207573.87",
+            "upper_limit": "90000"
+        },
+        {
+            "available": "27053.491356",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/69624517/USDC/RUB/item",
+            "lower_limit": "30000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "90",
+            "upper_limit": "700000"
+        },
+        {
+            "available": "1025.348492",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/116152695/USDC/RUB/item",
+            "lower_limit": "10000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "VTB"
+            ],
+            "price": "90",
+            "upper_limit": "14804.1"
+        },
+        {
+            "available": "50000",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/1839059/USDC/RUB/item",
+            "lower_limit": "15000",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "89.86",
+            "upper_limit": "300000"
+        },
+        {
+            "available": "6540",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/28072760/USDC/RUB/item",
+            "lower_limit": "40000",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "89.85",
+            "upper_limit": "587619"
+        },
+        {
+            "available": "5342.81502",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/28072760/USDC/RUB/item",
+            "lower_limit": "40000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "89.8",
+            "upper_limit": "436068.8"
+        },
+        {
+            "available": "104172.909966",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/101342343/USDC/RUB/item",
+            "lower_limit": "50000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "89.78",
+            "upper_limit": "400000"
+        },
+        {
+            "available": "4856",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/28072760/USDC/RUB/item",
+            "lower_limit": "80000",
+            "market": "bybit",
+            "payment_methods": [
+                "A-Bank",
+                "VTB"
+            ],
+            "price": "89.7",
+            "upper_limit": "435583.2"
+        },
+        {
+            "available": "51446.065528",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/52374181/USDC/RUB/item",
+            "lower_limit": "50000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "89.65",
+            "upper_limit": "500000"
+        },
+        {
+            "available": "50000",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/115951228/USDC/RUB/item",
+            "lower_limit": "10000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "89.62",
+            "upper_limit": "35000"
+        },
+        {
+            "available": "1000",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/144541956/USDC/RUB/item",
+            "lower_limit": "10000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "89.61",
+            "upper_limit": "35000"
+        },
+        {
+            "available": "3000",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/48816467/USDC/RUB/item",
+            "lower_limit": "18000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "VTB"
+            ],
+            "price": "89.6",
+            "upper_limit": "249799.99"
+        },
+        {
+            "available": "307928.425006",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/63668452/USDC/RUB/item",
+            "lower_limit": "25000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "Sberbank"
+            ],
+            "price": "89.51",
+            "upper_limit": "800000"
+        },
+        {
+            "available": "50000",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/110426517/USDC/RUB/item",
+            "lower_limit": "20000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "Sberbank"
+            ],
+            "price": "89.49",
+            "upper_limit": "500000"
+        },
+        {
+            "available": "46894",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/22989540/USDC/RUB/item",
+            "lower_limit": "30000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "89.24",
+            "upper_limit": "500000"
+        },
+        {
+            "available": "38763",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/100631397/USDC/RUB/item",
+            "lower_limit": "30000",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "89.05",
+            "upper_limit": "1333602.49"
+        },
+        {
+            "available": "145528.059785",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/63668452/USDC/RUB/item",
+            "lower_limit": "25500",
+            "market": "bybit",
+            "payment_methods": [
+                "OTP Bank"
+            ],
+            "price": "89.05",
+            "upper_limit": "750000"
+        },
+        {
+            "available": "250",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/28004155/USDC/RUB/item",
+            "lower_limit": "5000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff",
+                "Sberbank",
+                "VTB"
+            ],
+            "price": "89",
+            "upper_limit": "21000"
+        },
+        {
+            "available": "119507.959077",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/63668452/USDC/RUB/item",
+            "lower_limit": "25000",
+            "market": "bybit",
+            "payment_methods": [
+                "VTB"
+            ],
+            "price": "88.87",
+            "upper_limit": "750000"
+        },
+        {
+            "available": "52000",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/110426517/USDC/RUB/item",
+            "lower_limit": "25000",
+            "market": "bybit",
+            "payment_methods": [
+                "VTB"
+            ],
+            "price": "88.78",
+            "upper_limit": "700000"
+        },
+        {
+            "available": "7854.958735",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/42243041/USDC/RUB/item",
+            "lower_limit": "29000",
+            "market": "bybit",
+            "payment_methods": [
+                "VTB"
+            ],
+            "price": "88.63",
+            "upper_limit": "30000"
+        },
+        {
+            "available": "14569.508584",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/41257476/USDC/RUB/item",
+            "lower_limit": "20000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "A-Bank"
+            ],
+            "price": "88.5",
+            "upper_limit": "150000"
+        },
+        {
+            "available": "48264.628316",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/36683557/USDC/RUB/item",
+            "lower_limit": "1000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "88.31",
+            "upper_limit": "500000"
+        },
+        {
+            "available": "55230.161161",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/27544496/USDC/RUB/item",
+            "lower_limit": "100000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "Tinkoff"
+            ],
+            "price": "88.3",
+            "upper_limit": "3500000"
+        },
+        {
+            "available": "114.16",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/19267138/USDC/RUB/item",
+            "lower_limit": "5000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "OTP Bank",
+                "VTB"
+            ],
+            "price": "88.3",
+            "upper_limit": "10080.32"
+        },
+        {
+            "available": "50000",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/2379312/USDC/RUB/item",
+            "lower_limit": "20000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "VTB"
+            ],
+            "price": "88.15",
+            "upper_limit": "550000"
+        },
+        {
+            "available": "20864.416522",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/36304483/USDC/RUB/item",
+            "lower_limit": "50000",
+            "market": "bybit",
+            "payment_methods": [
+                "OZON",
+                "Tinkoff"
+            ],
+            "price": "88",
+            "upper_limit": "1232013.2"
+        },
+        {
+            "available": "15866.666667",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/36304483/USDC/RUB/item",
+            "lower_limit": "25000",
+            "market": "bybit",
+            "payment_methods": [
+                "VTB"
+            ],
+            "price": "88",
+            "upper_limit": "1276000"
+        },
+        {
+            "available": "395.42971",
+            "coin": "USDC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/19473496/USDC/RUB/item",
+            "lower_limit": "1000",
+            "market": "bybit",
+            "payment_methods": [
+                "VTB"
+            ],
+            "price": "88",
+            "upper_limit": "8800"
+        },
+        {
+            "available": "96768.5358",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/14850980/USDT/RUB/item",
+            "lower_limit": "30000",
+            "market": "bybit",
+            "payment_methods": [
+                "VTB"
+            ],
+            "price": "90.8",
+            "upper_limit": "30000"
+        },
+        {
+            "available": "700",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/48100863/USDT/RUB/item",
+            "lower_limit": "50000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "90.9",
+            "upper_limit": "50000.01"
+        },
+        {
+            "available": "600",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/26233654/USDT/RUB/item",
+            "lower_limit": "36000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "90.95",
+            "upper_limit": "36000.01"
+        },
+        {
+            "available": "4160.5413",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/150372100/USDT/RUB/item",
+            "lower_limit": "3407.84",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "90.97",
+            "upper_limit": "3407.85"
+        },
+        {
+            "available": "6575.373",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/142388550/USDT/RUB/item",
+            "lower_limit": "59000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "90.99",
+            "upper_limit": "59000.01"
+        },
+        {
+            "available": "450",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/50078170/USDT/RUB/item",
+            "lower_limit": "36204.91",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "90.99",
+            "upper_limit": "36204.92"
+        },
+        {
+            "available": "350",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/161585897/USDT/RUB/item",
+            "lower_limit": "27159",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "90.99",
+            "upper_limit": "27160"
+        },
+        {
+            "available": "101390.1827",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/126862934/USDT/RUB/item",
+            "lower_limit": "30000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "91",
+            "upper_limit": "30000.01"
+        },
+        {
+            "available": "47433.9997",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/21467652/USDT/RUB/item",
+            "lower_limit": "5000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "91",
+            "upper_limit": "5000.01"
+        },
+        {
+            "available": "476.087",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/33882849/USDT/RUB/item",
+            "lower_limit": "11500",
+            "market": "bybit",
+            "payment_methods": [
+                "VTB"
+            ],
+            "price": "91",
+            "upper_limit": "11500"
+        },
+        {
+            "available": "6397.1259",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/125468416/USDT/RUB/item",
+            "lower_limit": "81910",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "91",
+            "upper_limit": "81910.01"
+        },
+        {
+            "available": "9734.8968",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/25216494/USDT/RUB/item",
+            "lower_limit": "44000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "OZON",
+                "VTB"
+            ],
+            "price": "91",
+            "upper_limit": "44000"
+        },
+        {
+            "available": "8161.8635",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/154953624/USDT/RUB/item",
+            "lower_limit": "17000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "91.05",
+            "upper_limit": "17000.01"
+        },
+        {
+            "available": "4900.9593",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/107328013/USDT/RUB/item",
+            "lower_limit": "183304.58",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "91.05",
+            "upper_limit": "183304.58"
+        },
+        {
+            "available": "56098.6901",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/22619224/USDT/RUB/item",
+            "lower_limit": "25000",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "91.07",
+            "upper_limit": "150000"
+        },
+        {
+            "available": "23576.178",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/64352240/USDT/RUB/item",
+            "lower_limit": "10000",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "91.08",
+            "upper_limit": "150000"
+        },
+        {
+            "available": "1722.1894",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/143303126/USDT/RUB/item",
+            "lower_limit": "90430",
+            "market": "bybit",
+            "payment_methods": [
+                "VTB"
+            ],
+            "price": "91.1",
+            "upper_limit": "90431"
+        },
+        {
+            "available": "2609.3754",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/141379474/USDT/RUB/item",
+            "lower_limit": "91750",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "91.1",
+            "upper_limit": "91750"
+        },
+        {
+            "available": "950",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/145706493/USDT/RUB/item",
+            "lower_limit": "85000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "91.15",
+            "upper_limit": "85000.01"
+        },
+        {
+            "available": "26128.2503",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/14359062/USDT/RUB/item",
+            "lower_limit": "60800",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "91.3",
+            "upper_limit": "60801"
+        },
+        {
+            "available": "17809.9529",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/100584779/USDT/RUB/item",
+            "lower_limit": "90460",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "91.35",
+            "upper_limit": "90460.01"
+        },
+        {
+            "available": "0.00767161",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/45039089/BTC/RUB/item",
+            "lower_limit": "20000",
+            "market": "bybit",
+            "payment_methods": [
+                "VTB"
+            ],
+            "price": "6399000",
+            "upper_limit": "49090.63"
+        },
+        {
+            "available": "0.003835",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/118485038/BTC/RUB/item",
+            "lower_limit": "8500",
+            "market": "bybit",
+            "payment_methods": [
+                "OTP Bank",
+                "VTB"
+            ],
+            "price": "6400000",
+            "upper_limit": "8544"
+        },
+        {
+            "available": "0.00139659",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/123806461/BTC/RUB/item",
+            "lower_limit": "5000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank"
+            ],
+            "price": "6400000",
+            "upper_limit": "8938.17"
+        },
+        {
+            "available": "0.02417522",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/65979606/BTC/RUB/item",
+            "lower_limit": "20000",
+            "market": "bybit",
+            "payment_methods": [
+                "VTB"
+            ],
+            "price": "6425000",
+            "upper_limit": "31112.42"
+        },
+        {
+            "available": "0.09086455",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/67405581/BTC/RUB/item",
+            "lower_limit": "3000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "VTB"
+            ],
+            "price": "6428090",
+            "upper_limit": "88966.05"
+        },
+        {
+            "available": "0.01439445",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/100114573/BTC/RUB/item",
+            "lower_limit": "15000",
+            "market": "bybit",
+            "payment_methods": [
+                "VTB"
+            ],
+            "price": "6449999",
+            "upper_limit": "92844.18"
+        },
+        {
+            "available": "0.15870397",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/158736020/BTC/RUB/item",
+            "lower_limit": "1000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff",
+                "Sberbank",
+                "VTB"
+            ],
+            "price": "6450000",
+            "upper_limit": "19065.68"
+        },
+        {
+            "available": "0.56047204",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/66996768/BTC/RUB/item",
+            "lower_limit": "100000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "6455234.52",
+            "upper_limit": "1866238.57"
+        },
+        {
+            "available": "0.28732892",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/65392619/BTC/RUB/item",
+            "lower_limit": "100000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "6455852.12",
+            "upper_limit": "500000"
+        },
+        {
+            "available": "0.2500088",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/101693921/BTC/RUB/item",
+            "lower_limit": "100000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "6455852.12",
+            "upper_limit": "500000"
+        },
+        {
+            "available": "0.04617346",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/110146798/BTC/RUB/item",
+            "lower_limit": "10000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "Tinkoff"
+            ],
+            "price": "6455852.12",
+            "upper_limit": "196947.97"
+        },
+        {
+            "available": "0.80034942",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/103702371/BTC/RUB/item",
+            "lower_limit": "100000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "6456469.73",
+            "upper_limit": "2000000"
+        },
+        {
+            "available": "0.186163",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/169530122/BTC/RUB/item",
+            "lower_limit": "100000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "6456469.73",
+            "upper_limit": "1085742.09"
+        },
+        {
+            "available": "0.05656045",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/42056506/BTC/RUB/item",
+            "lower_limit": "2000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "VTB"
+            ],
+            "price": "6460000",
+            "upper_limit": "23522.53"
+        },
+        {
+            "available": "0.05",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/140797393/BTC/RUB/item",
+            "lower_limit": "100000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "6463881.02",
+            "upper_limit": "323194.05"
+        },
+        {
+            "available": "1.3831017",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/108800238/BTC/RUB/item",
+            "lower_limit": "10000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank"
+            ],
+            "price": "6470674.7",
+            "upper_limit": "90000"
+        },
+        {
+            "available": "0.1087172",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/31001520/BTC/RUB/item",
+            "lower_limit": "40000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "Sberbank",
+                "VTB"
+            ],
+            "price": "6472527.53",
+            "upper_limit": "539666.91"
+        },
+        {
+            "available": "0.15",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/136222105/BTC/RUB/item",
+            "lower_limit": "100000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "6473762.74",
+            "upper_limit": "500000"
+        },
+        {
+            "available": "0.15058004",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/139475139/BTC/RUB/item",
+            "lower_limit": "5000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "Sberbank",
+                "VTB"
+            ],
+            "price": "6480000",
+            "upper_limit": "100034.8"
+        },
+        {
+            "available": "0.05",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/100389074/BTC/RUB/item",
+            "lower_limit": "10000",
+            "market": "bybit",
+            "payment_methods": [
+                "VTB"
+            ],
+            "price": "6509583.98",
+            "upper_limit": "59483.6"
+        },
+        {
+            "available": "0.00748251",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/174462541/BTC/RUB/item",
+            "lower_limit": "4000",
+            "market": "bybit",
+            "payment_methods": [
+                "VTB"
+            ],
+            "price": "6509583.98",
+            "upper_limit": "39128.71"
+        },
+        {
+            "available": "0.00427709",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/126029196/BTC/RUB/item",
+            "lower_limit": "5000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "Sberbank",
+                "VTB"
+            ],
+            "price": "6540464.36",
+            "upper_limit": "17131.17"
+        },
+        {
+            "available": "0.03579402",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/6551014/BTC/RUB/item",
+            "lower_limit": "100000",
+            "market": "bybit",
+            "payment_methods": [
+                "VTB"
+            ],
+            "price": "6543552.4",
+            "upper_limit": "234220.04"
+        },
+        {
+            "available": "0.04543976",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/108085411/BTC/RUB/item",
+            "lower_limit": "50000",
+            "market": "bybit",
+            "payment_methods": [
+                "VTB"
+            ],
+            "price": "6545000",
+            "upper_limit": "64230.66"
+        },
+        {
+            "available": "0.0586",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/31010707/BTC/RUB/item",
+            "lower_limit": "30000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "6546022.83",
+            "upper_limit": "383596.93"
+        },
+        {
+            "available": "0.66324603",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/31010707/BTC/RUB/item",
+            "lower_limit": "30000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "A-Bank",
+                "VTB"
+            ],
+            "price": "6546022.83",
+            "upper_limit": "387784.1"
+        },
+        {
+            "available": "0.60690733",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/114498773/BTC/RUB/item",
+            "lower_limit": "100000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "VTB"
+            ],
+            "price": "6546640.44",
+            "upper_limit": "800000"
+        },
+        {
+            "available": "0.12553052",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/51675357/BTC/RUB/item",
+            "lower_limit": "20000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "Sberbank"
+            ],
+            "price": "6546640.44",
+            "upper_limit": "600000"
+        },
+        {
+            "available": "0.05318359",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/28108047/BTC/RUB/item",
+            "lower_limit": "50000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "VTB"
+            ],
+            "price": "6565168.67",
+            "upper_limit": "349159.23"
+        },
+        {
+            "available": "0.40848462",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/111957351/BTC/RUB/item",
+            "lower_limit": "20000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "Sberbank"
+            ],
+            "price": "6565168.67",
+            "upper_limit": "500000"
+        },
+        {
+            "available": "31.05535132",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/42079898/ETH/RUB/item",
+            "lower_limit": "45000",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "332169.5",
+            "upper_limit": "300000"
+        },
+        {
+            "available": "29.32199727",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/1839059/ETH/RUB/item",
+            "lower_limit": "15000",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "331950",
+            "upper_limit": "300000"
+        },
+        {
+            "available": "30",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/115951228/ETH/RUB/item",
+            "lower_limit": "10000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "331906.66",
+            "upper_limit": "35000"
+        },
+        {
+            "available": "30",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/52322301/ETH/RUB/item",
+            "lower_limit": "30000",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "331840.95",
+            "upper_limit": "300000"
+        },
+        {
+            "available": "25.8935",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/101342343/ETH/RUB/item",
+            "lower_limit": "50000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "331840.95",
+            "upper_limit": "400000"
+        },
+        {
+            "available": "30.397",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/101693921/ETH/RUB/item",
+            "lower_limit": "100000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "331578.1",
+            "upper_limit": "500000"
+        },
+        {
+            "available": "20",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/26233654/ETH/RUB/item",
+            "lower_limit": "100000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "331545.25",
+            "upper_limit": "500000"
+        },
+        {
+            "available": "0.42505494",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/24497164/ETH/RUB/item",
+            "lower_limit": "15000",
+            "market": "bybit",
+            "payment_methods": [
+                "VTB"
+            ],
+            "price": "331512.39",
+            "upper_limit": "23562.8"
+        },
+        {
+            "available": "30",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/140797393/ETH/RUB/item",
+            "lower_limit": "100000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "331446.68",
+            "upper_limit": "500000"
+        },
+        {
+            "available": "27.92268601",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/22989540/ETH/RUB/item",
+            "lower_limit": "10000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "330395.31",
+            "upper_limit": "500000"
+        },
+        {
+            "available": "26.37644332",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/69624517/ETH/RUB/item",
+            "lower_limit": "40000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "330198.17",
+            "upper_limit": "700000"
+        },
+        {
+            "available": "0.12030075",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/111254055/ETH/RUB/item",
+            "lower_limit": "3000",
+            "market": "bybit",
+            "payment_methods": [
+                "OZON",
+                "VTB"
+            ],
+            "price": "330100",
+            "upper_limit": "27490.99"
+        },
+        {
+            "available": "28",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/142306990/ETH/RUB/item",
+            "lower_limit": "30000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank"
+            ],
+            "price": "329976",
+            "upper_limit": "1000000"
+        },
+        {
+            "available": "39.33368183",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/128719274/ETH/RUB/item",
+            "lower_limit": "100000",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "329573.92",
+            "upper_limit": "3500000"
+        },
+        {
+            "available": "29.99",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/169530122/ETH/RUB/item",
+            "lower_limit": "100000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "329573.92",
+            "upper_limit": "3500000"
+        },
+        {
+            "available": "30",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/104754903/ETH/RUB/item",
+            "lower_limit": "50000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "329541.06",
+            "upper_limit": "300000"
+        },
+        {
+            "available": "2.82407947",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/51675357/ETH/RUB/item",
+            "lower_limit": "25000",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "329212.51",
+            "upper_limit": "599000"
+        },
+        {
+            "available": "30.21947794",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/66996768/ETH/RUB/item",
+            "lower_limit": "100000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "329015.37",
+            "upper_limit": "3500000"
+        },
+        {
+            "available": "32.21459304",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/103702371/ETH/RUB/item",
+            "lower_limit": "100000",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "329015.37",
+            "upper_limit": "3500000"
+        },
+        {
+            "available": "30",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/20292137/ETH/RUB/item",
+            "lower_limit": "80000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "328982.52",
+            "upper_limit": "300000"
+        },
+        {
+            "available": "30",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/65392619/ETH/RUB/item",
+            "lower_limit": "100000",
+            "market": "bybit",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "328949.66",
+            "upper_limit": "500000"
+        },
+        {
+            "available": "5.54584951",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/100631397/ETH/RUB/item",
+            "lower_limit": "90000",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "328555.4",
+            "upper_limit": "1633906.35"
+        },
+        {
+            "available": "4.75865264",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/42243041/ETH/RUB/item",
+            "lower_limit": "29000",
+            "market": "bybit",
+            "payment_methods": [
+                "VTB"
+            ],
+            "price": "328292.55",
+            "upper_limit": "30000"
+        },
+        {
+            "available": "0.69462501",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/43677888/ETH/RUB/item",
+            "lower_limit": "5000",
+            "market": "bybit",
+            "payment_methods": [
+                "VTB"
+            ],
+            "price": "328150",
+            "upper_limit": "49222.5"
+        },
+        {
+            "available": "23.13761196",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/36304483/ETH/RUB/item",
+            "lower_limit": "25000",
+            "market": "bybit",
+            "payment_methods": [
+                "VTB"
+            ],
+            "price": "328062.56",
+            "upper_limit": "1640312.8"
+        },
+        {
+            "available": "30",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/21726399/ETH/RUB/item",
+            "lower_limit": "30000",
+            "market": "bybit",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "327898.28",
+            "upper_limit": "250000"
+        },
+        {
+            "available": "6.72698478",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/20711933/ETH/RUB/item",
+            "lower_limit": "30000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "VTB"
+            ],
+            "price": "327569.73",
+            "upper_limit": "491354.59"
+        },
+        {
+            "available": "0.16",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/165410721/ETH/RUB/item",
+            "lower_limit": "5000",
+            "market": "bybit",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "Tinkoff",
+                "Sberbank",
+                "VTB"
+            ],
+            "price": "327160",
+            "upper_limit": "25000"
+        },
+        {
+            "available": "35.80008932",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.bybit.com/fiat/trade/otc/profile/36304483/ETH/RUB/item",
+            "lower_limit": "30000",
+            "market": "bybit",
+            "payment_methods": [
+                "OZON"
+            ],
+            "price": "326912.62",
+            "upper_limit": "1634563.1"
+        },
+        {
+            "available": "0.036626",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/491801366",
+            "lower_limit": "1000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "355000.00",
+            "upper_limit": "13002.00"
+        },
+        {
+            "available": "0.007583",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/421213105",
+            "lower_limit": "500.00",
+            "market": "htx",
+            "payment_methods": [
+                "SBP - Fast Bank Transfer",
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "355600.00",
+            "upper_limit": "2696.00"
+        },
+        {
+            "available": "0.181429",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/297149246",
+            "lower_limit": "15000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "SBP - Fast Bank Transfer",
+                "Alfa-bank",
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "356200.00",
+            "upper_limit": "64625.00"
+        },
+        {
+            "available": "1.047515",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/17285356",
+            "lower_limit": "20000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "Sberbank"
+            ],
+            "price": "358776.24",
+            "upper_limit": "375823.00"
+        },
+        {
+            "available": "0.974343",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/401167696",
+            "lower_limit": "30000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Alfa-bank",
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "366808.54",
+            "upper_limit": "350000.00"
+        },
+        {
+            "available": "0.587933",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/471145193",
+            "lower_limit": "10000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "Alfa-bank",
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "366808.54",
+            "upper_limit": "215126.00"
+        },
+        {
+            "available": "0.858403",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/268651649",
+            "lower_limit": "10000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "Sberbank"
+            ],
+            "price": "369653.32",
+            "upper_limit": "284996.43"
+        },
+        {
+            "available": "0.974343",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/401167696",
+            "lower_limit": "30000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "Alfa-bank",
+                "Tinkoff",
+                "Sberbank",
+                "Gazprombank"
+            ],
+            "price": "374706.97",
+            "upper_limit": "360000.00"
+        },
+        {
+            "available": "1.255836",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/357011334",
+            "lower_limit": "50000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Alfa-bank",
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "374740.44",
+            "upper_limit": "460000.00"
+        },
+        {
+            "available": "0.042773",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/429361021",
+            "lower_limit": "4000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "SBP - Fast Bank Transfer",
+                "Alfa-bank",
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "384847.76",
+            "upper_limit": "16400.00"
+        },
+        {
+            "available": "0.020000",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/416387971",
+            "lower_limit": "50000.00",
+            "market": "htx",
+            "payment_methods": [
+                "MTS-Bank",
+                "SBP - Fast Bank Transfer",
+                "Alfa-bank",
+                "VTB",
+                "Gazprombank"
+            ],
+            "price": "6275000.00",
+            "upper_limit": "125000.00"
+        },
+        {
+            "available": "0.500000",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/490740659",
+            "lower_limit": "20000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "6267000.01",
+            "upper_limit": "300000.00"
+        },
+        {
+            "available": "50.000000",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/323109052",
+            "lower_limit": "50000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "6264929.91",
+            "upper_limit": "500000.00"
+        },
+        {
+            "available": "49.984340",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/488239441",
+            "lower_limit": "40000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "Alfa-bank",
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "6261500.00",
+            "upper_limit": "230000.00"
+        },
+        {
+            "available": "0.990838",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/467658228",
+            "lower_limit": "20000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "6254890.96",
+            "upper_limit": "700000.00"
+        },
+        {
+            "available": "1.000000",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/477091705",
+            "lower_limit": "50000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Alfa-bank",
+                "Tinkoff",
+                "Sberbank",
+                "Raiffeisenbank",
+                "SBP - Fast Bank Transfer"
+            ],
+            "price": "6230000.00",
+            "upper_limit": "250000.00"
+        },
+        {
+            "available": "50.000000",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/286534263",
+            "lower_limit": "20000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Alfa-bank",
+                "VTB",
+                "Sberbank",
+                "Raiffeisenbank",
+                "SBP - Fast Bank Transfer"
+            ],
+            "price": "6228538.73",
+            "upper_limit": "150000.00"
+        },
+        {
+            "available": "0.003301",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/488660306",
+            "lower_limit": "10000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "6225000.01",
+            "upper_limit": "20548.00"
+        },
+        {
+            "available": "50.000000",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/297149246",
+            "lower_limit": "20000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Alfa-bank",
+                "Tinkoff",
+                "Sberbank",
+                "Raiffeisenbank",
+                "SBP - Fast Bank Transfer"
+            ],
+            "price": "6225000.00",
+            "upper_limit": "70000.00"
+        },
+        {
+            "available": "49.990049",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/439180889",
+            "lower_limit": "20000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "6213899.55",
+            "upper_limit": "1000000.00"
+        },
+        {
+            "available": "894.604883",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/481594149",
+            "lower_limit": "70000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Raiffeisenbank"
+            ],
+            "price": "91.29",
+            "upper_limit": "81600.00"
+        },
+        {
+            "available": "3200.000000",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/397202000",
+            "lower_limit": "271065.00",
+            "market": "htx",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "91.30",
+            "upper_limit": "271065.00"
+        },
+        {
+            "available": "1635.898576",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/489423714",
+            "lower_limit": "148000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "91.34",
+            "upper_limit": "148000.00"
+        },
+        {
+            "available": "15000.948643",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/261204855",
+            "lower_limit": "100000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Cash in Person"
+            ],
+            "price": "91.50",
+            "upper_limit": "916086.00"
+        },
+        {
+            "available": "1648.000000",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/484895654",
+            "lower_limit": "150000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "91.50",
+            "upper_limit": "150000.00"
+        },
+        {
+            "available": "1614.000000",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/410530836",
+            "lower_limit": "146831.00",
+            "market": "htx",
+            "payment_methods": [
+                "SBP - Fast Bank Transfer",
+                "Tinkoff"
+            ],
+            "price": "91.60",
+            "upper_limit": "146831.00"
+        },
+        {
+            "available": "750.000000",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/397202000",
+            "lower_limit": "60000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "91.69",
+            "upper_limit": "60000.00"
+        },
+        {
+            "available": "1500.000000",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/300463615",
+            "lower_limit": "100000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "91.69",
+            "upper_limit": "130000.00"
+        },
+        {
+            "available": "1650.000000",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/486649640",
+            "lower_limit": "150000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "91.70",
+            "upper_limit": "150000.00"
+        },
+        {
+            "available": "500.000000",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/463230598",
+            "lower_limit": "1000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Alipay",
+                "WeChat"
+            ],
+            "price": "91.70",
+            "upper_limit": "45000.00"
+        },
+        {
+            "available": "0.011427",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/480576266",
+            "lower_limit": "3000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Alfa-bank",
+                "Sovkombank",
+                "Russian standard bank",
+                "VTB",
+                "Sberbank"
+            ],
+            "price": "6451000.00",
+            "upper_limit": "73700.00"
+        },
+        {
+            "available": "0.008167",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/489883124",
+            "lower_limit": "5000.00",
+            "market": "htx",
+            "payment_methods": [
+                "SBP - Fast Bank Transfer",
+                "Alfa-bank",
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "6452000.00",
+            "upper_limit": "20000.00"
+        },
+        {
+            "available": "0.043059",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/433207542",
+            "lower_limit": "10000.00",
+            "market": "htx",
+            "payment_methods": [
+                "SBP - Fast Bank Transfer",
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "6468000.00",
+            "upper_limit": "278505.00"
+        },
+        {
+            "available": "0.001181",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/389208377",
+            "lower_limit": "100.00",
+            "market": "htx",
+            "payment_methods": [
+                "Post Bank",
+                "Alfa-bank",
+                "VTB",
+                "Tinkoff",
+                "Gazprombank"
+            ],
+            "price": "6470000.00",
+            "upper_limit": "7641.00"
+        },
+        {
+            "available": "0.079121",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/268651649",
+            "lower_limit": "50000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "Sberbank"
+            ],
+            "price": "6512766.39",
+            "upper_limit": "515296.00"
+        },
+        {
+            "available": "0.003743",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/425447183",
+            "lower_limit": "5000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Alfa-bank",
+                "Tinkoff",
+                "Sberbank",
+                "Raiffeisenbank"
+            ],
+            "price": "6535000.00",
+            "upper_limit": "24450.00"
+        },
+        {
+            "available": "0.062787",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/17285356",
+            "lower_limit": "20000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "Sberbank"
+            ],
+            "price": "6588058.49",
+            "upper_limit": "413644.00"
+        },
+        {
+            "available": "0.010124",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/487956601",
+            "lower_limit": "5000.00",
+            "market": "htx",
+            "payment_methods": [
+                "SBP - Fast Bank Transfer"
+            ],
+            "price": "6588058.49",
+            "upper_limit": "66697.00"
+        },
+        {
+            "available": "0.080000",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/413192975",
+            "lower_limit": "55000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "6685000.00",
+            "upper_limit": "505000.00"
+        },
+        {
+            "available": "0.049656",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/450716224",
+            "lower_limit": "50000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "6719192.23",
+            "upper_limit": "290000.00"
+        },
+        {
+            "available": "7500.000000",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/457487805",
+            "lower_limit": "30000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Alipay",
+                "WeChat"
+            ],
+            "price": "134.71",
+            "upper_limit": "750000.00"
+        },
+        {
+            "available": "1000.000000",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/463296798",
+            "lower_limit": "5000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Alipay"
+            ],
+            "price": "134.71",
+            "upper_limit": "130000.00"
+        },
+        {
+            "available": "2792.726425",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/416157527",
+            "lower_limit": "90000.00",
+            "market": "htx",
+            "payment_methods": [
+                "VTB"
+            ],
+            "price": "91.70",
+            "upper_limit": "98000.00"
+        },
+        {
+            "available": "2597.972417",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/416157527",
+            "lower_limit": "50000.00",
+            "market": "htx",
+            "payment_methods": [
+                "VTB"
+            ],
+            "price": "91.50",
+            "upper_limit": "99000.00"
+        },
+        {
+            "available": "772.000000",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/463390376",
+            "lower_limit": "50000.00",
+            "market": "htx",
+            "payment_methods": [
+                "VTB"
+            ],
+            "price": "91.45",
+            "upper_limit": "70514.00"
+        },
+        {
+            "available": "510.000000",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/469548140",
+            "lower_limit": "35000.00",
+            "market": "htx",
+            "payment_methods": [
+                "VTB"
+            ],
+            "price": "91.43",
+            "upper_limit": "39000.00"
+        },
+        {
+            "available": "802.000000",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/394000627",
+            "lower_limit": "50000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "91.25",
+            "upper_limit": "70000.00"
+        },
+        {
+            "available": "450.000000",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/283198431",
+            "lower_limit": "20000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "91.20",
+            "upper_limit": "36600.00"
+        },
+        {
+            "available": "471.957000",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/288914165",
+            "lower_limit": "15000.00",
+            "market": "htx",
+            "payment_methods": [
+                "SBP - Fast Bank Transfer"
+            ],
+            "price": "91.11",
+            "upper_limit": "43000.00"
+        },
+        {
+            "available": "1443.644347",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/487210769",
+            "lower_limit": "50000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "91.10",
+            "upper_limit": "131516.00"
+        },
+        {
+            "available": "1350.000000",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/462355193",
+            "lower_limit": "120000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "91.70",
+            "upper_limit": "120000.00"
+        },
+        {
+            "available": "1635.770000",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/413684137",
+            "lower_limit": "50000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "91.70",
+            "upper_limit": "150000.00"
+        },
+        {
+            "available": "5249.513656",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/431004033",
+            "lower_limit": "20000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Tinkoff",
+                "Raiffeisenbank"
+            ],
+            "price": "91.74",
+            "upper_limit": "480000.00"
+        },
+        {
+            "available": "334.522747",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/488349215",
+            "lower_limit": "20000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Bank Transfer",
+                "SBP - Fast Bank Transfer"
+            ],
+            "price": "91.77",
+            "upper_limit": "30690.00"
+        },
+        {
+            "available": "3192.810460",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/301564418",
+            "lower_limit": "10000.00",
+            "market": "htx",
+            "payment_methods": [
+                "VTB",
+                "Sberbank",
+                "Gazprombank",
+                "MTS-Bank"
+            ],
+            "price": "91.80",
+            "upper_limit": "200000.00"
+        },
+        {
+            "available": "1100.000000",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/389081866",
+            "lower_limit": "90000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Tinkoff",
+                "SBP - Fast Bank Transfer"
+            ],
+            "price": "91.80",
+            "upper_limit": "100000.00"
+        },
+        {
+            "available": "200.000000",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/294137009",
+            "lower_limit": "10800.00",
+            "market": "htx",
+            "payment_methods": [
+                "PSB",
+                "SBP - Fast Bank Transfer"
+            ],
+            "price": "91.80",
+            "upper_limit": "10800.00"
+        },
+        {
+            "available": "600.707900",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/386843514",
+            "lower_limit": "52920.00",
+            "market": "htx",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "91.80",
+            "upper_limit": "52920.00"
+        },
+        {
+            "available": "2500.000000",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/389081866",
+            "lower_limit": "100000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Tinkoff",
+                "SBP - Fast Bank Transfer"
+            ],
+            "price": "91.85",
+            "upper_limit": "197177.00"
+        },
+        {
+            "available": "495.700000",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/487679670",
+            "lower_limit": "45544.00",
+            "market": "htx",
+            "payment_methods": [
+                "Alfa-bank"
+            ],
+            "price": "91.88",
+            "upper_limit": "45544.00"
+        },
+        {
+            "available": "0.259385",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/354826381",
+            "lower_limit": "3000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Credit Bank of Moscow",
+                "SBP - Fast Bank Transfer",
+                "Rosbank",
+                "Rosselkhozbank",
+                "Credit Europe Bank (Russia)"
+            ],
+            "price": "384881.23",
+            "upper_limit": "99832.00"
+        },
+        {
+            "available": "0.259385",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/354826381",
+            "lower_limit": "3000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Yandex",
+                "Raiffeisenbank",
+                "Russian standard bank",
+                "VTB",
+                "Home Credit Bank (Russia)"
+            ],
+            "price": "385215.90",
+            "upper_limit": "99919.00"
+        },
+        {
+            "available": "4.156244",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/391163239",
+            "lower_limit": "20000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "SBP - Fast Bank Transfer",
+                "Alfa-bank",
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "400510.75",
+            "upper_limit": "1405000.00"
+        },
+        {
+            "available": "1.255836",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/357011334",
+            "lower_limit": "20000.00",
+            "market": "htx",
+            "payment_methods": [
+                "VTB",
+                "SBP - Fast Bank Transfer",
+                "Gazprombank",
+                "Rosbank",
+                "PSB"
+            ],
+            "price": "425042.75",
+            "upper_limit": "362449.00"
+        },
+        {
+            "available": "0.001880",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/268519424",
+            "lower_limit": "100.00",
+            "market": "htx",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "430835.00",
+            "upper_limit": "809.00"
+        },
+        {
+            "available": "2.945481",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/308512884",
+            "lower_limit": "5000.00",
+            "market": "htx",
+            "payment_methods": [
+                "QIWI",
+                "Alfa-bank",
+                "Tinkoff",
+                "Sberbank",
+                "SBP - Fast Bank Transfer"
+            ],
+            "price": "431334.72",
+            "upper_limit": "787945.00"
+        },
+        {
+            "available": "0.000964",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/417041849",
+            "lower_limit": "100.00",
+            "market": "htx",
+            "payment_methods": [
+                "Ak Bars Bank",
+                "Bank Transfer",
+                "PSB",
+                "MTS-Bank",
+                "BCS Bank"
+            ],
+            "price": "431702.86",
+            "upper_limit": "416.00"
+        },
+        {
+            "available": "0.000964",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/417041849",
+            "lower_limit": "200.00",
+            "market": "htx",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "MTS-Bank",
+                "SBP - Fast Bank Transfer",
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "431736.33",
+            "upper_limit": "416.00"
+        },
+        {
+            "available": "2.981933",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/308512884",
+            "lower_limit": "5000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Bank Transfer",
+                "Yandex",
+                "QIWI"
+            ],
+            "price": "435049.66",
+            "upper_limit": "1000000.00"
+        },
+        {
+            "available": "0.135739",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/314307826",
+            "lower_limit": "400.00",
+            "market": "htx",
+            "payment_methods": [
+                "PAYEER",
+                "Raiffeisenbank",
+                "SBP - Fast Bank Transfer",
+                "Bank Saint-Petersburg"
+            ],
+            "price": "435083.12",
+            "upper_limit": "59057.00"
+        },
+        {
+            "available": "1.000000",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/297309329",
+            "lower_limit": "20000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "6200000.00",
+            "upper_limit": "200000.00"
+        },
+        {
+            "available": "1.000000",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/285920708",
+            "lower_limit": "20000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "6200000.00",
+            "upper_limit": "200000.00"
+        },
+        {
+            "available": "50.000000",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/491978478",
+            "lower_limit": "25000.00",
+            "market": "htx",
+            "payment_methods": [
+                "SBP - Fast Bank Transfer",
+                "MTS-Bank",
+                "PSB"
+            ],
+            "price": "6186666.00",
+            "upper_limit": "325000.00"
+        },
+        {
+            "available": "0.100000",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/297364664",
+            "lower_limit": "30000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "SBP - Fast Bank Transfer",
+                "Sberbank"
+            ],
+            "price": "6185000.00",
+            "upper_limit": "200000.00"
+        },
+        {
+            "available": "50.000000",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/380690207",
+            "lower_limit": "30000.00",
+            "market": "htx",
+            "payment_methods": [
+                "SBP - Fast Bank Transfer"
+            ],
+            "price": "6180853.73",
+            "upper_limit": "300000.00"
+        },
+        {
+            "available": "1.000000",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/485836533",
+            "lower_limit": "15000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "6173951.96",
+            "upper_limit": "70000.00"
+        },
+        {
+            "available": "49.992982",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/445547518",
+            "lower_limit": "20000.00",
+            "market": "htx",
+            "payment_methods": [
+                "PSB",
+                "MTS-Bank",
+                "SBP - Fast Bank Transfer",
+                "Rosbank",
+                "Sberbank"
+            ],
+            "price": "6171442.22",
+            "upper_limit": "120000.00"
+        },
+        {
+            "available": "49.996094",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/445547518",
+            "lower_limit": "20000.00",
+            "market": "htx",
+            "payment_methods": [
+                "MTS-Bank",
+                "Rosselkhozbank",
+                "Russian standard bank",
+                "Tinkoff",
+                "Gazprombank"
+            ],
+            "price": "6168932.48",
+            "upper_limit": "100000.00"
+        },
+        {
+            "available": "1.000000",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/414536701",
+            "lower_limit": "50000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Alfa-bank",
+                "Tinkoff",
+                "Sberbank",
+                "Raiffeisenbank"
+            ],
+            "price": "6167677.61",
+            "upper_limit": "600000.00"
+        },
+        {
+            "available": "50.000000",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/401167696",
+            "lower_limit": "50000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "Sberbank"
+            ],
+            "price": "6150736.89",
+            "upper_limit": "1000000.00"
+        },
+        {
+            "available": "0.080863",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/401167696",
+            "lower_limit": "30000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Alfa-bank",
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "6775033.86",
+            "upper_limit": "538499.00"
+        },
+        {
+            "available": "0.062697",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/471145193",
+            "lower_limit": "20000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "Alfa-bank",
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "6775033.86",
+            "upper_limit": "423112.00"
+        },
+        {
+            "available": "0.050000",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/386006746",
+            "lower_limit": "10000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "SBP - Fast Bank Transfer",
+                "Alfa-bank",
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "6776288.73",
+            "upper_limit": "300000.00"
+        },
+        {
+            "available": "0.002546",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/437767715",
+            "lower_limit": "15000.00",
+            "market": "htx",
+            "payment_methods": [
+                "SBP - Fast Bank Transfer",
+                "Sberbank"
+            ],
+            "price": "6861000.00",
+            "upper_limit": "17468.00"
+        },
+        {
+            "available": "0.000102",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/491868134",
+            "lower_limit": "100.00",
+            "market": "htx",
+            "payment_methods": [
+                "SBP - Fast Bank Transfer",
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "6870403.85",
+            "upper_limit": "700.00"
+        },
+        {
+            "available": "0.010420",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/444153960",
+            "lower_limit": "10000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Sberbank",
+                "SBP - Fast Bank Transfer"
+            ],
+            "price": "6901775.56",
+            "upper_limit": "50000.00"
+        },
+        {
+            "available": "0.002666",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/388418838",
+            "lower_limit": "3000.00",
+            "market": "htx",
+            "payment_methods": [
+                "VTB",
+                "Tinkoff",
+                "Sberbank",
+                "SBP - Fast Bank Transfer",
+                "Rosbank"
+            ],
+            "price": "6945000.00",
+            "upper_limit": "18515.00"
+        },
+        {
+            "available": "0.002666",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/388418838",
+            "lower_limit": "3000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Alfa-bank",
+                "Tinkoff",
+                "Sberbank",
+                "Raiffeisenbank",
+                "SBP - Fast Bank Transfer"
+            ],
+            "price": "6949000.00",
+            "upper_limit": "18526.00"
+        },
+        {
+            "available": "0.012018",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/387138050",
+            "lower_limit": "777.00",
+            "market": "htx",
+            "payment_methods": [
+                "PSB",
+                "Rosbank",
+                "Alfa-bank",
+                "Sovkombank",
+                "VTB"
+            ],
+            "price": "6969696.00",
+            "upper_limit": "83761.00"
+        },
+        {
+            "available": "0.001928",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/385261419",
+            "lower_limit": "100.00",
+            "market": "htx",
+            "payment_methods": [
+                "VTB",
+                "Rosbank"
+            ],
+            "price": "7000000.00",
+            "upper_limit": "13496.00"
+        },
+        {
+            "available": "1000.000000",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/441788575",
+            "lower_limit": "50000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Alfa-bank",
+                "Tinkoff",
+                "SBP - Fast Bank Transfer",
+                "Ozon"
+            ],
+            "price": "91.04",
+            "upper_limit": "65000.00"
+        },
+        {
+            "available": "887.158469",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/489906864",
+            "lower_limit": "40000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "91.00",
+            "upper_limit": "40000.00"
+        },
+        {
+            "available": "2261.992922",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/487220243",
+            "lower_limit": "10000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "91.00",
+            "upper_limit": "20000.00"
+        },
+        {
+            "available": "700.000000",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/276467722",
+            "lower_limit": "50000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "90.95",
+            "upper_limit": "60000.00"
+        },
+        {
+            "available": "704.729433",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/215284777",
+            "lower_limit": "60000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "90.92",
+            "upper_limit": "64074.00"
+        },
+        {
+            "available": "850.000000",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/468685898",
+            "lower_limit": "30000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "90.92",
+            "upper_limit": "70000.00"
+        },
+        {
+            "available": "2500.000000",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/484895654",
+            "lower_limit": "70000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "90.92",
+            "upper_limit": "150000.00"
+        },
+        {
+            "available": "1000.000000",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/477223612",
+            "lower_limit": "40000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "90.92",
+            "upper_limit": "60000.00"
+        },
+        {
+            "available": "209.085910",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/194233096",
+            "lower_limit": "15000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Raiffeisenbank"
+            ],
+            "price": "90.91",
+            "upper_limit": "16000.00"
+        },
+        {
+            "available": "2000.000000",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/410398671",
+            "lower_limit": "100000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "90.90",
+            "upper_limit": "150000.00"
+        },
+        {
+            "available": "3.000000",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/490740659",
+            "lower_limit": "20000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "333000.01",
+            "upper_limit": "300000.00"
+        },
+        {
+            "available": "1.000000",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/294119530",
+            "lower_limit": "5000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "333000.00",
+            "upper_limit": "80000.00"
+        },
+        {
+            "available": "1000.000000",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/323109052",
+            "lower_limit": "30000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "332838.59",
+            "upper_limit": "500000.00"
+        },
+        {
+            "available": "1000.000000",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/467658228",
+            "lower_limit": "50000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "332336.57",
+            "upper_limit": "700000.00"
+        },
+        {
+            "available": "20.000000",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/397202000",
+            "lower_limit": "50000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "332000.00",
+            "upper_limit": "350000.00"
+        },
+        {
+            "available": "1000.000000",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/286534263",
+            "lower_limit": "20000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Alfa-bank",
+                "VTB",
+                "Sberbank",
+                "Raiffeisenbank",
+                "SBP - Fast Bank Transfer"
+            ],
+            "price": "331767.62",
+            "upper_limit": "150000.00"
+        },
+        {
+            "available": "1000.000000",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/266601818",
+            "lower_limit": "50000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Bank Transfer"
+            ],
+            "price": "331332.53",
+            "upper_limit": "850000.00"
+        },
+        {
+            "available": "1000.000000",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/297149246",
+            "lower_limit": "20000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Alfa-bank",
+                "Tinkoff",
+                "Sberbank",
+                "Raiffeisenbank",
+                "SBP - Fast Bank Transfer"
+            ],
+            "price": "330500.00",
+            "upper_limit": "70000.00"
+        },
+        {
+            "available": "1000.000000",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/491978478",
+            "lower_limit": "20000.00",
+            "market": "htx",
+            "payment_methods": [
+                "SBP - Fast Bank Transfer",
+                "MTS-Bank",
+                "PSB"
+            ],
+            "price": "330000.00",
+            "upper_limit": "299999.00"
+        },
+        {
+            "available": "1000.000000",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/380690207",
+            "lower_limit": "10000.00",
+            "market": "htx",
+            "payment_methods": [
+                "SBP - Fast Bank Transfer"
+            ],
+            "price": "329692.60",
+            "upper_limit": "300000.00"
+        },
+        {
+            "available": "0.213183",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/268481282",
+            "lower_limit": "500.00",
+            "market": "htx",
+            "payment_methods": [
+                "Ozon",
+                "Raiffeisenbank",
+                "MTS-Bank",
+                "Post Bank",
+                "Tinkoff"
+            ],
+            "price": "438429.92",
+            "upper_limit": "93465.00"
+        },
+        {
+            "available": "0.013056",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/257880161",
+            "lower_limit": "300.00",
+            "market": "htx",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "Alfa-bank",
+                "VTB",
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "449999.00",
+            "upper_limit": "5875.00"
+        },
+        {
+            "available": "0.213183",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/268481282",
+            "lower_limit": "1000.00",
+            "market": "htx",
+            "payment_methods": [
+                "VTB",
+                "Credit Europe Bank (Russia)",
+                "Renaissance Credit Bank",
+                "MTS-Bank",
+                "Post Bank"
+            ],
+            "price": "451817.09",
+            "upper_limit": "90000.00"
+        },
+        {
+            "available": "0.015543",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/257880161",
+            "lower_limit": "500.00",
+            "market": "htx",
+            "payment_methods": [
+                "SBP - Fast Bank Transfer"
+            ],
+            "price": "455555.00",
+            "upper_limit": "7080.00"
+        },
+        {
+            "available": "0.133936",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/245189080",
+            "lower_limit": "500.00",
+            "market": "htx",
+            "payment_methods": [
+                "Ak Bars Bank",
+                "Raiffeisenbank",
+                "Rosbank",
+                "Otkritie Bank",
+                "Gazprombank"
+            ],
+            "price": "511700.00",
+            "upper_limit": "68535.00"
+        },
+        {
+            "available": "0.133936",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/245189080",
+            "lower_limit": "500.00",
+            "market": "htx",
+            "payment_methods": [
+                "Uralsib Bank",
+                "Alfa-bank",
+                "Tinkoff",
+                "Sberbank",
+                "OTP"
+            ],
+            "price": "511711.00",
+            "upper_limit": "68536.00"
+        },
+        {
+            "available": "50.000000",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/357011334",
+            "lower_limit": "40000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "SBP - Fast Bank Transfer",
+                "Rosbank",
+                "Tinkoff"
+            ],
+            "price": "6150109.46",
+            "upper_limit": "300000.00"
+        },
+        {
+            "available": "49.926051",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/486836207",
+            "lower_limit": "3000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Yandex",
+                "VTB",
+                "Tinkoff",
+                "Sberbank",
+                "SBP - Fast Bank Transfer"
+            ],
+            "price": "6149482.02",
+            "upper_limit": "700000.00"
+        },
+        {
+            "available": "50.000000",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/266601818",
+            "lower_limit": "50000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Bank Transfer"
+            ],
+            "price": "6148854.59",
+            "upper_limit": "850000.00"
+        },
+        {
+            "available": "50.000000",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/412923092",
+            "lower_limit": "15000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "6136933.34",
+            "upper_limit": "299000.00"
+        },
+        {
+            "available": "49.927692",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/412923092",
+            "lower_limit": "15000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Alfa-bank",
+                "Tinkoff",
+                "Sberbank",
+                "Raiffeisenbank",
+                "Rosbank"
+            ],
+            "price": "6136933.34",
+            "upper_limit": "299088.00"
+        },
+        {
+            "available": "49.997141",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/486502734",
+            "lower_limit": "2000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "SBP - Fast Bank Transfer",
+                "Alfa-bank",
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "6117482.88",
+            "upper_limit": "600000.00"
+        },
+        {
+            "available": "50.000000",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/181528845",
+            "lower_limit": "20000.00",
+            "market": "htx",
+            "payment_methods": [
+                "SBP - Fast Bank Transfer",
+                "Sberbank"
+            ],
+            "price": "6103051.90",
+            "upper_limit": "100000.00"
+        },
+        {
+            "available": "49.996004",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/481600605",
+            "lower_limit": "5000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "SBP - Fast Bank Transfer",
+                "Alfa-bank",
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "6093640.39",
+            "upper_limit": "30000.00"
+        },
+        {
+            "available": "49.938909",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/387978290",
+            "lower_limit": "5000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Ak Bars Bank",
+                "Rosbank",
+                "Otkritie Bank",
+                "Alfa-bank",
+                "Gazprombank"
+            ],
+            "price": "6092385.52",
+            "upper_limit": "750000.00"
+        },
+        {
+            "available": "0.005000",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/415065196",
+            "lower_limit": "4500.00",
+            "market": "htx",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "6080000.00",
+            "upper_limit": "30000.00"
+        },
+        {
+            "available": "0.080863",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/401167696",
+            "lower_limit": "30000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "Alfa-bank",
+                "Tinkoff",
+                "Sberbank",
+                "Gazprombank"
+            ],
+            "price": "7026007.52",
+            "upper_limit": "550000.00"
+        },
+        {
+            "available": "0.100472",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/357011334",
+            "lower_limit": "30000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Alfa-bank",
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "7027262.39",
+            "upper_limit": "590000.00"
+        },
+        {
+            "available": "0.350002",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/391163239",
+            "lower_limit": "30000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "SBP - Fast Bank Transfer",
+                "Alfa-bank",
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "7194787.31",
+            "upper_limit": "2000000.00"
+        },
+        {
+            "available": "0.014574",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/354826381",
+            "lower_limit": "3000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Credit Bank of Moscow",
+                "SBP - Fast Bank Transfer",
+                "Rosbank",
+                "Rosselkhozbank",
+                "Credit Europe Bank (Russia)"
+            ],
+            "price": "7215492.63",
+            "upper_limit": "100000.00"
+        },
+        {
+            "available": "0.000922",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/417041849",
+            "lower_limit": "100.00",
+            "market": "htx",
+            "payment_methods": [
+                "PSB",
+                "MTS-Bank",
+                "SBP - Fast Bank Transfer",
+                "BCS Bank",
+                "Sberbank"
+            ],
+            "price": "7215492.63",
+            "upper_limit": "6535.00"
+        },
+        {
+            "available": "0.014574",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/354826381",
+            "lower_limit": "3000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Yandex",
+                "Raiffeisenbank",
+                "Russian standard bank",
+                "VTB",
+                "Home Credit Bank (Russia)"
+            ],
+            "price": "7221766.97",
+            "upper_limit": "100000.00"
+        },
+        {
+            "available": "0.000922",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/417041849",
+            "lower_limit": "100.00",
+            "market": "htx",
+            "payment_methods": [
+                "Ak Bars Bank",
+                "Bank Transfer",
+                "Raiffeisenbank",
+                "BCS Bank",
+                "Tinkoff"
+            ],
+            "price": "7278236.05",
+            "upper_limit": "6591.00"
+        },
+        {
+            "available": "0.004675",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/400006713",
+            "lower_limit": "1000.00",
+            "market": "htx",
+            "payment_methods": [
+                "UBRR",
+                "Otkritie Bank",
+                "Rosselkhozbank",
+                "VTB",
+                "UniCredit"
+            ],
+            "price": "7522307.93",
+            "upper_limit": "34981.00"
+        },
+        {
+            "available": "0.005354",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/398517277",
+            "lower_limit": "1000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Bank Transfer",
+                "Tinkoff",
+                "Home Credit Bank (Russia)",
+                "Sberbank",
+                "Gazprombank"
+            ],
+            "price": "7522307.93",
+            "upper_limit": "40073.45"
+        },
+        {
+            "available": "0.004675",
+            "coin": "BTC",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/400006713",
+            "lower_limit": "1000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Credit Bank of Moscow",
+                "PSB",
+                "RNCB Bank",
+                "Ozon",
+                "Gazprombank"
+            ],
+            "price": "7522935.36",
+            "upper_limit": "34982.53"
+        },
+        {
+            "available": "59.777992",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/486729832",
+            "lower_limit": "5000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "90.90",
+            "upper_limit": "5433.00"
+        },
+        {
+            "available": "118.987899",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/447199411",
+            "lower_limit": "10000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "90.90",
+            "upper_limit": "10816.00"
+        },
+        {
+            "available": "200000.000000",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/470614352",
+            "lower_limit": "50000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "90.90",
+            "upper_limit": "318472.00"
+        },
+        {
+            "available": "4351.000000",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/491874866",
+            "lower_limit": "100000.00",
+            "market": "htx",
+            "payment_methods": [
+                "SBP - Fast Bank Transfer",
+                "Alfa-bank"
+            ],
+            "price": "90.90",
+            "upper_limit": "395420.00"
+        },
+        {
+            "available": "560.000000",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/491942611",
+            "lower_limit": "50000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "Alfa-bank",
+                "VTB",
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "90.90",
+            "upper_limit": "50000.00"
+        },
+        {
+            "available": "45.000000",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/480141881",
+            "lower_limit": "4000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "90.88",
+            "upper_limit": "4000.00"
+        },
+        {
+            "available": "1700.000000",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/395483026",
+            "lower_limit": "100000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "90.88",
+            "upper_limit": "154000.00"
+        },
+        {
+            "available": "11.526989",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/491555863",
+            "lower_limit": "500.00",
+            "market": "htx",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "90.87",
+            "upper_limit": "1047.00"
+        },
+        {
+            "available": "395.000000",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/479484109",
+            "lower_limit": "20000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "SBP - Fast Bank Transfer",
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "90.87",
+            "upper_limit": "35000.00"
+        },
+        {
+            "available": "2300.000000",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/389081866",
+            "lower_limit": "100000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Alfa-bank",
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "90.85",
+            "upper_limit": "100000.00"
+        },
+        {
+            "available": "1000.000000",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/401167696",
+            "lower_limit": "30000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "Sberbank"
+            ],
+            "price": "329357.92",
+            "upper_limit": "1000000.00"
+        },
+        {
+            "available": "999.574416",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/486836207",
+            "lower_limit": "1000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Sberbank",
+                "SBP - Fast Bank Transfer"
+            ],
+            "price": "329324.46",
+            "upper_limit": "700000.00"
+        },
+        {
+            "available": "1000.000000",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/357011334",
+            "lower_limit": "30000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "SBP - Fast Bank Transfer",
+                "Tinkoff"
+            ],
+            "price": "329023.25",
+            "upper_limit": "300000.00"
+        },
+        {
+            "available": "1000.000000",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/445547518",
+            "lower_limit": "20000.00",
+            "market": "htx",
+            "payment_methods": [
+                "MTS-Bank",
+                "SBP - Fast Bank Transfer",
+                "Rosbank",
+                "Otkritie Bank",
+                "Sberbank"
+            ],
+            "price": "328922.84",
+            "upper_limit": "100000.00"
+        },
+        {
+            "available": "1000.000000",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/439180889",
+            "lower_limit": "20000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "328822.61",
+            "upper_limit": "1000000.00"
+        },
+        {
+            "available": "999.701757",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/445547518",
+            "lower_limit": "20000.00",
+            "market": "htx",
+            "payment_methods": [
+                "MTS-Bank",
+                "Rosbank",
+                "Otkritie Bank",
+                "Rosselkhozbank",
+                "Tinkoff"
+            ],
+            "price": "328788.97",
+            "upper_limit": "100000.00"
+        },
+        {
+            "available": "1000.000000",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/200763970",
+            "lower_limit": "15000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Alfa-bank",
+                "Tinkoff",
+                "Sberbank",
+                "SBP - Fast Bank Transfer"
+            ],
+            "price": "328655.10",
+            "upper_limit": "1500000.00"
+        },
+        {
+            "available": "1000.000000",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/486502734",
+            "lower_limit": "5000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "SBP - Fast Bank Transfer",
+                "Alfa-bank",
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "327985.74",
+            "upper_limit": "500000.00"
+        },
+        {
+            "available": "998.450030",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/412923092",
+            "lower_limit": "15000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Alfa-bank",
+                "Tinkoff",
+                "Sberbank",
+                "Raiffeisenbank"
+            ],
+            "price": "327349.85",
+            "upper_limit": "299000.00"
+        },
+        {
+            "available": "1000.000000",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/481600605",
+            "lower_limit": "5000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "SBP - Fast Bank Transfer",
+                "Alfa-bank",
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "325341.77",
+            "upper_limit": "30000.00"
+        },
+        {
+            "available": "1000.000000",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/401167696",
+            "lower_limit": "30000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "Alfa-bank",
+                "Tinkoff",
+                "Sberbank",
+                "Gazprombank"
+            ],
+            "price": "325308.30",
+            "upper_limit": "1000000.00"
+        },
+        {
+            "available": "999.727900",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/387978290",
+            "lower_limit": "5000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Ak Bars Bank",
+                "Rosbank",
+                "Otkritie Bank",
+                "Alfa-bank",
+                "Gazprombank"
+            ],
+            "price": "325308.30",
+            "upper_limit": "750000.00"
+        },
+        {
+            "available": "0.199000",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/419237833",
+            "lower_limit": "940.00",
+            "market": "htx",
+            "payment_methods": [
+                "Alfa-bank",
+                "Sberbank",
+                "Raiffeisenbank",
+                "Home Credit Bank (Russia)"
+            ],
+            "price": "325000.00",
+            "upper_limit": "62000.00"
+        },
+        {
+            "available": "1000.000000",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/181528845",
+            "lower_limit": "10000.00",
+            "market": "htx",
+            "payment_methods": [
+                "SBP - Fast Bank Transfer",
+                "Sberbank"
+            ],
+            "price": "324404.67",
+            "upper_limit": "100000.00"
+        },
+        {
+            "available": "1000.000000",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/417041849",
+            "lower_limit": "300.00",
+            "market": "htx",
+            "payment_methods": [
+                "Yandex",
+                "Raiffeisenbank",
+                "SBP - Fast Bank Transfer",
+                "BCS Bank",
+                "Tinkoff"
+            ],
+            "price": "324304.27",
+            "upper_limit": "20000.00"
+        },
+        {
+            "available": "1000.000000",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/181528845",
+            "lower_limit": "10000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Bank Transfer",
+                "MTS-Bank",
+                "SBP - Fast Bank Transfer",
+                "Russian standard bank"
+            ],
+            "price": "321794.17",
+            "upper_limit": "100000.00"
+        },
+        {
+            "available": "2.000000",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/470973082",
+            "lower_limit": "4000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "SBP - Fast Bank Transfer",
+                "Sberbank"
+            ],
+            "price": "321626.83",
+            "upper_limit": "30000.00"
+        },
+        {
+            "available": "1000.000000",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/286534263",
+            "lower_limit": "10000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Ak Bars Bank",
+                "Uralsib Bank",
+                "MTS-Bank",
+                "Rosbank",
+                "Otkritie Bank"
+            ],
+            "price": "321392.56",
+            "upper_limit": "100000.00"
+        },
+        {
+            "available": "1000.000000",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/202305558",
+            "lower_limit": "70000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Alfa-bank",
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "321292.15",
+            "upper_limit": "5000000.00"
+        },
+        {
+            "available": "1000.000000",
+            "coin": "ETH",
+            "currency": "RUB",
+            "direction": "sell",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/417041849",
+            "lower_limit": "300.00",
+            "market": "htx",
+            "payment_methods": [
+                "Ak Bars Bank",
+                "PSB",
+                "Yandex",
+                "MTS-Bank",
+                "BCS Bank"
+            ],
+            "price": "320890.54",
+            "upper_limit": "20000.00"
+        },
+        {
+            "available": "26.747404",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/480395136",
+            "lower_limit": "2000.00",
+            "market": "htx",
+            "payment_methods": [
+                "SBP - Fast Bank Transfer",
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "91.88",
+            "upper_limit": "2457.00"
+        },
+        {
+            "available": "1498.000000",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/489736020",
+            "lower_limit": "50000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Tinkoff",
+                "Sberbank"
+            ],
+            "price": "91.89",
+            "upper_limit": "137651.00"
+        },
+        {
+            "available": "4492.607117",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/490740659",
+            "lower_limit": "50000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "91.89",
+            "upper_limit": "300000.00"
+        },
+        {
+            "available": "1642.935377",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/479231869",
+            "lower_limit": "100000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Sberbank"
+            ],
+            "price": "91.90",
+            "upper_limit": "150000.00"
+        },
+        {
+            "available": "560.000000",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/488284987",
+            "lower_limit": "50000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "SBP - Fast Bank Transfer"
+            ],
+            "price": "91.90",
+            "upper_limit": "50000.00"
+        },
+        {
+            "available": "55.535075",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/489191387",
+            "lower_limit": "5000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Raiffeisenbank",
+                "SBP - Fast Bank Transfer"
+            ],
+            "price": "91.90",
+            "upper_limit": "5103.00"
+        },
+        {
+            "available": "210.248507",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/479883321",
+            "lower_limit": "5000.00",
+            "market": "htx",
+            "payment_methods": [
+                "SBP - Fast Bank Transfer"
+            ],
+            "price": "91.90",
+            "upper_limit": "19321.00"
+        },
+        {
+            "available": "150.000000",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/395707817",
+            "lower_limit": "12000.00",
+            "market": "htx",
+            "payment_methods": [
+                "SBP - Fast Bank Transfer"
+            ],
+            "price": "91.91",
+            "upper_limit": "12000.00"
+        },
+        {
+            "available": "1248.642720",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/487870211",
+            "lower_limit": "10000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "91.92",
+            "upper_limit": "90000.00"
+        },
+        {
+            "available": "387.467027",
+            "coin": "USDT",
+            "currency": "RUB",
+            "direction": "buy",
+            "link": "https://www.htx.com/en-us/fiat-crypto/trader/482115948",
+            "lower_limit": "30000.00",
+            "market": "htx",
+            "payment_methods": [
+                "Tinkoff"
+            ],
+            "price": "91.94",
+            "upper_limit": "35623.00"
+        }
+    ],
+    "spot_rates": [
+        {
+            "BTC/USDC": "69344.78",
+            "BTC/USDT": "69366.34",
+            "ETH/BTC": "0.053209",
+            "ETH/USDC": "3690.48",
+            "ETH/USDT": "3691.07",
+            "USDC/USDT": "1.0002",
+            "market": "bybit"
+        },
+        {
+            "BTC/USDT": "69373.56",
+            "ETH/BTC": "0.053204",
+            "ETH/USDT": "3691.35",
+            "market": "htx"
+        }
+    ]
+}

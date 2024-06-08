@@ -8,7 +8,7 @@ void fix_banks_naming_and_filter(Orders &orders) {
     for (const auto &ord : orders.list) {
         std::vector<std::string> new_banks;
         for (std::string bank : ord.banks) {
-            if (bank == "A-Bank") {
+            if (bank == "A-Bank" || bank == "Alfa-bank") {
                 new_banks.push_back("Alpha");
             } else if (bank == "Sberbank") {
                 new_banks.push_back("Sber");
@@ -16,7 +16,7 @@ void fix_banks_naming_and_filter(Orders &orders) {
                 new_banks.push_back("Raif");
             } else if (bank == "Tinkoff") {
                 new_banks.push_back("Tinkoff");
-            } else if (bank == "FPS" || bank == "SBP") {
+            } else if (bank == "FPS" || bank == "SBP" || bank == "SBP - Fast Bank Transfer") {
                 new_banks.push_back("SBP");
             }
         }
@@ -80,9 +80,16 @@ std::string pack_json(Chains &chains) {
     nlohmann::json j;
     for (Chain chain : chains.list) {
         nlohmann::json chain_json;
-        chain_json["buy"]["market"] = chain.buy.market;
+
+        if(chain.buy.market == "bybit") {
+            chain_json["buy"]["market"] = "ByBit";
+        } else if (chain.buy.market == "htx"){
+            chain_json["buy"]["market"] = "HTX";
+        } else {
+            chain_json["buy"]["market"] = chain.buy.market;
+        }
         chain_json["buy"]["type"] = chain.buy.type;
-        chain_json["buy"]["link"] = chain.buy.link;
+        chain_json["buy"]["id"] = chain.buy.link;
         chain_json["buy"]["seller_rating"] = chain.buy.seller_rating;
         chain_json["buy"]["coin1"] = chain.buy.coin1;
         chain_json["buy"]["coin2"] = chain.buy.coin2;
@@ -92,9 +99,15 @@ std::string pack_json(Chains &chains) {
 
         chain_json["change"] = chain.change;
 
-        chain_json["sell"]["market"] = chain.sell.market;
+        if(chain.sell.market == "bybit") {
+            chain_json["sell"]["market"] = "ByBit";
+        } else if (chain.sell.market == "htx"){
+            chain_json["sell"]["market"] = "HTX";
+        } else {
+            chain_json["sell"]["market"] = chain.sell.market;
+        }
         chain_json["sell"]["type"] = chain.sell.type;
-        chain_json["sell"]["link"] = chain.sell.link;
+        chain_json["sell"]["id"] = chain.sell.link;
         chain_json["sell"]["seller_rating"] = chain.sell.seller_rating;
         chain_json["sell"]["coin1"] = chain.sell.coin1;
         chain_json["sell"]["coin2"] = chain.sell.coin2;

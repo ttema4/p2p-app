@@ -2,7 +2,7 @@
     "endpoints": {
         "parser's ip": "127.0.0.1",
         "parser's port": 12345,
-        "users server's port": 50000 
+        "users server's port": 1856 
     },
     "logs to output": {
         "parser's client": false,
