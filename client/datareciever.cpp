@@ -65,7 +65,7 @@ std::string LocalClient::getJsonToString() {
         }
         return nlohmann::json(chains).dump();
     }
-    return "no updates";
+    return "no updates\r";
 }
 
 void LocalClient::check_updates() {
