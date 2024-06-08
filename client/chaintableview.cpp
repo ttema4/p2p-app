@@ -1,7 +1,6 @@
 #include "chaintableview.h"
 #include "QtWidgets/qheaderview.h"
 
-
 TableNullWidget::TableNullWidget(QWidget *parent) : QWidget(parent) {
     setMinimumHeight(50);
     QLabel *label = new QLabel("Chains not found");

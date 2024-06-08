@@ -160,10 +160,10 @@ bool DataReciever::init() {
                 GlobalCondition::getInstance().server_ip, std::to_string(GlobalCondition::getInstance().server_port)
             );
             client = new ServerClient(cli_io_context, endpoints);
-        } catch (const boost::system::system_error& e) {
+        } catch (const boost::system::system_error &e) {
             qWarning() << "Error while connecting to server:" << e.what();
             return false;
-        } catch (const std::exception& e) {
+        } catch (const std::exception &e) {
             qWarning() << "Standard exception: " << e.what();
             return false;
         } catch (...) {
@@ -187,10 +187,10 @@ void DataReciever::recieveNewChain(const QString &response) {
         try {
             QVector<Chain> chains = nlohmann::json::parse(response.toStdString()).get<QVector<Chain>>();
             emit dataParsed(chains);
-        } catch (const nlohmann::json::parse_error& e) {
+        } catch (const nlohmann::json::parse_error &e) {
             qWarning() << "Error while parsing json:" << e.what();
             return;
-        } catch (const std::exception& e) {
+        } catch (const std::exception &e) {
             qWarning() << "Standard exception: " << e.what();
             return;
         } catch (...) {

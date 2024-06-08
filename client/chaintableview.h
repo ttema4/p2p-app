@@ -2,7 +2,6 @@
 #define CHAINTABLEVIEW_H
 
 #include <QFont>
-#include <QTimer>
 #include <QHBoxLayout>
 #include <QIcon>
 #include <QLabel>
@@ -17,6 +16,7 @@
 #include <QSpacerItem>
 #include <QTableWidget>
 #include <QTableWidgetItem>
+#include <QTimer>
 #include <QVBoxLayout>
 #include <QVector>
 #include <QWidget>
