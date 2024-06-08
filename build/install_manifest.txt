@@ -1,3 +1,0 @@
-/Users/artem/VSCodeProjects/p2p-app/p2p-app/p2p-app.app/Contents/MacOS/p2p-app
-/Users/artem/VSCodeProjects/p2p-app/p2p-app/p2p-app.app/Contents/Resources/icon.icns
-/Users/artem/VSCodeProjects/p2p-app/p2p-app/p2p-app.app/Contents/Info.plist
