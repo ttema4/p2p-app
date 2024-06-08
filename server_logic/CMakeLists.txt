@@ -9,6 +9,7 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 
 # Добавление JSON файл в цель сборки
 configure_file(config.json ${CMAKE_BINARY_DIR}/config.json COPYONLY)
+add_definitions(-DCONFIG_PATH="${CMAKE_CURRENT_SOURCE_DIR}")
 
 find_package(Boost 1.65 REQUIRED)
 
