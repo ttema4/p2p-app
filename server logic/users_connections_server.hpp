@@ -11,7 +11,6 @@
 #include <thread>
 #include <unordered_map>
 #include <vector>
-
 #include "storage_structures.hpp"
 
 using namespace boost::asio;
@@ -31,18 +30,17 @@ class UsersConnectionsServer {
     std::list<Connection> m_connections;
     using con_handle_t = std::list<Connection>::iterator;
 
-   public:
+public:
     UsersConnectionsServer(boost::asio::io_context &io_context);
 
-    void handle_read(con_handle_t con_handle,
-                     boost::system::error_code const &err,
-                     size_t bytes_transfered);
+    void handle_read(con_handle_t con_handle, const boost::system::error_code &err, size_t bytes_transfered);
     void do_async_read(con_handle_t con_handle);
-    void handle_write(con_handle_t con_handle,
-                      std::shared_ptr<std::string> msg_buffer,
-                      boost::system::error_code const &err);
-    void handle_accept(con_handle_t con_handle,
-                       boost::system::error_code const &err);
+    void handle_write(
+        con_handle_t con_handle,
+        std::shared_ptr<std::string> msg_buffer,
+        const boost::system::error_code &err
+    );
+    void handle_accept(con_handle_t con_handle, const boost::system::error_code &err);
     void start_accept();
     void listen(uint16_t port);
     void run();

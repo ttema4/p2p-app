@@ -13,20 +13,19 @@ using namespace boost::asio;
 namespace p2p {
 
 class ParserConnectionClient {
-   public:
-    ParserConnectionClient(boost::asio::io_context &io_context,
-                           const ip::tcp::resolver::results_type &endpoints);
+public:
+    ParserConnectionClient(boost::asio::io_context &io_context, const ip::tcp::resolver::results_type &endpoints);
 
     void start();
 
-   private:
+private:
     void start_check_updates();
     void send_request(const std::string &request);
     void start_receive();
     void do_connect(const ip::tcp::resolver::results_type &endpoints);
     void do_reconnect();
 
-   private:
+private:
     boost::asio::io_context &io_context_;
     ip::tcp::socket socket_;
     boost::asio::streambuf response_;
