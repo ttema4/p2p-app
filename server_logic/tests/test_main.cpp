@@ -14,9 +14,14 @@
 using namespace p2p;
 using namespace boost::asio;
 
-// COMPILE THIS TESTS WITH clang++ -std=c++17 test_main.cpp
+// WARNING: This is a test file for the server logic. It is not a part of the main project.
+
+// !!! COMPILE THESE TESTS WITH "clang++ -std=c++17 test_main.cpp
 // ../logic_manager.cpp ../parser_connection_client.cpp ../users_connections_server.cpp
-// ../json_tools.cpp ../data_processing.cpp -L/opt/homebrew/opt/boost/lib -I/opt/homebrew/opt/boost/include
+// ../json_tools.cpp ../data_processing.cpp -L/opt/homebrew/opt/boost/lib -I/opt/homebrew/opt/boost/include"
+// command.
+
+// Also, you need to have boost installed on your machine.
 
 TEST_CASE("Testing Order structure") {
     Order order("market", "buy", "link", 5.0, "USD", "BTC", {"bank1", "bank2"}, {100.0, 1000.0}, 50000.0);

@@ -11,7 +11,6 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
-
 #include "include/concurrentqueue.h"
 
 namespace p2p {
@@ -27,11 +26,18 @@ struct Order {
     std::pair<long double, long double> min_max;
     long double exchange_rate;
     Order() = default;
-    Order(std::string market_, std::string type_, std::string link_,
-          long double seller_rating_, std::string coin1_, std::string coin2_,
-          std::vector<std::string> banks_,
-          std::pair<long double, long double> min_max_,
-          long double exchange_rate_)
+
+    Order(
+        std::string market_,
+        std::string type_,
+        std::string link_,
+        long double seller_rating_,
+        std::string coin1_,
+        std::string coin2_,
+        std::vector<std::string> banks_,
+        std::pair<long double, long double> min_max_,
+        long double exchange_rate_
+    )
         : market(market_),
           type(type_),
           link(link_),
@@ -40,7 +46,8 @@ struct Order {
           coin2(coin2_),
           banks(banks_),
           min_max(min_max_),
-          exchange_rate(exchange_rate_) {}
+          exchange_rate(exchange_rate_) {
+    }
 };
 
 struct Orders {
@@ -49,7 +56,8 @@ struct Orders {
 };
 
 struct MarketRates {
-    std::unordered_map<std::string, std::unordered_map<std::string, std::vector<std::pair<std::string, long double>>>> list;
+    std::unordered_map<std::string, std::unordered_map<std::string, std::vector<std::pair<std::string, long double>>>>
+        list;
     MarketRates() = default;
 };
 
@@ -60,9 +68,10 @@ struct Chain {
     long double spread;
 
     Chain() = default;
-    Chain(Order buy_, const std::pair<std::string, std::string> change_,
-          Order sell_, long double spread_)
-        : buy(buy_), change(change_), sell(sell_), spread(spread_) {}
+
+    Chain(Order buy_, const std::pair<std::string, std::string> change_, Order sell_, long double spread_)
+        : buy(buy_), change(change_), sell(sell_), spread(spread_) {
+    }
 };
 
 struct Chains {
@@ -73,13 +82,15 @@ struct Chains {
 inline moodycamel::ConcurrentQueue<std::string> parsers_responses;
 
 class SharedString {
-   private:
+private:
     std::string str;
     mutable std::shared_mutex mtx;
 
-   public:
+public:
     SharedString() = default;
-    SharedString(const std::string &initial_str) : str(initial_str) {}
+
+    SharedString(const std::string &initial_str) : str(initial_str) {
+    }
 
     std::string get() const {
         std::shared_lock lock(mtx);

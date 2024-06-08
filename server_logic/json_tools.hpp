@@ -10,8 +10,7 @@ namespace p2p {
 
 void fix_banks_naming_and_filter(Orders &orders);
 
-void unpack_json(std::string parsers_response, Orders &orders,
-                 MarketRates &market_rates);
+void unpack_json(std::string parsers_response, Orders &orders, MarketRates &market_rates);
 
 std::string pack_json(Chains &chains);
 

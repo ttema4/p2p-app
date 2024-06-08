@@ -1,4 +1,5 @@
 #include "json_tools.hpp"
+#include <fstream>
 #include "storage_structures.hpp"
 
 namespace p2p {
@@ -29,13 +30,13 @@ void fix_banks_naming_and_filter(Orders &orders) {
     orders = new_orders;
 }
 
-void unpack_json(std::string parsers_response, Orders &orders,
-                 MarketRates &market_rates) {
+void unpack_json(std::string parsers_response, Orders &orders, MarketRates &market_rates) {
+    std::ofstream log_file(std::string(LOGS_PATH) + "/logs.txt");
     nlohmann::json j;
     try {
         j = nlohmann::json::parse(parsers_response);
     } catch (const nlohmann::json::parse_error &e) {
-        std::cout << "JSON parse error(inside unpack()): " << e.what() << '\n';
+        log_file << "JSON parse error(inside unpack()): " << e.what() << '\n';
         return;
     }
 
@@ -47,9 +48,9 @@ void unpack_json(std::string parsers_response, Orders &orders,
         ord.seller_rating = 0.0;
         ord.coin1 = order["currency"].get<std::string>();
         ord.coin2 = order["coin"].get<std::string>();
-        ord.min_max =
-            std::make_pair(std::stold(order["lower_limit"].get<std::string>()),
-                           std::stold(order["upper_limit"].get<std::string>()));
+        ord.min_max = std::make_pair(
+            std::stold(order["lower_limit"].get<std::string>()), std::stold(order["upper_limit"].get<std::string>())
+        );
         ord.exchange_rate = std::stold(order["price"].get<std::string>());
         for (const auto &bank : order["payment_methods"]) {
             ord.banks.push_back(bank.get<std::string>());
@@ -63,7 +64,9 @@ void unpack_json(std::string parsers_response, Orders &orders,
     for (const auto &rate_obj : j["spot_rates"]) {
         std::string current_market = rate_obj["market"].get<std::string>();
         for (auto it = rate_obj.begin(); it != rate_obj.end(); ++it) {
-            if (it.key() == "market") continue;
+            if (it.key() == "market") {
+                continue;
+            }
             std::string coins_pair = it.key();
             size_t delimiter_pos = coins_pair.find('/');
             std::string coin1 = coins_pair.substr(0, delimiter_pos);
@@ -81,9 +84,9 @@ std::string pack_json(Chains &chains) {
     for (Chain chain : chains.list) {
         nlohmann::json chain_json;
 
-        if(chain.buy.market == "bybit") {
+        if (chain.buy.market == "bybit") {
             chain_json["buy"]["market"] = "ByBit";
-        } else if (chain.buy.market == "htx"){
+        } else if (chain.buy.market == "htx") {
             chain_json["buy"]["market"] = "HTX";
         } else {
             chain_json["buy"]["market"] = chain.buy.market;
@@ -99,9 +102,9 @@ std::string pack_json(Chains &chains) {
 
         chain_json["change"] = chain.change;
 
-        if(chain.sell.market == "bybit") {
+        if (chain.sell.market == "bybit") {
             chain_json["sell"]["market"] = "ByBit";
-        } else if (chain.sell.market == "htx"){
+        } else if (chain.sell.market == "htx") {
             chain_json["sell"]["market"] = "HTX";
         } else {
             chain_json["sell"]["market"] = chain.sell.market;
