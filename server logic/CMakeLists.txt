@@ -7,6 +7,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
 
+# Проверка наличия файла config.json
+set(CONFIG_FILE_PATH "${CMAKE_SOURCE_DIR}/config.json")
+if(NOT EXISTS ${CONFIG_FILE_PATH})
+    message(FATAL_ERROR "config.json not found in the project root directory.")
+endif()
+
 find_package(Boost 1.65 REQUIRED)
 
 if(NOT Boost_FOUND)

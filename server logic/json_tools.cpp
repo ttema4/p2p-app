@@ -38,12 +38,12 @@ void unpack_json(std::string parsers_response, Orders &orders,
         std::cout << "JSON parse error(inside unpack()): " << e.what() << '\n';
         return;
     }
+
     for (const auto &order : j["orders"]) {
         Order ord;
         ord.market = order["market"].get<std::string>();
         ord.type = order["direction"].get<std::string>();
         ord.link = order["link"].get<std::string>();
-        ;
         ord.seller_rating = 0.0;
         ord.coin1 = order["currency"].get<std::string>();
         ord.coin2 = order["coin"].get<std::string>();
