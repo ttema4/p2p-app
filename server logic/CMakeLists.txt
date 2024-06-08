@@ -7,6 +7,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
 
+# Добавление JSON файл в цель сборки
+configure_file(config.json ${CMAKE_BINARY_DIR}/config.json COPYONLY)
+
 find_package(Boost 1.65 REQUIRED)
 
 if(NOT Boost_FOUND)
@@ -15,6 +18,7 @@ if(NOT Boost_FOUND)
 endif()
 
 add_executable(server_logic 
+    logic_main.cpp
     logic_manager.cpp 
     data_processing.cpp 
     parser_connection_client.cpp 

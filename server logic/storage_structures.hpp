@@ -9,6 +9,7 @@
 #include <string>
 #include <thread>
 #include <unordered_map>
+#include <unordered_set>
 #include <vector>
 
 #include "include/concurrentqueue.h"
@@ -48,9 +49,7 @@ struct Orders {
 };
 
 struct MarketRates {
-    std::unordered_map<std::string,
-                       std::vector<std::pair<std::string, long double>>>
-        list;
+    std::unordered_map<std::string, std::unordered_map<std::string, std::vector<std::pair<std::string, long double>>>> list;
     MarketRates() = default;
 };
 
@@ -95,6 +94,7 @@ class SharedString {
 
 inline SharedString up_to_date_version;
 inline std::unordered_map<std::string, std::string> last_version_by_user;
+inline std::unordered_set<std::string> markets;
 
 inline std::string PARSER_IP;
 inline uint16_t PARSER_PORT;

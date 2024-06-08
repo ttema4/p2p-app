@@ -1,9 +1,7 @@
 #ifndef JSON_TOOLS_HPP_
 #define JSON_TOOLS_HPP_
 
-#include <iostream>
 #include <string>
-#include <thread>
 
 #include "include/nlohmann/json.hpp"
 #include "storage_structures.hpp"

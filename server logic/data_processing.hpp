@@ -6,7 +6,7 @@
 namespace p2p {
 
 struct Analysis {
-    void analyze(Chains &chains, Orders &orders, MarketRates &market_rates);
+    Chains analyze(Orders &orders, MarketRates &market_rates);
 };
 
 }  // namespace p2p
