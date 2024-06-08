@@ -1,6 +1,8 @@
 #include "markets.hpp"
+#include <boost/asio.hpp>
 #include <cmath>
 #include <sstream>
+#include "magic_enum/magic_enum.hpp"
 
 order::order(
     Currencies currency_,
@@ -563,7 +565,176 @@ void bybit_simulator::update_spot_rates() {
     }
 }
 
+std::vector<std::string> local_bank_is(std::vector<std::string> &payment_methods
+) {
+    bool wasSberbank = false;
+    bool wasA_bank = false;
+    std::vector<std::string> payment_methods_;
+    for (auto i : payment_methods) {
+        if (i == "Local Card(Yellow)") {
+            payment_methods_.push_back("Tinkoff");
+        } else if (i == "Local Card(R-Green)" || i == "Local Card(S-Green)" || i == "Local Card(Green)") {
+            if (!wasSberbank) {
+                payment_methods_.push_back("Sberbank");
+                wasSberbank = true;
+            }
+        } else if (i == "Local Card(Red)") {
+            if (!wasA_bank) {
+                payment_methods_.push_back("A-Bank");
+                wasA_bank = true;
+            }
+        } else {
+            if (i == "A-Bank") {
+                if (!wasA_bank) {
+                    payment_methods_.push_back(i);
+                    wasA_bank = true;
+                }
+            } else {
+                payment_methods_.push_back(i);
+            }
+        }
+    }
+    return payment_methods_;
+}
+
+void bybit_simulator::pack_in_json() {
+    json_orders.clear();
+    nlohmann::json json_order{};
+    for (auto &i : orders) {
+        json_order["market"] = magic_enum::enum_name(market_);
+        json_order["currency"] = magic_enum::enum_name(i->currency);
+        json_order["coin"] = magic_enum::enum_name(i->coin);
+        json_order["direction"] = magic_enum::enum_name(i->direction);
+        json_order["price"] = decimal2_to_string(i->price);
+        json_order["payment_methods"] = local_bank_is(i->payment_methods);
+        json_order["lower_limit"] = decimal2_to_string(i->lower_limit);
+        json_order["upper_limit"] = decimal2frp_to_string(i->upper_limit);
+        json_order["available"] = decimal8_to_string(i->available);
+        json_order["link"] = i->link;
+        json_orders.push_back(json_order);
+        json_order.erase(json_order.begin(), json_order.end());
+    }
+    json_spot_rates["market"] = magic_enum::enum_name(market_);
+    for (int j = 0; j < 4; ++j) {
+        for (int k = j + 1; k < 4; ++k) {
+            switch (coins[j]) {
+                case Coins::USDT:
+                    switch (coins[k]) {
+                        case Coins::USDC:
+                            json_spot_rates["USDC/USDT"] = decimal8_to_string(
+                                spot_rates[coins[j]][coins[k]]
+                            );
+                            break;
+
+                        case Coins::BTC:
+                            json_spot_rates["BTC/USDT"] = decimal8_to_string(
+                                spot_rates[coins[j]][coins[k]]
+                            );
+                            break;
+
+                        case Coins::ETH:
+                            json_spot_rates["ETH/USDT"] = decimal8_to_string(
+                                spot_rates[coins[j]][coins[k]]
+                            );
+                            break;
+                    }
+                    break;
+
+                case Coins::USDC:
+                    switch (coins[k]) {
+                        case Coins::BTC:
+                            json_spot_rates["BTC/USDC"] = decimal8_to_string(
+                                spot_rates[coins[j]][coins[k]]
+                            );
+                            break;
+
+                        case Coins::ETH:
+                            json_spot_rates["ETH/USDC"] = decimal8_to_string(
+                                spot_rates[coins[j]][coins[k]]
+                            );
+                            break;
+                    }
+                    break;
+
+                case Coins::BTC:
+                    json_spot_rates["ETH/BTC"] =
+                        decimal8_to_string(spot_rates[coins[j]][coins[k]]);
+                    break;
+            }
+        }
+    }
+}
+
 void bybit_simulator::update_market() {
     this->update_market_orders();
     this->update_spot_rates();
+    this->pack_in_json();
+}
+
+bybit::bybit() {
+    market_ = Markets::bybit;
+}
+
+using boost::asio::ip::tcp;
+
+void bybit::update_market() {
+    std::string orders = "";
+    boost::asio::io_context io_context;
+    auto create_connection = [&]() {
+        tcp::socket s(io_context);
+        boost::asio::connect(
+            s, tcp::resolver(io_context).resolve("127.0.0.1", "19379")
+        );
+        return tcp::iostream(std::move(s));
+    };
+    tcp::iostream conn = create_connection();
+    conn.socket().shutdown(tcp::socket::shutdown_send);
+    int c;
+    std::string symbol;
+    while ((c = conn.get()) != std::char_traits<char>::eof()) {
+        symbol = static_cast<char>(c);
+        orders += symbol;
+    }
+    std::ofstream temp_json("/Users/exchange scraper_/jsons/temp.json");
+    temp_json << orders;
+    temp_json.close();
+    std::ifstream temp_json_("/Users/exchange scraper_/jsons/temp.json");
+    nlohmann::json result;
+    temp_json_ >> result;
+    json_orders = result["orders"];
+    json_spot_rates = result["spot_rates"];
+    temp_json_.close();
+}
+
+htx::htx() {
+    market_ = Markets::htx;
+}
+
+void htx::update_market() {
+    std::string orders = "";
+    boost::asio::io_context io_context;
+    auto create_connection = [&]() {
+        tcp::socket s(io_context);
+        boost::asio::connect(
+            s, tcp::resolver(io_context).resolve("127.0.0.1", "19379")
+        );
+        return tcp::iostream(std::move(s));
+    };
+    tcp::iostream conn = create_connection();
+    conn.socket().shutdown(tcp::socket::shutdown_send);
+    int c;
+    std::string symbol;
+    while ((c = conn.get()) != std::char_traits<char>::eof()) {
+        symbol = static_cast<char>(c);
+        orders += symbol;
+    }
+    std::ofstream temp_json("/Users/exchange scraper_/jsons/temp.json");
+    temp_json << orders;
+    temp_json.close();
+    std::ifstream temp_json_("/Users/exchange scraper_/jsons/temp.json");
+    nlohmann::json result;
+    temp_json_ >> result;
+    json_orders = result["orders"];
+    json_spot_rates = result["spot_rates"];
+    temp_json_.close();
 }

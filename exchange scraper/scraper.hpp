@@ -1,10 +1,9 @@
 #ifndef SCRAPER_HPP_
 #define SCRAPER_HPP_
 
-#include <fstream>
-#include "magic_enum/magic_enum.hpp"
+#include <chrono>
+#include <thread>
 #include "markets.hpp"
-#include "nlohmann/json.hpp"
 
 std::vector<std::string> local_bank_is(std::vector<std::string> &payment_methods
 );
