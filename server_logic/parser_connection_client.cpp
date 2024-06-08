@@ -1,6 +1,7 @@
 #define BOOST_BIND_GLOBAL_PLACEHOLDERS
 
 #include "parser_connection_client.hpp"
+
 #include <boost/bind.hpp>
 #include <fstream>
 #include <iostream>

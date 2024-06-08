@@ -11,6 +11,7 @@
 #include <thread>
 #include <unordered_map>
 #include <vector>
+
 #include "storage_structures.hpp"
 
 using namespace boost::asio;

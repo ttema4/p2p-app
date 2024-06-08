@@ -1,8 +1,6 @@
 #ifndef USER_H
 #define USER_H
 
-// checked
-
 #include <QBitmap>
 #include <QBuffer>
 #include <QByteArray>

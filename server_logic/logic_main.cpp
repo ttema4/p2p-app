@@ -1,5 +1,5 @@
-
 #include <thread>
+
 #include "logic_manager.hpp"
 
 int main() {

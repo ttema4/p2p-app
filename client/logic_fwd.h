@@ -1,7 +1,7 @@
 #ifndef LOGIC_HPP_
 #define LOGIC_HPP_
 
-#include <nlohmann/json.hpp>
+#include <json.hpp>
 
 struct Order {
     // Фактически, без статуса мерчанта на бирже(получить его очень сложно,

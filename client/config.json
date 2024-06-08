@@ -1,8 +1,8 @@
 {
-  "use_database": true,
-  "use_server": false,
+  "use_database": false,
+  "use_server": true,
   "server_ip": "localhost",
-  "server_port": 12345,
+  "server_port": 1856,
   "server_update_interval": 5,
   "database_ip": "localhost",
   "database_port": 3306,

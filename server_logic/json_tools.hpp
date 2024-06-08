@@ -2,6 +2,7 @@
 #define JSON_TOOLS_HPP_
 
 #include <string>
+
 #include "include/nlohmann/json.hpp"
 #include "storage_structures.hpp"
 
