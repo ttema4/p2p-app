@@ -7,7 +7,7 @@ void scraper::add_market(std::unique_ptr<market> market_) {
 void scraper::update_markets() {
     for (auto &i : markets) {
         i->update_market();
-        std::this_thread::sleep_for(std::chrono::milliseconds(3000));
+        std::this_thread::sleep_for(std::chrono::milliseconds(5000));
     }
 }
 
@@ -24,7 +24,7 @@ void scraper::handle() {
         json_spot_rates.push_back(i->json_spot_rates);
     }
     std::ofstream data_market_file;
-    data_market_file.open("/Users/jsonss/data_market.json");
+    data_market_file.open("/Users/exchange scraper_/jsons/data_market.json");
     nlohmann::json json_data_market{};
     json_data_market["orders"] = json_orders;
     json_data_market["spot_rates"] = json_spot_rates;

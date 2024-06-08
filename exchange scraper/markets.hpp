@@ -1,6 +1,7 @@
 #ifndef MARKETS_HPP_
 #define MARKETS_HPP_
 
+#include <fstream>
 #include <iostream>
 #include <memory>
 #include <random>
@@ -9,7 +10,6 @@
 #include <vector>
 #include "decimal/decimal.h"
 #include "nlohmann/json.hpp"
-#include <fstream>
 
 enum class Markets { bybit_simulator, bybit, htx };
 

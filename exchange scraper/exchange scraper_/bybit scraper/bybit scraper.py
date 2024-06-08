@@ -90,7 +90,7 @@ async def main_():
 
 def main():
     sock = socket.socket()
-    sock.bind(("127.0.0.1", 12344))
+    sock.bind(("127.0.0.1", 19379))
     sock.listen(1)
     conn, addr = sock.accept()
     asyncio.run(main_())

@@ -1,7 +1,7 @@
 #include "markets.hpp"
+#include <boost/asio.hpp>
 #include <cmath>
 #include <sstream>
-#include <boost/asio.hpp>
 #include "magic_enum/magic_enum.hpp"
 
 order::order(
@@ -621,24 +621,21 @@ void bybit_simulator::pack_in_json() {
                 case Coins::USDT:
                     switch (coins[k]) {
                         case Coins::USDC:
-                            json_spot_rates["USDC/USDT"] =
-                                decimal8_to_string(
-                                    spot_rates[coins[j]][coins[k]]
-                                );
+                            json_spot_rates["USDC/USDT"] = decimal8_to_string(
+                                spot_rates[coins[j]][coins[k]]
+                            );
                             break;
 
                         case Coins::BTC:
-                            json_spot_rates["BTC/USDT"] =
-                                decimal8_to_string(
-                                    spot_rates[coins[j]][coins[k]]
-                                );
+                            json_spot_rates["BTC/USDT"] = decimal8_to_string(
+                                spot_rates[coins[j]][coins[k]]
+                            );
                             break;
 
                         case Coins::ETH:
-                            json_spot_rates["ETH/USDT"] =
-                                decimal8_to_string(
-                                    spot_rates[coins[j]][coins[k]]
-                                );
+                            json_spot_rates["ETH/USDT"] = decimal8_to_string(
+                                spot_rates[coins[j]][coins[k]]
+                            );
                             break;
                     }
                     break;
@@ -646,25 +643,22 @@ void bybit_simulator::pack_in_json() {
                 case Coins::USDC:
                     switch (coins[k]) {
                         case Coins::BTC:
-                            json_spot_rates["BTC/USDC"] =
-                                decimal8_to_string(
-                                    spot_rates[coins[j]][coins[k]]
-                                );
+                            json_spot_rates["BTC/USDC"] = decimal8_to_string(
+                                spot_rates[coins[j]][coins[k]]
+                            );
                             break;
 
                         case Coins::ETH:
-                            json_spot_rates["ETH/USDC"] =
-                                decimal8_to_string(
-                                    spot_rates[coins[j]][coins[k]]
-                                );
+                            json_spot_rates["ETH/USDC"] = decimal8_to_string(
+                                spot_rates[coins[j]][coins[k]]
+                            );
                             break;
                     }
                     break;
 
                 case Coins::BTC:
                     json_spot_rates["ETH/BTC"] =
-                        decimal8_to_string(spot_rates[coins[j]][coins[k]]
-                        );
+                        decimal8_to_string(spot_rates[coins[j]][coins[k]]);
                     break;
             }
         }
@@ -689,7 +683,7 @@ void bybit::update_market() {
     auto create_connection = [&]() {
         tcp::socket s(io_context);
         boost::asio::connect(
-            s, tcp::resolver(io_context).resolve("127.0.0.1", "12344")
+            s, tcp::resolver(io_context).resolve("127.0.0.1", "19379")
         );
         return tcp::iostream(std::move(s));
     };
@@ -701,10 +695,10 @@ void bybit::update_market() {
         symbol = static_cast<char>(c);
         orders += symbol;
     }
-    std::ofstream temp_json("/Users/jsonss/temp.json");
+    std::ofstream temp_json("/Users/exchange scraper_/jsons/temp.json");
     temp_json << orders;
     temp_json.close();
-    std::ifstream temp_json_("/Users/jsonss/temp.json");
+    std::ifstream temp_json_("/Users/exchange scraper_/jsons/temp.json");
     nlohmann::json result;
     temp_json_ >> result;
     json_orders = result["orders"];
@@ -722,7 +716,7 @@ void htx::update_market() {
     auto create_connection = [&]() {
         tcp::socket s(io_context);
         boost::asio::connect(
-            s, tcp::resolver(io_context).resolve("127.0.0.1", "12444")
+            s, tcp::resolver(io_context).resolve("127.0.0.1", "19379")
         );
         return tcp::iostream(std::move(s));
     };
@@ -734,10 +728,10 @@ void htx::update_market() {
         symbol = static_cast<char>(c);
         orders += symbol;
     }
-    std::ofstream temp_json("/Users/jsonss/temp.json");
+    std::ofstream temp_json("/Users/exchange scraper_/jsons/temp.json");
     temp_json << orders;
     temp_json.close();
-    std::ifstream temp_json_("/Users/jsonss/temp.json");
+    std::ifstream temp_json_("/Users/exchange scraper_/jsons/temp.json");
     nlohmann::json result;
     temp_json_ >> result;
     json_orders = result["orders"];

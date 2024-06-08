@@ -40,15 +40,16 @@ public:
             std::istream is(&con_handle->read_buffer);
             std::string line;
             getline(is, line);
-            std::cout << "Message Received: " << line << ", " << line.size()
-                      << std::endl;
+            std::cout << "Message Received: " << line << std::endl;
             if (line == "need update") {
                 std::unique_lock l(m);
                 // Если получено "need update", отправляем сообщение о том, что
                 // апдейта нет
                 std::string back;
                 std::ifstream file_of_orders;
-                file_of_orders.open("/Users/jsonss/data_market.json");
+                file_of_orders.open(
+                    "/Users/exchange scraper_/jsons/data_market.json"
+                );
                 nlohmann::json json_orders{};
                 file_of_orders >> json_orders;
                 file_of_orders.close();
@@ -174,20 +175,26 @@ int main() {
     scraper_.add_market(std::move(htx_market));
     std::thread t1([&]() {
         while (true) {
-            system("cd '/Users/cierkai/hse/p2p-app/exchange scraper/bybit scraper' && python 'bybit scraper.py'");
-            system("cd '/Users/cierkai/hse/p2p-app/exchange scraper/htx scraper' && python 'htx scraper.py'");
-            std::cout << "ok\n";
+            system(
+                "cd '/Users/exchange scraper_/bybit scraper' && python 'bybit "
+                "scraper.py'"
+            );
+            system(
+                "cd '/Users/exchange scraper_/htx scraper' && python 'htx "
+                "scraper.py'"
+            );
+            std::cout << "scraping finished\n";
         }
     });
     t1.detach();
-    std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+    std::this_thread::sleep_for(std::chrono::milliseconds(3000));
     std::thread t2([&]() {
         while (true) {
             std::unique_lock l(m);
             scraper_.update_markets();
             scraper_.handle();
             l.unlock();
-            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+            std::this_thread::sleep_for(std::chrono::milliseconds(3000));
         }
     });
     t2.detach();
