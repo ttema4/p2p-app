@@ -1,68 +1,68 @@
-# 🚀 P2P App - Описание проекта
+# 🚀 P2P App - Description of the project
 
-Наш проект - это **инструмент для анализа криптовалютных рынков** и нахождения возможностей для прибыльного арбитража. **Серверная** часть **собирает** и **анализирует** **данные** с различных платформ Peer-to-Peer торговли, а **приложение** **отображает** **результаты** этого анализа, открывая **новые** **перспективы** для **инвестирования** и **финансовых операций** в мире **криптовалют**.
+Our project is a **tool for analyzing cryptocurrency markets** and finding opportunities for profitable arbitrage. **The server** part **collects** and **analyzes** **data** from various Peer-to-Peer trading platforms, and **the application** **displays** **the results** of this analysis, opening **new** **prospects** for **investing** and **financial transactions** in the world of **cryptocurrencies**.
 
-* **Стек технологий сервера:** Boost::asio, NLohmann, Decimal, Magic Enum, moodycamel::ConcurrentQueue
-* **Стек технологий приложения:** Qt6, NLohmann, MySQL, Boost::asio.
+* **Server Technology Stack:** Boost::asio, NLohmann, Decimal, Magic Enum, moodycamel::ConcurrentQueue
+* **Application Technology Stack:** Qt6, NLohmann, MySQL, Boost::asio.
 
 
-> ***Приложение пишется, собирается и тестируется под Clang++17, MacOS.***
+> ***The application is being written, built and tested under Clang++17, macOS.***
 
-## 🛠️ Как собирать?
+## 🛠️ How to build?
 
 ``` shell
 cmake -B build && cmake --build build && cmake --install build
 ```
 
-## 🧩 Архитектура
+## 🧩 Architecture
 
-### 🔄 Парсер криптобирж
+### 🔄 Crypto Exchange Parser
 
-Данный микросервис выполняет следующие функции:
+This microservice performs the following functions:
 
-- Парсинг данных с криптобирж.
-- Форматирование данных в удобный формат **JSON**.
-- Отправка данных по **TCP**.
+- Parsing data from crypto exchanges.
+- Formatting data into a convenient **JSON** format.
+- Sending data over **TCP**.
 
-### 🔍 Сервис поиска арбитражных связок
+### 🔍 Arbitration Bundles search service
 
-Этот микросервис обеспечивает следующие функции:
+This microservice provides the following functions:
 
-- Прием данных от первого микросервиса по **TCP**.
-- Поиск арбитражных связок криптовалют.
-- Взаимодействие с клиентами посредством **TCP**.
+- Receiving data from the first microservice over **TCP**.
+- Search for arbitrage bundles of cryptocurrencies.
+- Interaction with clients via **TCP**.
 
-### 🖥️ Клиентская часть
+### 🖥️ The client part
 
-Клиентская часть приложения отвечает за:
+The client part of the application is responsible for:
 
-- Прием данных по **TCP** от серверной части.
-- Вывод данных в таблицу с поддержкой фильтрации и сортировки арбитражных связок.
-- Реализацию системы авторизации, позволяющую пользователям добавлять связки в избранное.
+- Receiving data over **TCP** from the server side.
+- Data output to a table with support for filtering and sorting arbitration bundles.
+- Implementation of an authorization system that allows users to add bundles to favorites.
 
-Клиентская часть разработана с использованием **Qt6**, обеспечивая мощные возможности для построения графического интерфейса.
+The client part is designed using **Qt6**, providing powerful capabilities for building a graphical interface.
 
-## 🧪 Тестирование
-В проекте реализованы следующие методы тестирования:
+## 🧪 Testing
+The following testing methods are implemented in the project:
 
-* **Серверная часть:**
+* **Server part:**
 
-  - Юнит-тесты для проверки отдельных компонентов системы.
-  - Логирование для отслеживания выполнения и отладки.
+  - Unit tests to check individual components of the system.
+  - Logging for tracking execution and debugging.
 
-* **Клиентская часть:**
+* **The client part:**
 
-  - Логирование для отслеживания выполнения и отладки клиентского приложения.
-
-
-## 🔚 Заключение
-
-Наш проект представляет собой систему, предназначенную для **анализа** рынка **P2P** на **криптобиржах**. Она обладает **высокой скоростью**, **точностью** и **надежностью**, благодаря использованию **современных технологий** и **инструментов**. Весь процесс анализа становится **интуитивно понятным** для пользователя.
+  - Logging to track the execution and debugging of the client application.
 
 
+## 🔚 Conclusion
+
+Our project is a system designed to **analyze** the **P2P** market on **crypto exchanges**. It has **high speed**, **accuracy** and **reliability**, thanks to the use of **modern technologies** and **tools**. The entire analysis process becomes **intuitive** for the user.
 
 
-# 📅 Итория разработки:
-1. [Первые наброски UI](https://arc.net/e/482FD89B-F6DA-4F38-9423-1BED0E5B8C8F)
-2. [Презентация с предзащиты](https://docs.google.com/presentation/d/1NrUOuDGumqUUWVuxRqMIdVQsbHfAztYD_oqa6h2195s/edit#slide=id.g2c944cb5879_4_62)
-3. [Видеозапись предзащиты](https://youtu.be/aajr6Wu4m8k)
+
+
+## 📅 And the development area:
+1. [First sketches of the UI](https://arc.net/e/482FD89B-F6DA-4F38-9423-1BED0E5B8C8F )
+2. [Presentation with предзащиты](https://docs.google.com/presentation/d/1NrUOuDGumqUUWVuxRqMIdVQsbHfAztYD_oqa6h2195s/edit#slide=id.g2c944cb5879_4_62)
+3. [Video recording of the pre-defense](https://youtu.be/aajr6Wu4m8k )
