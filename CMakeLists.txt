@@ -6,5 +6,5 @@ project(p2p
 )
 
 add_subdirectory(client)
-add_subdirectory(Logic)
+add_subdirectory(server logic)
 add_subdirectory(exchange scraper)
