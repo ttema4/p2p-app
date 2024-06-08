@@ -1,0 +1,3 @@
+/Users/cierkai/hse/p2p-app/p2p-app.app/Contents/MacOS/p2p-app
+/Users/cierkai/hse/p2p-app/p2p-app.app/Contents/Resources/icon.icns
+/Users/cierkai/hse/p2p-app/p2p-app.app/Contents/Info.plist
