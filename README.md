@@ -1,12 +1,10 @@
-# p2p-app
-
 # Дисклеймер
 * Приложение пишется, собирается и тестируется под MacOS 14.
 * Стек технологий: Qt6, NLohmann, MySQL, Boost::asio.
 
 # Как собирать?
 ``` shell
-cmake -B build && cmake --build build &&  cmake --install build
+cmake -B build && cmake --build build && cmake --install build
 ```
 
 # Итория разработки:
