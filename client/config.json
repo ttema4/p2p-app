@@ -1,5 +1,5 @@
 {
-  "use_database": true,
+  "use_database": false,
   "use_server": false,
   "server_ip": "localhost",
   "server_port": 12345,

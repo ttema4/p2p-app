@@ -17,10 +17,10 @@ ChainMonitor::ChainMonitor(QWidget *parent, Chain c) : QWidget(parent), ui(new U
     }
 
     if (c.change.first == c.change.second) {
-        ui->label_8->setText(QString("Связка USDT - %1 - USDT со спредом %2\%")
+        ui->label_8->setText(QString("Связка RUB - %1 - RUB со спредом %2\%")
                                  .arg(QString::fromStdString(c.change.first), QString::number(c.spread, 'f', 2)));
     } else {
-        ui->label_8->setText(QString("Связка USDT - %1 - %2 - USDT со спредом %3\%")
+        ui->label_8->setText(QString("Связка RUB - %1 - %2 - RUB со спредом %3\%")
                                  .arg(
                                      QString::fromStdString(c.change.first), QString::fromStdString(c.change.second),
                                      QString::number(c.spread, 'f', 2)

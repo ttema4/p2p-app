@@ -1,8 +1,6 @@
 #ifndef DATARECIEVER_H
 #define DATARECIEVER_H
 
-// checked
-
 #include <QDebug>
 #include <QException>
 #include <QObject>
@@ -10,7 +8,7 @@
 #include <QThread>
 #include <QVector>
 #include <boost/asio.hpp>
-#include <nlohmann/json.hpp>
+#include <json.hpp>
 #include <random>
 #include <string>
 #include <thread>
