@@ -2,6 +2,7 @@
 #define CHAINTABLEVIEW_H
 
 #include <QFont>
+#include <QTimer>
 #include <QHBoxLayout>
 #include <QIcon>
 #include <QLabel>
@@ -24,6 +25,12 @@
 #include "logic_fwd.h"
 
 enum class SortType { none, up, down };
+
+class TableNullWidget : public QWidget {
+    Q_OBJECT
+public:
+    TableNullWidget(QWidget *parent = nullptr);
+};
 
 class TableOrderWidget : public QWidget {
     Q_OBJECT
@@ -62,7 +69,7 @@ class ChainTableView : public QWidget {
     Q_OBJECT
 public:
     ChainTableView(QWidget *parent = nullptr);
-    void setData(QVector<Chain> data);
+    void setData(QVector<Chain> data = {});
     void
     setFilters(QSet<QString> &selectedBanks, QSet<QString> &selectedMarkets, QPair<double, double> &selectedMinMax);
     void updateTable();

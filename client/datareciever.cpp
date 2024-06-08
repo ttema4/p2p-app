@@ -15,7 +15,7 @@ Chain LocalClient::getFakeChain() {
     };
     static std::vector<std::string> coins{"BTC", "ETH", "DOGY", "SOLU", "WLD", "COTI"};
     static std::vector<std::string> banks{"Tinkoff", "Sber", "Alpha", "VTB", "SBP", "Raif", "Gasprom"};
-    static std::vector<std::string> markets{"ByBit", "Bitget"};
+    static std::vector<std::string> markets{"ByBit", "HTX"};
 
     std::string fake_type1 = types[gen() % types.size()];
     std::string fake_market1 = markets[gen() % markets.size()];
@@ -65,7 +65,7 @@ std::string LocalClient::getJsonToString() {
         }
         return nlohmann::json(chains).dump();
     }
-    return "No updates\r";
+    return "no updates";
 }
 
 void LocalClient::check_updates() {
@@ -160,7 +160,14 @@ bool DataReciever::init() {
                 GlobalCondition::getInstance().server_ip, std::to_string(GlobalCondition::getInstance().server_port)
             );
             client = new ServerClient(cli_io_context, endpoints);
-        } catch (QException e) {
+        } catch (const boost::system::system_error& e) {
+            qWarning() << "Error while connecting to server:" << e.what();
+            return false;
+        } catch (const std::exception& e) {
+            qWarning() << "Standard exception: " << e.what();
+            return false;
+        } catch (...) {
+            qWarning() << "Unknown error occurred.";
             return false;
         }
     } else {
@@ -173,12 +180,23 @@ bool DataReciever::init() {
 }
 
 void DataReciever::recieveNewChain(const QString &response) {
-    if (response != "No updates\r") {
+    if (response != "no updates\r") {
         qInfo() << "Recieved response";
         qDebug() << "Recieved response with len" << QString::number(response.size())
                  << "First 10:" << response.left(10);
-        QVector<Chain> chains = nlohmann::json::parse(response.toStdString()).get<QVector<Chain>>();
-        emit dataParsed(chains);
+        try {
+            QVector<Chain> chains = nlohmann::json::parse(response.toStdString()).get<QVector<Chain>>();
+            emit dataParsed(chains);
+        } catch (const nlohmann::json::parse_error& e) {
+            qWarning() << "Error while parsing json:" << e.what();
+            return;
+        } catch (const std::exception& e) {
+            qWarning() << "Standard exception: " << e.what();
+            return;
+        } catch (...) {
+            qWarning() << "Unknown error occurred.";
+            return;
+        }
     } else {
         qDebug() << "Recieved null response [no update]";
     }

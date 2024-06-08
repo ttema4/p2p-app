@@ -2,7 +2,7 @@
 #define GLOBALCONDITION_H
 
 #include <QException>
-#include <nlohmann/json.hpp>
+#include <json.hpp>
 #include <string>
 
 struct GlobalCondition {

@@ -1,6 +1,16 @@
 #include "chaintableview.h"
 #include "QtWidgets/qheaderview.h"
 
+
+TableNullWidget::TableNullWidget(QWidget *parent) : QWidget(parent) {
+    setMinimumHeight(50);
+    QLabel *label = new QLabel("Chains not found");
+    label->setStyleSheet("color: grey; font-size: 15px;");
+    label->setAlignment(Qt::AlignCenter);
+    setLayout(new QVBoxLayout(this));
+    layout()->addWidget(label);
+}
+
 TableChangeWidget::TableChangeWidget(std::pair<std::string, std::string> &change, QWidget *parent) : QLabel(parent) {
     if (change.first != change.second) {
         setText(QString::fromStdString(change.first) + " → " + QString::fromStdString(change.second));
@@ -202,7 +212,7 @@ ChainTableView::ChainTableView(QWidget *parent) : QWidget{parent} {
     table = new QTableWidget();
     table->verticalHeader()->hide();
     table->horizontalHeader()->hide();
-    table->setRowCount(30);
+    table->setRowCount(1);
     table->setColumnCount(1);
 
     table->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -226,6 +236,8 @@ ChainTableView::ChainTableView(QWidget *parent) : QWidget{parent} {
 
     connect(header, &QTableWidget::cellClicked, this, &ChainTableView::onHeaderCellClicked);
     connect(table, &QTableWidget::cellClicked, this, &ChainTableView::onTableCellClicked);
+
+    setData();
 }
 
 void ChainTableView::onTableCellClicked(int row, int col) {
@@ -272,6 +284,13 @@ void ChainTableView::setFilters(
 }
 
 void ChainTableView::setData(QVector<Chain> data) {
+    if (data.empty()) {
+        table->setRowCount(1);
+        table->setCellWidget(0, 0, new TableNullWidget());
+        table->setRowHeight(0, 60);
+        return;
+    }
+
     if (&chains != &data) {
         chains = std::move(data);
     }
@@ -305,6 +324,13 @@ void ChainTableView::setData(QVector<Chain> data) {
         }
     } else {
         showedChains = chains;
+    }
+
+    if (showedChains.empty()) {
+        table->setRowCount(1);
+        table->setCellWidget(0, 0, new TableNullWidget());
+        table->setRowHeight(0, 60);
+        return;
     }
 
     switch (sortType) {

@@ -252,7 +252,7 @@
                 <item>
                  <widget class="QCheckBox" name="checkBox_5">
                   <property name="text">
-                   <string>Bitget</string>
+                   <string>HTX</string>
                   </property>
                  </widget>
                 </item>
