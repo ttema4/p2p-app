@@ -1,11 +1,9 @@
 #include <boost/asio.hpp>
 #include <boost/bind.hpp>
-#include <chrono>
 #include <condition_variable>
 #include <cstdint>
 #include <list>
 #include <mutex>
-#include <thread>
 #include "scraper.hpp"
 
 std::mutex m;
@@ -50,7 +48,7 @@ public:
                 // апдейта нет
                 std::string back;
                 std::ifstream file_of_orders;
-                file_of_orders.open("/Users/data_market.json");
+                file_of_orders.open("/Users/jsonss/data_market.json");
                 nlohmann::json json_orders{};
                 file_of_orders >> json_orders;
                 file_of_orders.close();
@@ -166,13 +164,24 @@ public:
     }
 };
 
-int main(int, char **) {
+int main() {
     // auto fake_market = std::make_unique<bybit_simulator>();
     auto bybit_market = std::make_unique<bybit>();
+    auto htx_market = std::make_unique<htx>();
     scraper scraper_;
     // scraper_.add_market(std::move(fake_market));
     scraper_.add_market(std::move(bybit_market));
-    std::thread t([&]() {
+    scraper_.add_market(std::move(htx_market));
+    std::thread t1([&]() {
+        while (true) {
+            system("cd '/Users/cierkai/hse/p2p-app/exchange scraper/bybit scraper' && python 'bybit scraper.py'");
+            system("cd '/Users/cierkai/hse/p2p-app/exchange scraper/htx scraper' && python 'htx scraper.py'");
+            std::cout << "ok\n";
+        }
+    });
+    t1.detach();
+    std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+    std::thread t2([&]() {
         while (true) {
             std::unique_lock l(m);
             scraper_.update_markets();
@@ -181,7 +190,7 @@ int main(int, char **) {
             std::this_thread::sleep_for(std::chrono::milliseconds(1000));
         }
     });
-    t.detach();
+    t2.detach();
     auto srv = Server();
     srv.listen(12345);
     srv.run();

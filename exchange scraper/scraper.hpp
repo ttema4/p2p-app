@@ -2,6 +2,8 @@
 #define SCRAPER_HPP_
 
 #include "markets.hpp"
+#include <chrono>
+#include <thread>
 
 std::vector<std::string> local_bank_is(std::vector<std::string> &payment_methods
 );

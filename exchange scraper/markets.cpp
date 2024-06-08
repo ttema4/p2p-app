@@ -701,14 +701,46 @@ void bybit::update_market() {
         symbol = static_cast<char>(c);
         orders += symbol;
     }
-    std::ofstream temp_json("/Users/temp.json", std::ofstream::trunc);
+    std::ofstream temp_json("/Users/jsonss/temp.json");
     temp_json << orders;
     temp_json.close();
-    std::ifstream temp_json_("/Users/temp.json");
+    std::ifstream temp_json_("/Users/jsonss/temp.json");
     nlohmann::json result;
     temp_json_ >> result;
     json_orders = result["orders"];
     json_spot_rates = result["spot_rates"];
-    std::cout << result << "\n";
+    temp_json_.close();
+}
+
+htx::htx() {
+    market_ = Markets::htx;
+}
+
+void htx::update_market() {
+    std::string orders = "";
+    boost::asio::io_context io_context;
+    auto create_connection = [&]() {
+        tcp::socket s(io_context);
+        boost::asio::connect(
+            s, tcp::resolver(io_context).resolve("127.0.0.1", "12444")
+        );
+        return tcp::iostream(std::move(s));
+    };
+    tcp::iostream conn = create_connection();
+    conn.socket().shutdown(tcp::socket::shutdown_send);
+    int c;
+    std::string symbol;
+    while ((c = conn.get()) != std::char_traits<char>::eof()) {
+        symbol = static_cast<char>(c);
+        orders += symbol;
+    }
+    std::ofstream temp_json("/Users/jsonss/temp.json");
+    temp_json << orders;
+    temp_json.close();
+    std::ifstream temp_json_("/Users/jsonss/temp.json");
+    nlohmann::json result;
+    temp_json_ >> result;
+    json_orders = result["orders"];
+    json_spot_rates = result["spot_rates"];
     temp_json_.close();
 }

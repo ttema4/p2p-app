@@ -11,7 +11,7 @@
 #include "nlohmann/json.hpp"
 #include <fstream>
 
-enum class Markets { bybit_simulator, bybit };
+enum class Markets { bybit_simulator, bybit, htx };
 
 enum class Currencies { RUB };
 
@@ -78,6 +78,12 @@ std::vector<std::string> local_bank_is(std::vector<std::string> &payment_methods
 
 struct bybit : market {
     bybit();
+
+    void update_market() override;
+};
+
+struct htx : market {
+    htx();
 
     void update_market() override;
 };

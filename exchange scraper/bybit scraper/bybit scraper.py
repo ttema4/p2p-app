@@ -1,7 +1,7 @@
 import asyncio
-import json
 from pybit.unified_trading import HTTP
 import aiohttp
+import json
 import socket
 
 url = "https://api2.bybit.com/fiat/otc/item/online"
@@ -73,12 +73,14 @@ def scrap_spot():
     session = HTTP()
     for i in range(0, 4):
         for j in range(i + 1, 4):
-            response = session.get_orderbook(category="spot", symbol=(coins[j] + coins[i]))
+            response = session.get_orderbook(
+                category="spot", symbol=(coins[j] + coins[i])
+            )
             spot_rates[coins[j] + "/" + coins[i]] = response["result"]["b"][0][0]
     spot_rates["market"] = "bybit"
 
 
-async def main():
+async def main_():
     scraping_tasks = []
     for i in range(0, 2):
         for coin in coins:
@@ -86,16 +88,20 @@ async def main():
     await asyncio.gather(*scraping_tasks)
 
 
-while True:
+def main():
     sock = socket.socket()
     sock.bind(("127.0.0.1", 12344))
     sock.listen(1)
     conn, addr = sock.accept()
-    asyncio.run(main())
+    asyncio.run(main_())
     scrap_spot()
     data_market = dict()
     data_market["orders"] = orders
     data_market["spot_rates"] = spot_rates
     conn.send(json.dumps(data_market).encode())
+    print(data_market)
     conn.close()
     orders.clear()
+
+
+main()
