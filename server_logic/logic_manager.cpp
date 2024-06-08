@@ -82,7 +82,7 @@ void to_analysis() {
 }
 
 void apply_config() {
-    std::ifstream config("/Users/cierkai/hse/p2p-app/server_logic/config.json");
+    std::ifstream config(std::string(CONFIG_PATH) + "/config.json");
     nlohmann::json j;
     config >> j;
     config.close();
