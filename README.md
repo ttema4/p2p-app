@@ -6,13 +6,33 @@ Our project is a **tool for analyzing cryptocurrency markets** and finding oppor
 * **Application Technology Stack:** Qt6, NLohmann, MySQL, Boost::asio.
 
 
-> ***The application is being written, built and tested under Clang++17, macOS.***
+> ***The application is coded, built and tested under Clang++17, macOS.***
 
 ## 🛠️ How to build?
 
 ``` shell
 cmake -B build && cmake --build build && cmake --install build
 ```
+
+<details>
+<summary><b>FAQ</b></summary>
+
+The parser may not find the requests library:
+
+```bash
+pip install requests
+```
+
+The parser may not find the Boost::asio:
+
+```cmake
+
+find_package(Boost 1.65 REQUIRED COMPONENTS system)
+target_link_libraries(markets_scraper PRIVATE Boost::system)
+```
+to cmake exchange_scraper. 
+
+</details>
 
 ## 🧩 Architecture
 
@@ -55,14 +75,7 @@ The following testing methods are implemented in the project:
   - Logging to track the execution and debugging of the client application.
 
 
-## 🔚 Conclusion
-
-Our project is a system designed to **analyze** the **P2P** market on **crypto exchanges**. It has **high speed**, **accuracy** and **reliability**, thanks to the use of **modern technologies** and **tools**. The entire analysis process becomes **intuitive** for the user.
-
-
-
-
-## 📅 And the development area:
-1. [First sketches of the UI](https://arc.net/e/482FD89B-F6DA-4F38-9423-1BED0E5B8C8F )
-2. [Presentation with предзащиты](https://docs.google.com/presentation/d/1NrUOuDGumqUUWVuxRqMIdVQsbHfAztYD_oqa6h2195s/edit#slide=id.g2c944cb5879_4_62)
-3. [Video recording of the pre-defense](https://youtu.be/aajr6Wu4m8k )
+## 📅 Links:
+1. [First sketches](https://arc.net/e/482FD89B-F6DA-4F38-9423-1BED0E5B8C8F )
+2. [Video of the pre-defense](https://youtu.be/aajr6Wu4m8k )
+3. [Presentation](https://docs.google.com/presentation/d/1NrUOuDGumqUUWVuxRqMIdVQsbHfAztYD_oqa6h2195s/edit#slide=id.g2c944cb5879_4_62)
