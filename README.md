@@ -14,6 +14,8 @@ Our project is a **tool for analyzing cryptocurrency markets** and finding oppor
 cmake -B build && cmake --build build && cmake --install build
 ```
 
+To run the feed handler, you need to create a folder named 'exchange scraper_' in Users, and run install.sh to install and configure Python. Some commands that should have been in install.sh but were forgotten are - cd '/Users/exchange scraper_/htx scraper' && pip install requests.
+
 <details>
 <summary><b>FAQ</b></summary>
 
